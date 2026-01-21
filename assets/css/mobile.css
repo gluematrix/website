@@ -1,0 +1,142 @@
+/* MOBILE OVERRIDES - IMPROVED */
+
+/* Base mobile styles */
+@media screen and (max-width: 768px) {
+  
+  /* Better text scaling */
+  body, p, li, a {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    text-align: center;
+  }
+
+  /* Fix header/nav */
+  #header h1 {
+    font-size: 0.9em;
+    left: 1em;
+  }
+
+  #header nav > ul > li > a {
+    padding: 0 1em;
+  }
+
+  .menuToggle span {
+    display: none;
+  }
+
+  /* Banner improvements */
+  #banner {
+    min-height: 80vh;
+    padding: 4em 1.5em !important;
+  }
+
+  #banner .inner {
+    padding: 1em;
+  }
+
+  #banner h2 {
+    font-size: clamp(1.5em, 6vw, 2em) !important;
+    padding: 0.5em !important;
+  }
+
+  #banner p {
+    font-size: clamp(0.9em, 3vw, 1.1em) !important;
+    line-height: 1.6 !important;
+  }
+
+  /* All sections */
+  #services,
+  #music,
+  #contact,
+  .wrapper {
+    padding: 3em 1.5em !important;
+  }
+
+  /* Services section */
+  #services h2,
+  #music h2,
+  #contact h2 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem) !important;
+  }
+
+  #services p,
+  #music p,
+  #contact p {
+    font-size: 1rem !important;
+  }
+
+  /* Contact form - stack columns */
+  .row > .col-6 {
+    width: 100% !important;
+  }
+
+  .row {
+    margin: 0 !important;
+  }
+
+  .row > * {
+    padding: 0.75em 0 !important;
+  }
+
+  /* Form inputs */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+
+  /* Footer */
+  #footer {
+    padding: 3em 1.5em !important;
+  }
+
+  .copyright li {
+    border: 0 !important;
+    display: block !important;
+    line-height: 1.65em !important;
+    margin: 0.5em 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Prevent horizontal scroll */
+  body, html {
+    overflow-x: hidden !important;
+    width: 100%;
+  }
+
+  #page-wrapper {
+    overflow-x: hidden !important;
+  }
+}
+
+/* Extra small phones */
+@media screen and (max-width: 480px) {
+  
+  body {
+    font-size: 12px;
+  }
+
+  #banner {
+    min-height: 70vh;
+    padding: 3em 1em !important;
+  }
+
+  #banner h2 {
+    font-size: 1.5em !important;
+  }
+
+  #services,
+  #music,
+  #contact {
+    padding: 2em 1em !important;
+  }
+
+  .more {
+    padding: 0.8em 1.5em !important;
+    font-size: 0.7em !important;
+  }
+}

@@ -4084,11 +4084,3 @@ body, p, span, li, a, input, textarea, select {
 }
 
 
-#footer .copyright a {
-    font-size: 0.5em;   /* tiny link */
-}
-
-#footer .copyright {
-    font-size: 0.5em;   /* shrink the whole line */
-    text-align: center; /* optional, keeps it centered */
-}
