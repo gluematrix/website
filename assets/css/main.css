@@ -31,6 +31,13 @@ body, p, span, li, a, input, select, textarea {
     font-family: 'Analogue OS', sans-serif;
 }
 
+#banner {
+    background-image: url('images/homephoto.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 #banner .inner { position: relative; z-index: 2; }
 
 /* Services section */
