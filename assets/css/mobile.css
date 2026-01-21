@@ -3,9 +3,15 @@
 /* Base mobile styles */
 @media screen and (max-width: 768px) {
   
-  /* Lighten the banner overlay on mobile so photo shows */
+  /* Remove banner overlay completely on mobile so photo shows clearly */
   #banner::before {
-    background-color: rgba(0,0,0,0.2) !important;
+    display: none !important;
+  }
+  
+  /* Make text more readable without the dark overlay */
+  #banner h2,
+  #banner p {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
   }
   
   /* Better text scaling */
@@ -91,7 +97,7 @@
   input[type="text"],
   input[type="email"],
   textarea {
-    font-size: 16px !important; /* Prevents zoom on iOS */
+    font-size: 16px !important;
   }
 
   /* Footer */
