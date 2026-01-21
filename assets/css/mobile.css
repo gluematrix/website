@@ -3,6 +3,11 @@
 /* Base mobile styles */
 @media screen and (max-width: 768px) {
   
+  /* Lighten the banner overlay on mobile so photo shows */
+  #banner::before {
+    background-color: rgba(0,0,0,0.2) !important;
+  }
+  
   /* Better text scaling */
   body, p, li, a {
     font-size: 14px;
