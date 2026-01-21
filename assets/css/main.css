@@ -31,25 +31,6 @@ body, p, span, li, a, input, select, textarea {
     font-family: 'Analogue OS', sans-serif;
 }
 
-/* Main page banner */
-#banner {
-    background-image: url('images/homephoto.jpg');  /* your home banner */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    position: relative; /* for overlay */
-    color: #fff;
-}
-
-/* Optional overlay for readability */
-#banner::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0,0,0,0.15); /* adjust opacity */
-    z-index: 1;
-}
 #banner .inner { position: relative; z-index: 2; }
 
 /* Services section */
