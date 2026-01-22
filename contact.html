@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>GLUE MATRIX - Contact</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/mobile.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* Full page background for contact */
+			body {
+				background-image: url('images/contactphoto.jpg');
+				background-size: cover;
+				background-position: center;
+				background-attachment: fixed;
+				background-repeat: no-repeat;
+				margin: 0;
+				padding: 0;
+				min-height: 100vh;
+			}
+			
+			/* Dark overlay for readability */
+			body::before {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0,0,0,0.3);
+				z-index: 0;
+			}
+			
+			#page-wrapper {
+				position: relative;
+				z-index: 1;
+			}
+			
+			.page-content {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+				text-align: center;
+				padding: 6em 2em 4em 2em;
+			}
+			
+			.page-content h1 {
+				font-size: clamp(2em, 6vw, 3em);
+				margin-bottom: 0.5em;
+			}
+			
+			.page-content p {
+				font-size: clamp(0.9em, 2.5vw, 1.2em);
+				margin-bottom: 2em;
+			}
+			
+			.contact-form {
+				width: 100%;
+				max-width: 600px;
+			}
+			
+			.contact-form .row {
+				margin-bottom: 0;
+			}
+		</style>
+	</head>
+	<body>
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">GLUE MATRIX</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="services.html">Services</a></li>
+											<li><a href="music.html">Music</a></li>
+											<li><a href="contact.html">Contact</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Contact Content -->
+					<div class="page-content">
+						<h1>Contact</h1>
+						<p>Production  /  Recording  /  Mixing</p>
+						<form method="post" action="#" class="contact-form">
+							<div class="row gtr-uniform">
+								<div class="col-6 col-12-xsmall">
+									<input type="text" name="name" placeholder="Name" />
+								</div>
+								<div class="col-6 col-12-xsmall">
+									<input type="email" name="email" placeholder="Email" />
+								</div>
+								<div class="col-12">
+									<textarea name="message" placeholder="Message" rows="6"></textarea>
+								</div>
+								<div class="col-12">
+									<input type="submit" value="Send" class="primary" />
+								</div>
+							</div>
+						</form>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer" style="position: relative; z-index: 1;">
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; GLUE MATRIX</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
