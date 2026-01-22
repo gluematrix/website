@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>GLUE MATRIX - Music</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/mobile.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* Full page background for music */
+			body {
+				background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+				margin: 0;
+				padding: 0;
+				min-height: 100vh;
+			}
+			
+			#page-wrapper {
+				position: relative;
+				z-index: 1;
+			}
+			
+			.page-content {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+				text-align: center;
+				padding: 6em 2em 4em 2em;
+			}
+			
+			.page-content h1 {
+				font-size: clamp(2em, 6vw, 3em);
+				margin-bottom: 0.5em;
+			}
+			
+			.page-content p {
+				font-size: clamp(0.9em, 2.5vw, 1.2em);
+				max-width: 800px;
+				line-height: 1.8;
+				margin-bottom: 2em;
+			}
+			
+			.music-links {
+				display: flex;
+				flex-direction: column;
+				gap: 1em;
+				margin: 2em 0;
+				width: 100%;
+				max-width: 400px;
+			}
+			
+			.music-links a {
+				padding: 1em 2em;
+				font-size: 1.1em;
+			}
+		</style>
+	</head>
+	<body>
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">GLUE MATRIX</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="services.html">Services</a></li>
+											<li><a href="music.html">Music</a></li>
+											<li><a href="contact.html">Contact</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Music Content -->
+					<div class="page-content">
+						<h1>Music</h1>
+						<p>Listen to Glue Matrix</p>
+						<div class="music-links">
+							<a href="#" class="button">Spotify</a>
+							<a href="#" class="button">Apple Music</a>
+							<a href="#" class="button">SoundCloud</a>
+							<a href="#" class="button">Tidal</a>
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
