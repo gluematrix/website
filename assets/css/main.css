@@ -3444,6 +3444,7 @@ input, select, textarea {
 					outline: 0;
 					text-decoration: none;
 					text-transform: uppercase;
+					font-family: 'Digital7', monospace !important;
 				}
 
 					@media screen and (max-width: 736px) {
@@ -3569,6 +3570,7 @@ input, select, textarea {
 						#header nav > ul > li > a.menuToggle {
 							outline: 0;
 							position: relative;
+							font-family: 'Digital7', monospace !important;
 						}
 
 							#header nav > ul > li > a.menuToggle:after {
@@ -3579,7 +3581,7 @@ input, select, textarea {
 								display: inline-block;
 								height: 3.75em;
 								vertical-align: top;
-								width: 2em;
+								width: 1.5em;
 							}
 
 							@media screen and (max-width: 736px) {
