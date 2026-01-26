@@ -57,15 +57,20 @@ display: inline-block;
 }
 
 .home-content p {
-font-size: clamp(0.8em, 2.2vw, 1.1em);
-max-width: 95%;
-line-height: 1.8;
-margin-bottom: 0.5em;
-white-space: nowrap;
+    font-size: clamp(0.8em, 2.2vw, 1.1em);
+    max-width: 95%;
+    line-height: 1.8;
+    margin-bottom: 0.5em;
+}
+
+@media screen and (min-width: 769px) {
+    .home-content p {
+        white-space: nowrap;
+    }
 }
 
 .home-content p:last-of-type {
-margin-bottom: 2em;
+    margin-bottom: 2em;
 }
 
 .home-content .button {
@@ -113,7 +118,19 @@ font-family: 'Digital7', monospace !important;
 					</div>
 
 			</div>
-
+<!-- Footer -->
+<footer id="footer" style="position: relative; z-index: 1;">
+    <ul class="icons">
+        <li><a href="https://www.instagram.com/gluematrix/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61575180267468" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+        <li><a href="https://x.com/gluematrix" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+    </ul>
+    <ul class="copyright">
+        <li>&copy; GLUE MATRIX</li>
+    </ul>
+    <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
+</footer>
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
