@@ -2,6 +2,9 @@
 <html>
 	<head>
 		<title>GLUE MATRIX - Music</title>
+        <link rel="icon" type="image/png" href="favicon.png">
+        <meta name="description" content="Listen to Glue Matrix on Spotify, Apple Music, Tidal, and SoundCloud. Original music exploring the forces that connect us all.">
+        <meta name="keywords" content="Glue Matrix music, electronic music, experimental music, streaming">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -112,19 +115,36 @@ body::before {
 						</nav>
 					</header>
 
-				<!-- Music Content -->
-					<div class="page-content">
-						<h1>Music</h1>
-						<p>Listen to Glue Matrix</p>
-						<div class="music-links">
-							<a href="https://open.spotify.com/artist/51pjgf2UfI5WiQ52KWlJjE?si=yUUQG1qLRuK7Ygvv8d-OPQ" class="button">Spotify</a>
-							<a href="https://music.apple.com/us/artist/glue-matrix/1807712310" class="button">Apple Music</a>
-							<a href="https://tidal.com/artist/56568122/u" class="button">Tidal</a>
-                            <a href="https://soundcloud.com/gluematrix" class="button">SoundCloud</a>
-						</div>
-					</div>
+<!-- Music Content -->
+<div class="page-content">
+    <h1>Music</h1>
+    <p>Listen to Glue Matrix</p>
+    
+    <!-- Streaming Links -->
+    <div class="music-links">
+        <a href="https://open.spotify.com/artist/51pjgf2UfI5WiQ52KWlJjE" class="button" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://music.apple.com/us/artist/glue-matrix/1807712310" class="button" target="_blank" rel="noopener">Apple Music</a>
+        <a href="https://tidal.com/artist/56568122/u" class="button" target="_blank" rel="noopener">Tidal</a>
+        <a href="https://soundcloud.com/gluematrix" class="button" target="_blank" rel="noopener">SoundCloud</a>
+    </div>
 
-			</div>
+    <!-- Audio Samples -->
+    <div style="margin: 3em 0; width: 100%; max-width: 600px;">
+        <h3 style="margin-bottom: 1em;">Featured Tracks</h3>
+        <!-- Replace with your actual SoundCloud embed codes -->
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=YOUR_TRACK_URL&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+    </div>
+
+    <!-- Email Signup -->
+    <div style="margin: 3em 0; width: 100%; max-width: 500px; padding: 2em; background: rgba(0,0,0,0.5); border-radius: 5px;">
+        <h3 style="margin-bottom: 1em;">Join the Mailing List</h3>
+        <p style="font-size: 0.9em; margin-bottom: 1.5em;">Get updates on new releases and exclusive content.</p>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display: flex; gap: 0.5em; flex-direction: column;">
+            <input type="email" name="email" placeholder="Your email" required style="padding: 0.75em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 3px;">
+            <button type="submit" class="primary" style="width: 100%;">Subscribe</button>
+        </form>
+    </div>
+</div>
 <!-- Footer -->
 <footer id="footer" style="position: relative; z-index: 1;">
     <ul class="icons">
