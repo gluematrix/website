@@ -99,22 +99,25 @@
 					<div class="page-content">
 						<h1>Contact</h1>
 						<p>Production  /  Recording  /  Mixing  /  Collaboration</p>
-					<form method="POST" action="https://formspree.io/f/mlgbjdgg" class="contact-form">
+<form method="POST" action="https://formspree.io/f/mlgbjdgg" class="contact-form" id="contactForm">
     <div class="row gtr-uniform">
         <div class="col-6 col-12-xsmall">
             <input type="text" name="name" placeholder="Name" required />
         </div>
         <div class="col-6 col-12-xsmall">
-            <input type="email" name="email" placeholder="Email" required />
+            <input type="email" name="_replyto" placeholder="Email" required />
         </div>
         <div class="col-12">
             <textarea name="message" placeholder="Message" rows="6" required></textarea>
         </div>
         <div class="col-12">
-            <button type="submit" class="primary">
+            <button type="submit" class="primary" id="submitBtn" style="font-family: 'Digital7', monospace !important;">
                 <span class="button-text">Send</span>
                 <span class="button-loading" style="display: none;">Sending...</span>
             </button>
+        </div>
+        <div class="col-12">
+            <p id="formStatus" style="margin-top: 1em; display: none; font-size: 1em;"></p>
         </div>
     </div>
 </form>
@@ -122,28 +125,63 @@
 <p style="margin-top: 2em; font-size: 0.9em;">Or email directly: <a href="mailto:jack@gluematrix.com">jack@gluematrix.com</a></p>
 
 <script>
-document.querySelector('.contact-form').addEventListener('submit', function() {
-    document.querySelector('.button-text').style.display = 'none';
-    document.querySelector('.button-loading').style.display = 'inline';
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const form = this;
+    const submitBtn = document.getElementById('submitBtn');
+    const buttonText = document.querySelector('.button-text');
+    const buttonLoading = document.querySelector('.button-loading');
+    const formStatus = document.getElementById('formStatus');
+    
+    // Show loading state
+    buttonText.style.display = 'none';
+    buttonLoading.style.display = 'inline';
+    submitBtn.disabled = true;
+    
+    // Submit form
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            formStatus.textContent = 'Message sent! I\'ll get back to you soon.';
+            formStatus.style.color = '#00ff88';
+            formStatus.style.display = 'block';
+            form.reset();
+        } else {
+            formStatus.textContent = 'Oops! Something went wrong. Try emailing directly.';
+            formStatus.style.color = '#ff4444';
+            formStatus.style.display = 'block';
+        }
+    }).catch(error => {
+        formStatus.textContent = 'Oops! Something went wrong. Try emailing directly.';
+        formStatus.style.color = '#ff4444';
+        formStatus.style.display = 'block';
+    }).finally(() => {
+        buttonText.style.display = 'inline';
+        buttonLoading.style.display = 'none';
+        submitBtn.disabled = false;
+    });
 });
 </script>
 
-				<!-- Footer -->
-					<footer id="footer" style="position: relative; z-index: 1;">
-						<ul class="icons">
-                            <li><a href="https://www.instagram.com/gluematrix/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="https://www.facebook.com/profile.php?id=61575180267468&notif_id=1768423594118218&notif_t=page_user_activity&ref=notif" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                            <li><a href="https://x.com/gluematrixmusic" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
-						<ul class="copyright">
-    <li>&copy; GLUE MATRIX</li>
-        </ul>
-        <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
-					</footer>
-
-			</div>
-
+<!-- Footer -->
+<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 2em 0;">
+    <ul class="icons">
+        <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+        <li><a href="https://x.com/gluematrix" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+    </ul>
+    <ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+        <li>&copy; GLUE MATRIX</li>
+    </ul>
+    <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
+</footer>
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>

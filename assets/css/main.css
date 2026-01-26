@@ -4079,3 +4079,25 @@ button,
 .button {
     font-family: 'Digital7', monospace !important;
 }
+
+/* Make all external links open in new tabs look consistent */
+a[target="_blank"]::after {
+    content: "";
+}
+
+/* Improve button hover states */
+.button:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
+/* Better mobile footer spacing */
+@media screen and (max-width: 768px) {
+    #footer {
+        padding: 2em 1em 1em 1em !important;
+    }
+    
+    #footer .icons {
+        font-size: 1em;
+    }
+}

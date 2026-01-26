@@ -135,25 +135,73 @@ body::before {
         <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1997517003&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
     </div>
 
-    <!-- Email Signup -->
-    <div style="margin: 3em 0; width: 100%; max-width: 500px; padding: 2em; background: rgba(0,0,0,0.5); border-radius: 5px;">
-        <h3 style="margin-bottom: 1em;">Join the Mailing List</h3>
-        <p style="font-size: 0.9em; margin-bottom: 1.5em;">Get updates on new releases, shows, and exclusive content.</p>
-        <form action="https://formspree.io/f/mqeqpqdr" method="POST" style="display: flex; gap: 0.5em; flex-direction: column;">
-            <input type="email" name="email" placeholder="Your email" required style="padding: 0.75em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 3px;">
-            <button type="submit" class="primary" style="width: 100%;">Subscribe</button>
-        </form>
-    </div>
+<!-- Email Signup -->
+<div style="margin: 3em 0; width: 100%; max-width: 500px; padding: 2em; background: rgba(0,0,0,0.5); border-radius: 5px;">
+    <h3 style="margin-bottom: 1em;">Join the Mailing List</h3>
+    <p style="font-size: 0.9em; margin-bottom: 1.5em;">Get updates on new releases, shows, and exclusive content.</p>
+    <form id="mailingListForm" action="https://formspree.io/f/mqeqpqdr" method="POST" style="display: flex; gap: 0.5em; flex-direction: column;">
+        <input type="email" name="email" placeholder="Your email" required style="padding: 0.75em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 3px;">
+        <button type="submit" class="primary" id="subscribeBtn" style="width: 100%; font-family: 'Digital7', monospace !important;">
+            <span class="sub-text">Subscribe</span>
+            <span class="sub-loading" style="display: none;">Subscribing...</span>
+        </button>
+        <p id="subStatus" style="margin-top: 0.5em; display: none; font-size: 0.9em;"></p>
+    </form>
 </div>
+
+<script>
+document.getElementById('mailingListForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const form = this;
+    const subscribeBtn = document.getElementById('subscribeBtn');
+    const subText = document.querySelector('.sub-text');
+    const subLoading = document.querySelector('.sub-loading');
+    const subStatus = document.getElementById('subStatus');
+    
+    // Show loading state
+    subText.style.display = 'none';
+    subLoading.style.display = 'inline';
+    subscribeBtn.disabled = true;
+    
+    // Submit form
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            subStatus.textContent = 'You\'re subscribed! Check your email.';
+            subStatus.style.color = '#00ff88';
+            subStatus.style.display = 'block';
+            form.reset();
+        } else {
+            subStatus.textContent = 'Something went wrong. Try again.';
+            subStatus.style.color = '#ff4444';
+            subStatus.style.display = 'block';
+        }
+    }).catch(error => {
+        subStatus.textContent = 'Something went wrong. Try again.';
+        subStatus.style.color = '#ff4444';
+        subStatus.style.display = 'block';
+    }).finally(() => {
+        subText.style.display = 'inline';
+        subLoading.style.display = 'none';
+        subscribeBtn.disabled = false;
+    });
+});
+</script>
 <!-- Footer -->
-<footer id="footer" style="position: relative; z-index: 1;">
+<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 2em 0;">
     <ul class="icons">
-        <li><a href="https://www.instagram.com/gluematrix/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-        <li><a href="https://www.facebook.com/profile.php?id=61575180267468" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-        <li><a href="https://x.com/gluematrix" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+        <li><a href="https://x.com/gluematrix" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
         <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
     </ul>
-    <ul class="copyright">
+    <ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
         <li>&copy; GLUE MATRIX</li>
     </ul>
     <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
