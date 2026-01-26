@@ -4058,3 +4058,24 @@ body, p, span, li, a, input, textarea, select {
 }
 
 
+/* FORCE Digital7 on header elements */
+#header h1,
+#header h1 a,
+#header nav > ul > li > a,
+#header nav > ul > li > a.menuToggle,
+#header nav > ul > li > a.menuToggle span {
+    font-family: 'Digital7', monospace !important;
+}
+
+#menu ul > li > a {
+    font-family: 'Digital7', monospace !important;
+}
+
+/* FORCE Digital7 on all buttons */
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button,
+.button {
+    font-family: 'Digital7', monospace !important;
+}
