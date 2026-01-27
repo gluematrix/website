@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>GLUE MATRIX - About</title>
+        <link rel="icon" type="image/png" href="favicon.png">
+        <meta name="description" content="Meet the artist behind Glue Matrix. Professional audio engineer and music producer with a passion for sonic alchemy.">
+        <meta name="keywords" content="Glue Matrix bio, audio engineer, music producer, about">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/mobile.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* Full page background for about */
+			body {
+				background-image: url('assets/css/images/aboutphoto.jpg');
+				background-size: cover;
+				background-position: center;
+				background-attachment: fixed;
+				background-repeat: no-repeat;
+				margin: 0;
+				padding: 0;
+				min-height: 100vh;
+			}
+			
+			/* Dark overlay for readability */
+			body::before {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0,0,0,0.4);
+				z-index: 0;
+			}
+			
+			#page-wrapper {
+				position: relative;
+				z-index: 1;
+			}
+			
+			.page-content {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+				text-align: center;
+				padding: 6em 2em 4em 2em;
+			}
+			
+			.about-container {
+				max-width: 900px;
+				margin: 0 auto;
+			}
+			
+			.about-image {
+				width: 250px;
+				height: 250px;
+				border-radius: 50%;
+				border: 3px solid #fff;
+				margin: 0 auto 2em auto;
+				overflow: hidden;
+				box-shadow: 0 0 30px rgba(0,0,0,0.5);
+			}
+			
+			.about-image img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+			
+			.page-content h1 {
+				font-size: clamp(2em, 6vw, 3em);
+				margin-bottom: 0.5em;
+			}
+			
+			.page-content h3 {
+				font-size: clamp(1.2em, 3vw, 1.5em);
+				margin-bottom: 1.5em;
+				color: #00ffcc;
+				font-weight: normal;
+			}
+			
+			.bio-text {
+				font-size: clamp(0.95em, 2.2vw, 1.1em);
+				line-height: 1.8;
+				text-align: left;
+				margin: 0 auto 2em auto;
+				max-width: 700px;
+				background: rgba(0,0,0,0.3);
+				padding: 2em;
+				border-radius: 5px;
+			}
+			
+			.bio-text p {
+				margin-bottom: 1.5em;
+			}
+			
+			.bio-text p:last-child {
+				margin-bottom: 0;
+			}
+			
+			.credentials {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 1.5em;
+				margin: 3em 0;
+				text-align: center;
+			}
+			
+			.credential-item {
+				background: rgba(0,0,0,0.5);
+				padding: 1.5em;
+				border-radius: 5px;
+				border: 1px solid rgba(255,255,255,0.2);
+			}
+			
+			.credential-item h4 {
+				color: #00ffcc;
+				margin-bottom: 0.5em;
+				font-size: 0.9em;
+			}
+			
+			.credential-item p {
+				margin: 0;
+				font-size: 0.95em;
+			}
+			
+			@media screen and (max-width: 768px) {
+				.about-image {
+					width: 200px;
+					height: 200px;
+				}
+				
+				.bio-text {
+					padding: 1.5em;
+					text-align: center;
+				}
+				
+				.credentials {
+					grid-template-columns: 1fr;
+					gap: 1em;
+				}
+			}
+		</style>
+	</head>
+	<body>
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">GLUE MATRIX</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="services.html">Services</a></li>
+											<li><a href="music.html">Music</a></li>
+											<li><a href="about.html">About</a></li>
+											<li><a href="contact.html">Contact</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- About Content -->
+					<div class="page-content">
+						<div class="about-container">
+							<h1>About</h1>
+							
+							<!-- Profile Image - Add your photo here -->
+							<div class="about-image">
+								<img src="assets/css/images/profile.jpg" alt="Glue Matrix" />
+							</div>
+							
+							<h3>Audio Engineer  /  Producer  /  Artist</h3>
+							
+							<div class="bio-text">
+								<p>Behind Glue Matrix is a passion for sonic exploration and a commitment to crafting audio experiences that resonate on a deeper level. With years of experience in audio engineering and music production, I've developed a refined approach to mixing, recording, and sound design that prioritizes both technical precision and artistic vision.</p>
+								
+								<p>My journey in audio began with a fascination for how sound shapes emotion and atmosphere. This curiosity evolved into a professional pursuit, leading me to work across multiple genres and collaborate with diverse artists. Whether I'm mixing a delicate acoustic piece or engineering a dense electronic production, my goal remains the same: to uncover and amplify the unique essence of each project.</p>
+								
+								<p>Glue Matrix represents more than just technical services—it's an exploration of the invisible forces that connect us through sound. Every track, every mix, every sonic decision is made with intention, seeking that perfect balance where clarity meets depth, where precision meets soul.</p>
+								
+								<p>When I'm not in the studio, you'll find me exploring new production techniques, diving into music theory, or experimenting with field recordings and sound design. Music is both my profession and my meditation.</p>
+							</div>
+							
+							<!-- Credentials -->
+							<div class="credentials">
+								<div class="credential-item">
+									<h4>Experience</h4>
+									<p>5+ years professional audio engineering</p>
+								</div>
+								<div class="credential-item">
+									<h4>Specialties</h4>
+									<p>Mixing / Recording / Sound Design</p>
+								</div>
+								<div class="credential-item">
+									<h4>Approach</h4>
+									<p>Technical precision meets artistic vision</p>
+								</div>
+							</div>
+							
+							<a href="contact.html" class="button primary">Let's Work Together</a>
+						</div>
+					</div>
+
+			</div>
+
+<!-- Footer -->
+<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 2em 0;">
+    <ul class="icons">
+        <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+        <li><a href="https://x.com/gluematrix" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+    </ul>
+    <ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+        <li>&copy; GLUE MATRIX</li>
+    </ul>
+    <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
+</footer>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
