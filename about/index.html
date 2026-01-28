@@ -105,33 +105,35 @@
 			.credentials {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
-				gap: 1.5em;
-				margin: 3em 0;
+				gap: 1.2em;
+				margin: 3em auto;
 				text-align: center;
-				max-width: 700px;
+				max-width: 650px;
+				width: 100%;
 			}
 			
 			.credential-item {
 				background: rgba(0,0,0,0.5);
-				padding: 1.5em 1em;
+				padding: 1.25em 0.75em;
 				border-radius: 5px;
 				border: 1px solid rgba(255,255,255,0.2);
 				display: flex;
 				flex-direction: column;
 				justify-content: flex-start;
-				min-height: 140px;
+				align-items: center;
 			}
 			
 			.credential-item h4 {
 				color: #00ffcc;
 				margin-bottom: 0.75em;
-				font-size: 0.85em;
+				font-size: 0.8em;
+				white-space: nowrap;
 			}
 			
 			.credential-item p {
 				margin: 0;
-				font-size: 0.85em;
-				line-height: 1.5;
+				font-size: 0.8em;
+				line-height: 1.6;
 			}
 			
 			@media screen and (max-width: 768px) {
@@ -148,6 +150,12 @@
 				.credentials {
 					grid-template-columns: 1fr;
 					gap: 1em;
+					max-width: 400px;
+				}
+				
+				.credential-item {
+					padding: 1.5em;
+					min-height: auto;
 				}
 			}
 		</style>
@@ -240,8 +248,13 @@
     <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
 </footer>
 		<!-- Scripts -->
-			<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.scrollex.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
 			<script src="/assets/js/browser.min.js"></script>
-			<script src="/
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>
