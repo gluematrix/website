@@ -60,20 +60,18 @@ display: inline-block;
 }
 
 .home-content p {
-    font-size: clamp(0.8em, 2.2vw, 1.1em);
+    font-size: clamp(0.65em, 2vw, 1.1em);
     max-width: 95%;
     line-height: 1.8;
     margin-bottom: 0.5em;
-}
-
-.home-content p {
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 350px) {
     .home-content p {
-        white-space: normal;
-        font-size: 0.75em;
+        font-size: 0.55em;
     }
 }
 
@@ -82,8 +80,26 @@ display: inline-block;
 }
 
 .home-content .button {
-margin: 0.5em;
-font-family: 'Digital7', monospace !important;
+    margin: 0.5em;
+    font-family: 'Digital7', monospace !important;
+}
+
+/* Button container - all horizontal on desktop */
+.home-content > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5em;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* On mobile: 3 buttons on top row, Contact centered below */
+@media screen and (max-width: 768px) {
+    .home-content .button.primary {
+        flex-basis: 100%;
+        text-align: center;
+    }
 }
 </style>
 	</head>
@@ -94,18 +110,18 @@ font-family: 'Digital7', monospace !important;
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="index.html">GLUE MATRIX</a></h1>
+						<h1><a href="/">GLUE MATRIX</a></h1>
 						<nav id="nav">
 							<ul>
 								<li class="special">
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
 										<ul>
-	<li><a href="/">Home</a></li>
-<li><a href="/services/">Services</a></li>
-<li><a href="/music/">Music</a></li>
-<li><a href="/about/">About</a></li>
-<li><a href="/contact/">Contact</a></li>
+											<li><a href="/">Home</a></li>
+											<li><a href="/services/">Services</a></li>
+											<li><a href="/music/">Music</a></li>
+											<li><a href="/about/">About</a></li>
+											<li><a href="/contact/">Contact</a></li>
 										</ul>
 									</div>
 								</li>
@@ -116,15 +132,15 @@ font-family: 'Digital7', monospace !important;
 				<!-- Home Content -->
 					<div class="home-content">
 						<h1>GLUE MATRIX</h1>
-						<p>This website is still in progress of being made. Pardon the dust. If you're here, reading this, why not say hi?! ;D</p>
+                        
                         <p>Hidden between layers is a force that connects us all.</p>
                         <p>Glue Matrix is a musical project that attempts to alchemize and decipher this force.</p>
                         <p>Much love to all beings everywhere.</p>
 						<div>
-<a href="/services/" class="button">Services</a>
-<a href="/music/" class="button">Music</a>
-<a href="/about/" class="button">About</a>
-<a href="/contact/" class="button primary">Contact</a>
+							<a href="/services/" class="button">Services</a>
+							<a href="/music/" class="button">Music</a>
+							<a href="/about/" class="button">About</a>
+							<a href="/contact/" class="button primary">Contact</a>
 						</div>
 					</div>
 
