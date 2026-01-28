@@ -95,21 +95,24 @@ display: inline-block;
     margin: 0 auto;
 }
 
-/* On mobile: Contact button goes below, stays SAME SIZE, centered */
+/* On mobile: Contact button goes to own centered row */
 @media screen and (max-width: 768px) {
     .home-content > div {
         justify-content: center;
+        max-width: 90%;
     }
     
+    /* Make first 3 buttons fit in one row */
+    .home-content .button:not(.primary) {
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+    
+    /* Force Contact to next line and center it */
     .home-content .button.primary {
-        /* Force it to next line but keep same width as others */
-        flex-basis: calc(33.33% - 0.5em);
-        min-width: fit-content;
-    }
-    
-    /* Create line break before Contact button */
-    .home-content .button:nth-child(3) {
-        margin-right: calc(100% - 33.33%);
+        width: 100%;
+        max-width: 200px;
+        margin-top: 0.5em;
     }
 }
 
