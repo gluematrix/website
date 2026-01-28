@@ -89,15 +89,34 @@ display: inline-block;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 0.5em;
     width: 100%;
     margin: 0 auto;
 }
 
-/* On mobile: 3 buttons on top row, Contact centered below and SAME SIZE */
+/* On mobile: Contact button goes below, stays SAME SIZE, centered */
 @media screen and (max-width: 768px) {
+    .home-content > div {
+        justify-content: center;
+    }
+    
     .home-content .button.primary {
-        flex-basis: 100%;
+        /* Force it to next line but keep same width as others */
+        flex-basis: calc(33.33% - 0.5em);
+        min-width: fit-content;
+    }
+    
+    /* Create line break before Contact button */
+    .home-content .button:nth-child(3) {
+        margin-right: calc(100% - 33.33%);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home-content .button {
+        font-size: 0.7em;
+        padding: 0 2em;
     }
 }
 </style>
