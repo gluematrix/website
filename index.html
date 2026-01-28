@@ -97,12 +97,14 @@ display: inline-block;
 /* On mobile: make Contact button wrap to its own centered row */
 @media screen and (max-width: 768px) {
     .home-content .button {
-        min-width: 140px;
-        padding: 0 2.75em;
+        min-width: 120px;
+        max-width: 140px;
+        padding: 0 2em;
     }
     
     .button-container .button.primary {
         flex-basis: 100%;
+        max-width: 140px;
     }
 }
 
