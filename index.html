@@ -82,8 +82,6 @@ display: inline-block;
 .home-content .button {
     margin: 0.5em;
     font-family: 'Digital7', monospace !important;
-    min-width: 140px;
-    padding: 0 2.75em;
 }
 
 /* Button container - simple and clean */
@@ -94,6 +92,13 @@ display: inline-block;
     gap: 0.5em;
     width: 100%;
     margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .home-content .button {
+        min-width: 140px;
+        padding: 0 2.75em;
+    }
 }
 
 @media screen and (max-width: 480px) {
