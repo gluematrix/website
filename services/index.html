@@ -3,37 +3,15 @@
 	<head>
 		<title>GLUE MATRIX - Services</title>
         <link rel="icon" type="image/png" href="/favicon.png">
-        <meta name="description" content="Professional mixing, recording, and sound design services. Single, EP, and album mixing. Custom sound design and collaborative production.">
-        <meta name="keywords" content="mixing services, audio mixing, music production, sound design, recording">
+        <meta name="description" content="Professional audio services: mixing, recording, music production, composition, and podcast editing. Elevate your sound with Glue Matrix.">
+        <meta name="keywords" content="audio mixing, music production, recording services, composition, podcast editing">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/assets/css/main.css" />
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
-
-
-/* Menu hover effects */
-#menu ul li a {
-    transition: all 0.2s ease;
-}
-
-#menu ul li a:hover {
-    color: #00ffcc;
-    padding-left: 1.5em;
-}
-
-/* Menu toggle button hover */
-.menuToggle {
-    transition: all 0.3s ease;
-}
-
-.menuToggle:hover {
-    transform: rotate(90deg);
-}
-
-
-			/* Full page background for services */
+			/* Full page background */
 			body {
 				background-image: url('/assets/css/images/servicesphoto.jpg');
 				background-size: cover;
@@ -45,7 +23,7 @@
 				min-height: 100vh;
 			}
 			
-			/* Dark overlay for readability */
+			/* Dark overlay */
 			body::before {
 				content: '';
 				position: fixed;
@@ -53,7 +31,7 @@
 				left: 0;
 				right: 0;
 				bottom: 0;
-				background: rgba(0,0,0,0.3);
+				background: rgba(0,0,0,0.6);
 				z-index: 0;
 			}
 			
@@ -65,119 +43,405 @@
 			.page-content {
 				display: flex;
 				flex-direction: column;
-				justify-content: center;
 				align-items: center;
 				min-height: 100vh;
-				text-align: center;
 				padding: 6em 2em 4em 2em;
+			}
+			
+			.services-container {
+				max-width: 1000px;
+				width: 100%;
+				margin: 0 auto;
 			}
 			
 			.page-content h1 {
 				font-size: clamp(2em, 6vw, 3em);
 				margin-bottom: 0.5em;
+				text-align: center;
 			}
 			
-			.page-content p {
+			.page-content > p {
 				font-size: clamp(0.9em, 2.5vw, 1.2em);
-				max-width: 800px;
+				max-width: 700px;
 				line-height: 1.8;
+				margin: 0 auto 3em auto;
+				text-align: center;
 			}
 			
-			.services-list {
-				margin: 2em 0;
-				font-size: clamp(1em, 2.5vw, 1.3em);
+			/* Services Grid */
+			.services-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 2em;
+				margin: 3em 0;
+			}
+			
+			.service-card {
+				background: rgba(0,0,0,0.6);
+				padding: 2em;
+				border-radius: 8px;
+				border: 1px solid rgba(0,255,204,0.3);
+				position: relative;
+				transition: all 0.3s ease;
+			}
+			
+			.service-card:hover {
+				transform: translateY(-5px);
+				border-color: rgba(0,255,204,0.6);
+				box-shadow: 0 10px 30px rgba(0,255,204,0.2);
+			}
+			
+			.service-card h3 {
+				color: #00ffcc;
+				font-size: 1.3em;
+				margin-bottom: 0.5em;
+			}
+			
+			.service-card .price {
+				font-size: 1.5em;
+				color: #fff;
+				margin: 0.5em 0;
+				font-weight: bold;
+			}
+			
+			.service-card .price-detail {
+				font-size: 0.85em;
+				color: rgba(255,255,255,0.7);
+				margin-bottom: 1em;
+			}
+			
+			.service-card p {
+				font-size: 0.95em;
+				line-height: 1.6;
+				color: rgba(255,255,255,0.9);
+			}
+			
+			/* Waveform decorations */
+			.waveform {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				opacity: 0.15;
+				width: 60px;
+				height: 60px;
+			}
+			
+			/* Before/After Audio Player */
+			.audio-comparison {
+				background: rgba(0,0,0,0.7);
+				padding: 2.5em;
+				border-radius: 8px;
+				margin: 4em 0;
+				border: 1px solid rgba(0,255,204,0.3);
+			}
+			
+			.audio-comparison h2 {
+				color: #00ffcc;
+				text-align: center;
+				margin-bottom: 1.5em;
+				font-size: 1.8em;
+			}
+			
+			.audio-players {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 2em;
+				margin-top: 2em;
+			}
+			
+			.audio-player-box {
+				background: rgba(0,0,0,0.4);
+				padding: 1.5em;
+				border-radius: 5px;
+				text-align: center;
+			}
+			
+			.audio-player-box h4 {
+				color: #00ffcc;
+				margin-bottom: 1em;
+				font-size: 1.1em;
+			}
+			
+			.audio-player-box audio {
+				width: 100%;
+				margin-top: 0.5em;
+			}
+			
+			.audio-note {
+				text-align: center;
+				font-size: 0.9em;
+				color: rgba(255,255,255,0.6);
+				margin-top: 1.5em;
+				font-style: italic;
+			}
+			
+			/* Alchemy Symbol Decorations */
+			.alchemy-symbol {
+				position: absolute;
+				opacity: 0.08;
+				pointer-events: none;
+			}
+			
+			.symbol-top-left {
+				top: 100px;
+				left: 50px;
+				width: 80px;
+				height: 80px;
+			}
+			
+			.symbol-top-right {
+				top: 120px;
+				right: 50px;
+				width: 100px;
+				height: 100px;
+			}
+			
+			.symbol-bottom {
+				bottom: 100px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 120px;
+				height: 120px;
+			}
+			
+			/* Testimonials */
+			.testimonials {
+				margin: 4em 0;
+			}
+			
+			.testimonials h2 {
+				color: #00ffcc;
+				text-align: center;
+				margin-bottom: 2em;
+				font-size: 1.8em;
+			}
+			
+			.testimonial {
+				background: rgba(0,0,0,0.6);
+				padding: 2em;
+				border-radius: 8px;
+				border-left: 4px solid #00ffcc;
+				margin-bottom: 1.5em;
+			}
+			
+			.testimonial p {
+				font-size: 1.05em;
+				line-height: 1.7;
+				margin-bottom: 1em;
+				font-style: italic;
+			}
+			
+			.testimonial .author {
+				color: #00ffcc;
+				font-size: 0.95em;
+				text-align: right;
+			}
+			
+			@media screen and (max-width: 768px) {
+				.services-grid {
+					grid-template-columns: 1fr;
+				}
+				
+				.audio-players {
+					grid-template-columns: 1fr;
+				}
+				
+				.alchemy-symbol {
+					display: none;
+				}
 			}
 		</style>
 	</head>
 	<body>
 
+		<!-- Alchemy Symbol Decorations -->
+		<svg class="alchemy-symbol symbol-top-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+			<polygon points="50,10 90,90 10,90" fill="none" stroke="#00ffcc" stroke-width="3"/>
+		</svg>
+		
+		<svg class="alchemy-symbol symbol-top-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+			<circle cx="50" cy="50" r="35" fill="none" stroke="#00ffcc" stroke-width="2"/>
+			<rect x="20" y="20" width="60" height="60" fill="none" stroke="#00ffcc" stroke-width="2"/>
+			<polygon points="50,15 85,50 50,85 15,50" fill="none" stroke="#00ffcc" stroke-width="2"/>
+		</svg>
+		
+		<svg class="alchemy-symbol symbol-bottom" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+			<circle cx="50" cy="50" r="15" fill="none" stroke="#00ffcc" stroke-width="1.5"/>
+			<circle cx="35" cy="40" r="15" fill="none" stroke="#00ffcc" stroke-width="1.5"/>
+			<circle cx="65" cy="40" r="15" fill="none" stroke="#00ffcc" stroke-width="1.5"/>
+			<circle cx="35" cy="60" r="15" fill="none" stroke="#00ffcc" stroke-width="1.5"/>
+			<circle cx="65" cy="60" r="15" fill="none" stroke="#00ffcc" stroke-width="1.5"/>
+			<circle cx="50" cy="30" r="15" fill="none" stroke="#00ffcc" stroke-width="1.5"/>
+			<circle cx="50" cy="70" r="15" fill="none" stroke="#00ffcc" stroke-width="1.5"/>
+		</svg>
+
 		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+		<div id="page-wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<h1><a href="/">GLUE MATRIX</a></h1>
-						<nav id="nav">
-							<ul>
-								<li class="special">
-									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-									<div id="menu">
-										<ul>
-								<li><a href="/">Home</a></li>
-<li><a href="/services/">Services</a></li>
-<li><a href="/music/">Music</a></li>
-<li><a href="/about/">About</a></li>
-<li><a href="/contact/">Contact</a></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</nav>
-					</header>
+			<!-- Header -->
+			<header id="header">
+				<h1><a href="/">GLUE MATRIX</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="/">Home</a></li>
+									<li><a href="/services/">Services</a></li>
+									<li><a href="/music/">Music</a></li>
+									<li><a href="/about/">About</a></li>
+									<li><a href="/contact/">Contact</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
 
-<!-- Services Content -->
-<div class="page-content">
-    <h1>Services</h1>
-    <p style="margin-bottom: 0.5em;">Mixing, recording, and sound design focused on clarity, depth, and the vibe your project deserves.</p>
-    
-    <div class="services-list">
-        <p>
-            Mixing - Single  /  EP  /  Album<br />
-                                Recording<br />
+			<!-- Services Content -->
+			<div class="page-content">
+				<div class="services-container">
+					<h1>Services</h1>
+					<p>Professional audio engineering and music production services. Let's bring your vision to life.</p>
 
-                                Composition<br />
+					<!-- Services Grid -->
+					<div class="services-grid">
+						
+						<!-- Recording & Mixing -->
+						<div class="service-card">
+							<svg class="waveform" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+								<rect x="5" y="20" width="3" height="20" fill="#00ffcc"/>
+								<rect x="12" y="10" width="3" height="40" fill="#00ffcc"/>
+								<rect x="19" y="25" width="3" height="10" fill="#00ffcc"/>
+								<rect x="26" y="5" width="3" height="50" fill="#00ffcc"/>
+								<rect x="33" y="15" width="3" height="30" fill="#00ffcc"/>
+								<rect x="40" y="22" width="3" height="16" fill="#00ffcc"/>
+								<rect x="47" y="12" width="3" height="36" fill="#00ffcc"/>
+							</svg>
+							<h3>Recording & Mixing</h3>
+							<div class="price">$75/hr</div>
+							<div class="price-detail">or $400 per song</div>
+							<p>Professional mixing and recording services. SSL-trained engineer with experience in analog and digital workflows. Perfect for singles, EPs, and full albums.</p>
+						</div>
 
-                                Production<br />
+						<!-- Music Production -->
+						<div class="service-card">
+							<svg class="waveform" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="30" cy="30" r="20" fill="none" stroke="#00ffcc" stroke-width="2"/>
+								<circle cx="30" cy="30" r="12" fill="none" stroke="#00ffcc" stroke-width="2"/>
+								<circle cx="30" cy="30" r="4" fill="#00ffcc"/>
+							</svg>
+							<h3>Music Production</h3>
+							<div class="price">Starting at $800</div>
+							<div class="price-detail">per song</div>
+							<p>Full production services from concept to completion. Specializing in psych pop, electronic, and atmospheric soundscapes with lush layering and creative sound design.</p>
+						</div>
 
-                                Audio Consulting<br />
+						<!-- Composition -->
+						<div class="service-card">
+							<svg class="waveform" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+								<path d="M 10,30 Q 20,10 30,30 T 50,30" fill="none" stroke="#00ffcc" stroke-width="2"/>
+								<path d="M 10,35 Q 20,15 30,35 T 50,35" fill="none" stroke="#00ffcc" stroke-width="2"/>
+							</svg>
+							<h3>Composition</h3>
+							<div class="price">$300/min</div>
+							<div class="price-detail">custom music</div>
+							<p>Original compositions tailored to your project. Film scores, game soundtracks, commercial music, or standalone pieces. Royalty-free licensing available.</p>
+						</div>
 
-                                Podcasts
-        </p>
-    </div>
+						<!-- Podcast Editing -->
+						<div class="service-card">
+							<svg class="waveform" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+								<rect x="15" y="15" width="30" height="30" rx="5" fill="none" stroke="#00ffcc" stroke-width="2"/>
+								<circle cx="25" cy="25" r="3" fill="#00ffcc"/>
+								<circle cx="35" cy="25" r="3" fill="#00ffcc"/>
+								<path d="M 20,35 Q 30,40 40,35" fill="none" stroke="#00ffcc" stroke-width="2"/>
+							</svg>
+							<h3>Podcast Editing</h3>
+							<div class="price">$50/hr</div>
+							<div class="price-detail">quick turnaround</div>
+							<p>Professional podcast editing and post-production. Noise reduction, level balancing, editing, and mastering. Get your episodes sounding polished and broadcast-ready.</p>
+						</div>
 
-    <p style="font-size: 0.9em; margin: 2em 0;">Contact for pricing</p>
+					</div>
 
-    <!-- Testimonials -->
-    <div style="margin: 3em auto; max-width: 700px;">
-        <h3 style="margin-bottom: 2em;">What Artists Say</h3>
+					<!-- Before/After Audio Comparison -->
+					<div class="audio-comparison">
+						<h2>Hear the Difference</h2>
+						<p style="text-align: center; margin-bottom: 2em;">Experience the transformation from raw recording to polished mix.</p>
+						
+						<div class="audio-players">
+							<div class="audio-player-box">
+								<h4>Before (Raw Mix)</h4>
+								<audio controls>
+									<source src="/assets/audio/before-mix.mp3" type="audio/mpeg">
+									Your browser does not support the audio element.
+								</audio>
+							</div>
+							
+							<div class="audio-player-box">
+								<h4>After (Professional Mix)</h4>
+								<audio controls>
+									<source src="/assets/audio/after-mix.mp3" type="audio/mpeg">
+									Your browser does not support the audio element.
+								</audio>
+							</div>
+						</div>
+						
+						<p class="audio-note">Note: Upload your before/after audio files to /assets/audio/ directory</p>
+					</div>
 
-        <blockquote style="background: rgba(0,0,0,0.5); padding: 2em; margin: 1.5em 0; border-left: 3px solid #fff; font-style: italic;">
-            <p style="margin-bottom: 1em;">"You’re definitely a pro. I mean I just listened to what you did to my track, & it was so good holy moly! You just took it to another level. I’m gonna be playing that all month!"</p>
-            <footer style="font-style: normal; opacity: 0.8;">— Preston B</footer>
-        </blockquote>
+					<!-- Testimonials -->
+					<div class="testimonials">
+						<h2>What Artists Say</h2>
+						
+	<div class="testimonial">
+							<p>"Definitely a pro. I mean, I just listened to what you did to my track, & it was so good holy moly! You just took it to another level. I’m gonna be playing that all month!"</p>
+							<div class="author">— Preston B</div>
+						</div>
 
-        <blockquote style="background: rgba(0,0,0,0.5); padding: 2em; margin: 1.5em 0; border-left: 3px solid #fff; font-style: italic;">
-            <p style="margin-bottom: 1em;">"Glue Matrix brought my vision to life in ways I didn't even know were possible. Professional and creative. The attention to detail in the mix was incredible and Jack brought my sound exactly where it needed to be."</p>
-            <footer style="font-style: normal; opacity: 0.8;">— Pseyeche</footer>
-        </blockquote>
 
-    </div>
+						<div class="testimonial">
+							<p>"Working with Glue Matrix transformed my sound. The attention to detail and creative input elevated my tracks beyond what I imagined possible."</p>
+							<div class="author">— Pseyeche</div>
+						</div>
+						
+					
+					</div>
 
-    <a href="/contact/" class="button primary">Get in Touch</a>
-</div>
+					<!-- CTA -->
+					<div style="text-align: center; margin: 4em 0;">
+						<a href="/contact/" class="button primary" style="font-size: 1.2em;">Let's Work Together</a>
+					</div>
 
- 
-<!-- Footer -->
-<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 2em 0;">
-    <ul class="icons">
-        <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-        <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-        <li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-        <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-    </ul>
-    <ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
-        <li>&copy; GLUE MATRIX</li>
-    </ul>
-    <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
-</footer>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 2em 0;">
+			<ul class="icons">
+				<li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+				<li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+			</ul>
+			<ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+				<li>&copy; GLUE MATRIX</li>
+			</ul>
+			<p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
+		</footer>
+
 		<!-- Scripts -->
-			<script src="/assets/js/jquery.min.js"></script>
-			<script src="/assets/js/jquery.scrollex.min.js"></script>
-			<script src="/assets/js/jquery.scrolly.min.js"></script>
-			<script src="/assets/js/browser.min.js"></script>
-			<script src="/assets/js/breakpoints.min.js"></script>
-			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/jquery.scrolly.min.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
 
 	</body>
 </html>
