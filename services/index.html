@@ -11,6 +11,27 @@
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
+
+/* Menu hover effects */
+#menu ul li a {
+    transition: all 0.2s ease;
+}
+
+#menu ul li a:hover {
+    color: #00ffcc;
+    padding-left: 1.5em;
+}
+
+/* REPLACE the menu toggle hover in HOVER-EFFECTS.md with this: */
+.menuToggle {
+    transition: all 0.3s ease;
+}
+
+.menuToggle:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
 			/* Full page background */
 			body {
 				background-image: url('/assets/css/images/servicesphoto.jpg');
@@ -182,12 +203,6 @@
 				pointer-events: none;
 			}
 			
-			.symbol-top-left {
-				top: 100px;
-				left: 50px;
-				width: 80px;
-				height: 80px;
-			}
 			
 			.symbol-top-right {
 				top: 120px;
@@ -255,9 +270,7 @@
 	<body>
 
 		<!-- Alchemy Symbol Decorations -->
-		<svg class="alchemy-symbol symbol-top-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-			<polygon points="50,10 90,90 10,90" fill="none" stroke="#00ffcc" stroke-width="3"/>
-		</svg>
+	
 		
 		<svg class="alchemy-symbol symbol-top-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 			<circle cx="50" cy="50" r="35" fill="none" stroke="#00ffcc" stroke-width="2"/>
@@ -389,7 +402,6 @@
 							</div>
 						</div>
 						
-						<p class="audio-note">Note: Upload your before/after audio files to /assets/audio/ directory</p>
 					</div>
 
 					<!-- Testimonials -->
