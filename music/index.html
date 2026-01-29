@@ -12,9 +12,7 @@
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
 
-
-
-/* Menu hover effects */
+            /* Menu hover effects */
 #menu ul li a {
     transition: all 0.2s ease;
 }
@@ -32,7 +30,6 @@
 .menuToggle:hover {
     transform: rotate(90deg);
 }
-
 
 .music-links a {
     padding: 1em 2em;
@@ -52,7 +49,7 @@
     text-align: center !important;
 }
 
-/* Subscribe button - MUCH SMALLER, same size as homepage buttons */
+/* Subscribe button - MUCH SMALLER, same size as homepage buttons + HOVER */
 #mailingListForm button.primary {
     padding: 0 2em !important;
     font-size: 0.8em !important;
@@ -62,6 +59,12 @@
     line-height: 3.125em !important;
     max-width: 300px !important;
     margin: 0 auto !important;
+    transition: all 0.3s ease !important;
+}
+
+#mailingListForm button.primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(237, 73, 51, 0.6);
 }
 
 #subscribeBtn,
@@ -137,6 +140,13 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.coming-soon {
+    font-size: clamp(1.2em, 3vw, 1.8em);
+    margin: 3em 0 2em 0;
+    opacity: 0.8;
+    font-style: italic;
+}
 		</style>
 	</head>
 	<body>
@@ -179,10 +189,9 @@ body {
         <a href="https://soundcloud.com/gluematrix" class="button" target="_blank" rel="noopener">SoundCloud</a>
     </div>
 
-    <!-- Audio Samples -->
-    <div style="margin: 3em 0; width: 100%; max-width: 600px;">
-        <h3 style="margin-bottom: 1em;">Featured Tracks</h3>
-        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1997517003&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+    <!-- Coming Soon Message -->
+    <div class="coming-soon">
+        <p>New music coming soon.</p>
     </div>
 
 <!-- Email Signup -->
@@ -250,7 +259,7 @@ document.getElementById('mailingListForm').addEventListener('submit', function(e
     <ul class="icons">
         <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
         <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-        <li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="https://x.com/gluematrix" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
         <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
     </ul>
     <ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
