@@ -6,11 +6,34 @@
         <meta name="description" content="Professional audio services: mixing, recording, music production, composition, and podcast editing. Elevate your sound with Glue Matrix.">
         <meta name="keywords" content="audio mixing, music production, recording services, composition, podcast editing">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
 		<link rel="stylesheet" href="/assets/css/main.css" />
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
+/* ===== iOS SAFARI GREY BAR FIX ===== */
+html {
+    height: 100%;
+    height: -webkit-fill-available;
+}
+
+body {
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
+}
+
+@supports (-webkit-touch-callout: none) {
+    body {
+        background-attachment: scroll !important;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    body {
+        background-attachment: scroll !important;
+    }
+}
 
 /* Menu hover effects */
 #menu ul li a {
@@ -41,6 +64,7 @@
 				margin: 0;
 				padding: 0;
 				min-height: 100vh;
+				overflow-x: hidden;
 			}
 			
 			/* Dark overlay */
@@ -65,6 +89,7 @@
 				flex-direction: column;
 				align-items: center;
 				min-height: 100vh;
+				min-height: 100dvh;
 				padding: 6em 2em 4em 2em;
 			}
 			
@@ -284,11 +309,28 @@
 				.services-grid {
 					grid-template-columns: repeat(2, 1fr);
 				}
+				
+				.service-card:nth-child(1),
+				.service-card:nth-child(2),
+				.service-card:nth-child(3),
+				.service-card:nth-child(4),
+				.service-card:nth-child(5) {
+					grid-column: auto;
+				}
 			}
 			
 			@media screen and (max-width: 768px) {
 				.services-grid {
-					grid-template-columns: 1fr;
+					grid-template-columns: 1fr !important;
+				}
+				
+				.service-card,
+				.service-card:nth-child(1),
+				.service-card:nth-child(2),
+				.service-card:nth-child(3),
+				.service-card:nth-child(4),
+				.service-card:nth-child(5) {
+					grid-column: auto !important;
 				}
 				
 				.audio-players {
@@ -299,9 +341,62 @@
 					display: none;
 				}
 			}
+
+/* ===== PAGE TRANSITION OVERLAY ===== */
+#page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#page-transition.active {
+    animation: pageTransition 0.6s ease-in-out;
+}
+
+@keyframes pageTransition {
+    0% { opacity: 0; }
+    40% { opacity: 1; }
+    60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#page-transition .waveform-transition {
+    width: 80%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+#page-transition .wave-bar {
+    width: 3px;
+    background: #00ffcc;
+    border-radius: 2px;
+    animation: waveAnim 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes waveAnim {
+    0% { height: 10px; }
+    100% { height: 50px; }
+}
 		</style>
 	</head>
 	<body>
+
+		<!-- Page Transition Overlay -->
+		<div id="page-transition">
+			<div class="waveform-transition" id="transition-waveform"></div>
+		</div>
 
 		<!-- Alchemy Symbol Decorations -->
 		
@@ -326,18 +421,18 @@
 
 			<!-- Header -->
 			<header id="header">
-				<h1><a href="/">GLUE MATRIX</a></h1>
+				<h1><a href="/" class="nav-link">GLUE MATRIX</a></h1>
 				<nav id="nav">
 					<ul>
 						<li class="special">
 							<a href="#menu" class="menuToggle"><span>Menu</span></a>
 							<div id="menu">
 								<ul>
-									<li><a href="/">Home</a></li>
-									<li><a href="/services/">Services</a></li>
-									<li><a href="/music/">Music</a></li>
-									<li><a href="/about/">About</a></li>
-									<li><a href="/contact/">Contact</a></li>
+									<li><a href="/" class="nav-link">Home</a></li>
+									<li><a href="/services/" class="nav-link">Services</a></li>
+									<li><a href="/music/" class="nav-link">Music</a></li>
+									<li><a href="/about/" class="nav-link">About</a></li>
+									<li><a href="/contact/" class="nav-link">Contact</a></li>
 								</ul>
 							</div>
 						</li>
@@ -405,7 +500,7 @@
 								<path d="M 20,35 Q 30,40 40,35" fill="none" stroke="#00ffcc" stroke-width="2"/>
 							</svg>
 							<h3>Podcast Editing</h3>
-							<div class="price">$35/hr</div>
+							<div class="price">Starting at $35/hr</div>
 							<div class="price-detail">quick turnaround</div>
 							<p>Professional podcast editing and post-production. Noise reduction, level balancing, editing, and mastering. Get your episodes sounding polished and broadcast-ready.</p>
 						</div>
@@ -425,8 +520,6 @@
 
 					</div>
 
-
-<!-- Add this RIGHT AFTER the services-grid closing </div> and BEFORE the audio-comparison section -->
 
 <!-- Custom Pricing Note -->
 <div style="background: rgba(0,255,204,0.1); border: 1px solid rgba(0,255,204,0.3); border-radius: 8px; padding: 2em; margin: 3em auto; max-width: 700px; text-align: center;">
@@ -480,7 +573,7 @@
 
 					<!-- CTA -->
 					<div style="text-align: center; margin: 4em 0;">
-						<a href="/contact/" class="button primary" style="font-size: 1.2em;">Let's Work Together</a>
+						<a href="/contact/" class="button primary nav-link" style="font-size: 1.2em;">Let's Work Together</a>
 					</div>
 
 				</div>
@@ -510,6 +603,44 @@
 		<script src="/assets/js/breakpoints.min.js"></script>
 		<script src="/assets/js/util.js"></script>
 		<script src="/assets/js/main.js"></script>
+
+<script>
+// ===== PAGE TRANSITIONS =====
+(function() {
+    const transition = document.getElementById('page-transition');
+    const waveform = document.getElementById('transition-waveform');
+    
+    // Create waveform bars for transition
+    for (let i = 0; i < 50; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'wave-bar';
+        bar.style.animationDelay = `${i * 0.02}s`;
+        waveform.appendChild(bar);
+    }
+    
+    // Intercept navigation clicks
+    document.querySelectorAll('a.nav-link, #menu a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Don't intercept external links or anchor links
+            if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
+                return;
+            }
+            
+            e.preventDefault();
+            
+            // Trigger transition
+            transition.classList.add('active');
+            
+            // Navigate after animation
+            setTimeout(() => {
+                window.location.href = href;
+            }, 400);
+        });
+    });
+})();
+</script>
 
 	</body>
 </html>

@@ -6,11 +6,34 @@
         <meta name="description" content="Contact Glue Matrix for professional mixing, recording, and sound design services. Get in touch to elevate your sound.">
         <meta name="keywords" content="contact music producer, hire mixing engineer, audio services">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
 		<link rel="stylesheet" href="/assets/css/main.css" />
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
+/* ===== iOS SAFARI GREY BAR FIX ===== */
+html {
+    height: 100%;
+    height: -webkit-fill-available;
+}
+
+body {
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
+}
+
+@supports (-webkit-touch-callout: none) {
+    body {
+        background-attachment: scroll !important;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    body {
+        background-attachment: scroll !important;
+    }
+}
 
 /* Send button hover effect */
 #contactForm button[type="submit"],
@@ -24,7 +47,6 @@
     box-shadow: 0 0 20px rgba(237, 73, 51, 0.6);
 }
 
-
 /* Menu hover effects */
 #menu ul li a {
     transition: all 0.2s ease;
@@ -35,7 +57,6 @@
     padding-left: 1.5em;
 }
 
-/* REPLACE the menu toggle hover in HOVER-EFFECTS.md with this: */
 .menuToggle {
     transition: all 0.3s ease;
 }
@@ -45,8 +66,7 @@
     transform: scale(1.1);
 }
 
-
-			/* Full page background for contact */
+/* Full page background for contact */
 body {
     background-image: url('/assets/css/images/contactphoto.jpg');
     background-size: cover;
@@ -56,81 +76,135 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    overflow-x: hidden;
 }
-			
+
 #submitBtn,
 #submitBtn .button-text,
 #submitBtn .button-loading {
     font-family: 'Digital7', monospace !important;
 }
 
+/* Dark overlay for readability */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 0;
+}
 
-			/* Dark overlay for readability */
-			body::before {
-				content: '';
-				position: fixed;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background: rgba(0,0,0,0.3);
-				z-index: 0;
-			}
-			
-			#page-wrapper {
-				position: relative;
-				z-index: 1;
-			}
-			
-			.page-content {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				min-height: 100vh;
-				text-align: center;
-				padding: 6em 2em 4em 2em;
-			}
-			
-			.page-content h1 {
-				font-size: clamp(2em, 6vw, 3em);
-				margin-bottom: 0.5em;
-			}
-			
-			.page-content p {
-				font-size: clamp(0.9em, 2.5vw, 1.2em);
-				margin-bottom: 2em;
-			}
-			
-			.contact-form {
-				width: 100%;
-				max-width: 600px;
-			}
-			
-			.contact-form .row {
-				margin-bottom: 0;
-			}
+#page-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    text-align: center;
+    padding: 6em 2em 4em 2em;
+}
+
+.page-content h1 {
+    font-size: clamp(2em, 6vw, 3em);
+    margin-bottom: 0.5em;
+}
+
+.page-content p {
+    font-size: clamp(0.9em, 2.5vw, 1.2em);
+    margin-bottom: 2em;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: 600px;
+}
+
+.contact-form .row {
+    margin-bottom: 0;
+}
+
+/* ===== PAGE TRANSITION OVERLAY ===== */
+#page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#page-transition.active {
+    animation: pageTransition 0.6s ease-in-out;
+}
+
+@keyframes pageTransition {
+    0% { opacity: 0; }
+    40% { opacity: 1; }
+    60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#page-transition .waveform {
+    width: 80%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+#page-transition .wave-bar {
+    width: 3px;
+    background: #00ffcc;
+    border-radius: 2px;
+    animation: waveAnim 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes waveAnim {
+    0% { height: 10px; }
+    100% { height: 50px; }
+}
 		</style>
 	</head>
 	<body>
+
+        <!-- Page Transition Overlay -->
+        <div id="page-transition">
+            <div class="waveform" id="transition-waveform"></div>
+        </div>
 
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="/">GLUE MATRIX</a></h1>
+						<h1><a href="/" class="nav-link">GLUE MATRIX</a></h1>
 						<nav id="nav">
 							<ul>
 								<li class="special">
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
 										<ul>
-											<li><a href="/">Home</a></li>
-<li><a href="/services/">Services</a></li>
-<li><a href="/music/">Music</a></li>
-<li><a href="/about/">About</a></li>
-<li><a href="/contact/">Contact</a></li>
+											<li><a href="/" class="nav-link">Home</a></li>
+											<li><a href="/services/" class="nav-link">Services</a></li>
+											<li><a href="/music/" class="nav-link">Music</a></li>
+											<li><a href="/about/" class="nav-link">About</a></li>
+											<li><a href="/contact/" class="nav-link">Contact</a></li>
 										</ul>
 									</div>
 								</li>
@@ -163,12 +237,7 @@ body {
             <p id="formStatus" style="margin-top: 1em; display: none; font-size: 1em;"></p>
         </div>
     </div>
-
-    
 </form>
-
-
-
 
 <p style="margin-top: 2em; font-size: 0.9em;">Or email directly: <a href="mailto:jack@gluematrix.com">jack@gluematrix.com</a></p>
 
@@ -230,6 +299,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     </ul>
     <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
 </footer>
+
 		<!-- Scripts -->
 			<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.scrollex.min.js"></script>
@@ -239,7 +309,43 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
 
-
+<script>
+// ===== PAGE TRANSITIONS =====
+(function() {
+    const transition = document.getElementById('page-transition');
+    const waveform = document.getElementById('transition-waveform');
+    
+    // Create waveform bars for transition
+    for (let i = 0; i < 50; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'wave-bar';
+        bar.style.animationDelay = `${i * 0.02}s`;
+        waveform.appendChild(bar);
+    }
+    
+    // Intercept navigation clicks
+    document.querySelectorAll('a.nav-link, #menu a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
             
+            // Don't intercept external links or anchor links
+            if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
+                return;
+            }
+            
+            e.preventDefault();
+            
+            // Trigger transition
+            transition.classList.add('active');
+            
+            // Navigate after animation
+            setTimeout(() => {
+                window.location.href = href;
+            }, 400);
+        });
+    });
+})();
+</script>
+
 	</body>
 </html>

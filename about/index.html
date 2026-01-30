@@ -6,12 +6,34 @@
         <meta name="description" content="Meet the artist behind Glue Matrix. Professional audio engineer and music producer with a passion for sonic alchemy.">
         <meta name="keywords" content="Glue Matrix bio, audio engineer, music producer, about">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
 		<link rel="stylesheet" href="/assets/css/main.css" />
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
+/* ===== iOS SAFARI GREY BAR FIX ===== */
+html {
+    height: 100%;
+    height: -webkit-fill-available;
+}
 
+body {
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
+}
+
+@supports (-webkit-touch-callout: none) {
+    body {
+        background-attachment: scroll !important;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    body {
+        background-attachment: scroll !important;
+    }
+}
 
 /* Menu hover effects */
 #menu ul li a {
@@ -23,7 +45,6 @@
     padding-left: 1.5em;
 }
 
-/* REPLACE the menu toggle hover in HOVER-EFFECTS.md with this: */
 .menuToggle {
     transition: all 0.3s ease;
 }
@@ -33,175 +54,229 @@
     transform: scale(1.1);
 }
 
+/* Full page background for about */
+body {
+    background-image: url('/assets/css/images/aboutphoto.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
-			/* Full page background for about */
-			body {
-				background-image: url('/assets/css/images/aboutphoto.jpg');
-				background-size: cover;
-				background-position: center;
-				background-attachment: fixed;
-				background-repeat: no-repeat;
-				margin: 0;
-				padding: 0;
-				min-height: 100vh;
-			}
-			
-			/* Dark overlay for readability */
-			body::before {
-				content: '';
-				position: fixed;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background: rgba(0,0,0,0.4);
-				z-index: 0;
-			}
-			
-			#page-wrapper {
-				position: relative;
-				z-index: 1;
-			}
-			
-			.page-content {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				min-height: 100vh;
-				text-align: center;
-				padding: 6em 2em 4em 2em;
-			}
-			
-			.about-container {
-				max-width: 900px;
-				margin: 0 auto;
-			}
-			
-			.about-image {
-				width: 250px;
-				height: 250px;
-				border-radius: 50%;
-				border: 3px solid #fff;
-				margin: 0 auto 2em auto;
-				overflow: hidden;
-				box-shadow: 0 0 30px rgba(0,0,0,0.5);
-			}
-			
-			.about-image img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-			
-			.page-content h1 {
-				font-size: clamp(2em, 6vw, 3em);
-				margin-bottom: 0.5em;
-			}
-			
-			.page-content h3 {
-				font-size: clamp(1.2em, 3vw, 1.5em);
-				margin-bottom: 1.5em;
-				color: #00ffcc;
-				font-weight: normal;
-			}
-			
-			.bio-text {
-				font-size: clamp(0.95em, 2.2vw, 1.1em);
-				line-height: 1.8;
-				text-align: left;
-				margin: 0 auto 2em auto;
-				max-width: 700px;
-				background: rgba(0,0,0,0.3);
-				padding: 2em;
-				border-radius: 5px;
-			}
-			
-			.bio-text p {
-				margin-bottom: 1.5em;
-			}
-			
-			.bio-text p:last-child {
-				margin-bottom: 0;
-			}
-			
-			.credentials {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 1.2em;
-				margin: 3em auto;
-				text-align: center;
-				max-width: 650px;
-				width: 100%;
-			}
-			
-			.credential-item {
-				background: rgba(0,0,0,0.5);
-				padding: 1.25em 0.75em;
-				border-radius: 5px;
-				border: 1px solid rgba(255,255,255,0.2);
-				display: flex;
-				flex-direction: column;
-				justify-content: flex-start;
-				align-items: center;
-			}
-			
-			.credential-item h4 {
-				color: #00ffcc;
-				margin-bottom: 0.75em;
-				font-size: 0.8em;
-				white-space: nowrap;
-			}
-			
-			.credential-item p {
-				margin: 0;
-				font-size: 0.8em;
-				line-height: 1.6;
-			}
-			
-			@media screen and (max-width: 768px) {
-				.about-image {
-					width: 200px;
-					height: 200px;
-				}
-				
-				.bio-text {
-					padding: 1.5em;
-					text-align: center;
-				}
-				
-				.credentials {
-					grid-template-columns: 1fr;
-					gap: 1em;
-					max-width: 400px;
-				}
-				
-				.credential-item {
-					padding: 1.5em;
-					min-height: auto;
-				}
-			}
+/* Dark overlay for readability */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 0;
+}
+
+#page-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    text-align: center;
+    padding: 6em 2em 4em 2em;
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin: 0 auto 2em auto;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.page-content h1 {
+    font-size: clamp(2em, 6vw, 3em);
+    margin-bottom: 0.5em;
+}
+
+.page-content h3 {
+    font-size: clamp(1.2em, 3vw, 1.5em);
+    margin-bottom: 1.5em;
+    color: #00ffcc;
+    font-weight: normal;
+}
+
+.bio-text {
+    font-size: clamp(0.95em, 2.2vw, 1.1em);
+    line-height: 1.8;
+    text-align: left;
+    margin: 0 auto 2em auto;
+    max-width: 700px;
+    background: rgba(0,0,0,0.3);
+    padding: 2em;
+    border-radius: 5px;
+}
+
+.bio-text p {
+    margin-bottom: 1.5em;
+}
+
+.bio-text p:last-child {
+    margin-bottom: 0;
+}
+
+.credentials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2em;
+    margin: 3em auto;
+    text-align: center;
+    max-width: 650px;
+    width: 100%;
+}
+
+.credential-item {
+    background: rgba(0,0,0,0.5);
+    padding: 1.25em 0.75em;
+    border-radius: 5px;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.credential-item h4 {
+    color: #00ffcc;
+    margin-bottom: 0.75em;
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+.credential-item p {
+    margin: 0;
+    font-size: 0.8em;
+    line-height: 1.6;
+}
+
+@media screen and (max-width: 768px) {
+    .about-image {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .bio-text {
+        padding: 1.5em;
+        text-align: center;
+    }
+    
+    .credentials {
+        grid-template-columns: 1fr;
+        gap: 1em;
+        max-width: 400px;
+    }
+    
+    .credential-item {
+        padding: 1.5em;
+        min-height: auto;
+    }
+}
+
+/* ===== PAGE TRANSITION OVERLAY ===== */
+#page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#page-transition.active {
+    animation: pageTransition 0.6s ease-in-out;
+}
+
+@keyframes pageTransition {
+    0% { opacity: 0; }
+    40% { opacity: 1; }
+    60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#page-transition .waveform {
+    width: 80%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+#page-transition .wave-bar {
+    width: 3px;
+    background: #00ffcc;
+    border-radius: 2px;
+    animation: waveAnim 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes waveAnim {
+    0% { height: 10px; }
+    100% { height: 50px; }
+}
 		</style>
 	</head>
 	<body>
+
+        <!-- Page Transition Overlay -->
+        <div id="page-transition">
+            <div class="waveform" id="transition-waveform"></div>
+        </div>
 
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="/">GLUE MATRIX</a></h1>
+						<h1><a href="/" class="nav-link">GLUE MATRIX</a></h1>
 						<nav id="nav">
 							<ul>
 								<li class="special">
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
 										<ul>
-											<li><a href="/">Home</a></li>
-											<li><a href="/services/">Services</a></li>
-											<li><a href="/music/">Music</a></li>
-											<li><a href="/about/">About</a></li>
-											<li><a href="/contact/">Contact</a></li>
+											<li><a href="/" class="nav-link">Home</a></li>
+											<li><a href="/services/" class="nav-link">Services</a></li>
+											<li><a href="/music/" class="nav-link">Music</a></li>
+											<li><a href="/about/" class="nav-link">About</a></li>
+											<li><a href="/contact/" class="nav-link">Contact</a></li>
 										</ul>
 									</div>
 								</li>
@@ -253,7 +328,7 @@
 								</div>
 							</div>
 							
-							<a href="/contact/" class="button primary">Let's Create Something</a>
+							<a href="/contact/" class="button primary nav-link">Let's Create Something</a>
 						</div>
 					</div>
 
@@ -265,13 +340,14 @@
         <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
         <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
         <li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-        <li><a href="/cdn-cgi/l/email-protection#c3a9a2a0a883a4afb6a6aea2b7b1aabbeda0acae" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+        <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
     </ul>
     <ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
         <li>&copy; GLUE MATRIX</li>
     </ul>
     <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
 </footer>
+
 		<!-- Scripts -->
 			<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.scrollex.min.js"></script>
@@ -280,6 +356,44 @@
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
+
+<script>
+// ===== PAGE TRANSITIONS =====
+(function() {
+    const transition = document.getElementById('page-transition');
+    const waveform = document.getElementById('transition-waveform');
+    
+    // Create waveform bars for transition
+    for (let i = 0; i < 50; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'wave-bar';
+        bar.style.animationDelay = `${i * 0.02}s`;
+        waveform.appendChild(bar);
+    }
+    
+    // Intercept navigation clicks
+    document.querySelectorAll('a.nav-link, #menu a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Don't intercept external links or anchor links
+            if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
+                return;
+            }
+            
+            e.preventDefault();
+            
+            // Trigger transition
+            transition.classList.add('active');
+            
+            // Navigate after animation
+            setTimeout(() => {
+                window.location.href = href;
+            }, 400);
+        });
+    });
+})();
+</script>
 
 	</body>
 </html>

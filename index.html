@@ -6,13 +6,35 @@
         <meta name="description" content="Glue Matrix - Professional music mixing, recording, and sound design focused on clarity, depth, and emotion. Elevate your sound to its highest potential.">
         <meta name="keywords" content="music mixing, sound design, audio engineering, music production, recording studio, Glue Matrix">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 <style>
+/* ===== iOS SAFARI GREY BAR FIX ===== */
+html {
+    height: 100%;
+    height: -webkit-fill-available;
+}
 
+body {
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh; /* dynamic viewport height - best for mobile */
+}
 
+/* Use scroll instead of fixed on mobile to prevent grey bar */
+@supports (-webkit-touch-callout: none) {
+    body {
+        background-attachment: scroll !important;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    body {
+        background-attachment: scroll !important;
+    }
+}
 
 /* Menu hover effects */
 #menu ul li a {
@@ -24,7 +46,6 @@
     padding-left: 1.5em;
 }
 
-/* REPLACE the menu toggle hover in HOVER-EFFECTS.md with this: */
 .menuToggle {
     transition: all 0.3s ease;
 }
@@ -33,7 +54,6 @@
     opacity: 0.7;
     transform: scale(1.1);
 }
-
 
 /* Full page background for home */
 body {
@@ -45,42 +65,46 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* Dark overlay for readability */
 body::before {
-content: '';
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background: rgba(0,0,0,0.3);
-z-index: 0;
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 0;
 }
 
 #page-wrapper {
-position: relative;
-z-index: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .home-content {
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-min-height: 100vh;
-text-align: center;
-padding: 3em 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    text-align: center;
+    padding: 3em 2em;
+    position: relative;
+    z-index: 2;
 }
 
 .home-content h1 {
-font-size: clamp(2em, 8vw, 4em);
-margin-bottom: 1em;
-border-top: solid 2px #fff;
-border-bottom: solid 2px #fff;
-padding: 0.5em 1em;
-display: inline-block;
+    font-size: clamp(2em, 8vw, 4em);
+    margin-bottom: 1em;
+    border-top: solid 2px #fff;
+    border-bottom: solid 2px #fff;
+    padding: 0.5em 1em;
+    display: inline-block;
 }
 
 .home-content p {
@@ -140,9 +164,152 @@ display: inline-block;
         max-width: 220px;
     }
 }
+
+/* ===== FREQUENCY VISUALIZER ===== */
+#frequency-visualizer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 3px;
+    padding: 0 20px;
+}
+
+.freq-bar {
+    width: 4px;
+    background: linear-gradient(to top, #00ffcc, #00ffcc88);
+    border-radius: 2px 2px 0 0;
+    transition: height 0.15s ease-out;
+}
+
+@media screen and (max-width: 768px) {
+    #frequency-visualizer {
+        height: 100px;
+        opacity: 0.3;
+    }
+    .freq-bar {
+        width: 3px;
+    }
+}
+
+/* ===== PAGE TRANSITION OVERLAY ===== */
+#page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#page-transition.active {
+    animation: pageTransition 0.6s ease-in-out;
+}
+
+@keyframes pageTransition {
+    0% { opacity: 0; }
+    40% { opacity: 1; }
+    60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#page-transition .waveform {
+    width: 80%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+#page-transition .wave-bar {
+    width: 3px;
+    background: #00ffcc;
+    border-radius: 2px;
+    animation: waveAnim 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes waveAnim {
+    0% { height: 10px; }
+    100% { height: 50px; }
+}
+
+/* ===== EASTER EGG PSYCHEDELIC OVERLAY ===== */
+#psychedelic-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    cursor: pointer;
+}
+
+#psychedelic-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#psychedelic-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+#psychedelic-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 0.8em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    font-family: 'Analogue OS', sans-serif;
+    text-shadow: 0 0 10px rgba(0,255,204,0.8);
+}
+
+/* Easter egg trigger - the period after "Much love" */
+.easter-egg-trigger {
+    cursor: default;
+    transition: text-shadow 0.3s ease;
+}
+
+.easter-egg-trigger:hover {
+    text-shadow: 0 0 10px #00ffcc;
+}
 </style>
 	</head>
 	<body>
+
+        <!-- Frequency Visualizer Background -->
+        <div id="frequency-visualizer"></div>
+
+        <!-- Page Transition Overlay -->
+        <div id="page-transition">
+            <div class="waveform" id="transition-waveform"></div>
+        </div>
+
+        <!-- Psychedelic Easter Egg Overlay -->
+        <div id="psychedelic-overlay">
+            <canvas id="psychedelic-canvas"></canvas>
+            <div id="psychedelic-close">Press ESC or click anywhere to close</div>
+        </div>
 
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
@@ -175,19 +342,17 @@ display: inline-block;
                         <p>PARDON THE DUST - THIS WEBSITE IS STILL IN PROGRESS!</p>
                         <p>Hidden between layers is a force that connects us all.</p>
                         <p>Glue Matrix is a musical project that attempts to alchemize and decipher this force.</p>
-                        <p>Much love to all beings everywhere.</p>
+                        <p>Much love to all beings everywhere<span class="easter-egg-trigger" id="easter-egg-trigger">.</span></p>
 						<div class="button-container">
-							<a href="/services/" class="button">Services</a>
-							<a href="/music/" class="button">Music</a>
-							<a href="/about/" class="button">About</a>
-							<a href="/contact/" class="button primary">Contact</a>
+							<a href="/services/" class="button nav-link">Services</a>
+							<a href="/music/" class="button nav-link">Music</a>
+							<a href="/about/" class="button nav-link">About</a>
+							<a href="/contact/" class="button primary nav-link">Contact</a>
 						</div>
 					</div>
 
 			</div>       
 
-   
-            
 <!-- Footer -->
 <footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 2em 0;">
     <ul class="icons">
@@ -201,6 +366,7 @@ display: inline-block;
     </ul>
     <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
 </footer>
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
@@ -209,6 +375,228 @@ display: inline-block;
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+<script>
+// ===== FREQUENCY VISUALIZER =====
+(function() {
+    const visualizer = document.getElementById('frequency-visualizer');
+    const barCount = Math.floor(window.innerWidth / 8);
+    const bars = [];
+    
+    // Create bars
+    for (let i = 0; i < barCount; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'freq-bar';
+        bar.style.height = '10px';
+        visualizer.appendChild(bar);
+        bars.push(bar);
+    }
+    
+    // Mouse position tracking
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    // Touch support for mobile
+    document.addEventListener('touchmove', (e) => {
+        if (e.touches[0]) {
+            mouseX = e.touches[0].clientX;
+            mouseY = e.touches[0].clientY;
+        }
+    });
+    
+    // Animate bars based on mouse position
+    function animateBars() {
+        const time = Date.now() * 0.002;
+        
+        bars.forEach((bar, index) => {
+            const barX = (index / bars.length) * window.innerWidth;
+            const distanceFromMouse = Math.abs(barX - mouseX);
+            const maxDistance = window.innerWidth / 3;
+            const influence = Math.max(0, 1 - (distanceFromMouse / maxDistance));
+            
+            // Combine mouse influence with subtle wave animation
+            const wave = Math.sin(time + index * 0.1) * 0.5 + 0.5;
+            const mouseWave = Math.sin(time * 2 + index * 0.05) * influence;
+            
+            const baseHeight = 10;
+            const maxHeight = 80;
+            const height = baseHeight + (wave * 20) + (mouseWave * (maxHeight - baseHeight));
+            
+            bar.style.height = `${height}px`;
+        });
+        
+        requestAnimationFrame(animateBars);
+    }
+    
+    animateBars();
+})();
+
+// ===== PAGE TRANSITIONS =====
+(function() {
+    const transition = document.getElementById('page-transition');
+    const waveform = document.getElementById('transition-waveform');
+    
+    // Create waveform bars for transition
+    for (let i = 0; i < 50; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'wave-bar';
+        bar.style.animationDelay = `${i * 0.02}s`;
+        waveform.appendChild(bar);
+    }
+    
+    // Intercept navigation clicks
+    document.querySelectorAll('a.nav-link, #menu a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Don't intercept external links or anchor links
+            if (href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
+                return;
+            }
+            
+            e.preventDefault();
+            
+            // Trigger transition
+            transition.classList.add('active');
+            
+            // Navigate after animation
+            setTimeout(() => {
+                window.location.href = href;
+            }, 400);
+        });
+    });
+})();
+
+// ===== PSYCHEDELIC EASTER EGG =====
+(function() {
+    const overlay = document.getElementById('psychedelic-overlay');
+    const canvas = document.getElementById('psychedelic-canvas');
+    const ctx = canvas.getContext('2d');
+    const trigger = document.getElementById('easter-egg-trigger');
+    
+    let animationId = null;
+    let isActive = false;
+    
+    // Resize canvas
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Psychedelic animation
+    function drawPsychedelic(time) {
+        const width = canvas.width;
+        const height = canvas.height;
+        
+        // Clear with slight trail effect
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, width, height);
+        
+        const centerX = width / 2;
+        const centerY = height / 2;
+        
+        // Draw multiple rotating shapes
+        for (let ring = 0; ring < 8; ring++) {
+            const ringRadius = 50 + ring * 60;
+            const segments = 6 + ring * 2;
+            const rotationSpeed = (ring % 2 === 0 ? 1 : -1) * 0.0005;
+            
+            for (let i = 0; i < segments; i++) {
+                const angle = (i / segments) * Math.PI * 2 + time * rotationSpeed;
+                const x = centerX + Math.cos(angle) * ringRadius;
+                const y = centerY + Math.sin(angle) * ringRadius;
+                
+                // Color cycling
+                const hue = (time * 0.05 + ring * 30 + i * 20) % 360;
+                const saturation = 70 + Math.sin(time * 0.001 + i) * 30;
+                const lightness = 50 + Math.sin(time * 0.002 + ring) * 20;
+                
+                ctx.beginPath();
+                ctx.arc(x, y, 20 + Math.sin(time * 0.003 + i) * 10, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, 0.6)`;
+                ctx.fill();
+                
+                // Sacred geometry lines
+                if (i > 0) {
+                    const prevAngle = ((i - 1) / segments) * Math.PI * 2 + time * rotationSpeed;
+                    const prevX = centerX + Math.cos(prevAngle) * ringRadius;
+                    const prevY = centerY + Math.sin(prevAngle) * ringRadius;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(prevX, prevY);
+                    ctx.lineTo(x, y);
+                    ctx.strokeStyle = `hsla(${(hue + 180) % 360}, 80%, 60%, 0.3)`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            }
+        }
+        
+        // Central flower of life pattern
+        const petalCount = 6;
+        const petalRadius = 80 + Math.sin(time * 0.001) * 20;
+        
+        for (let i = 0; i < petalCount; i++) {
+            const angle = (i / petalCount) * Math.PI * 2 + time * 0.0003;
+            const x = centerX + Math.cos(angle) * petalRadius * 0.5;
+            const y = centerY + Math.sin(angle) * petalRadius * 0.5;
+            
+            ctx.beginPath();
+            ctx.arc(x, y, petalRadius, 0, Math.PI * 2);
+            ctx.strokeStyle = `hsla(${(time * 0.02 + i * 60) % 360}, 100%, 70%, 0.4)`;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+        
+        // Center circle
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 30 + Math.sin(time * 0.002) * 10, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${time * 0.03 % 360}, 80%, 60%, 0.8)`;
+        ctx.fill();
+        
+        if (isActive) {
+            animationId = requestAnimationFrame(() => drawPsychedelic(time + 16));
+        }
+    }
+    
+    // Activate easter egg
+    function activateEasterEgg() {
+        isActive = true;
+        overlay.classList.add('active');
+        drawPsychedelic(0);
+    }
+    
+    // Deactivate easter egg
+    function deactivateEasterEgg() {
+        isActive = false;
+        overlay.classList.remove('active');
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    // Click trigger (the period)
+    trigger.addEventListener('click', activateEasterEgg);
+    
+    // Close on click or ESC
+    overlay.addEventListener('click', deactivateEasterEgg);
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isActive) {
+            deactivateEasterEgg();
+        }
+    });
+})();
+</script>
 
 	</body>
 </html>
