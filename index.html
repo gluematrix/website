@@ -93,34 +93,13 @@ body {
     }
 }
 
-/* Dark overlay for readability */
+/* Fixed: Dark overlay for readability */
 #page-wrapper {
     position: relative;
     z-index: 1;
-}
-
-#page-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: -1;
-    pointer-events: none;
-}
-body {
-    position: relative;
-}
-
-body {
-    position: relative;
-}
-
-#page-wrapper {
-    position: relative;
-    z-index: 1;
+    /* This creates the dark tint directly on the wrapper */
+    background: rgba(0, 0, 0, 0.6) !important; 
+    min-height: 100vh;
 }
 
 .home-content {
@@ -132,7 +111,7 @@ body {
     text-align: center;
     padding: 3em 2em;
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Ensures text stays above the overlay */
 }
 
 .home-content h1 {
