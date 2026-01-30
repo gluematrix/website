@@ -22,7 +22,6 @@
     padding-left: 1.5em;
 }
 
-/* REPLACE the menu toggle hover in HOVER-EFFECTS.md with this: */
 .menuToggle {
     transition: all 0.3s ease;
 }
@@ -70,7 +69,7 @@
 			}
 			
 			.services-container {
-				max-width: 1000px;
+				max-width: 1200px;
 				width: 100%;
 				margin: 0 auto;
 			}
@@ -81,7 +80,7 @@
 				text-align: center;
 			}
 			
-			.page-content > p {
+			.services-container > p {
 				font-size: clamp(0.9em, 2.5vw, 1.2em);
 				max-width: 700px;
 				line-height: 1.8;
@@ -89,12 +88,42 @@
 				text-align: center;
 			}
 			
-			/* Services Grid */
+			/* Services Grid - 3 columns on desktop, bottom 2 centered */
 			.services-grid {
 				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				grid-template-columns: repeat(3, 1fr);
 				gap: 2em;
 				margin: 3em 0;
+			}
+			
+			/* Center the last 2 cards (Podcast & Consulting) on desktop */
+			.service-card:nth-child(4) {
+				grid-column: 1 / 2;
+			}
+			
+			.service-card:nth-child(5) {
+				grid-column: 2 / 3;
+			}
+			
+			/* Push them to center by starting at column 2 */
+			@media screen and (min-width: 769px) {
+				.services-grid {
+					grid-template-columns: repeat(6, 1fr);
+				}
+				
+				.service-card:nth-child(1),
+				.service-card:nth-child(2),
+				.service-card:nth-child(3) {
+					grid-column: span 2;
+				}
+				
+				.service-card:nth-child(4) {
+					grid-column: 2 / 4;
+				}
+				
+				.service-card:nth-child(5) {
+					grid-column: 4 / 6;
+				}
 			}
 			
 			.service-card {
@@ -203,7 +232,6 @@
 				pointer-events: none;
 			}
 			
-			
 			.symbol-top-right {
 				top: 120px;
 				right: 50px;
@@ -252,6 +280,12 @@
 				text-align: right;
 			}
 			
+			@media screen and (max-width: 1024px) {
+				.services-grid {
+					grid-template-columns: repeat(2, 1fr);
+				}
+			}
+			
 			@media screen and (max-width: 768px) {
 				.services-grid {
 					grid-template-columns: 1fr;
@@ -270,7 +304,6 @@
 	<body>
 
 		<!-- Alchemy Symbol Decorations -->
-	
 		
 		<svg class="alchemy-symbol symbol-top-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 			<circle cx="50" cy="50" r="35" fill="none" stroke="#00ffcc" stroke-width="2"/>
@@ -372,9 +405,22 @@
 								<path d="M 20,35 Q 30,40 40,35" fill="none" stroke="#00ffcc" stroke-width="2"/>
 							</svg>
 							<h3>Podcast Editing</h3>
-							<div class="price">$Starting at $35/hr</div>
+							<div class="price">$35/hr</div>
 							<div class="price-detail">quick turnaround</div>
 							<p>Professional podcast editing and post-production. Noise reduction, level balancing, editing, and mastering. Get your episodes sounding polished and broadcast-ready.</p>
+						</div>
+
+						<!-- Audio Consulting -->
+						<div class="service-card">
+							<svg class="waveform" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="30" cy="30" r="25" fill="none" stroke="#00ffcc" stroke-width="2"/>
+								<path d="M 20,30 L 25,25 L 25,35 Z" fill="#00ffcc"/>
+								<rect x="28" y="25" width="12" height="10" fill="#00ffcc"/>
+							</svg>
+							<h3>Audio Consulting</h3>
+							<div class="price">$25/hr</div>
+							<div class="price-detail">expert guidance</div>
+							<p>One-on-one consultation for your home studio setup, mixing techniques, production workflow, or general audio questions. Get professional insights without the full project commitment.</p>
 						</div>
 
 					</div>
@@ -408,17 +454,15 @@
 					<div class="testimonials">
 						<h2>What Artists Say</h2>
 						
-	<div class="testimonial">
-							<p>"Definitely a pro. I mean, I just listened to what you did to my track, & it was so good holy moly! You just took it to another level. I’m gonna be playing that all month!"</p>
+						<div class="testimonial">
+							<p>"Definitely a pro. I mean, I just listened to what you did to my track, & it was so good holy moly! You just took it to another level. I'm gonna be playing that all month!"</p>
 							<div class="author">— Preston B</div>
 						</div>
-
 
 						<div class="testimonial">
 							<p>"Working with Glue Matrix transformed my sound. The attention to detail and creative input elevated my tracks beyond what I imagined possible."</p>
 							<div class="author">— Pseyeche</div>
 						</div>
-						
 					
 					</div>
 
