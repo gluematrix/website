@@ -6,33 +6,37 @@
         <meta name="description" content="Meet the artist behind Glue Matrix. Professional audio engineer and music producer with a passion for sonic alchemy.">
         <meta name="keywords" content="Glue Matrix bio, audio engineer, music producer, about">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/assets/css/main.css" />
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
-/* ===== iOS SAFARI GREY BAR FIX ===== */
-html {
-    height: 100%;
-    height: -webkit-fill-available;
+/* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
+.button,
+input[type="submit"],
+input[type="button"],
+button {
+    transition: all 0.3s ease !important;
+    transform: translateY(0) scale(1) !important;
 }
 
-body {
-    min-height: 100%;
-    min-height: -webkit-fill-available;
-    min-height: 100dvh;
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+button:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 20px rgba(237, 73, 51, 0.6) !important;
 }
 
-@supports (-webkit-touch-callout: none) {
-    body {
-        background-attachment: scroll !important;
-    }
+/* GLUE MATRIX logo hover */
+#header h1 a {
+    transition: all 0.3s ease !important;
+    display: inline-block;
 }
 
-@media screen and (max-width: 980px) {
-    body {
-        background-attachment: scroll !important;
-    }
+#header h1 a:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
 /* Menu hover effects */
@@ -54,157 +58,162 @@ body {
     transform: scale(1.1);
 }
 
-/* Full page background for about */
-body {
-    background-image: url('/assets/css/images/aboutphoto.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
+			/* Full page background for about */
+			body {
+				background-image: url('/assets/css/images/aboutphoto.jpg');
+				background-size: cover;
+				background-position: center;
+				background-attachment: fixed;
+				background-repeat: no-repeat;
+				margin: 0;
+				padding: 0;
+				min-height: 100vh;
+			}
+			
+			/* Mobile: use scroll instead of fixed */
+			@media screen and (max-width: 980px) {
+			    body {
+			        background-attachment: scroll;
+			    }
+			}
+			
+			/* Dark overlay for readability */
+			body::before {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0,0,0,0.4);
+				z-index: 0;
+			}
+			
+			#page-wrapper {
+				position: relative;
+				z-index: 1;
+			}
+			
+			.page-content {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+				text-align: center;
+				padding: 6em 2em 4em 2em;
+			}
+			
+			.about-container {
+				max-width: 900px;
+				margin: 0 auto;
+			}
+			
+			.about-image {
+				width: 250px;
+				height: 250px;
+				border-radius: 50%;
+				border: 3px solid #fff;
+				margin: 0 auto 2em auto;
+				overflow: hidden;
+				box-shadow: 0 0 30px rgba(0,0,0,0.5);
+			}
+			
+			.about-image img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+			
+			.page-content h1 {
+				font-size: clamp(2em, 6vw, 3em);
+				margin-bottom: 0.5em;
+			}
+			
+			.page-content h3 {
+				font-size: clamp(1.2em, 3vw, 1.5em);
+				margin-bottom: 1.5em;
+				color: #00ffcc;
+				font-weight: normal;
+			}
+			
+			.bio-text {
+				font-size: clamp(0.95em, 2.2vw, 1.1em);
+				line-height: 1.8;
+				text-align: left;
+				margin: 0 auto 2em auto;
+				max-width: 700px;
+				background: rgba(0,0,0,0.3);
+				padding: 2em;
+				border-radius: 5px;
+			}
+			
+			.bio-text p {
+				margin-bottom: 1.5em;
+			}
+			
+			.bio-text p:last-child {
+				margin-bottom: 0;
+			}
+			
+			.credentials {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.2em;
+				margin: 3em auto;
+				text-align: center;
+				max-width: 650px;
+				width: 100%;
+			}
+			
+			.credential-item {
+				background: rgba(0,0,0,0.5);
+				padding: 1.25em 0.75em;
+				border-radius: 5px;
+				border: 1px solid rgba(255,255,255,0.2);
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: center;
+			}
+			
+			.credential-item h4 {
+				color: #00ffcc;
+				margin-bottom: 0.75em;
+				font-size: 0.8em;
+				white-space: nowrap;
+			}
+			
+			.credential-item p {
+				margin: 0;
+				font-size: 0.8em;
+				line-height: 1.6;
+			}
+			
+			@media screen and (max-width: 768px) {
+				.about-image {
+					width: 200px;
+					height: 200px;
+				}
+				
+				.bio-text {
+					padding: 1.5em;
+					text-align: center;
+				}
+				
+				.credentials {
+					grid-template-columns: 1fr;
+					gap: 1em;
+					max-width: 400px;
+				}
+				
+				.credential-item {
+					padding: 1.5em;
+					min-height: auto;
+				}
+			}
 
-/* Dark overlay for readability */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.4);
-    z-index: 0;
-}
-
-#page-wrapper {
-    position: relative;
-    z-index: 1;
-}
-
-.page-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    min-height: 100dvh;
-    text-align: center;
-    padding: 6em 2em 4em 2em;
-}
-
-.about-container {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.about-image {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    margin: 0 auto 2em auto;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-}
-
-.about-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.page-content h1 {
-    font-size: clamp(2em, 6vw, 3em);
-    margin-bottom: 0.5em;
-}
-
-.page-content h3 {
-    font-size: clamp(1.2em, 3vw, 1.5em);
-    margin-bottom: 1.5em;
-    color: #00ffcc;
-    font-weight: normal;
-}
-
-.bio-text {
-    font-size: clamp(0.95em, 2.2vw, 1.1em);
-    line-height: 1.8;
-    text-align: left;
-    margin: 0 auto 2em auto;
-    max-width: 700px;
-    background: rgba(0,0,0,0.3);
-    padding: 2em;
-    border-radius: 5px;
-}
-
-.bio-text p {
-    margin-bottom: 1.5em;
-}
-
-.bio-text p:last-child {
-    margin-bottom: 0;
-}
-
-.credentials {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2em;
-    margin: 3em auto;
-    text-align: center;
-    max-width: 650px;
-    width: 100%;
-}
-
-.credential-item {
-    background: rgba(0,0,0,0.5);
-    padding: 1.25em 0.75em;
-    border-radius: 5px;
-    border: 1px solid rgba(255,255,255,0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.credential-item h4 {
-    color: #00ffcc;
-    margin-bottom: 0.75em;
-    font-size: 0.8em;
-    white-space: nowrap;
-}
-
-.credential-item p {
-    margin: 0;
-    font-size: 0.8em;
-    line-height: 1.6;
-}
-
-@media screen and (max-width: 768px) {
-    .about-image {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .bio-text {
-        padding: 1.5em;
-        text-align: center;
-    }
-    
-    .credentials {
-        grid-template-columns: 1fr;
-        gap: 1em;
-        max-width: 400px;
-    }
-    
-    .credential-item {
-        padding: 1.5em;
-        min-height: auto;
-    }
-}
-
-/* ===== PAGE TRANSITION OVERLAY ===== */
+/* ===== VHS GLITCH TRANSITION ===== */
 #page-transition {
     position: fixed;
     top: 0;
@@ -215,68 +224,89 @@ body::before {
     z-index: 9999;
     pointer-events: none;
     opacity: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    visibility: hidden;
 }
 
 #page-transition.active {
-    animation: pageTransition 0.6s ease-in-out;
+    opacity: 1;
+    visibility: visible;
+    animation: glitchTransition 0.5s ease-in-out;
 }
 
-@keyframes pageTransition {
+@keyframes glitchTransition {
     0% { opacity: 0; }
-    40% { opacity: 1; }
-    60% { opacity: 1; }
+    10% { opacity: 1; }
+    20% { opacity: 1; clip-path: inset(20% 0 60% 0); transform: translateX(-5px); }
+    25% { clip-path: inset(50% 0 30% 0); transform: translateX(5px); }
+    30% { clip-path: inset(10% 0 70% 0); transform: translateX(-3px); }
+    35% { clip-path: inset(70% 0 10% 0); transform: translateX(3px); }
+    40% { clip-path: inset(40% 0 40% 0); transform: translateX(0); }
+    50% { clip-path: inset(0); opacity: 1; }
     100% { opacity: 0; }
 }
 
-#page-transition .waveform {
-    width: 80%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
+#page-transition::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 204, 0.03) 2px,
+        rgba(0, 255, 204, 0.03) 4px
+    );
 }
 
-#page-transition .wave-bar {
-    width: 3px;
-    background: #00ffcc;
-    border-radius: 2px;
-    animation: waveAnim 0.4s ease-in-out infinite alternate;
+.glitch-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Digital7', monospace;
+    font-size: 2em;
+    color: #00ffcc;
+    text-shadow: 
+        2px 0 #ff0000,
+        -2px 0 #00ffff;
+    animation: textGlitch 0.3s ease-in-out infinite;
 }
 
-@keyframes waveAnim {
-    0% { height: 10px; }
-    100% { height: 50px; }
+@keyframes textGlitch {
+    0%, 100% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(-50%, -50%); }
+    25% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; transform: translate(-51%, -50%); }
+    50% { text-shadow: 1px 0 #ff0000, -1px 0 #00ffff; transform: translate(-50%, -51%); }
+    75% { text-shadow: -1px 0 #ff0000, 1px 0 #00ffff; transform: translate(-49%, -50%); }
 }
 		</style>
 	</head>
 	<body>
 
-        <!-- Page Transition Overlay -->
-        <div id="page-transition">
-            <div class="waveform" id="transition-waveform"></div>
-        </div>
+		<!-- VHS Glitch Transition -->
+		<div id="page-transition">
+			<span class="glitch-text">GLUE MATRIX</span>
+		</div>
 
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="/" class="nav-link">GLUE MATRIX</a></h1>
+						<h1><a href="/">GLUE MATRIX</a></h1>
 						<nav id="nav">
 							<ul>
 								<li class="special">
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
 										<ul>
-											<li><a href="/" class="nav-link">Home</a></li>
-											<li><a href="/services/" class="nav-link">Services</a></li>
-											<li><a href="/music/" class="nav-link">Music</a></li>
-											<li><a href="/about/" class="nav-link">About</a></li>
-											<li><a href="/contact/" class="nav-link">Contact</a></li>
+											<li><a href="/">Home</a></li>
+											<li><a href="/services/">Services</a></li>
+											<li><a href="/music/">Music</a></li>
+											<li><a href="/about/">About</a></li>
+											<li><a href="/contact/">Contact</a></li>
 										</ul>
 									</div>
 								</li>
@@ -289,7 +319,7 @@ body::before {
 						<div class="about-container">
 							<h1>About</h1>
 							
-							<!-- Profile Image - Add your photo here -->
+							<!-- Profile Image -->
 							<div class="about-image">
 								<img src="/assets/css/images/profile.jpg" alt="Glue Matrix" />
 							</div>
@@ -328,7 +358,7 @@ body::before {
 								</div>
 							</div>
 							
-							<a href="/contact/" class="button primary nav-link">Let's Create Something</a>
+							<a href="/contact/" class="button primary">Let's Create Something</a>
 						</div>
 					</div>
 
@@ -358,38 +388,24 @@ body::before {
 			<script src="/assets/js/main.js"></script>
 
 <script>
-// ===== PAGE TRANSITIONS =====
+// ===== VHS GLITCH PAGE TRANSITIONS =====
 (function() {
     const transition = document.getElementById('page-transition');
-    const waveform = document.getElementById('transition-waveform');
     
-    // Create waveform bars for transition
-    for (let i = 0; i < 50; i++) {
-        const bar = document.createElement('div');
-        bar.className = 'wave-bar';
-        bar.style.animationDelay = `${i * 0.02}s`;
-        waveform.appendChild(bar);
-    }
-    
-    // Intercept navigation clicks
-    document.querySelectorAll('a.nav-link, #menu a').forEach(link => {
+    document.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            // Don't intercept external links or anchor links
-            if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
+            if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
                 return;
             }
             
             e.preventDefault();
-            
-            // Trigger transition
             transition.classList.add('active');
             
-            // Navigate after animation
             setTimeout(() => {
                 window.location.href = href;
-            }, 400);
+            }, 350);
         });
     });
 })();

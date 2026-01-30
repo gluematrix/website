@@ -6,33 +6,37 @@
         <meta name="description" content="Professional audio services: mixing, recording, music production, composition, and podcast editing. Elevate your sound with Glue Matrix.">
         <meta name="keywords" content="audio mixing, music production, recording services, composition, podcast editing">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/assets/css/main.css" />
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
-/* ===== iOS SAFARI GREY BAR FIX ===== */
-html {
-    height: 100%;
-    height: -webkit-fill-available;
+/* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
+.button,
+input[type="submit"],
+input[type="button"],
+button {
+    transition: all 0.3s ease !important;
+    transform: translateY(0) scale(1) !important;
 }
 
-body {
-    min-height: 100%;
-    min-height: -webkit-fill-available;
-    min-height: 100dvh;
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+button:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 20px rgba(237, 73, 51, 0.6) !important;
 }
 
-@supports (-webkit-touch-callout: none) {
-    body {
-        background-attachment: scroll !important;
-    }
+/* GLUE MATRIX logo hover */
+#header h1 a {
+    transition: all 0.3s ease !important;
+    display: inline-block;
 }
 
-@media screen and (max-width: 980px) {
-    body {
-        background-attachment: scroll !important;
-    }
+#header h1 a:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
 /* Menu hover effects */
@@ -64,7 +68,13 @@ body {
 				margin: 0;
 				padding: 0;
 				min-height: 100vh;
-				overflow-x: hidden;
+			}
+			
+			/* Mobile: use scroll instead of fixed */
+			@media screen and (max-width: 980px) {
+			    body {
+			        background-attachment: scroll;
+			    }
 			}
 			
 			/* Dark overlay */
@@ -89,7 +99,6 @@ body {
 				flex-direction: column;
 				align-items: center;
 				min-height: 100vh;
-				min-height: 100dvh;
 				padding: 6em 2em 4em 2em;
 			}
 			
@@ -161,7 +170,6 @@ body {
 			}
 			
 			.service-card:hover {
-				transform: translateY(-5px);
 				border-color: rgba(0,255,204,0.6);
 				box-shadow: 0 10px 30px rgba(0,255,204,0.2);
 			}
@@ -342,7 +350,7 @@ body {
 				}
 			}
 
-/* ===== PAGE TRANSITION OVERLAY ===== */
+/* ===== VHS GLITCH TRANSITION ===== */
 #page-transition {
     position: fixed;
     top: 0;
@@ -353,53 +361,73 @@ body {
     z-index: 9999;
     pointer-events: none;
     opacity: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    visibility: hidden;
 }
 
 #page-transition.active {
-    animation: pageTransition 0.6s ease-in-out;
+    opacity: 1;
+    visibility: visible;
+    animation: glitchTransition 0.5s ease-in-out;
 }
 
-@keyframes pageTransition {
+@keyframes glitchTransition {
     0% { opacity: 0; }
-    40% { opacity: 1; }
-    60% { opacity: 1; }
+    10% { opacity: 1; }
+    20% { opacity: 1; clip-path: inset(20% 0 60% 0); transform: translateX(-5px); }
+    25% { clip-path: inset(50% 0 30% 0); transform: translateX(5px); }
+    30% { clip-path: inset(10% 0 70% 0); transform: translateX(-3px); }
+    35% { clip-path: inset(70% 0 10% 0); transform: translateX(3px); }
+    40% { clip-path: inset(40% 0 40% 0); transform: translateX(0); }
+    50% { clip-path: inset(0); opacity: 1; }
     100% { opacity: 0; }
 }
 
-#page-transition .waveform-transition {
-    width: 80%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
+#page-transition::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 204, 0.03) 2px,
+        rgba(0, 255, 204, 0.03) 4px
+    );
 }
 
-#page-transition .wave-bar {
-    width: 3px;
-    background: #00ffcc;
-    border-radius: 2px;
-    animation: waveAnim 0.4s ease-in-out infinite alternate;
+.glitch-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Digital7', monospace;
+    font-size: 2em;
+    color: #00ffcc;
+    text-shadow: 
+        2px 0 #ff0000,
+        -2px 0 #00ffff;
+    animation: textGlitch 0.3s ease-in-out infinite;
 }
 
-@keyframes waveAnim {
-    0% { height: 10px; }
-    100% { height: 50px; }
+@keyframes textGlitch {
+    0%, 100% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(-50%, -50%); }
+    25% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; transform: translate(-51%, -50%); }
+    50% { text-shadow: 1px 0 #ff0000, -1px 0 #00ffff; transform: translate(-50%, -51%); }
+    75% { text-shadow: -1px 0 #ff0000, 1px 0 #00ffff; transform: translate(-49%, -50%); }
 }
 		</style>
 	</head>
 	<body>
 
-		<!-- Page Transition Overlay -->
+		<!-- VHS Glitch Transition -->
 		<div id="page-transition">
-			<div class="waveform-transition" id="transition-waveform"></div>
+			<span class="glitch-text">GLUE MATRIX</span>
 		</div>
 
 		<!-- Alchemy Symbol Decorations -->
-		
 		<svg class="alchemy-symbol symbol-top-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 			<circle cx="50" cy="50" r="35" fill="none" stroke="#00ffcc" stroke-width="2"/>
 			<rect x="20" y="20" width="60" height="60" fill="none" stroke="#00ffcc" stroke-width="2"/>
@@ -421,18 +449,18 @@ body {
 
 			<!-- Header -->
 			<header id="header">
-				<h1><a href="/" class="nav-link">GLUE MATRIX</a></h1>
+				<h1><a href="/">GLUE MATRIX</a></h1>
 				<nav id="nav">
 					<ul>
 						<li class="special">
 							<a href="#menu" class="menuToggle"><span>Menu</span></a>
 							<div id="menu">
 								<ul>
-									<li><a href="/" class="nav-link">Home</a></li>
-									<li><a href="/services/" class="nav-link">Services</a></li>
-									<li><a href="/music/" class="nav-link">Music</a></li>
-									<li><a href="/about/" class="nav-link">About</a></li>
-									<li><a href="/contact/" class="nav-link">Contact</a></li>
+									<li><a href="/">Home</a></li>
+									<li><a href="/services/">Services</a></li>
+									<li><a href="/music/">Music</a></li>
+									<li><a href="/about/">About</a></li>
+									<li><a href="/contact/">Contact</a></li>
 								</ul>
 							</div>
 						</li>
@@ -500,7 +528,7 @@ body {
 								<path d="M 20,35 Q 30,40 40,35" fill="none" stroke="#00ffcc" stroke-width="2"/>
 							</svg>
 							<h3>Podcast Editing</h3>
-							<div class="price">Starting at $35/hr</div>
+							<div class="price">$35/hr</div>
 							<div class="price-detail">quick turnaround</div>
 							<p>Professional podcast editing and post-production. Noise reduction, level balancing, editing, and mastering. Get your episodes sounding polished and broadcast-ready.</p>
 						</div>
@@ -520,15 +548,12 @@ body {
 
 					</div>
 
-
-<!-- Custom Pricing Note -->
-<div style="background: rgba(0,255,204,0.1); border: 1px solid rgba(0,255,204,0.3); border-radius: 8px; padding: 2em; margin: 3em auto; max-width: 700px; text-align: center;">
-    <p style="font-size: 1.1em; line-height: 1.7; margin: 0;">
-        <strong style="color: #00ffcc;">Custom Pricing Available</strong><br/>
-       
-    </p>
-</div>
-
+					<!-- Custom Pricing Note -->
+					<div style="background: rgba(0,255,204,0.1); border: 1px solid rgba(0,255,204,0.3); border-radius: 8px; padding: 2em; margin: 3em auto; max-width: 700px; text-align: center;">
+					    <p style="font-size: 1.1em; line-height: 1.7; margin: 0;">
+					        <strong style="color: #00ffcc;">Custom Pricing Available</strong><br/>
+					    </p>
+					</div>
 
 					<!-- Before/After Audio Comparison -->
 					<div class="audio-comparison">
@@ -552,7 +577,6 @@ body {
 								</audio>
 							</div>
 						</div>
-						
 					</div>
 
 					<!-- Testimonials -->
@@ -568,12 +592,11 @@ body {
 							<p>"Working with Glue Matrix transformed my sound. The attention to detail and creative input elevated my tracks beyond what I imagined possible."</p>
 							<div class="author">— Pseyeche</div>
 						</div>
-					
 					</div>
 
 					<!-- CTA -->
 					<div style="text-align: center; margin: 4em 0;">
-						<a href="/contact/" class="button primary nav-link" style="font-size: 1.2em;">Let's Work Together</a>
+						<a href="/contact/" class="button primary" style="font-size: 1.2em;">Let's Work Together</a>
 					</div>
 
 				</div>
@@ -605,38 +628,24 @@ body {
 		<script src="/assets/js/main.js"></script>
 
 <script>
-// ===== PAGE TRANSITIONS =====
+// ===== VHS GLITCH PAGE TRANSITIONS =====
 (function() {
     const transition = document.getElementById('page-transition');
-    const waveform = document.getElementById('transition-waveform');
     
-    // Create waveform bars for transition
-    for (let i = 0; i < 50; i++) {
-        const bar = document.createElement('div');
-        bar.className = 'wave-bar';
-        bar.style.animationDelay = `${i * 0.02}s`;
-        waveform.appendChild(bar);
-    }
-    
-    // Intercept navigation clicks
-    document.querySelectorAll('a.nav-link, #menu a').forEach(link => {
+    document.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            // Don't intercept external links or anchor links
-            if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
+            if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
                 return;
             }
             
             e.preventDefault();
-            
-            // Trigger transition
             transition.classList.add('active');
             
-            // Navigate after animation
             setTimeout(() => {
                 window.location.href = href;
-            }, 400);
+            }, 350);
         });
     });
 })();
