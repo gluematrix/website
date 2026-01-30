@@ -93,39 +93,21 @@ body {
     font-family: 'Digital7', monospace !important;
 }
 
-/* 1. The Fixed Background with Overlay */
-        body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/css/images/contactphoto.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
+/* Dark overlay for readability */
+#page-wrapper {
+    position: relative;
+    z-index: 1;
+}
 
-        /* 2. Make all containers transparent so you see the photo */
-        #page-wrapper, 
-        #main, 
-        .wrapper.style5, 
-        #footer {
-            background: transparent !important;
-        }
 
-        /* 3. Ensure text is bright and readable against the dark background */
-        #main header h2, 
-        #main p, 
-        #main h1, 
-        #main h2, 
-        #main h3 {
-            color: #ffffff !important;
-        }
 
-        /* 4. Remove the old broken overlay */
-        #page-wrapper::before {
-            display: none !important;
-        }
+body {
+    position: relative;
+}
+#page-wrapper {
+    position: relative;
+    z-index: 1;
+}
 
 .page-content {
     display: flex;
