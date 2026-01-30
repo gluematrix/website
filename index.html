@@ -74,8 +74,9 @@ button:hover {
 }
 
 /* Full page background for home */
+/* Full page background with integrated dark overlay */
 body {
-    background-image: url('assets/css/images/homephoto.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/css/images/homephoto.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -83,7 +84,8 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    overflow-x: hidden;
+    width: 100%;
+    position: relative;
 }
 
 /* Mobile: use scroll instead of fixed */
@@ -98,8 +100,7 @@ body {
     position: relative;
     z-index: 1;
     /* This creates the dark tint directly on the wrapper */
-    background: rgba(0, 0, 0, 0.6) !important; 
-    min-height: 100vh;
+    background: transparent !important; 
 }
 
 .home-content {
