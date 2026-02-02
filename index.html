@@ -11,8 +11,6 @@
 		<link rel="stylesheet" href="assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 <style>
-
-
 html, body {
     height: 100%;
 }
@@ -20,7 +18,6 @@ html, body {
 #page-wrapper {
     min-height: 100%;
 }
-
 
 /* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
 .button,
@@ -73,7 +70,6 @@ button:hover {
     transform: scale(1.1);
 }
 
-/* Full page background for home */
 /* Full page background with integrated dark overlay */
 body {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/css/images/homephoto.jpg');
@@ -95,11 +91,9 @@ body {
     }
 }
 
-/* Fixed: Dark overlay for readability */
 #page-wrapper {
     position: relative;
     z-index: 1;
-    /* This creates the dark tint directly on the wrapper */
     background: transparent !important; 
 }
 
@@ -112,7 +106,7 @@ body {
     text-align: center;
     padding: 3em 2em;
     position: relative;
-    z-index: 2; /* Ensures text stays above the overlay */
+    z-index: 2;
 }
 
 .home-content h1 {
@@ -285,28 +279,6 @@ body {
     50% { transform: translateX(100%); }
 }
 
-/* Glitch text in center */
-.glitch-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Digital7', monospace;
-    font-size: 2em;
-    color: #00ffcc;
-    text-shadow: 
-        2px 0 #ff0000,
-        -2px 0 #00ffff;
-    animation: textGlitch 0.3s ease-in-out infinite;
-}
-
-@keyframes textGlitch {
-    0%, 100% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(-50%, -50%); }
-    25% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; transform: translate(-51%, -50%); }
-    50% { text-shadow: 1px 0 #ff0000, -1px 0 #00ffff; transform: translate(-50%, -51%); }
-    75% { text-shadow: -1px 0 #ff0000, 1px 0 #00ffff; transform: translate(-49%, -50%); }
-}
-
 /* ===== EASTER EGG PSYCHEDELIC OVERLAY ===== */
 #psychedelic-overlay {
     position: fixed;
@@ -361,8 +333,7 @@ body {
         <div id="frequency-visualizer"></div>
 
         <!-- VHS Glitch Transition Overlay -->
-        <div id="page-transition">
-r 6t7h-         </div>
+        <div id="page-transition"></div>
 
         <!-- Psychedelic Easter Egg Overlay -->
         <div id="psychedelic-overlay">
@@ -442,7 +413,6 @@ r 6t7h-         </div>
     const barCount = Math.floor(window.innerWidth / 6);
     const bars = [];
     
-    // Create bars
     for (let i = 0; i < barCount; i++) {
         const bar = document.createElement('div');
         bar.className = 'freq-bar';
@@ -451,12 +421,10 @@ r 6t7h-         </div>
         bars.push(bar);
     }
     
-    // Very slow, subtle animation
     function animateBars() {
-        const time = Date.now() * 0.0005; // Much slower
+        const time = Date.now() * 0.0005;
         
         bars.forEach((bar, index) => {
-            // Gentle wave animation
             const wave = Math.sin(time + index * 0.05) * 0.5 + 0.5;
             const height = 5 + (wave * 40);
             bar.style.height = `${height}px`;
@@ -472,22 +440,17 @@ r 6t7h-         </div>
 (function() {
     const transition = document.getElementById('page-transition');
     
-    // Intercept navigation clicks
     document.querySelectorAll('a.nav-link, #menu a, a.button').forEach(link => {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            // Don't intercept external links, anchor links, or mailto
             if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
                 return;
             }
             
             e.preventDefault();
-            
-            // Trigger glitch transition
             transition.classList.add('active');
             
-            // Navigate after animation
             setTimeout(() => {
                 window.location.href = href;
             }, 350);
@@ -495,35 +458,22 @@ r 6t7h-         </div>
     });
 })();
 
-<!-- 
-PSYCHEDELIC CONTOUR EASTER EGG
-==============================
-Replace your current easter egg JavaScript with this.
-
-Find this section in your homepage:
-// ===== PSYCHEDELIC EASTER EGG =====
-(function() {
-    ... all the code ...
-})();
-
-And replace it with everything below:
--->
-
 // ===== PSYCHEDELIC CONTOUR EASTER EGG =====
 (function() {
     const overlay = document.getElementById('psychedelic-overlay');
     const canvas = document.getElementById('psychedelic-canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
     const trigger = document.getElementById('easter-egg-trigger');
     
     let animationId = null;
     let isActive = false;
     let startTime = 0;
     
-    // Check for WebGL support, fallback to 2D if not available
+    // Try WebGL first
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    
     if (!gl) {
-        console.log('WebGL not supported, using 2D fallback');
-        initCanvas2D();
+        // Fallback to 2D canvas
+        init2DFallback();
         return;
     }
     
@@ -535,13 +485,12 @@ And replace it with everything below:
         }
     `;
     
-    // Fragment shader - the magic happens here
+    // Fragment shader - creates the psychedelic contour effect
     const fragmentShaderSource = `
         precision highp float;
         uniform vec2 u_resolution;
         uniform float u_time;
         
-        // Simplex-ish noise using sine combinations
         float noise(vec2 p, float t) {
             float n = 0.0;
             n += sin(p.x * 0.02 + t * 0.5) * cos(p.y * 0.02 + t * 0.3);
@@ -553,7 +502,6 @@ And replace it with everything below:
             return n / 2.8;
         }
         
-        // HSV to RGB
         vec3 hsv2rgb(vec3 c) {
             vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
             vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
@@ -563,27 +511,20 @@ And replace it with everything below:
         void main() {
             vec2 uv = gl_FragCoord.xy;
             vec2 center = u_resolution * 0.5;
-            
-            // Mirror for kaleidoscope symmetry
             vec2 mirrorUV = abs(uv - center);
             
-            // Get noise value
             float n = noise(mirrorUV, u_time);
             
-            // Create contour lines
             float lineDensity = 15.0;
             float contour = (n + 1.0) * lineDensity;
             float frac = fract(contour);
             
-            // Smooth line with adjustable thickness
             float lineThickness = 0.12;
             float line = 1.0 - smoothstep(0.0, lineThickness, abs(frac - 0.5));
             
-            // Rainbow color based on noise + time
             float hue = fract((n + 1.0) * 0.5 + u_time * 0.08);
             vec3 color = hsv2rgb(vec3(hue, 0.85, 0.95));
             
-            // Darken background between lines
             float brightness = mix(0.05, 1.0, line);
             color *= brightness;
             
@@ -591,22 +532,24 @@ And replace it with everything below:
         }
     `;
     
-    // Compile shader
     function compileShader(source, type) {
         const shader = gl.createShader(type);
         gl.shaderSource(shader, source);
         gl.compileShader(shader);
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            console.error('Shader compile error:', gl.getShaderInfoLog(shader));
-            gl.deleteShader(shader);
+            console.error('Shader error:', gl.getShaderInfoLog(shader));
             return null;
         }
         return shader;
     }
     
-    // Create program
     const vertexShader = compileShader(vertexShaderSource, gl.VERTEX_SHADER);
     const fragmentShader = compileShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
+    
+    if (!vertexShader || !fragmentShader) {
+        init2DFallback();
+        return;
+    }
     
     const program = gl.createProgram();
     gl.attachShader(program, vertexShader);
@@ -614,26 +557,22 @@ And replace it with everything below:
     gl.linkProgram(program);
     
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        console.error('Program link error:', gl.getProgramInfoLog(program));
+        console.error('Program error:', gl.getProgramInfoLog(program));
+        init2DFallback();
+        return;
     }
     
-    // Set up geometry (full screen quad)
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-        -1, -1,
-         1, -1,
-        -1,  1,
-        -1,  1,
-         1, -1,
-         1,  1
+        -1, -1, 1, -1, -1, 1,
+        -1, 1, 1, -1, 1, 1
     ]), gl.STATIC_DRAW);
     
     const positionLocation = gl.getAttribLocation(program, 'a_position');
     const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
     const timeLocation = gl.getUniformLocation(program, 'u_time');
     
-    // Resize handler
     function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -642,66 +581,52 @@ And replace it with everything below:
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     
-    // Render loop
     function render() {
         if (!isActive) return;
         
         const currentTime = (Date.now() - startTime) / 1000;
         
         gl.useProgram(program);
-        
         gl.enableVertexAttribArray(positionLocation);
         gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
         gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-        
         gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
         gl.uniform1f(timeLocation, currentTime);
-        
         gl.drawArrays(gl.TRIANGLES, 0, 6);
         
         animationId = requestAnimationFrame(render);
     }
     
-    // Activate easter egg
-    function activateEasterEgg() {
+    function activate() {
         isActive = true;
         startTime = Date.now();
         overlay.classList.add('active');
         render();
     }
     
-    // Deactivate easter egg
-    function deactivateEasterEgg() {
+    function deactivate() {
         isActive = false;
         overlay.classList.remove('active');
-        if (animationId) {
-            cancelAnimationFrame(animationId);
-        }
+        if (animationId) cancelAnimationFrame(animationId);
     }
     
-    // Click trigger (the period)
-    trigger.addEventListener('click', activateEasterEgg);
-    
-    // Close on click or ESC
-    overlay.addEventListener('click', deactivateEasterEgg);
-    
+    trigger.addEventListener('click', activate);
+    overlay.addEventListener('click', deactivate);
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isActive) {
-            deactivateEasterEgg();
-        }
+        if (e.key === 'Escape' && isActive) deactivate();
     });
     
-    // 2D Canvas fallback function
-    function initCanvas2D() {
+    // 2D Canvas fallback
+    function init2DFallback() {
         const ctx = canvas.getContext('2d');
         let time = 0;
         
-        function resizeCanvas2D() {
+        function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        resizeCanvas2D();
-        window.addEventListener('resize', resizeCanvas2D);
+        resize();
+        window.addEventListener('resize', resize);
         
         function noise2D(x, y, t) {
             let n = 0;
@@ -718,26 +643,26 @@ And replace it with everything below:
             const f = h * 6 - i;
             const p = v * (1 - s);
             const q = v * (1 - f * s);
-            const t = v * (1 - (1 - f) * s);
+            const tv = v * (1 - (1 - f) * s);
             switch (i % 6) {
-                case 0: r = v; g = t; b = p; break;
+                case 0: r = v; g = tv; b = p; break;
                 case 1: r = q; g = v; b = p; break;
-                case 2: r = p; g = v; b = t; break;
+                case 2: r = p; g = v; b = tv; break;
                 case 3: r = p; g = q; b = v; break;
-                case 4: r = t; g = p; b = v; break;
+                case 4: r = tv; g = p; b = v; break;
                 case 5: r = v; g = p; b = q; break;
             }
             return `rgb(${Math.round(r*255)},${Math.round(g*255)},${Math.round(b*255)})`;
         }
         
-        function draw2D() {
+        function draw() {
             if (!isActive) return;
             
             const width = canvas.width;
             const height = canvas.height;
             const centerX = width / 2;
             const centerY = height / 2;
-            const step = 4; // Lower = more detail but slower
+            const step = 4;
             
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, width, height);
@@ -759,14 +684,14 @@ And replace it with everything below:
             }
             
             time += 0.03;
-            animationId = requestAnimationFrame(draw2D);
+            animationId = requestAnimationFrame(draw);
         }
         
         trigger.addEventListener('click', () => {
             isActive = true;
             time = 0;
             overlay.classList.add('active');
-            draw2D();
+            draw();
         });
         
         overlay.addEventListener('click', () => {
@@ -784,3 +709,7 @@ And replace it with everything below:
         });
     }
 })();
+</script>
+
+	</body>
+</html>
