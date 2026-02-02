@@ -495,105 +495,179 @@ r 6t7h-         </div>
     });
 })();
 
+<!-- 
+PSYCHEDELIC CONTOUR EASTER EGG
+==============================
+Replace your current easter egg JavaScript with this.
+
+Find this section in your homepage:
 // ===== PSYCHEDELIC EASTER EGG =====
+(function() {
+    ... all the code ...
+})();
+
+And replace it with everything below:
+-->
+
+// ===== PSYCHEDELIC CONTOUR EASTER EGG =====
 (function() {
     const overlay = document.getElementById('psychedelic-overlay');
     const canvas = document.getElementById('psychedelic-canvas');
-    const ctx = canvas.getContext('2d');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
     const trigger = document.getElementById('easter-egg-trigger');
     
     let animationId = null;
     let isActive = false;
+    let startTime = 0;
     
-    // Resize canvas
+    // Check for WebGL support, fallback to 2D if not available
+    if (!gl) {
+        console.log('WebGL not supported, using 2D fallback');
+        initCanvas2D();
+        return;
+    }
+    
+    // Vertex shader
+    const vertexShaderSource = `
+        attribute vec2 a_position;
+        void main() {
+            gl_Position = vec4(a_position, 0.0, 1.0);
+        }
+    `;
+    
+    // Fragment shader - the magic happens here
+    const fragmentShaderSource = `
+        precision highp float;
+        uniform vec2 u_resolution;
+        uniform float u_time;
+        
+        // Simplex-ish noise using sine combinations
+        float noise(vec2 p, float t) {
+            float n = 0.0;
+            n += sin(p.x * 0.02 + t * 0.5) * cos(p.y * 0.02 + t * 0.3);
+            n += sin(p.x * 0.04 - t * 0.4) * cos(p.y * 0.03 + t * 0.2) * 0.5;
+            n += sin(p.x * 0.01 + p.y * 0.01 + t * 0.6) * 0.7;
+            n += cos(p.x * 0.03 + t * 0.2) * sin(p.y * 0.04 - t * 0.5) * 0.4;
+            n += sin((p.x + p.y) * 0.015 + t * 0.25) * 0.6;
+            n += cos(p.x * 0.025 - p.y * 0.02 + t * 0.35) * 0.35;
+            return n / 2.8;
+        }
+        
+        // HSV to RGB
+        vec3 hsv2rgb(vec3 c) {
+            vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
+            vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+            return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+        }
+        
+        void main() {
+            vec2 uv = gl_FragCoord.xy;
+            vec2 center = u_resolution * 0.5;
+            
+            // Mirror for kaleidoscope symmetry
+            vec2 mirrorUV = abs(uv - center);
+            
+            // Get noise value
+            float n = noise(mirrorUV, u_time);
+            
+            // Create contour lines
+            float lineDensity = 15.0;
+            float contour = (n + 1.0) * lineDensity;
+            float frac = fract(contour);
+            
+            // Smooth line with adjustable thickness
+            float lineThickness = 0.12;
+            float line = 1.0 - smoothstep(0.0, lineThickness, abs(frac - 0.5));
+            
+            // Rainbow color based on noise + time
+            float hue = fract((n + 1.0) * 0.5 + u_time * 0.08);
+            vec3 color = hsv2rgb(vec3(hue, 0.85, 0.95));
+            
+            // Darken background between lines
+            float brightness = mix(0.05, 1.0, line);
+            color *= brightness;
+            
+            gl_FragColor = vec4(color, 1.0);
+        }
+    `;
+    
+    // Compile shader
+    function compileShader(source, type) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+            gl.deleteShader(shader);
+            return null;
+        }
+        return shader;
+    }
+    
+    // Create program
+    const vertexShader = compileShader(vertexShaderSource, gl.VERTEX_SHADER);
+    const fragmentShader = compileShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
+    
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        console.error('Program link error:', gl.getProgramInfoLog(program));
+    }
+    
+    // Set up geometry (full screen quad)
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+        -1, -1,
+         1, -1,
+        -1,  1,
+        -1,  1,
+         1, -1,
+         1,  1
+    ]), gl.STATIC_DRAW);
+    
+    const positionLocation = gl.getAttribLocation(program, 'a_position');
+    const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
+    const timeLocation = gl.getUniformLocation(program, 'u_time');
+    
+    // Resize handler
     function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
     }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     
-    // Psychedelic animation
-    function drawPsychedelic(time) {
-        const width = canvas.width;
-        const height = canvas.height;
+    // Render loop
+    function render() {
+        if (!isActive) return;
         
-        // Clear with slight trail effect
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, width, height);
+        const currentTime = (Date.now() - startTime) / 1000;
         
-        const centerX = width / 2;
-        const centerY = height / 2;
+        gl.useProgram(program);
         
-        // Draw multiple rotating shapes
-        for (let ring = 0; ring < 8; ring++) {
-            const ringRadius = 50 + ring * 60;
-            const segments = 6 + ring * 2;
-            const rotationSpeed = (ring % 2 === 0 ? 1 : -1) * 0.0005;
-            
-            for (let i = 0; i < segments; i++) {
-                const angle = (i / segments) * Math.PI * 2 + time * rotationSpeed;
-                const x = centerX + Math.cos(angle) * ringRadius;
-                const y = centerY + Math.sin(angle) * ringRadius;
-                
-                // Color cycling
-                const hue = (time * 0.05 + ring * 30 + i * 20) % 360;
-                const saturation = 70 + Math.sin(time * 0.001 + i) * 30;
-                const lightness = 50 + Math.sin(time * 0.002 + ring) * 20;
-                
-                ctx.beginPath();
-                ctx.arc(x, y, 20 + Math.sin(time * 0.003 + i) * 10, 0, Math.PI * 2);
-                ctx.fillStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, 0.6)`;
-                ctx.fill();
-                
-                // Sacred geometry lines
-                if (i > 0) {
-                    const prevAngle = ((i - 1) / segments) * Math.PI * 2 + time * rotationSpeed;
-                    const prevX = centerX + Math.cos(prevAngle) * ringRadius;
-                    const prevY = centerY + Math.sin(prevAngle) * ringRadius;
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(prevX, prevY);
-                    ctx.lineTo(x, y);
-                    ctx.strokeStyle = `hsla(${(hue + 180) % 360}, 80%, 60%, 0.3)`;
-                    ctx.lineWidth = 1;
-                    ctx.stroke();
-                }
-            }
-        }
+        gl.enableVertexAttribArray(positionLocation);
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
         
-        // Central flower of life pattern
-        const petalCount = 6;
-        const petalRadius = 80 + Math.sin(time * 0.001) * 20;
+        gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+        gl.uniform1f(timeLocation, currentTime);
         
-        for (let i = 0; i < petalCount; i++) {
-            const angle = (i / petalCount) * Math.PI * 2 + time * 0.0003;
-            const x = centerX + Math.cos(angle) * petalRadius * 0.5;
-            const y = centerY + Math.sin(angle) * petalRadius * 0.5;
-            
-            ctx.beginPath();
-            ctx.arc(x, y, petalRadius, 0, Math.PI * 2);
-            ctx.strokeStyle = `hsla(${(time * 0.02 + i * 60) % 360}, 100%, 70%, 0.4)`;
-            ctx.lineWidth = 2;
-            ctx.stroke();
-        }
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
         
-        // Center circle
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, 30 + Math.sin(time * 0.002) * 10, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${time * 0.03 % 360}, 80%, 60%, 0.8)`;
-        ctx.fill();
-        
-        if (isActive) {
-            animationId = requestAnimationFrame(() => drawPsychedelic(time + 16));
-        }
+        animationId = requestAnimationFrame(render);
     }
     
     // Activate easter egg
     function activateEasterEgg() {
         isActive = true;
+        startTime = Date.now();
         overlay.classList.add('active');
-        drawPsychedelic(0);
+        render();
     }
     
     // Deactivate easter egg
@@ -603,7 +677,6 @@ r 6t7h-         </div>
         if (animationId) {
             cancelAnimationFrame(animationId);
         }
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
     
     // Click trigger (the period)
@@ -617,8 +690,97 @@ r 6t7h-         </div>
             deactivateEasterEgg();
         }
     });
+    
+    // 2D Canvas fallback function
+    function initCanvas2D() {
+        const ctx = canvas.getContext('2d');
+        let time = 0;
+        
+        function resizeCanvas2D() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas2D();
+        window.addEventListener('resize', resizeCanvas2D);
+        
+        function noise2D(x, y, t) {
+            let n = 0;
+            n += Math.sin(x * 0.02 + t * 0.5) * Math.cos(y * 0.02 + t * 0.3);
+            n += Math.sin(x * 0.04 - t * 0.4) * Math.cos(y * 0.03 + t * 0.2) * 0.5;
+            n += Math.sin(x * 0.01 + y * 0.01 + t * 0.6) * 0.7;
+            n += Math.cos(x * 0.03 + t * 0.2) * Math.sin(y * 0.04 - t * 0.5) * 0.4;
+            return n / 2.5;
+        }
+        
+        function hsvToRgb(h, s, v) {
+            let r, g, b;
+            const i = Math.floor(h * 6);
+            const f = h * 6 - i;
+            const p = v * (1 - s);
+            const q = v * (1 - f * s);
+            const t = v * (1 - (1 - f) * s);
+            switch (i % 6) {
+                case 0: r = v; g = t; b = p; break;
+                case 1: r = q; g = v; b = p; break;
+                case 2: r = p; g = v; b = t; break;
+                case 3: r = p; g = q; b = v; break;
+                case 4: r = t; g = p; b = v; break;
+                case 5: r = v; g = p; b = q; break;
+            }
+            return `rgb(${Math.round(r*255)},${Math.round(g*255)},${Math.round(b*255)})`;
+        }
+        
+        function draw2D() {
+            if (!isActive) return;
+            
+            const width = canvas.width;
+            const height = canvas.height;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const step = 4; // Lower = more detail but slower
+            
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, width, height);
+            
+            for (let y = 0; y < height; y += step) {
+                for (let x = 0; x < width; x += step) {
+                    const mx = Math.abs(x - centerX);
+                    const my = Math.abs(y - centerY);
+                    const n = noise2D(mx, my, time);
+                    const contour = (n + 1) * 12;
+                    const frac = contour - Math.floor(contour);
+                    
+                    if (Math.abs(frac - 0.5) < 0.15) {
+                        const hue = ((n + 1) / 2 + time * 0.08) % 1;
+                        ctx.fillStyle = hsvToRgb(hue, 0.85, 0.95);
+                        ctx.fillRect(x, y, step, step);
+                    }
+                }
+            }
+            
+            time += 0.03;
+            animationId = requestAnimationFrame(draw2D);
+        }
+        
+        trigger.addEventListener('click', () => {
+            isActive = true;
+            time = 0;
+            overlay.classList.add('active');
+            draw2D();
+        });
+        
+        overlay.addEventListener('click', () => {
+            isActive = false;
+            overlay.classList.remove('active');
+            if (animationId) cancelAnimationFrame(animationId);
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isActive) {
+                isActive = false;
+                overlay.classList.remove('active');
+                if (animationId) cancelAnimationFrame(animationId);
+            }
+        });
+    }
 })();
-</script>
-
-	</body>
-</html>
