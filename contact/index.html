@@ -68,9 +68,9 @@ button:hover {
     transform: scale(1.1);
 }
 
-/* Full page background for contact */
+/* Full page background with integrated dark overlay */
 body {
-    background-image: url('/assets/css/images/contactphoto.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/assets/css/images/contactphoto.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -78,6 +78,8 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    width: 100%;
+    position: relative;
 }
 
 /* Mobile: use scroll instead of fixed */
@@ -93,20 +95,10 @@ body {
     font-family: 'Digital7', monospace !important;
 }
 
-/* Dark overlay for readability */
 #page-wrapper {
     position: relative;
     z-index: 1;
-}
-
-
-
-body {
-    position: relative;
-}
-#page-wrapper {
-    position: relative;
-    z-index: 1;
+    background: transparent !important;
 }
 
 .page-content {
@@ -138,7 +130,7 @@ body {
     margin-bottom: 0;
 }
 
-/* ===== VHS GLITCH TRANSITION ===== */
+/* ===== ENHANCED VHS GLITCH TRANSITION ===== */
 #page-transition {
     position: fixed;
     top: 0;
@@ -150,26 +142,71 @@ body {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
+    overflow: hidden;
 }
 
 #page-transition.active {
     opacity: 1;
     visibility: visible;
-    animation: glitchTransition 0.5s ease-in-out;
+    animation: glitchTransition 0.6s ease-in-out;
 }
 
 @keyframes glitchTransition {
-    0% { opacity: 0; }
-    10% { opacity: 1; }
-    20% { opacity: 1; clip-path: inset(20% 0 60% 0); transform: translateX(-5px); }
-    25% { clip-path: inset(50% 0 30% 0); transform: translateX(5px); }
-    30% { clip-path: inset(10% 0 70% 0); transform: translateX(-3px); }
-    35% { clip-path: inset(70% 0 10% 0); transform: translateX(3px); }
-    40% { clip-path: inset(40% 0 40% 0); transform: translateX(0); }
-    50% { clip-path: inset(0); opacity: 1; }
-    100% { opacity: 0; }
+    0% { 
+        opacity: 0;
+        filter: brightness(1);
+    }
+    5% { 
+        opacity: 1;
+        filter: brightness(1.5) saturate(1.5);
+    }
+    10% { 
+        opacity: 1;
+        background: #000;
+    }
+    15% {
+        clip-path: inset(20% 0 60% 0);
+        transform: translateX(-8px);
+        filter: hue-rotate(90deg) brightness(1.3);
+    }
+    20% {
+        clip-path: inset(50% 0 30% 0);
+        transform: translateX(8px);
+        filter: hue-rotate(180deg) brightness(1.5);
+        background: rgba(255, 0, 255, 0.1);
+    }
+    25% {
+        clip-path: inset(10% 0 70% 0);
+        transform: translateX(-5px);
+        filter: hue-rotate(270deg) brightness(1.2);
+        background: rgba(0, 255, 255, 0.1);
+    }
+    30% {
+        clip-path: inset(70% 0 10% 0);
+        transform: translateX(5px);
+        filter: hue-rotate(45deg) brightness(1.4);
+        background: rgba(255, 255, 0, 0.1);
+    }
+    35% {
+        clip-path: inset(40% 0 40% 0);
+        transform: translateX(0);
+        filter: brightness(2) saturate(2);
+    }
+    40% {
+        clip-path: inset(0);
+        opacity: 1;
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+    100% { 
+        opacity: 0;
+    }
 }
 
+/* RGB Color Split Effect */
 #page-transition::before {
     content: '';
     position: absolute;
@@ -181,11 +218,61 @@ body {
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 255, 204, 0.03) 2px,
-        rgba(0, 255, 204, 0.03) 4px
+        rgba(0, 255, 204, 0.05) 2px,
+        rgba(0, 255, 204, 0.05) 4px
     );
+    animation: scanlines 0.1s linear infinite;
+    mix-blend-mode: screen;
 }
 
+/* Chromatic Aberration Layer - Red */
+#page-transition::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.2) 0%,
+        transparent 20%,
+        transparent 80%,
+        rgba(0, 255, 255, 0.2) 100%
+    );
+    animation: rgbSplit 0.2s ease-in-out infinite;
+    mix-blend-mode: screen;
+}
+
+@keyframes scanlines {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+}
+
+@keyframes rgbSplit {
+    0% { 
+        transform: translateX(-3px);
+        opacity: 0.8;
+    }
+    25% { 
+        transform: translateX(3px);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateX(-2px);
+        opacity: 0.8;
+    }
+    75% { 
+        transform: translateX(2px);
+        opacity: 1;
+    }
+    100% { 
+        transform: translateX(-3px);
+        opacity: 0.8;
+    }
+}
+
+/* VHS Static Noise */
 .glitch-text {
     position: absolute;
     top: 50%;
@@ -193,18 +280,129 @@ body {
     transform: translate(-50%, -50%);
     font-family: 'Digital7', monospace;
     font-size: 2em;
-    color: #00ffcc;
+    color: #fff;
     text-shadow: 
-        2px 0 #ff0000,
-        -2px 0 #00ffff;
-    animation: textGlitch 0.3s ease-in-out infinite;
+        3px 0 #ff00ff,
+        -3px 0 #00ffff,
+        0 3px #ffff00,
+        0 -3px #ff0000;
+    animation: textGlitch 0.15s ease-in-out infinite;
+    filter: brightness(1.5);
 }
 
 @keyframes textGlitch {
-    0%, 100% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(-50%, -50%); }
-    25% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; transform: translate(-51%, -50%); }
-    50% { text-shadow: 1px 0 #ff0000, -1px 0 #00ffff; transform: translate(-50%, -51%); }
-    75% { text-shadow: -1px 0 #ff0000, 1px 0 #00ffff; transform: translate(-49%, -50%); }
+    0% { 
+        text-shadow: 
+            3px 0 #ff00ff,
+            -3px 0 #00ffff,
+            0 3px #ffff00;
+        transform: translate(-50%, -50%) skew(0deg);
+        filter: brightness(1.5) saturate(1.5);
+    }
+    20% { 
+        text-shadow: 
+            -3px 0 #ff0000,
+            3px 0 #00ff00,
+            0 -3px #0000ff;
+        transform: translate(-51%, -50%) skew(2deg);
+        filter: brightness(2) saturate(2);
+    }
+    40% { 
+        text-shadow: 
+            2px 0 #ffff00,
+            -2px 0 #ff00ff,
+            0 2px #00ffff;
+        transform: translate(-50%, -51%) skew(-1deg);
+        filter: brightness(1.8) saturate(1.8);
+    }
+    60% { 
+        text-shadow: 
+            -2px 0 #00ffff,
+            2px 0 #ff00ff,
+            0 -2px #ffff00;
+        transform: translate(-49%, -50%) skew(1deg);
+        filter: brightness(1.6) saturate(1.6);
+    }
+    80% { 
+        text-shadow: 
+            4px 0 #ff0000,
+            -4px 0 #00ff00,
+            0 4px #0000ff;
+        transform: translate(-50%, -49%) skew(-2deg);
+        filter: brightness(2.2) saturate(2);
+    }
+    100% { 
+        text-shadow: 
+            3px 0 #ff00ff,
+            -3px 0 #00ffff,
+            0 3px #ffff00;
+        transform: translate(-50%, -50%) skew(0deg);
+        filter: brightness(1.5) saturate(1.5);
+    }
+}
+
+/* ===== MATRIX RAIN EASTER EGG ===== */
+#matrix-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+#matrix-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#matrix-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+#matrix-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 0.8em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    font-family: 'Analogue OS', sans-serif;
+    text-shadow: 0 0 10px rgba(0,255,204,0.8);
+}
+
+#matrix-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #00ffcc;
+    font-size: 2em;
+    font-family: 'Digital7', monospace;
+    text-shadow: 0 0 20px rgba(0,255,204,0.8);
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#matrix-message.visible {
+    opacity: 1;
+}
+
+.easter-egg-trigger {
+    cursor: default;
+    transition: text-shadow 0.3s ease;
+}
+
+.easter-egg-trigger:hover {
+    text-shadow: 0 0 10px #00ffcc;
 }
 		</style>
 	</head>
@@ -212,6 +410,13 @@ body {
 
 		<!-- VHS Glitch Transition -->
 		<div id="page-transition">
+		</div>
+
+		<!-- Matrix Rain Easter Egg Overlay -->
+		<div id="matrix-overlay">
+		    <canvas id="matrix-canvas"></canvas>
+		    <div id="matrix-message">THE GLUE CONNECTS ALL</div>
+		    <div id="matrix-close">Press ESC or click anywhere to close</div>
 		</div>
 
 		<!-- Page Wrapper -->
@@ -321,7 +526,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
     </ul>
     <ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
-        <li>&copy; GLUE MATRIX</li>
+        <li><span class="easter-egg-trigger" id="easter-egg-trigger">©</span> GLUE MATRIX</li>
     </ul>
     <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
 </footer>
@@ -355,6 +560,92 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
                 window.location.href = href;
             }, 350);
         });
+    });
+})();
+
+// ===== MATRIX RAIN EASTER EGG =====
+(function() {
+    const overlay = document.getElementById('matrix-overlay');
+    const canvas = document.getElementById('matrix-canvas');
+    const message = document.getElementById('matrix-message');
+    const trigger = document.getElementById('easter-egg-trigger');
+    
+    let animationId = null;
+    let isActive = false;
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Matrix characters
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    
+    let drops = [];
+    let fontSize = 16;
+    let columns = 0;
+    
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        columns = Math.floor(canvas.width / fontSize);
+        drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    
+    function draw() {
+        if (!isActive) return;
+        
+        // Fade effect
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#00ffcc';
+        ctx.font = `${fontSize}px monospace`;
+        
+        for (let i = 0; i < drops.length; i++) {
+            const char = chars[Math.floor(Math.random() * chars.length)];
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
+            
+            ctx.fillText(char, x, y);
+            
+            // Random reset
+            if (y > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            
+            drops[i]++;
+        }
+        
+        animationId = requestAnimationFrame(draw);
+    }
+    
+    function activate() {
+        isActive = true;
+        overlay.classList.add('active');
+        draw();
+        
+        // Show message after 2 seconds
+        setTimeout(() => {
+            if (isActive) {
+                message.classList.add('visible');
+            }
+        }, 2000);
+    }
+    
+    function deactivate() {
+        isActive = false;
+        overlay.classList.remove('active');
+        message.classList.remove('visible');
+        if (animationId) cancelAnimationFrame(animationId);
+    }
+    
+    trigger.addEventListener('click', activate);
+    overlay.addEventListener('click', deactivate);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isActive) deactivate();
     });
 })();
 </script>
