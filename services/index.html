@@ -94,12 +94,16 @@ html, body {
 }
 
 
-/* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
+/* ===== AWAKENING HOVER SYSTEM - BLUR TO FOCUS ===== */
 .button,
 input[type="submit"],
 input[type="button"],
-button {
-    transition: all 0.3s ease !important;
+button,
+a,
+#menu ul li a,
+#header h1 a {
+    filter: blur(0.3px);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) !important;
     transform: translateY(0) scale(1) !important;
 }
 
@@ -107,8 +111,55 @@ button {
 input[type="submit"]:hover,
 input[type="button"]:hover,
 button:hover {
-    transform: scale(1.05) !important;
-    box-shadow: 0 0 20px rgba(237, 73, 51, 0.6) !important;
+    filter: blur(0px);
+    transform: scale(1.02) !important;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Chromatic Aberration on Key Elements */
+.button,
+#header h1 a {
+    position: relative;
+}
+
+.button::before,
+#header h1 a::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: rgba(0, 255, 255, 0.2);
+    transform: translate(-0.5px, 0);
+    transition: all 250ms ease-out;
+    pointer-events: none;
+}
+
+.button:hover::before,
+#header h1 a:hover::before {
+    transform: translate(0, 0);
+    opacity: 0;
+}
+
+.button.primary:hover {
+    box-shadow: 0 0 25px rgba(237, 73, 51, 0.6) !important;
+}
+
+a:hover {
+    filter: blur(0px);
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+}
+
+#menu ul li a:hover {
+    filter: blur(0px);
+    color: #00ffcc;
+    padding-left: 1.5em;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
+}
+
+#header h1 a:hover {
+    filter: blur(0px);
+    transform: scale(1.02);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
 /* GLUE MATRIX logo hover */
@@ -342,6 +393,8 @@ body {
 			.after-side {
 				position: absolute;
 				top: 0;
+				left: 0;
+				width: 100%;
 				height: 100%;
 				display: flex;
 				flex-direction: column;
@@ -351,16 +404,14 @@ body {
 			}
 			
 			.before-side {
-				left: 0;
-				width: 50%;
 				background: rgba(100, 0, 0, 0.2);
 				filter: blur(1px) saturate(0.5);
+				clip-path: inset(0 50% 0 0);
 			}
 			
 			.after-side {
-				right: 0;
-				width: 50%;
 				background: rgba(0, 100, 100, 0.2);
+				clip-path: inset(0 0 0 50%);
 			}
 			
 			.before-side h4 {
@@ -410,9 +461,11 @@ body {
 			}
 			
 			#play-pause-btn {
-				width: 120px;
+				min-width: 120px;
 				font-family: 'Digital7', monospace;
 				font-size: 1.1em;
+				white-space: nowrap;
+				padding: 0.75em 1.5em;
 			}
 			
 			#crossfade-slider {
@@ -823,40 +876,11 @@ body {
     text-shadow: 0 0 10px #00ffcc;
 }
 
-/* Cursor Trail Effect */
-.cursor-trail {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    background: #00ffcc;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.6;
-    animation: trailFade 500ms ease-out forwards;
-}
-
-@keyframes trailFade {
-    0% {
-        opacity: 0.6;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.3);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .cursor-trail {
-        display: none;
-    }
-}
 
 
 /* Easter Egg Tracker */
 #egg-tracker {
-    position: fixed;
+    position: absolute;
     bottom: 20px;
     left: 20px;
     z-index: 9997;
@@ -1452,23 +1476,23 @@ body {
     animate();
     
     // Crossfade logic
-    function updateCrossfade(value) {
-        const position = value / 100;
-        
-        beforeAudio.volume = 1 - position;
-        afterAudio.volume = position;
-        
-        // Update divider position
-        divider.style.left = `${value}%`;
-        
-        // Update visual widths
-        beforeVisual.style.width = `${100 - value}%`;
-        afterVisual.style.width = `${value}%`;
-        
-        // Update blur on before side
-        const blurAmount = position * 2;
-        beforeVisual.style.filter = `blur(${blurAmount}px) saturate(${1 - position * 0.5})`;
-    }
+	function updateCrossfade(value) {
+		const position = value / 100;
+		
+		beforeAudio.volume = 1 - position;
+		afterAudio.volume = position;
+		
+		// Update divider position
+		divider.style.left = `${value}%`;
+		
+		// Update visual positioning (not width)
+		beforeVisual.style.clipPath = `inset(0 ${value}% 0 0)`;
+		afterVisual.style.clipPath = `inset(0 0 0 ${100 - value}%)`;
+		
+		// Update blur on before side
+		const blurAmount = position * 2;
+		beforeVisual.style.filter = `blur(${blurAmount}px) saturate(${1 - position * 0.5})`;
+	}
     
     slider.addEventListener('input', (e) => {
         updateCrossfade(e.target.value);
@@ -1479,11 +1503,11 @@ body {
         if (isPlaying) {
             beforeAudio.pause();
             afterAudio.pause();
-            playPauseBtn.textContent = '▶ Play';
+            playPauseBtn.innerHTML = '&#9654; Play'; // Use HTML entity instead
         } else {
             beforeAudio.play();
             afterAudio.play();
-            playPauseBtn.textContent = '⏸ Pause';
+            playPauseBtn.innerHTML = '&#9208; Pause';
         }
         isPlaying = !isPlaying;
     });
@@ -1554,68 +1578,42 @@ body {
         });
     }
     
-    // God Mode
-    function triggerGodMode() {
-        const overlay = document.getElementById('god-mode-overlay');
-        overlay.classList.add('active');
-        
-        // Activate ALL effects
-        document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
-        document.body.style.animation = 'screenShake 0.5s infinite';
-        
-        setTimeout(() => {
-            overlay.classList.remove('active');
-            document.body.style.filter = '';
-            document.body.style.animation = '';
-        }, 3000);
+// God Mode
+function triggerGodMode() {
+    const overlay = document.getElementById('god-mode-overlay');
+    
+    // Check if already shown this session
+    if (sessionStorage.getItem('godModeShown')) return;
+    
+    overlay.classList.add('active');
+    sessionStorage.setItem('godModeShown', 'true');
+    
+    // Activate ALL effects
+    document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
+    document.body.style.animation = 'screenShake 0.5s infinite';
+    
+    setTimeout(() => {
+        overlay.classList.remove('active');
+        document.body.style.filter = '';
+        document.body.style.animation = '';
+    }, 5000);
+}
+
+// Add reset functionality (Shift + R)
+document.addEventListener('keydown', (e) => {
+    if (e.shiftKey && e.key === 'R') {
+        if (confirm('Reset all easter eggs?')) {
+            localStorage.removeItem('glueMatrixEggs');
+            sessionStorage.removeItem('godModeShown');
+            location.reload();
+        }
     }
+});
     
     updateTracker();
 })();
 
 
-// ===== CURSOR TRAIL EFFECT =====
-(function() {
-    // Only on desktop
-    if ('ontouchstart' in window) return;
-    
-    let trails = [];
-    const maxTrails = 5;
-    let lastTime = 0;
-    
-    document.addEventListener('mousemove', (e) => {
-        const now = Date.now();
-        
-        // Throttle to every 50ms
-        if (now - lastTime < 50) return;
-        lastTime = now;
-        
-        // Remove oldest if at max
-        if (trails.length >= maxTrails) {
-            const oldest = trails.shift();
-            if (oldest && oldest.parentNode) {
-                oldest.parentNode.removeChild(oldest);
-            }
-        }
-        
-        // Create trail particle
-        const trail = document.createElement('div');
-        trail.className = 'cursor-trail';
-        trail.style.left = e.clientX + 'px';
-        trail.style.top = e.clientY + 'px';
-        document.body.appendChild(trail);
-        trails.push(trail);
-        
-        // Auto-remove after animation
-        setTimeout(() => {
-            if (trail && trail.parentNode) {
-                trail.parentNode.removeChild(trail);
-            }
-            const index = trails.indexOf(trail);
-            if (index > -1) trails.splice(index, 1);
-        }, 500);
-    });
-})();
 
 // ===== KONAMI CODE EASTER EGG =====
 (function() {

@@ -93,12 +93,16 @@ html, body {
     min-height: 100%;
 }
 
-/* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
+/* ===== AWAKENING HOVER SYSTEM - BLUR TO FOCUS ===== */
 .button,
 input[type="submit"],
 input[type="button"],
-button {
-    transition: all 0.3s ease !important;
+button,
+a,
+#menu ul li a,
+#header h1 a {
+    filter: blur(0.3px);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) !important;
     transform: translateY(0) scale(1) !important;
 }
 
@@ -106,12 +110,55 @@ button {
 input[type="submit"]:hover,
 input[type="button"]:hover,
 button:hover {
-    transform: scale(1.05) !important;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6) !important;
+    filter: blur(0px);
+    transform: scale(1.02) !important;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Chromatic Aberration on Key Elements */
+.button,
+#header h1 a {
+    position: relative;
+}
+
+.button::before,
+#header h1 a::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: rgba(0, 255, 255, 0.2);
+    transform: translate(-0.5px, 0);
+    transition: all 250ms ease-out;
+    pointer-events: none;
+}
+
+.button:hover::before,
+#header h1 a:hover::before {
+    transform: translate(0, 0);
+    opacity: 0;
 }
 
 .button.primary:hover {
-    box-shadow: 0 0 20px rgba(237, 73, 51, 0.6) !important;
+    box-shadow: 0 0 25px rgba(237, 73, 51, 0.6) !important;
+}
+
+a:hover {
+    filter: blur(0px);
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+}
+
+#menu ul li a:hover {
+    filter: blur(0px);
+    color: #00ffcc;
+    padding-left: 1.5em;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
+}
+
+#header h1 a:hover {
+    filter: blur(0px);
+    transform: scale(1.02);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
 /* GLUE MATRIX logo hover */
@@ -592,40 +639,11 @@ body {
     text-shadow: 0 0 10px #00ffcc;
 }
 
-/* Cursor Trail Effect */
-.cursor-trail {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    background: #00ffcc;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.6;
-    animation: trailFade 500ms ease-out forwards;
-}
-
-@keyframes trailFade {
-    0% {
-        opacity: 0.6;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.3);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .cursor-trail {
-        display: none;
-    }
-}
 
 
 /* Easter Egg Tracker */
 #egg-tracker {
-    position: fixed;
+    position: absolute;
     bottom: 20px;
     left: 20px;
     z-index: 9997;
@@ -782,11 +800,11 @@ body {
 </footer>
 
 <!-- Ambient Audio Player -->
-		<div id="audio-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 9998; cursor: pointer; opacity: 0.6; transition: opacity 0.3s;">
+		<div id="audio-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 9998; cursor: pointer; opacity: 0.6; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center;">
 			<svg width="40" height="40" viewBox="0 0 40 40" id="audio-icon">
 				<circle cx="20" cy="20" r="18" fill="none" stroke="#00ffcc" stroke-width="2"/>
-				<path id="speaker-icon" d="M15 14 L15 26 L20 26 L27 32 L27 8 Z" fill="#00ffcc"/>
-				<path id="sound-waves" d="M30 15 Q32 20 30 25 M33 12 Q36 20 33 28" stroke="#00ffcc" stroke-width="2" fill="none" opacity="0"/>
+				<path id="speaker-icon" d="M14 16 L14 24 L18 24 L26 30 L26 10 Z" fill="#00ffcc"/>
+				<path id="sound-waves" d="M29 16 Q31 20 29 24 M32 13 Q35 20 32 27" stroke="#00ffcc" stroke-width="2" fill="none" opacity="0"/>
 			</svg>
 		</div>
 		<audio id="ambient-audio" loop>
@@ -794,18 +812,24 @@ body {
 			<!-- You'll need to create this file - a 20-30 sec ambient loop -->
 		</audio>
 
-		<script>
+<script>
 		// Ambient Audio System
 		(function() {
 			const toggle = document.getElementById('audio-toggle');
 			const audio = document.getElementById('ambient-audio');
 			const soundWaves = document.getElementById('sound-waves');
+			
+			if (!toggle || !audio) return;
+			
 			let isPlaying = false;
 			
 			// Check localStorage
 			const savedState = localStorage.getItem('glueMatrixAudio');
 			if (savedState === 'playing') {
-				audio.play();
+				audio.play().catch(() => {
+					// Autoplay blocked, that's fine
+					localStorage.setItem('glueMatrixAudio', 'paused');
+				});
 				isPlaying = true;
 				soundWaves.setAttribute('opacity', '1');
 			}
@@ -815,12 +839,26 @@ body {
 					audio.pause();
 					soundWaves.setAttribute('opacity', '0');
 					localStorage.setItem('glueMatrixAudio', 'paused');
+					isPlaying = false;
 				} else {
-					audio.play();
+					audio.play().catch(err => {
+						console.log('Audio play failed:', err);
+					});
 					soundWaves.setAttribute('opacity', '1');
 					localStorage.setItem('glueMatrixAudio', 'playing');
+					isPlaying = true;
 				}
-				isPlaying = !isPlaying;
+			});
+			
+			// Sync visual state with actual playback
+			audio.addEventListener('play', () => {
+				isPlaying = true;
+				soundWaves.setAttribute('opacity', '1');
+			});
+			
+			audio.addEventListener('pause', () => {
+				isPlaying = false;
+				soundWaves.setAttribute('opacity', '0');
 			});
 			
 			toggle.addEventListener('mouseenter', function() {
@@ -834,10 +872,12 @@ body {
 			// Breathing animation when playing
 			let breathTime = 0;
 			function breathe() {
-				if (isPlaying) {
+				if (isPlaying && !audio.paused) {
 					breathTime += 0.02;
 					const scale = 1 + Math.sin(breathTime) * 0.05;
 					toggle.style.transform = `scale(${scale})`;
+				} else {
+					toggle.style.transform = 'scale(1)';
 				}
 				requestAnimationFrame(breathe);
 			}
@@ -908,6 +948,9 @@ body {
         mouseY = e.clientY / window.innerHeight;
     });
     
+// Ripple tracking
+    let ripples = [];
+    
     function noise2D(x, y, t) {
         let n = 0;
         n += Math.sin(x * 0.02 + t * 0.5) * Math.cos(y * 0.02 + t * 0.3);
@@ -921,6 +964,19 @@ body {
         const dist = Math.sqrt(dx * dx + dy * dy);
         const mouseInfluence = Math.max(0, 1 - dist / 200) * 0.3;
         n += mouseInfluence;
+        
+        // Ripple influence
+        ripples.forEach(ripple => {
+            const rdx = x - ripple.x;
+            const rdy = y - ripple.y;
+            const rdist = Math.sqrt(rdx * rdx + rdy * rdy);
+            const rippleRadius = 150;
+            
+            if (rdist < rippleRadius) {
+                const rippleInfluence = (1 - rdist / rippleRadius) * ripple.strength * 0.4;
+                n += rippleInfluence;
+            }
+        });
         
         return n / 2.5;
     }
@@ -1430,67 +1486,42 @@ body {
         });
     }
     
-    // God Mode
-    function triggerGodMode() {
-        const overlay = document.getElementById('god-mode-overlay');
-        overlay.classList.add('active');
-        
-        // Activate ALL effects
-        document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
-        document.body.style.animation = 'screenShake 0.5s infinite';
-        
-        setTimeout(() => {
-            overlay.classList.remove('active');
-            document.body.style.filter = '';
-            document.body.style.animation = '';
-        }, 3000);
+// God Mode
+function triggerGodMode() {
+    const overlay = document.getElementById('god-mode-overlay');
+    
+    // Check if already shown this session
+    if (sessionStorage.getItem('godModeShown')) return;
+    
+    overlay.classList.add('active');
+    sessionStorage.setItem('godModeShown', 'true');
+    
+    // Activate ALL effects
+    document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
+    document.body.style.animation = 'screenShake 0.5s infinite';
+    
+    setTimeout(() => {
+        overlay.classList.remove('active');
+        document.body.style.filter = '';
+        document.body.style.animation = '';
+    }, 5000);
+}
+
+// Add reset functionality (Shift + R)
+document.addEventListener('keydown', (e) => {
+    if (e.shiftKey && e.key === 'R') {
+        if (confirm('Reset all easter eggs?')) {
+            localStorage.removeItem('glueMatrixEggs');
+            sessionStorage.removeItem('godModeShown');
+            location.reload();
+        }
     }
+});
     
     updateTracker();
 })();
 
-// ===== CURSOR TRAIL EFFECT =====
-(function() {
-    // Only on desktop
-    if ('ontouchstart' in window) return;
-    
-    let trails = [];
-    const maxTrails = 5;
-    let lastTime = 0;
-    
-    document.addEventListener('mousemove', (e) => {
-        const now = Date.now();
-        
-        // Throttle to every 50ms
-        if (now - lastTime < 50) return;
-        lastTime = now;
-        
-        // Remove oldest if at max
-        if (trails.length >= maxTrails) {
-            const oldest = trails.shift();
-            if (oldest && oldest.parentNode) {
-                oldest.parentNode.removeChild(oldest);
-            }
-        }
-        
-        // Create trail particle
-        const trail = document.createElement('div');
-        trail.className = 'cursor-trail';
-        trail.style.left = e.clientX + 'px';
-        trail.style.top = e.clientY + 'px';
-        document.body.appendChild(trail);
-        trails.push(trail);
-        
-        // Auto-remove after animation
-        setTimeout(() => {
-            if (trail && trail.parentNode) {
-                trail.parentNode.removeChild(trail);
-            }
-            const index = trails.indexOf(trail);
-            if (index > -1) trails.splice(index, 1);
-        }, 500);
-    });
-})();
+
 
 // ===== KONAMI CODE EASTER EGG =====
 (function() {
