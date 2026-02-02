@@ -94,7 +94,7 @@ html, body {
 }
 
 
-/* ===== AWAKENING HOVER SYSTEM - BLUR TO FOCUS ===== */
+/* ===== AWAKENING HOVER SYSTEM - REFOCUS EFFECT ===== */
 .button,
 input[type="submit"],
 input[type="button"],
@@ -102,18 +102,32 @@ button,
 a,
 #menu ul li a,
 #header h1 a {
-    filter: blur(0.3px);
-    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    filter: blur(0px);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) !important;
     transform: translateY(0) scale(1) !important;
 }
 
+/* Quick blur pulse on hover */
 .button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,
 button:hover {
-    filter: blur(0px);
+    animation: refocus 300ms ease-out forwards;
     transform: scale(1.02) !important;
     box-shadow: 0 0 25px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Refocus animation: sharp → slight blur → sharper */
+@keyframes refocus {
+    0% {
+        filter: blur(0px);
+    }
+    30% {
+        filter: blur(0.5px);
+    }
+    100% {
+        filter: blur(0px) brightness(1.05);
+    }
 }
 
 /* Chromatic Aberration on Key Elements */
@@ -145,19 +159,19 @@ button:hover {
 }
 
 a:hover {
-    filter: blur(0px);
+    animation: refocus 300ms ease-out forwards;
     text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
 }
 
 #menu ul li a:hover {
-    filter: blur(0px);
+    animation: refocus 300ms ease-out forwards;
     color: #00ffcc;
     padding-left: 1.5em;
     text-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
 }
 
 #header h1 a:hover {
-    filter: blur(0px);
+    animation: refocus 300ms ease-out forwards;
     transform: scale(1.02);
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
@@ -461,12 +475,15 @@ body {
 			}
 			
 			#play-pause-btn {
-				min-width: 120px;
-				font-family: 'Digital7', monospace;
-				font-size: 1.1em;
-				white-space: nowrap;
-				padding: 0.75em 1.5em;
-			}
+    min-width: 120px;
+    font-family: 'Digital7', monospace;
+    font-size: 1.1em;
+    white-space: nowrap;
+    padding: 0.75em 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 			
 			#crossfade-slider {
 				width: 100%;
@@ -880,17 +897,25 @@ body {
 
 /* Easter Egg Tracker */
 #egg-tracker {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     left: 20px;
     z-index: 9997;
     display: flex;
     gap: 8px;
-    opacity: 0.3;
-    transition: opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-#egg-tracker:hover {
+#egg-tracker.visible {
+    opacity: 0.3;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+#egg-tracker.visible:hover {
     opacity: 1;
 }
 
@@ -1613,6 +1638,29 @@ document.addEventListener('keydown', (e) => {
     updateTracker();
 })();
 
+// ===== EASTER EGG TRACKER SCROLL VISIBILITY =====
+(function() {
+    const tracker = document.getElementById('egg-tracker');
+    if (!tracker) return;
+    
+    function checkScroll() {
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const pageHeight = document.documentElement.scrollHeight;
+        
+        // Show tracker when within 200px of bottom
+        if (pageHeight - scrollPosition < 200) {
+            tracker.classList.add('visible');
+        } else {
+            tracker.classList.remove('visible');
+        }
+    }
+    
+    // Check on scroll
+    window.addEventListener('scroll', checkScroll);
+    
+    // Check on page load
+    checkScroll();
+})();
 
 
 // ===== KONAMI CODE EASTER EGG =====

@@ -93,7 +93,7 @@ html, body {
     min-height: 100%;
 }
 
-/* ===== AWAKENING HOVER SYSTEM - BLUR TO FOCUS ===== */
+/* ===== AWAKENING HOVER SYSTEM - REFOCUS EFFECT ===== */
 .button,
 input[type="submit"],
 input[type="button"],
@@ -101,18 +101,32 @@ button,
 a,
 #menu ul li a,
 #header h1 a {
-    filter: blur(0.3px);
-    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    filter: blur(0px);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) !important;
     transform: translateY(0) scale(1) !important;
 }
 
+/* Quick blur pulse on hover */
 .button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,
 button:hover {
-    filter: blur(0px);
+    animation: refocus 300ms ease-out forwards;
     transform: scale(1.02) !important;
     box-shadow: 0 0 25px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Refocus animation: sharp → slight blur → sharper */
+@keyframes refocus {
+    0% {
+        filter: blur(0px);
+    }
+    30% {
+        filter: blur(0.5px);
+    }
+    100% {
+        filter: blur(0px) brightness(1.05);
+    }
 }
 
 /* Chromatic Aberration on Key Elements */
@@ -144,19 +158,19 @@ button:hover {
 }
 
 a:hover {
-    filter: blur(0px);
+    animation: refocus 300ms ease-out forwards;
     text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
 }
 
 #menu ul li a:hover {
-    filter: blur(0px);
+    animation: refocus 300ms ease-out forwards;
     color: #00ffcc;
     padding-left: 1.5em;
     text-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
 }
 
 #header h1 a:hover {
-    filter: blur(0px);
+    animation: refocus 300ms ease-out forwards;
     transform: scale(1.02);
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
@@ -571,7 +585,20 @@ body {
     height: 100%;
     z-index: 0;
     pointer-events: none;
+    opacity: 0;
+    display: none; /* HIDDEN BY DEFAULT */
+    transition: opacity 0.5s ease;
+}
+
+#live-psychedelic-bg.unlocked {
+    display: block;
     opacity: 0.12;
+}
+
+@media screen and (max-width: 768px) {
+    #live-psychedelic-bg.unlocked {
+        opacity: 0.08;
+    }
 }
 
 #live-psychedelic-canvas {
@@ -643,17 +670,25 @@ body {
 
 /* Easter Egg Tracker */
 #egg-tracker {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     left: 20px;
     z-index: 9997;
     display: flex;
     gap: 8px;
-    opacity: 0.3;
-    transition: opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-#egg-tracker:hover {
+#egg-tracker.visible {
+    opacity: 0.3;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+#egg-tracker.visible:hover {
     opacity: 1;
 }
 
@@ -812,7 +847,22 @@ body {
 			<!-- You'll need to create this file - a 20-30 sec ambient loop -->
 		</audio>
 
+</audio>
+
+		<!-- Psychedelic Background Toggle (Hidden until unlocked) -->
+		<div id="psychedelic-toggle" style="position: fixed; bottom: 70px; right: 20px; z-index: 9998; cursor: pointer; opacity: 0; display: none; transition: opacity 0.3s;">
+			<svg width="40" height="40" viewBox="0 0 40 40">
+				<circle cx="20" cy="20" r="18" fill="none" stroke="#00ffcc" stroke-width="2"/>
+				<circle cx="20" cy="20" r="12" fill="none" stroke="#00ffcc" stroke-width="2"/>
+				<circle cx="20" cy="20" r="6" fill="none" stroke="#00ffcc" stroke-width="2" id="psychedelic-indicator"/>
+			</svg>
+		</div>
+
 <script>
+
+
+
+
 		// Ambient Audio System
 		(function() {
 			const toggle = document.getElementById('audio-toggle');
@@ -882,6 +932,63 @@ body {
 				requestAnimationFrame(breathe);
 			}
 			breathe();
+		})();
+		</script>
+
+        // Psychedelic Background Toggle System
+		(function() {
+			const bg = document.getElementById('live-psychedelic-bg');
+			const toggle = document.getElementById('psychedelic-toggle');
+			const indicator = document.getElementById('psychedelic-indicator');
+			
+			if (!bg || !toggle) return;
+			
+			let isActive = false;
+			
+			function initPsychedelicToggle() {
+				const unlocked = localStorage.getItem('psychedelicUnlocked');
+				
+				if (unlocked === 'true') {
+					toggle.style.display = 'flex';
+					toggle.style.opacity = '0.6';
+					
+					// Check if it should be active
+					const savedState = localStorage.getItem('psychedelicActive');
+					if (savedState === 'true') {
+						bg.classList.add('unlocked');
+						isActive = true;
+						indicator.setAttribute('fill', '#00ffcc');
+					}
+				}
+			}
+			
+			toggle.addEventListener('click', function() {
+				isActive = !isActive;
+				
+				if (isActive) {
+					bg.classList.add('unlocked');
+					indicator.setAttribute('fill', '#00ffcc');
+					localStorage.setItem('psychedelicActive', 'true');
+				} else {
+					bg.classList.remove('unlocked');
+					indicator.setAttribute('fill', 'none');
+					localStorage.setItem('psychedelicActive', 'false');
+				}
+			});
+			
+			toggle.addEventListener('mouseenter', function() {
+				this.style.opacity = '1';
+			});
+			
+			toggle.addEventListener('mouseleave', function() {
+				this.style.opacity = '0.6';
+			});
+			
+			// Initialize on page load
+			initPsychedelicToggle();
+			
+			// Make function globally accessible
+			window.initPsychedelicToggle = initPsychedelicToggle;
 		})();
 		</script>
 
@@ -1486,7 +1593,7 @@ body {
         });
     }
     
-// God Mode
+// God Mode + Unlock Psychedelic Background
 function triggerGodMode() {
     const overlay = document.getElementById('god-mode-overlay');
     
@@ -1500,10 +1607,19 @@ function triggerGodMode() {
     document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
     document.body.style.animation = 'screenShake 0.5s infinite';
     
+    // UNLOCK PSYCHEDELIC BACKGROUND PERMANENTLY
+    localStorage.setItem('psychedelicUnlocked', 'true');
+    
     setTimeout(() => {
         overlay.classList.remove('active');
         document.body.style.filter = '';
         document.body.style.animation = '';
+        
+        // Show unlock notification
+        alert('🌀 PSYCHEDELIC BACKGROUND UNLOCKED!\n\nYou can now toggle it on/off using the button in the bottom-right.');
+        
+        // Activate the toggle
+        initPsychedelicToggle();
     }, 5000);
 }
 
@@ -1521,7 +1637,29 @@ document.addEventListener('keydown', (e) => {
     updateTracker();
 })();
 
-
+// ===== EASTER EGG TRACKER SCROLL VISIBILITY =====
+(function() {
+    const tracker = document.getElementById('egg-tracker');
+    if (!tracker) return;
+    
+    function checkScroll() {
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const pageHeight = document.documentElement.scrollHeight;
+        
+        // Show tracker when within 200px of bottom
+        if (pageHeight - scrollPosition < 200) {
+            tracker.classList.add('visible');
+        } else {
+            tracker.classList.remove('visible');
+        }
+    }
+    
+    // Check on scroll
+    window.addEventListener('scroll', checkScroll);
+    
+    // Check on page load
+    checkScroll();
+})();
 
 // ===== KONAMI CODE EASTER EGG =====
 (function() {
