@@ -1,5 +1,23 @@
 <!DOCTYPE HTML>
 <html>
+
+<!--
+   ████████╗██╗  ██╗███████╗     ██████╗ ██╗     ██╗   ██╗███████╗
+   ╚══██╔══╝██║  ██║██╔════╝    ██╔════╝ ██║     ██║   ██║██╔════╝
+      ██║   ███████║█████╗      ██║  ███╗██║     ██║   ██║█████╗  
+      ██║   ██╔══██║██╔══╝      ██║   ██║██║     ██║   ██║██╔══╝  
+      ██║   ██║  ██║███████╗    ╚██████╔╝███████╗╚██████╔╝███████╗
+      ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝
+   
+   You found the hidden layer.
+   The glue is everywhere.
+   Keep searching.
+   
+   - Jack @ Glue Matrix
+-->
+   <!-- Sound is the only language that doesn't lie. -->
+
+
 	<head>
 		<title>GLUE MATRIX - Contact</title>
         <link rel="icon" type="image/png" href="/favicon.png">
@@ -11,6 +29,61 @@
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
+
+/* ===== CRT GRAIN TEXTURE ===== */
+body::after {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 9995;
+    opacity: 0.025;
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.05) 2px,
+            rgba(255, 255, 255, 0.05) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.03) 2px,
+            rgba(255, 255, 255, 0.03) 4px
+        );
+    animation: grainMove 8s steps(10) infinite;
+}
+
+@keyframes grainMove {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -5%); }
+    20% { transform: translate(-10%, 5%); }
+    30% { transform: translate(5%, -10%); }
+    40% { transform: translate(-5%, 15%); }
+    50% { transform: translate(-15%, 5%); }
+    60% { transform: translate(10%, -15%); }
+    70% { transform: translate(-10%, 10%); }
+    80% { transform: translate(15%, -5%); }
+    90% { transform: translate(-5%, -10%); }
+    100% { transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::after {
+        animation: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body::after {
+        opacity: 0.015; /* Even more subtle on mobile */
+    }
+}
 
 
 html, body {
@@ -53,6 +126,23 @@ button:hover {
 #menu ul li a {
     transition: all 0.2s ease;
 }
+
+/* Menu Constellation Canvas */
+#menu-constellation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+#menu ul {
+    position: relative;
+    z-index: 1;
+}
+
 
 #menu ul li a:hover {
     color: #00ffcc;
@@ -404,8 +494,119 @@ body {
 .easter-egg-trigger:hover {
     text-shadow: 0 0 10px #00ffcc;
 }
+
+/* Cursor Trail Effect */
+.cursor-trail {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: #00ffcc;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+    animation: trailFade 500ms ease-out forwards;
+}
+
+@keyframes trailFade {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cursor-trail {
+        display: none;
+    }
+}
+
+/* Easter Egg Tracker */
+#egg-tracker {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9997;
+    display: flex;
+    gap: 8px;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+}
+
+#egg-tracker:hover {
+    opacity: 1;
+}
+
+.egg-circle {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #00ffcc;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.5s ease;
+}
+
+.egg-circle.found {
+    background: #00ffcc;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+    animation: eggPulse 2s infinite;
+}
+
+@keyframes eggPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+/* God Mode Overlay */
+#god-mode-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+#god-mode-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+#god-mode-message {
+    font-family: 'Digital7', monospace;
+    font-size: 3em;
+    color: #00ffcc;
+    text-shadow: 0 0 30px rgba(0, 255, 204, 1);
+    animation: glitchText 0.3s infinite;
+}
+
 		</style>
 	</head>
+
+<!-- Easter Egg Tracker -->
+        <div id="egg-tracker">
+            <div class="egg-circle" data-egg="home"></div>
+            <div class="egg-circle" data-egg="services"></div>
+            <div class="egg-circle" data-egg="music"></div>
+            <div class="egg-circle" data-egg="about"></div>
+            <div class="egg-circle" data-egg="contact"></div>
+        </div>
+
+        <!-- God Mode Overlay -->
+        <div id="god-mode-overlay">
+            <div id="god-mode-message">YOU'VE DECIPHERED THE MATRIX</div>
+        </div>
+
 	<body>
 
 		<!-- VHS Glitch Transition -->
@@ -430,6 +631,7 @@ body {
 								<li class="special">
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
+										<canvas id="menu-constellation"></canvas>
 										<ul>
 											<li><a href="/">Home</a></li>
 											<li><a href="/services/">Services</a></li>
@@ -563,6 +765,121 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     });
 })();
 
+// ===== MENU CONSTELLATION EFFECT =====
+(function() {
+    const menu = document.getElementById('menu');
+    const canvas = document.getElementById('menu-constellation');
+    
+    if (!canvas || !menu) return;
+    
+    const ctx = canvas.getContext('2d');
+    let nodes = [];
+    let animating = false;
+    
+    function resize() {
+        canvas.width = menu.offsetWidth;
+        canvas.height = menu.offsetHeight;
+    }
+    
+    function getMenuItemPositions() {
+        const items = menu.querySelectorAll('ul li');
+        const positions = [];
+        
+        items.forEach(item => {
+            const rect = item.getBoundingClientRect();
+            const menuRect = menu.getBoundingClientRect();
+            positions.push({
+                x: rect.left - menuRect.left + rect.width / 2,
+                y: rect.top - menuRect.top + rect.height / 2
+            });
+        });
+        
+        return positions;
+    }
+    
+    function drawConstellation(progress) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = 'rgba(0, 255, 204, 0.3)';
+        ctx.fillStyle = '#00ffcc';
+        ctx.lineWidth = 1.5;
+        
+        // Draw lines
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const alpha = progress * 0.3;
+                ctx.strokeStyle = `rgba(0, 255, 204, ${alpha})`;
+                
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                
+                // Curved line
+                const midX = (nodes[i].x + nodes[j].x) / 2 + (Math.sin(progress * Math.PI) * 20);
+                const midY = (nodes[i].y + nodes[j].y) / 2;
+                ctx.quadraticCurveTo(midX, midY, nodes[j].x, nodes[j].y);
+                ctx.stroke();
+            }
+        }
+        
+        // Draw nodes
+        nodes.forEach((node, i) => {
+            const delay = i * 0.1;
+            const nodeProgress = Math.max(0, Math.min(1, (progress - delay) / 0.3));
+            const pulse = 1 + Math.sin(progress * Math.PI * 4 + i) * 0.2;
+            const radius = 4 * nodeProgress * pulse;
+            
+            ctx.globalAlpha = nodeProgress;
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Glow
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#00ffcc';
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            ctx.globalAlpha = 1;
+        });
+    }
+    
+    function animate() {
+        let startTime = Date.now();
+        animating = true;
+        
+        function frame() {
+            if (!menu.classList.contains('active')) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                animating = false;
+                return;
+            }
+            
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(1, elapsed / 1000);
+            
+            drawConstellation(progress);
+            
+            requestAnimationFrame(frame);
+        }
+        
+        frame();
+    }
+    
+    // Watch for menu open/close
+    const observer = new MutationObserver(() => {
+        if (menu.classList.contains('active')) {
+            resize();
+            nodes = getMenuItemPositions();
+            if (!animating) animate();
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            animating = false;
+        }
+    });
+    
+    observer.observe(menu, { attributes: true, attributeFilter: ['class'] });
+})();
+
 // ===== MATRIX RAIN EASTER EGG =====
 (function() {
     const overlay = document.getElementById('matrix-overlay');
@@ -648,6 +965,215 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         if (e.key === 'Escape' && isActive) deactivate();
     });
 })();
+
+// ===== EASTER EGG TRACKING SYSTEM =====
+(function() {
+    const eggs = {
+        home: false,
+        services: false,
+        music: false,
+        about: false,
+        contact: false
+    };
+    
+    // Load from localStorage
+    const saved = localStorage.getItem('glueMatrixEggs');
+    if (saved) {
+        const savedEggs = JSON.parse(saved);
+        Object.assign(eggs, savedEggs);
+    }
+    
+    // Update UI
+    function updateTracker() {
+        Object.keys(eggs).forEach(key => {
+            const circle = document.querySelector(`.egg-circle[data-egg="${key}"]`);
+            if (circle && eggs[key]) {
+                circle.classList.add('found');
+            }
+        });
+        
+        // Check if all found
+        if (Object.values(eggs).every(v => v === true)) {
+            setTimeout(triggerGodMode, 500);
+        }
+    }
+    
+    // Mark egg as found
+    window.markEggFound = function(eggName) {
+        if (!eggs[eggName]) {
+            eggs[eggName] = true;
+            localStorage.setItem('glueMatrixEggs', JSON.stringify(eggs));
+            updateTracker();
+        }
+    };
+    
+    // Auto-mark based on page
+    const pageName = window.location.pathname.includes('/services') ? 'services' :
+                     window.location.pathname.includes('/music') ? 'music' :
+                     window.location.pathname.includes('/about') ? 'about' :
+                     window.location.pathname.includes('/contact') ? 'contact' : 'home';
+    
+    // Listen for easter egg triggers on this page
+    const eggTrigger = document.getElementById('easter-egg-trigger');
+    if (eggTrigger) {
+        eggTrigger.addEventListener('click', function() {
+            markEggFound(pageName);
+        });
+    }
+    
+    // God Mode
+    function triggerGodMode() {
+        const overlay = document.getElementById('god-mode-overlay');
+        overlay.classList.add('active');
+        
+        // Activate ALL effects
+        document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
+        document.body.style.animation = 'screenShake 0.5s infinite';
+        
+        setTimeout(() => {
+            overlay.classList.remove('active');
+            document.body.style.filter = '';
+            document.body.style.animation = '';
+        }, 3000);
+    }
+    
+    updateTracker();
+})();
+
+// ===== CURSOR TRAIL EFFECT =====
+(function() {
+    // Only on desktop
+    if ('ontouchstart' in window) return;
+    
+    let trails = [];
+    const maxTrails = 5;
+    let lastTime = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        
+        // Throttle to every 50ms
+        if (now - lastTime < 50) return;
+        lastTime = now;
+        
+        // Remove oldest if at max
+        if (trails.length >= maxTrails) {
+            const oldest = trails.shift();
+            if (oldest && oldest.parentNode) {
+                oldest.parentNode.removeChild(oldest);
+            }
+        }
+        
+        // Create trail particle
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        trail.style.left = e.clientX + 'px';
+        trail.style.top = e.clientY + 'px';
+        document.body.appendChild(trail);
+        trails.push(trail);
+        
+        // Auto-remove after animation
+        setTimeout(() => {
+            if (trail && trail.parentNode) {
+                trail.parentNode.removeChild(trail);
+            }
+            const index = trails.indexOf(trail);
+            if (index > -1) trails.splice(index, 1);
+        }, 500);
+    });
+})();
+
+// ===== KONAMI CODE EASTER EGG =====
+(function() {
+    const code = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let position = 0;
+    
+    document.addEventListener('keydown', (e) => {
+        const key = e.key.toLowerCase();
+        
+        if (key === code[position] || e.key === code[position]) {
+            position++;
+            
+            if (position === code.length) {
+                activateGodMode();
+                position = 0;
+            }
+        } else {
+            position = 0;
+        }
+    });
+    
+    function activateGodMode() {
+        const overlay = document.getElementById('god-mode-overlay');
+        if (!overlay) return;
+        
+        overlay.classList.add('active');
+        
+        // Activate all visual effects
+        document.body.style.filter = 'hue-rotate(360deg) saturate(2) brightness(1.2)';
+        document.body.style.animation = 'screenShake 0.5s infinite, rainbowShift 3s infinite';
+        
+        // Trigger all easter eggs if possible
+        const eggTriggers = document.querySelectorAll('.easter-egg-trigger');
+        eggTriggers.forEach(trigger => {
+            if (trigger.click) trigger.click();
+        });
+        
+        // Exit after 5 seconds or ESC
+        const exitGodMode = () => {
+            overlay.classList.remove('active');
+            document.body.style.filter = '';
+            document.body.style.animation = '';
+        };
+        
+        setTimeout(exitGodMode, 5000);
+        
+        document.addEventListener('keydown', function escHandler(e) {
+            if (e.key === 'Escape') {
+                exitGodMode();
+                document.removeEventListener('keydown', escHandler);
+            }
+        });
+        
+        overlay.addEventListener('click', exitGodMode, { once: true });
+    }
+})();
+
+// Add rainbow shift animation
+if (!document.getElementById('konami-style')) {
+    const style = document.createElement('style');
+    style.id = 'konami-style';
+    style.textContent = `
+    @keyframes rainbowShift {
+        0% { filter: hue-rotate(0deg) saturate(2); }
+        25% { filter: hue-rotate(90deg) saturate(2); }
+        50% { filter: hue-rotate(180deg) saturate(2); }
+        75% { filter: hue-rotate(270deg) saturate(2); }
+        100% { filter: hue-rotate(360deg) saturate(2); }
+    }
+    `;
+    document.head.appendChild(style);
+}
+
+
+// Screen shake animation
+const style = document.createElement('style');
+style.textContent = `
+@keyframes screenShake {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-2px, 2px); }
+    20% { transform: translate(2px, -2px); }
+    30% { transform: translate(-2px, -2px); }
+    40% { transform: translate(2px, 2px); }
+    50% { transform: translate(-2px, 2px); }
+    60% { transform: translate(2px, -2px); }
+    70% { transform: translate(-2px, -2px); }
+    80% { transform: translate(2px, 2px); }
+    90% { transform: translate(-2px, 2px); }
+}
+`;
+document.head.appendChild(style);
+
 </script>
 
 	</body>
