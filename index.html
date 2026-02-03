@@ -23,7 +23,7 @@
         <meta name="description" content="Glue Matrix - Professional music mixing, recording, and sound design focused on clarity, depth, and emotion. Elevate your sound to its highest potential.">
         <meta name="keywords" content="music mixing, sound design, audio engineering, music production, recording studio, Glue Matrix">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -226,16 +226,22 @@ a:hover {
 
 /* Full page background with integrated dark overlay */
 body {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/css/images/homephoto.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-color: #000;
     margin: 0;
     padding: 0;
     min-height: 100vh;
     width: 100%;
     position: relative;
+}
+
+/* Background image on page wrapper instead of body */
+#page-wrapper {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/css/images/homephoto.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    min-height: 100vh;
 }
 
 /* ===== MOBILE FIXES - SOLID BLACK STATUS BAR & FOOTER ===== */
@@ -248,33 +254,30 @@ body {
     
     body {
         background-color: #000 !important;
-        background-attachment: scroll;
-        background-position: center top;
-        background-size: cover;
+        background-image: none !important;
         min-height: 100vh;
         min-height: -webkit-fill-available;
         padding-bottom: 0;
-        padding-top: env(safe-area-inset-top);
+        padding-top: 0;
     }
     
-    /* Fix for iOS status bar area - extend header into safe area */
+    /* Header stays at top */
     #header {
-        padding-top: env(safe-area-inset-top);
         background: #000 !important;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 10000;
     }
     
-    /* Compensate for fixed header */
+    /* Page wrapper has the background image on mobile */
     #page-wrapper {
-        padding-top: calc(3.5em + env(safe-area-inset-top));
+        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/css/images/homephoto.jpg');
+        background-size: cover;
+        background-position: center top;
+        background-attachment: scroll;
+        background-repeat: no-repeat;
+        padding-top: 0;
     }
     
     .home-content {
-        min-height: calc(100vh - env(safe-area-inset-top));
+        min-height: 100vh;
         padding-bottom: calc(8em + env(safe-area-inset-bottom));
     }
     
@@ -297,7 +300,12 @@ body {
 #page-wrapper {
     position: relative;
     z-index: 1;
-    background: transparent !important; 
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/css/images/homephoto.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    min-height: 100vh;
 }
 
 .home-content {
