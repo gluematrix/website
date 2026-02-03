@@ -1284,6 +1284,31 @@ body {
 		<script src="/assets/js/breakpoints.min.js"></script>
 		<script src="/assets/js/util.js"></script>
 		<script src="/assets/js/main.js"></script>
+		
+		<!-- SERVICES PAGE FIX: Prevent header from disappearing on scroll -->
+		<script>
+		(function() {
+			// Override main.js header behavior
+			$(window).on('load', function() {
+				const $header = $('#header');
+				
+				// Remove alt class continuously
+				setInterval(function() {
+					$header.removeClass('alt');
+				}, 50);
+				
+				// Watch for class changes
+				const observer = new MutationObserver(function() {
+					$header.removeClass('alt');
+				});
+				
+				observer.observe($header[0], { 
+					attributes: true, 
+					attributeFilter: ['class'] 
+				});
+			});
+		})();
+		</script>
 
 <script>
 // ===== VHS GLITCH PAGE TRANSITIONS =====
@@ -1921,4 +1946,13 @@ style.textContent = `
     50% { transform: translate(-2px, 2px); }
     60% { transform: translate(2px, -2px); }
     70% { transform: translate(-2px, -2px); }
-    80%
+    80% { transform: translate(2px, 2px); }
+    90% { transform: translate(-2px, 2px); }
+}
+`;
+document.head.appendChild(style);
+
+</script>
+
+	</body>
+</html>
