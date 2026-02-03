@@ -1418,7 +1418,7 @@ body {
     });
 })();
 
-// ===== INTERACTIVE CROSSFADE PLAYER - FIXED FOR MOBILE =====
+// ===== INTERACTIVE CROSSFADE PLAYER - MOBILE FIXED =====
 (function() {
     const beforeAudio = document.getElementById('before-audio');
     const afterAudio = document.getElementById('after-audio');
@@ -1433,6 +1433,7 @@ body {
     if (!beforeAudio || !afterAudio) return;
     
     let isPlaying = false;
+    let currentVolumes = { before: 0.5, after: 0.5 };
     
     // Setup canvases
     function setupCanvas(canvas) {
@@ -1478,12 +1479,12 @@ body {
     function updateCrossfade(value) {
         const position = parseFloat(value) / 100;
         
-        // Set volumes with clamping
-        const beforeVol = Math.max(0, Math.min(1, 1 - position));
-        const afterVol = Math.max(0, Math.min(1, position));
+        currentVolumes.before = 1 - position;
+        currentVolumes.after = position;
         
-        beforeAudio.volume = beforeVol;
-        afterAudio.volume = afterVol;
+        // Force set volumes
+        beforeAudio.volume = currentVolumes.before;
+        afterAudio.volume = currentVolumes.after;
         
         // Update divider
         divider.style.left = `${value}%`;
@@ -1496,17 +1497,12 @@ body {
         beforeVisual.style.filter = `blur(${blurAmount}px) saturate(${1 - position * 0.5})`;
     }
     
-    // ALL event listeners
-    slider.addEventListener('input', function() {
-        updateCrossfade(this.value);
-    });
-    
-    slider.addEventListener('change', function() {
-        updateCrossfade(this.value);
-    });
-    
-    slider.addEventListener('touchend', function() {
-        updateCrossfade(this.value);
+    // Slider events
+    let sliderTimeout;
+    slider.addEventListener('input', function(e) {
+        updateCrossfade(e.target.value);
+        clearTimeout(sliderTimeout);
+        sliderTimeout = setTimeout(() => updateCrossfade(e.target.value), 50);
     });
     
     // Play/Pause
@@ -1517,39 +1513,44 @@ body {
             playPauseBtn.textContent = '▶ Play';
             isPlaying = false;
         } else {
-            // Set volumes BEFORE playing
-            updateCrossfade(slider.value);
+            // Sync to start if both are at 0
+            if (beforeAudio.currentTime === 0 && afterAudio.currentTime === 0) {
+                beforeAudio.currentTime = 0;
+                afterAudio.currentTime = 0;
+            }
             
-            // Play both
-            const playBefore = beforeAudio.play();
-            const playAfter = afterAudio.play();
+            // Set volumes before play
+            beforeAudio.volume = currentVolumes.before;
+            afterAudio.volume = currentVolumes.after;
             
-            Promise.all([playBefore, playAfter]).then(() => {
-                playPauseBtn.textContent = '⏸ Pause';
-                isPlaying = true;
-            }).catch(err => {
-                console.error('Play failed:', err);
-            });
+            // Start playing
+            beforeAudio.play().catch(e => console.log('Before play error:', e));
+            afterAudio.play().catch(e => console.log('After play error:', e));
+            
+            playPauseBtn.textContent = '⏸ Pause';
+            isPlaying = true;
         }
     });
     
-    // Keep in sync
+    // Sync playback position
     beforeAudio.addEventListener('timeupdate', function() {
-        if (isPlaying && Math.abs(beforeAudio.currentTime - afterAudio.currentTime) > 0.3) {
-            afterAudio.currentTime = beforeAudio.currentTime;
+        if (isPlaying) {
+            const diff = Math.abs(beforeAudio.currentTime - afterAudio.currentTime);
+            if (diff > 0.3) {
+                afterAudio.currentTime = beforeAudio.currentTime;
+            }
         }
     });
     
-    // AGGRESSIVE mobile fix - force volumes every 100ms while playing
+    // CRITICAL: Force volume sync continuously while playing
     setInterval(function() {
-        if (isPlaying && !beforeAudio.paused && !afterAudio.paused) {
-            const position = parseFloat(slider.value) / 100;
-            beforeAudio.volume = Math.max(0, Math.min(1, 1 - position));
-            afterAudio.volume = Math.max(0, Math.min(1, position));
+        if (isPlaying) {
+            beforeAudio.volume = currentVolumes.before;
+            afterAudio.volume = currentVolumes.after;
         }
-    }, 100);
+    }, 50);
     
-    // Initialize
+    // Initialize at 50/50
     updateCrossfade(50);
 })();
 
@@ -1648,40 +1649,45 @@ body {
     const tracker = document.getElementById('egg-tracker');
     if (!tracker) return;
     
-    let ticking = false;
-    
     function checkScroll() {
-        const scrollPosition = window.scrollY + window.innerHeight;
-        const pageHeight = document.documentElement.scrollHeight;
-        const distanceFromBottom = pageHeight - scrollPosition;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const docHeight = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
         
-        // Show tracker when within 200px of bottom
-        if (distanceFromBottom < 200) {
+        const scrollPercent = (scrollTop + windowHeight) / docHeight;
+        
+        // Show when scrolled 90% or more
+        if (scrollPercent >= 0.9) {
             tracker.classList.add('visible');
         } else {
             tracker.classList.remove('visible');
         }
-        
-        ticking = false;
     }
     
-    function requestTick() {
-        if (!ticking) {
-            window.requestAnimationFrame(checkScroll);
-            ticking = true;
-        }
-    }
+    // Check on all scroll events
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(checkScroll, 10);
+    }, { passive: true });
     
-    // Check on scroll (optimized for mobile)
-    window.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener('touchmove', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(checkScroll, 10);
+    }, { passive: true });
     
-    // Also check on touch events for mobile
-    window.addEventListener('touchmove', requestTick, { passive: true });
     window.addEventListener('touchend', checkScroll, { passive: true });
     
-    // Check on page load and resize
-    checkScroll();
+    // Check on load and resize
+    window.addEventListener('load', checkScroll);
     window.addEventListener('resize', checkScroll);
+    checkScroll();
 })();
 
 
