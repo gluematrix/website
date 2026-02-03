@@ -35,6 +35,22 @@
     background: #000 !important;
 }
 
+/* Extend header to top of screen on iOS */
+#header {
+    background: #000 !important;
+    padding-top: env(safe-area-inset-top) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10000 !important;
+}
+
+/* Add padding to page content so it doesn't hide under header */
+.page-content {
+    padding-top: calc(6em + env(safe-area-inset-top)) !important;
+}
+
 /* ===== CRT GRAIN TEXTURE ===== */
 body::after {
     content: '';
