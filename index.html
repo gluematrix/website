@@ -17,6 +17,7 @@
 -->
 <!-- Much love to all beings everywhere. -->
 	<head>
+		<meta name="theme-color" content="#000000">
 		<title>GLUE MATRIX - Home</title>
         <link rel="icon" type="image/png" href="favicon.png">
         <meta name="description" content="Glue Matrix - Professional music mixing, recording, and sound design focused on clarity, depth, and emotion. Elevate your sound to its highest potential.">
@@ -237,10 +238,42 @@ body {
     position: relative;
 }
 
-/* Mobile: use scroll instead of fixed */
+/* ===== MOBILE FIXES - SOLID BLACK STATUS BAR & FOOTER ===== */
 @media screen and (max-width: 980px) {
+    html {
+        background-color: #000 !important;
+        min-height: 100%;
+        height: 100%;
+    }
+    
     body {
+        background-color: #000 !important;
         background-attachment: scroll;
+        background-position: center top;
+        background-size: cover;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+        padding-bottom: 0;
+    }
+    
+    .home-content {
+        min-height: 100vh;
+        padding-bottom: calc(8em + env(safe-area-inset-bottom));
+    }
+    
+    #footer {
+        background: transparent !important;
+        padding-bottom: calc(4em + env(safe-area-inset-bottom)) !important;
+    }
+}
+
+/* iOS Safari -webkit-fill-available support */
+@supports (-webkit-touch-callout: none) {
+    html {
+        height: -webkit-fill-available;
+    }
+    body {
+        min-height: -webkit-fill-available;
     }
 }
 
@@ -270,12 +303,6 @@ body {
     padding: 0.5em 1em;
     display: inline-block;
 }
-
-			    #footer {
-			        background: transparent !important;
-			        padding-bottom: calc(4em + env(safe-area-inset-bottom)) !important;
-			    }
-			
 
 .home-content p {
     font-size: clamp(0.65em, 2vw, 1.1em);
@@ -1648,27 +1675,49 @@ document.addEventListener('keydown', (e) => {
     updateTracker();
 })();
 
-// ===== EASTER EGG TRACKER SCROLL VISIBILITY =====
+// ===== EASTER EGG TRACKER SCROLL VISIBILITY - FIXED FOR MOBILE =====
 (function() {
     const tracker = document.getElementById('egg-tracker');
     if (!tracker) return;
     
     function checkScroll() {
-        const scrollPosition = window.scrollY + window.innerHeight;
-        const pageHeight = document.documentElement.scrollHeight;
+        // Get scroll position
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
         
-        // Show tracker when within 200px of bottom
-        if (pageHeight - scrollPosition < 200) {
+        // Get document height - try multiple methods for mobile
+        const body = document.body;
+        const html = document.documentElement;
+        const docHeight = Math.max(
+            body.scrollHeight, body.offsetHeight,
+            html.clientHeight, html.scrollHeight, html.offsetHeight
+        );
+        
+        // Calculate scroll percentage
+        const scrollPercent = (scrollTop + windowHeight) / docHeight;
+        
+        // Show at 80% or more
+        if (scrollPercent >= 0.8) {
             tracker.classList.add('visible');
         } else {
             tracker.classList.remove('visible');
         }
     }
     
-    // Check on scroll
-    window.addEventListener('scroll', checkScroll);
+    // Check frequently
+    let scrollTimer;
+    function handleScroll() {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(checkScroll, 50);
+    }
     
-    // Check on page load
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('touchmove', handleScroll, { passive: true });
+    window.addEventListener('touchend', checkScroll, { passive: true });
+    window.addEventListener('resize', checkScroll);
+    
+    // Check on load
+    setTimeout(checkScroll, 500);
     checkScroll();
 })();
 
