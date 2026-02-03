@@ -62,13 +62,13 @@ body::after {
 body::before {
     content: '';
     position: fixed;
-    bottom: 0;
+    bottom: 60px; /* Move it ABOVE Safari toolbar */
     left: 0;
     right: 0;
-    height: 200px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 70%, #000 100%);
+    height: 150px; /* Shorter gradient */
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0.9) 100%);
     pointer-events: none;
-    z-index: 9994;
+    z-index: 9994; /* Lower than header */
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -110,6 +110,7 @@ html, body {
 
 #page-wrapper {
     min-height: 100%;
+    padding-top: 3.5em; /* Space for fixed header */
 }
 
 
@@ -173,8 +174,13 @@ a:hover {
 
 /* GLUE MATRIX logo hover */
 #header {
-	background: #000 !important; /* Force black header */
+	background: #000 !important;
 	backdrop-filter: none !important;
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	z-index: 10000 !important;
 }
 
 #header h1 a {
