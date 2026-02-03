@@ -1293,29 +1293,34 @@ body {
 		<script src="/assets/js/util.js"></script>
 		<script src="/assets/js/main.js"></script>
 		
-		<!-- SERVICES PAGE FIX: Prevent header from disappearing on scroll -->
+		<!-- SERVICES PAGE FIX: Force header to stay at top -->
 		<script>
-		(function() {
-			// Override main.js header behavior
-			$(window).on('load', function() {
-				const $header = $('#header');
-				
-				// Remove alt class continuously
-				setInterval(function() {
-					$header.removeClass('alt');
-				}, 50);
-				
-				// Watch for class changes
-				const observer = new MutationObserver(function() {
-					$header.removeClass('alt');
-				});
-				
-				observer.observe($header[0], { 
-					attributes: true, 
-					attributeFilter: ['class'] 
-				});
+		// Run AFTER page fully loads
+		window.addEventListener('DOMContentLoaded', function() {
+			const header = document.getElementById('header');
+			if (!header) return;
+			
+			// Force header to stay visible - run immediately and repeatedly
+			function forceHeaderVisible() {
+				header.classList.remove('alt');
+				header.style.position = 'fixed';
+				header.style.top = '0';
+				header.style.transform = 'none';
+			}
+			
+			// Run it now
+			forceHeaderVisible();
+			
+			// Run it every 50ms to override any changes
+			setInterval(forceHeaderVisible, 50);
+			
+			// Watch for class changes
+			const observer = new MutationObserver(forceHeaderVisible);
+			observer.observe(header, { 
+				attributes: true, 
+				attributeFilter: ['class', 'style'] 
 			});
-		})();
+		});
 		</script>
 
 <script>
