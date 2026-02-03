@@ -198,40 +198,43 @@ a:hover {
     transform: scale(1.1);
 }
 
-/* Full page background */
-body {
-    background-color: #000; /* BLACK background */
-    background-image: url('/assets/css/images/servicesphoto.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-}
-
-/* Mobile: use scroll instead of fixed */
-@media screen and (max-width: 980px) {
-    body {
-        background-attachment: scroll;
-        background-size: cover;
-        background-position: center top;
-    }
-}
-
-/* Ensure page wrapper fills full height */
-#page-wrapper {
-    min-height: 100vh;
-    background-color: transparent;
-}
-
-/* Force black behind header on mobile */
-@media screen and (max-width: 980px) {
-    #header {
-        background-color: #000;
-    }
-}
+			/* Full page background */
+			body {
+				background-image: url('/assets/css/images/servicesphoto.jpg');
+				background-size: cover;
+				background-position: center;
+				background-attachment: fixed;
+				background-repeat: no-repeat;
+				margin: 0;
+				padding: 0;
+				min-height: 100vh;
+			}
+			
+			/* Mobile: use scroll instead of fixed */
+			@media screen and (max-width: 980px) {
+			    html {
+			        background-color: #000;
+			        min-height: 100%;
+			    }
+			    
+			    body {
+			        background-color: #000;
+			        background-attachment: scroll;
+			        background-position: center top;
+			        min-height: 100vh;
+			        padding-bottom: 0;
+			    }
+			    
+			    .page-content {
+			        min-height: 100vh;
+			        padding-bottom: 8em;
+			    }
+			    
+			    #footer {
+			        background: transparent !important;
+			        padding-bottom: 4em !important;
+			    }
+			}
 			
 			/* Dark overlay */
 #page-wrapper {
@@ -1189,7 +1192,7 @@ body {
 				<li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 				<li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 				<li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-				<li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				<li><a href="/cdn-cgi/l/email-protection#620803010922050e17070f0316100b1a4c010d0f" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 			</ul>
 			<ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
 				<li>&copy; GLUE MATRIX</li>
@@ -1198,7 +1201,7 @@ body {
 		</footer>
 
 		<!-- Scripts -->
-		<script src="/assets/js/jquery.min.js"></script>
+		<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/assets/js/jquery.min.js"></script>
 		<script src="/assets/js/jquery.scrollex.min.js"></script>
 		<script src="/assets/js/jquery.scrolly.min.js"></script>
 		<script src="/assets/js/browser.min.js"></script>
@@ -1434,56 +1437,53 @@ body {
     });
 })();
 
-// ===== INTERACTIVE CROSSFADE PLAYER - MOBILE FIXED =====
+// ===== INTERACTIVE CROSSFADE PLAYER - MOBILE MUTE FIX =====
 (function() {
     const beforeAudio = document.getElementById('before-audio');
     const afterAudio = document.getElementById('after-audio');
     const slider = document.getElementById('crossfade-slider');
-    const playPauseBtn = document.getElementById('play-pause-btn');
+    const playBtn = document.getElementById('play-pause-btn');
     const divider = document.getElementById('slider-divider');
     const beforeVisual = document.getElementById('before-visual');
     const afterVisual = document.getElementById('after-visual');
     const beforeCanvas = document.getElementById('before-canvas');
     const afterCanvas = document.getElementById('after-canvas');
     
-    if (!beforeAudio || !afterAudio) return;
-    
-    let isPlaying = false;
-    let currentVolumes = { before: 0.5, after: 0.5 };
-    
-    // Setup canvases
-    function setupCanvas(canvas) {
-        const ctx = canvas.getContext('2d');
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-        return ctx;
+    if (!beforeAudio || !afterAudio || !slider || !playBtn) {
+        console.error('Audio elements missing!');
+        return;
     }
     
-    const beforeCtx = setupCanvas(beforeCanvas);
-    const afterCtx = setupCanvas(afterCanvas);
+    let playing = false;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     
-    // Draw simple waveforms
+    // Setup canvases
+    const beforeCtx = beforeCanvas.getContext('2d');
+    const afterCtx = afterCanvas.getContext('2d');
+    beforeCanvas.width = beforeCanvas.offsetWidth;
+    beforeCanvas.height = beforeCanvas.offsetHeight;
+    afterCanvas.width = afterCanvas.offsetWidth;
+    afterCanvas.height = afterCanvas.offsetHeight;
+    
+    // Draw waveforms
     function drawWaveform(ctx, color) {
-        const width = ctx.canvas.width;
-        const height = ctx.canvas.height;
-        const centerY = height / 2;
-        
-        ctx.clearRect(0, 0, width, height);
+        const w = ctx.canvas.width;
+        const h = ctx.canvas.height;
+        const cy = h / 2;
+        ctx.clearRect(0, 0, w, h);
         ctx.strokeStyle = color;
         ctx.lineWidth = 2;
-        
         ctx.beginPath();
-        for (let x = 0; x < width; x++) {
-            const y = centerY + Math.sin((x / width) * Math.PI * 4 + Date.now() * 0.001) * (height * 0.3);
+        for (let x = 0; x < w; x++) {
+            const y = cy + Math.sin((x / w) * Math.PI * 4 + Date.now() * 0.001) * (h * 0.3);
             if (x === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
         }
         ctx.stroke();
     }
     
-    // Animate waveforms
     function animate() {
-        if (isPlaying) {
+        if (playing) {
             drawWaveform(beforeCtx, 'rgba(255, 100, 100, 0.6)');
             drawWaveform(afterCtx, 'rgba(0, 255, 204, 0.8)');
         }
@@ -1491,83 +1491,105 @@ body {
     }
     animate();
     
-    // Crossfade logic
-    function updateCrossfade(value) {
-        const position = parseFloat(value) / 100;
+    // Set volumes OR mute on mobile
+    function setVolumes() {
+        const val = parseFloat(slider.value);
+        const beforeVol = (100 - val) / 100;
+        const afterVol = val / 100;
         
-        currentVolumes.before = 1 - position;
-        currentVolumes.after = position;
-        
-        // Force set volumes
-        beforeAudio.volume = currentVolumes.before;
-        afterAudio.volume = currentVolumes.after;
-        
-        // Update divider
-        divider.style.left = `${value}%`;
+        if (isMobile) {
+            // MOBILE: Use mute instead of volume
+            // If slider is far left (< 10), mute "after"
+            // If slider is far right (> 90), mute "before"
+            // Otherwise, play both and try volume
+            
+            if (val < 10) {
+                beforeAudio.muted = false;
+                afterAudio.muted = true;
+                beforeAudio.volume = 1.0;
+            } else if (val > 90) {
+                beforeAudio.muted = true;
+                afterAudio.muted = false;
+                afterAudio.volume = 1.0;
+            } else {
+                // Middle range - unmute both and set volumes
+                beforeAudio.muted = false;
+                afterAudio.muted = false;
+                beforeAudio.volume = beforeVol;
+                afterAudio.volume = afterVol;
+            }
+        } else {
+            // DESKTOP: Normal volume control
+            beforeAudio.volume = beforeVol;
+            afterAudio.volume = afterVol;
+        }
         
         // Update visuals
-        beforeVisual.style.clipPath = `inset(0 ${value}% 0 0)`;
-        afterVisual.style.clipPath = `inset(0 0 0 ${100 - value}%)`;
+        if (divider) divider.style.left = val + '%';
+        if (beforeVisual) {
+            beforeVisual.style.clipPath = `inset(0 ${val}% 0 0)`;
+            beforeVisual.style.filter = `blur(${afterVol * 2}px) saturate(${beforeVol})`;
+        }
+        if (afterVisual) {
+            afterVisual.style.clipPath = `inset(0 0 0 ${100 - val}%)`;
+        }
         
-        const blurAmount = position * 2;
-        beforeVisual.style.filter = `blur(${blurAmount}px) saturate(${1 - position * 0.5})`;
+        console.log('Mobile:', isMobile, 'Slider:', val, 'Before muted:', beforeAudio.muted, 'After muted:', afterAudio.muted);
     }
     
     // Slider events
-    let sliderTimeout;
-    slider.addEventListener('input', function(e) {
-        updateCrossfade(e.target.value);
-        clearTimeout(sliderTimeout);
-        sliderTimeout = setTimeout(() => updateCrossfade(e.target.value), 50);
-    });
+    slider.addEventListener('input', setVolumes);
+    slider.addEventListener('change', setVolumes);
+    slider.addEventListener('touchend', setVolumes);
     
-    // Play/Pause
-    playPauseBtn.addEventListener('click', function() {
-        if (isPlaying) {
+    // Play button
+    playBtn.addEventListener('click', function() {
+        if (playing) {
             beforeAudio.pause();
             afterAudio.pause();
-            playPauseBtn.textContent = '▶ Play';
-            isPlaying = false;
+            playBtn.innerHTML = '&#9654; Play';
+            playing = false;
         } else {
-            // Sync to start if both are at 0
-            if (beforeAudio.currentTime === 0 && afterAudio.currentTime === 0) {
-                beforeAudio.currentTime = 0;
-                afterAudio.currentTime = 0;
-            }
+            setVolumes();
             
-            // Set volumes before play
-            beforeAudio.volume = currentVolumes.before;
-            afterAudio.volume = currentVolumes.after;
+            // Force sync to same position
+            beforeAudio.currentTime = 0;
+            afterAudio.currentTime = 0;
             
-            // Start playing
-            beforeAudio.play().catch(e => console.log('Before play error:', e));
-            afterAudio.play().catch(e => console.log('After play error:', e));
-            
-            playPauseBtn.textContent = '⏸ Pause';
-            isPlaying = true;
+            beforeAudio.play().catch(e => console.error('Before:', e));
+            afterAudio.play().catch(e => console.error('After:', e));
+            playBtn.innerHTML = '&#9208; Pause';
+            playing = true;
         }
     });
     
-    // Sync playback position
+    // Keep in sync - AGGRESSIVE
     beforeAudio.addEventListener('timeupdate', function() {
-        if (isPlaying) {
+        if (playing) {
             const diff = Math.abs(beforeAudio.currentTime - afterAudio.currentTime);
-            if (diff > 0.3) {
+            if (diff > 0.2) {
                 afterAudio.currentTime = beforeAudio.currentTime;
             }
         }
     });
     
-    // CRITICAL: Force volume sync continuously while playing
-    setInterval(function() {
-        if (isPlaying) {
-            beforeAudio.volume = currentVolumes.before;
-            afterAudio.volume = currentVolumes.after;
+    afterAudio.addEventListener('timeupdate', function() {
+        if (playing) {
+            const diff = Math.abs(beforeAudio.currentTime - afterAudio.currentTime);
+            if (diff > 0.2) {
+                beforeAudio.currentTime = afterAudio.currentTime;
+            }
         }
-    }, 50);
+    });
     
-    // Initialize at 50/50
-    updateCrossfade(50);
+    // Force volume/mute sync every 100ms
+    setInterval(function() {
+        if (playing) setVolumes();
+    }, 100);
+    
+    // Init at center
+    setVolumes();
+    console.log('Audio player ready - Mobile mode:', isMobile);
 })();
 
 // ===== EASTER EGG TRACKING SYSTEM =====
@@ -1666,43 +1688,46 @@ body {
     if (!tracker) return;
     
     function checkScroll() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
+        // Get scroll position
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        
+        // Get document height - try multiple methods for mobile
+        const body = document.body;
+        const html = document.documentElement;
         const docHeight = Math.max(
-            document.body.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.clientHeight,
-            document.documentElement.scrollHeight,
-            document.documentElement.offsetHeight
+            body.scrollHeight, body.offsetHeight,
+            html.clientHeight, html.scrollHeight, html.offsetHeight
         );
         
+        // Calculate scroll percentage
         const scrollPercent = (scrollTop + windowHeight) / docHeight;
         
-        // Show when scrolled 90% or more
-        if (scrollPercent >= 0.9) {
+        // Show at 80% or more
+        if (scrollPercent >= 0.8) {
             tracker.classList.add('visible');
         } else {
             tracker.classList.remove('visible');
         }
+        
+        // Debug on mobile
+        console.log('Scroll:', scrollPercent.toFixed(2), 'Visible:', scrollPercent >= 0.8);
     }
     
-    // Check on all scroll events
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(checkScroll, 10);
-    }, { passive: true });
+    // Check frequently
+    let scrollTimer;
+    function handleScroll() {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(checkScroll, 50);
+    }
     
-    window.addEventListener('touchmove', function() {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(checkScroll, 10);
-    }, { passive: true });
-    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('touchmove', handleScroll, { passive: true });
     window.addEventListener('touchend', checkScroll, { passive: true });
-    
-    // Check on load and resize
-    window.addEventListener('load', checkScroll);
     window.addEventListener('resize', checkScroll);
+    
+    // Check on load
+    setTimeout(checkScroll, 500);
     checkScroll();
 })();
 
@@ -1791,13 +1816,4 @@ style.textContent = `
     50% { transform: translate(-2px, 2px); }
     60% { transform: translate(2px, -2px); }
     70% { transform: translate(-2px, -2px); }
-    80% { transform: translate(2px, 2px); }
-    90% { transform: translate(-2px, 2px); }
-}
-`;
-document.head.appendChild(style);
-
-</script>
-
-	</body>
-</html>
+    80%
