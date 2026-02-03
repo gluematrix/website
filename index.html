@@ -23,7 +23,7 @@
         <meta name="description" content="Glue Matrix - Professional music mixing, recording, and sound design focused on clarity, depth, and emotion. Elevate your sound to its highest potential.">
         <meta name="keywords" content="music mixing, sound design, audio engineering, music production, recording studio, Glue Matrix">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -254,10 +254,27 @@ body {
         min-height: 100vh;
         min-height: -webkit-fill-available;
         padding-bottom: 0;
+        padding-top: env(safe-area-inset-top);
+    }
+    
+    /* Fix for iOS status bar area - extend header into safe area */
+    #header {
+        padding-top: env(safe-area-inset-top);
+        background: #000 !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10000;
+    }
+    
+    /* Compensate for fixed header */
+    #page-wrapper {
+        padding-top: calc(3.5em + env(safe-area-inset-top));
     }
     
     .home-content {
-        min-height: 100vh;
+        min-height: calc(100vh - env(safe-area-inset-top));
         padding-bottom: calc(8em + env(safe-area-inset-bottom));
     }
     
@@ -860,7 +877,7 @@ body {
         <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
         <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
         <li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-        <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+        <li><a href="/cdn-cgi/l/email-protection#4f252e2c240f28233a2a222e3b3d2637612c2022" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
     </ul>
     <ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
         <li>&copy; GLUE MATRIX</li>
@@ -892,7 +909,7 @@ body {
 			</svg>
 		</div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
 
 
