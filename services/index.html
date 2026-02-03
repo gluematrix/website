@@ -112,6 +112,7 @@ html, body {
 
 #page-wrapper {
     min-height: 100%;
+    padding-top: 3.5em; /* Space for fixed header */
 }
 
 
@@ -174,14 +175,19 @@ a:hover {
 }
 
 /* GLUE MATRIX logo hover */
+#header {
+	background: #000 !important;
+	backdrop-filter: none !important;
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	z-index: 10000 !important;
+}
+
 #header h1 a {
     transition: all 0.3s ease !important;
     display: inline-block;
-}
-
-#header h1 a:hover {
-    transform: scale(1.05);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
 #header h1 a:hover {
@@ -1287,6 +1293,35 @@ body {
 		<script src="/assets/js/util.js"></script>
 		<script src="/assets/js/main.js"></script>
 		
+		<!-- SERVICES PAGE FIX: Force header to stay at top -->
+		<script>
+		// Run AFTER page fully loads
+		window.addEventListener('DOMContentLoaded', function() {
+			const header = document.getElementById('header');
+			if (!header) return;
+			
+			// Force header to stay visible - run immediately and repeatedly
+			function forceHeaderVisible() {
+				header.classList.remove('alt');
+				header.style.position = 'fixed';
+				header.style.top = '0';
+				header.style.transform = 'none';
+			}
+			
+			// Run it now
+			forceHeaderVisible();
+			
+			// Run it every 50ms to override any changes
+			setInterval(forceHeaderVisible, 50);
+			
+			// Watch for class changes
+			const observer = new MutationObserver(forceHeaderVisible);
+			observer.observe(header, { 
+				attributes: true, 
+				attributeFilter: ['class', 'style'] 
+			});
+		});
+		</script>
 
 <script>
 // ===== VHS GLITCH PAGE TRANSITIONS =====
