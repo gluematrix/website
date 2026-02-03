@@ -6,20 +6,25 @@
         <meta name="description" content="Meet the artist behind Glue Matrix. Professional audio engineer and music producer with a passion for sonic alchemy.">
         <meta name="keywords" content="Glue Matrix bio, audio engineer, music producer, about">
 		<meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />		<link rel="stylesheet" href="/assets/css/main.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
 
 html, body {
     height: 100%;
-    height: -webkit-fill-available;
 }
 
 #page-wrapper {
     min-height: 100%;
-    min-height: -webkit-fill-available;
-    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* iOS Safari bottom bar fix */
+@supports (-webkit-touch-callout: none) {
+    .page-content {
+        padding-bottom: calc(4em + 100px) !important;
+    }
 }
 
 /* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
@@ -79,6 +84,8 @@ button:hover {
 				margin: 0;
 				padding: 0;
 				min-height: 100vh;
+				overflow-x: hidden;
+				position: relative;
 			}
 			
 			/* Mobile: use scroll instead of fixed */
@@ -106,14 +113,14 @@ body {
 			}
 			
 			.page-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    text-align: center;
-    padding: 6em 2em calc(4em + env(safe-area-inset-bottom)) 2em;
-}
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				min-height: calc(100vh - 100px);
+				text-align: center;
+				padding: 6em 2em 4em 2em;
+			}
 			
 			.about-container {
 				max-width: 900px;
@@ -530,7 +537,9 @@ body {
 							<h3>Audio Alchemist  /  Engineer  /  Producer</h3>
 							
 							<div class="bio-text">
-																
+								
+								<p>Sound is the only language that doesn't lie.</p>
+								
 								<p>Music saved my life. Not metaphorically, literally. When I was at my lowest, barely holding on, I found myself alone with Tame Impala's <i>The Slow Rush</i>, Pink Floyd's <i>Animals</i>, and MGMT's <i>Congratulations</i> on repeat. Those albums became a lifeline. They showed me that sound could be more than entertainment. It could be medicine, transformation, or even a portal to something greater.</p>
 								
 								<p>That's when everything changed. I started recording local bands and artists out of necessity, teaching myself every instrument I could get my hands on, obsessively learning the craft of production and mixing. What began as survival became purpose. I moved to Colorado, got formally trained on SSL consoles and a variety of professional studios, and realized that my mission wasn't just to make music. It was to help others access the same healing and connection that saved me.</p>
@@ -569,7 +578,8 @@ body {
 			</div>
 
 <!-- Footer -->
-<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 calc(2em + env(safe-area-inset-bottom)) 0;">    <ul class="icons">
+<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 2em 0;">
+    <ul class="icons">
         <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
         <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
         <li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>

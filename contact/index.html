@@ -6,7 +6,8 @@
         <meta name="description" content="Contact Glue Matrix for professional mixing, recording, and sound design services. Get in touch to elevate your sound.">
         <meta name="keywords" content="contact music producer, hire mixing engineer, audio services">
 		<meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />		<link rel="stylesheet" href="/assets/css/main.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
@@ -14,13 +15,17 @@
 
 html, body {
     height: 100%;
-    height: -webkit-fill-available;
 }
 
 #page-wrapper {
     min-height: 100%;
-    min-height: -webkit-fill-available;
-    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* iOS Safari bottom bar fix */
+@supports (-webkit-touch-callout: none) {
+    .page-content {
+        padding-bottom: calc(4em + 100px) !important;
+    }
 }
 
 /* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
@@ -82,6 +87,7 @@ body {
     min-height: 100vh;
     width: 100%;
     position: relative;
+    overflow-x: hidden;
 }
 
 /* Mobile: use scroll instead of fixed */
@@ -108,9 +114,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 100px);
     text-align: center;
-    padding: 6em 2em calc(4em + env(safe-area-inset-bottom)) 2em;
+    padding: 6em 2em 4em 2em;
 }
 
 .page-content h1 {
@@ -520,7 +526,8 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 </script>
 
 <!-- Footer -->
-<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 calc(2em + env(safe-area-inset-bottom)) 0;">    <ul class="icons">
+<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 2em 0;">
+    <ul class="icons">
         <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
         <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
         <li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>

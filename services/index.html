@@ -6,7 +6,8 @@
         <meta name="description" content="Professional audio services: mixing, recording, music production, composition, and podcast editing. Elevate your sound with Glue Matrix.">
         <meta name="keywords" content="audio mixing, music production, recording services, composition, podcast editing">
 		<meta charset="utf-8" />
-		meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />		<link rel="stylesheet" href="/assets/css/main.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
 		<link rel="stylesheet" href="/assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
@@ -14,15 +15,18 @@
 
 html, body {
     height: 100%;
-    height: -webkit-fill-available;
 }
 
 #page-wrapper {
     min-height: 100%;
-    min-height: -webkit-fill-available;
-    padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* iOS Safari bottom bar fix */
+@supports (-webkit-touch-callout: none) {
+    .page-content {
+        padding-bottom: calc(4em + 100px) !important;
+    }
+}
 
 /* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
 .button,
@@ -81,6 +85,8 @@ button:hover {
 				margin: 0;
 				padding: 0;
 				min-height: 100vh;
+				overflow-x: hidden;
+				position: relative;
 			}
 			
 			/* Mobile: use scroll instead of fixed */
@@ -106,15 +112,13 @@ body {
 				z-index: 1;
 			}
 			
-	.page-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    text-align: center;
-    padding: 6em 2em calc(4em + env(safe-area-inset-bottom)) 2em;
-}
+			.page-content {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				min-height: calc(100vh - 100px);
+				padding: 6em 2em 4em 2em;
+			}
 			
 			.services-container {
 				max-width: 1200px;
@@ -813,7 +817,8 @@ body {
 		</div>
 
 		<!-- Footer -->
-<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 calc(2em + env(safe-area-inset-bottom)) 0;">			<ul class="icons">
+		<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 2em 0;">
+			<ul class="icons">
 				<li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 				<li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 				<li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
