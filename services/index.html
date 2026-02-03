@@ -1518,10 +1518,43 @@ body {
 		const blurAmount = position * 2;
 		beforeVisual.style.filter = `blur(${blurAmount}px) saturate(${1 - position * 0.5})`;
 	}
+
+// Force sync audio volumes on mobile
+	function syncAudioVolumes() {
+		const sliderValue = slider.value;
+		const position = sliderValue / 100;
+		
+		beforeAudio.volume = 1 - position;
+		afterAudio.volume = position;
+		
+		console.log('Synced volumes:', {
+			before: beforeAudio.volume,
+			after: afterAudio.volume,
+			slider: sliderValue
+		});
+	}
+	
+	// Sync volumes periodically while playing (mobile fix)
+	setInterval(() => {
+		if (isPlaying) {
+			syncAudioVolumes();
+		}
+	}, 100);
+
     
-    slider.addEventListener('input', (e) => {
-        updateCrossfade(e.target.value);
-    });
+// Handle both desktop and mobile events
+	slider.addEventListener('input', (e) => {
+		updateCrossfade(e.target.value);
+	});
+	
+	slider.addEventListener('change', (e) => {
+		updateCrossfade(e.target.value);
+	});
+	
+	// Force update on touch devices
+	slider.addEventListener('touchend', (e) => {
+		updateCrossfade(e.target.value);
+	});
     
     // Play/Pause
     playPauseBtn.addEventListener('click', () => {
@@ -1643,6 +1676,8 @@ document.addEventListener('keydown', (e) => {
     const tracker = document.getElementById('egg-tracker');
     if (!tracker) return;
     
+    let ticking = false;
+    
     function checkScroll() {
         const scrollPosition = window.scrollY + window.innerHeight;
         const pageHeight = document.documentElement.scrollHeight;
@@ -1653,13 +1688,27 @@ document.addEventListener('keydown', (e) => {
         } else {
             tracker.classList.remove('visible');
         }
+        
+        ticking = false;
     }
     
-    // Check on scroll
-    window.addEventListener('scroll', checkScroll);
+    function requestTick() {
+        if (!ticking) {
+            window.requestAnimationFrame(checkScroll);
+            ticking = true;
+        }
+    }
     
-    // Check on page load
+    // Check on scroll (optimized for mobile)
+    window.addEventListener('scroll', requestTick, { passive: true });
+    
+    // Also check on touch events for mobile
+    window.addEventListener('touchmove', requestTick, { passive: true });
+    window.addEventListener('touchend', checkScroll, { passive: true });
+    
+    // Check on page load and resize
     checkScroll();
+    window.addEventListener('resize', checkScroll);
 })();
 
 
