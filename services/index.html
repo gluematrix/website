@@ -153,6 +153,11 @@ a:hover {
 }
 
 /* GLUE MATRIX logo hover */
+#header {
+	background: #000 !important; /* Force black header */
+	backdrop-filter: none !important;
+}
+
 #header h1 a {
     transition: all 0.3s ease !important;
     display: inline-block;
@@ -533,6 +538,24 @@ body {
 				.waveform-viz {
 					height: 40px;
 				}
+				
+				/* Hide desktop player, show mobile player */
+				.desktop-only {
+					display: none !important;
+				}
+				
+				.mobile-only {
+					display: block !important;
+				}
+			}
+			
+			/* Hide mobile player on desktop */
+			.mobile-only {
+				display: none;
+			}
+			
+			.desktop-only {
+				display: block;
 			}
 
 
@@ -898,9 +921,9 @@ body {
     z-index: 9997;
     display: flex;
     gap: 8px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(20px);
+    opacity: 1 !important; /* ALWAYS VISIBLE FOR TESTING */
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -1124,9 +1147,10 @@ body {
 <!-- Before/After Interactive Crossfade -->
 					<div class="audio-comparison">
 						<h2>Hear the Difference</h2>
-						<p style="text-align: center; margin-bottom: 2em;">Drag the slider to crossfade between raw recording and final mix.</p>
+						<p style="text-align: center; margin-bottom: 2em;">Compare the raw recording with the final mix.</p>
 						
-						<div class="crossfade-player">
+						<!-- DESKTOP: Fancy Crossfade Player -->
+						<div class="crossfade-player desktop-only">
 							<div class="visual-comparison">
 								<div class="before-side" id="before-visual">
 									<h4>Before (Raw)</h4>
@@ -1158,6 +1182,26 @@ body {
 							<audio id="after-audio" loop>
 								<source src="/assets/audio/after-mix.mp3" type="audio/mpeg">
 							</audio>
+						</div>
+						
+						<!-- MOBILE: Simple Two-Button Player -->
+						<div class="simple-player mobile-only">
+							<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; max-width: 500px; margin: 0 auto;">
+								<div style="text-align: center;">
+									<h4 style="color: rgba(255, 100, 100, 0.8); margin-bottom: 1em; font-size: 0.9em;">BEFORE (Raw)</h4>
+									<button id="mobile-before-btn" class="button" style="width: 100%;">▶ Play</button>
+									<audio id="mobile-before-audio" loop>
+										<source src="/assets/audio/before-mix.mp3" type="audio/mpeg">
+									</audio>
+								</div>
+								<div style="text-align: center;">
+									<h4 style="color: #00ffcc; margin-bottom: 1em; font-size: 0.9em;">AFTER (Mixed)</h4>
+									<button id="mobile-after-btn" class="button" style="width: 100%;">▶ Play</button>
+									<audio id="mobile-after-audio" loop>
+										<source src="/assets/audio/after-mix.mp3" type="audio/mpeg">
+									</audio>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -1434,6 +1478,57 @@ body {
     overlay.addEventListener('click', deactivate);
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && isActive) deactivate();
+    });
+})();
+
+// ===== MOBILE SIMPLE AUDIO PLAYER =====
+(function() {
+    const beforeBtn = document.getElementById('mobile-before-btn');
+    const afterBtn = document.getElementById('mobile-after-btn');
+    const beforeAudio = document.getElementById('mobile-before-audio');
+    const afterAudio = document.getElementById('mobile-after-audio');
+    
+    if (!beforeBtn || !afterBtn) return; // Not on mobile
+    
+    let beforePlaying = false;
+    let afterPlaying = false;
+    
+    // Before button
+    beforeBtn.addEventListener('click', function() {
+        if (beforePlaying) {
+            beforeAudio.pause();
+            beforeBtn.innerHTML = '&#9654; Play';
+            beforePlaying = false;
+        } else {
+            // Stop the other one
+            afterAudio.pause();
+            afterBtn.innerHTML = '&#9654; Play';
+            afterPlaying = false;
+            
+            // Play this one
+            beforeAudio.play().catch(e => alert('Play failed: ' + e.message));
+            beforeBtn.innerHTML = '&#9208; Pause';
+            beforePlaying = true;
+        }
+    });
+    
+    // After button
+    afterBtn.addEventListener('click', function() {
+        if (afterPlaying) {
+            afterAudio.pause();
+            afterBtn.innerHTML = '&#9654; Play';
+            afterPlaying = false;
+        } else {
+            // Stop the other one
+            beforeAudio.pause();
+            beforeBtn.innerHTML = '&#9654; Play';
+            beforePlaying = false;
+            
+            // Play this one
+            afterAudio.play().catch(e => alert('Play failed: ' + e.message));
+            afterBtn.innerHTML = '&#9208; Pause';
+            afterPlaying = true;
+        }
     });
 })();
 
