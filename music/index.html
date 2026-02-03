@@ -78,25 +78,15 @@ button:hover {
     font-family: 'Digital7', monospace !important;
 }
 
-/* Email input - keep normal size */
-#mailingListForm input[type="email"] {
+/* Email input and Subscribe button - SAME SIZE */
+#mailingListForm input[type="email"],
+#mailingListForm button.primary {
     padding: 0.875em 1em !important;
     font-size: 1em !important;
     height: auto !important;
     line-height: 1.5 !important;
     text-align: center !important;
-}
-
-/* Subscribe button - smaller */
-#mailingListForm button.primary {
-    padding: 0 2em !important;
-    font-size: 0.8em !important;
-    font-weight: 600 !important;
-    height: 3.125em !important;
-    letter-spacing: 0.225em !important;
-    line-height: 3.125em !important;
-    max-width: 300px !important;
-    margin: 0 auto !important;
+    width: 100% !important;
 }
 
 #subscribeBtn,
@@ -105,21 +95,9 @@ button:hover {
     font-family: 'Digital7', monospace !important;
 }
 
-/* Dark overlay for readability */
-#page-wrapper {
-    position: relative;
-    z-index: 1;
-}
-
-
-
+/* Full page background with integrated dark overlay */
 body {
-    position: relative;
-}
-
-/* Full page background for music */
-body {
-    background-image: url('/assets/css/images/musicphoto.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/assets/css/images/musicphoto.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -127,6 +105,8 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    width: 100%;
+    position: relative;
 }
 
 /* Mobile: use scroll instead of fixed */
@@ -139,6 +119,7 @@ body {
 #page-wrapper {
     position: relative;
     z-index: 1;
+    background: transparent !important;
 }
 
 .page-content {
@@ -187,7 +168,7 @@ body {
     font-style: italic;
 }
 
-/* ===== VHS GLITCH TRANSITION ===== */
+/* ===== ENHANCED VHS GLITCH TRANSITION ===== */
 #page-transition {
     position: fixed;
     top: 0;
@@ -199,26 +180,71 @@ body {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
+    overflow: hidden;
 }
 
 #page-transition.active {
     opacity: 1;
     visibility: visible;
-    animation: glitchTransition 0.5s ease-in-out;
+    animation: glitchTransition 0.6s ease-in-out;
 }
 
 @keyframes glitchTransition {
-    0% { opacity: 0; }
-    10% { opacity: 1; }
-    20% { opacity: 1; clip-path: inset(20% 0 60% 0); transform: translateX(-5px); }
-    25% { clip-path: inset(50% 0 30% 0); transform: translateX(5px); }
-    30% { clip-path: inset(10% 0 70% 0); transform: translateX(-3px); }
-    35% { clip-path: inset(70% 0 10% 0); transform: translateX(3px); }
-    40% { clip-path: inset(40% 0 40% 0); transform: translateX(0); }
-    50% { clip-path: inset(0); opacity: 1; }
-    100% { opacity: 0; }
+    0% { 
+        opacity: 0;
+        filter: brightness(1);
+    }
+    5% { 
+        opacity: 1;
+        filter: brightness(1.5) saturate(1.5);
+    }
+    10% { 
+        opacity: 1;
+        background: #000;
+    }
+    15% {
+        clip-path: inset(20% 0 60% 0);
+        transform: translateX(-8px);
+        filter: hue-rotate(90deg) brightness(1.3);
+    }
+    20% {
+        clip-path: inset(50% 0 30% 0);
+        transform: translateX(8px);
+        filter: hue-rotate(180deg) brightness(1.5);
+        background: rgba(255, 0, 255, 0.1);
+    }
+    25% {
+        clip-path: inset(10% 0 70% 0);
+        transform: translateX(-5px);
+        filter: hue-rotate(270deg) brightness(1.2);
+        background: rgba(0, 255, 255, 0.1);
+    }
+    30% {
+        clip-path: inset(70% 0 10% 0);
+        transform: translateX(5px);
+        filter: hue-rotate(45deg) brightness(1.4);
+        background: rgba(255, 255, 0, 0.1);
+    }
+    35% {
+        clip-path: inset(40% 0 40% 0);
+        transform: translateX(0);
+        filter: brightness(2) saturate(2);
+    }
+    40% {
+        clip-path: inset(0);
+        opacity: 1;
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+    100% { 
+        opacity: 0;
+    }
 }
 
+/* RGB Color Split Effect */
 #page-transition::before {
     content: '';
     position: absolute;
@@ -230,11 +256,61 @@ body {
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 255, 204, 0.03) 2px,
-        rgba(0, 255, 204, 0.03) 4px
+        rgba(0, 255, 204, 0.05) 2px,
+        rgba(0, 255, 204, 0.05) 4px
     );
+    animation: scanlines 0.1s linear infinite;
+    mix-blend-mode: screen;
 }
 
+/* Chromatic Aberration Layer - Red */
+#page-transition::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.2) 0%,
+        transparent 20%,
+        transparent 80%,
+        rgba(0, 255, 255, 0.2) 100%
+    );
+    animation: rgbSplit 0.2s ease-in-out infinite;
+    mix-blend-mode: screen;
+}
+
+@keyframes scanlines {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+}
+
+@keyframes rgbSplit {
+    0% { 
+        transform: translateX(-3px);
+        opacity: 0.8;
+    }
+    25% { 
+        transform: translateX(3px);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateX(-2px);
+        opacity: 0.8;
+    }
+    75% { 
+        transform: translateX(2px);
+        opacity: 1;
+    }
+    100% { 
+        transform: translateX(-3px);
+        opacity: 0.8;
+    }
+}
+
+/* VHS Static Noise */
 .glitch-text {
     position: absolute;
     top: 50%;
@@ -242,18 +318,112 @@ body {
     transform: translate(-50%, -50%);
     font-family: 'Digital7', monospace;
     font-size: 2em;
-    color: #00ffcc;
+    color: #fff;
     text-shadow: 
-        2px 0 #ff0000,
-        -2px 0 #00ffff;
-    animation: textGlitch 0.3s ease-in-out infinite;
+        3px 0 #ff00ff,
+        -3px 0 #00ffff,
+        0 3px #ffff00,
+        0 -3px #ff0000;
+    animation: textGlitch 0.15s ease-in-out infinite;
+    filter: brightness(1.5);
 }
 
 @keyframes textGlitch {
-    0%, 100% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(-50%, -50%); }
-    25% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; transform: translate(-51%, -50%); }
-    50% { text-shadow: 1px 0 #ff0000, -1px 0 #00ffff; transform: translate(-50%, -51%); }
-    75% { text-shadow: -1px 0 #ff0000, 1px 0 #00ffff; transform: translate(-49%, -50%); }
+    0% { 
+        text-shadow: 
+            3px 0 #ff00ff,
+            -3px 0 #00ffff,
+            0 3px #ffff00;
+        transform: translate(-50%, -50%) skew(0deg);
+        filter: brightness(1.5) saturate(1.5);
+    }
+    20% { 
+        text-shadow: 
+            -3px 0 #ff0000,
+            3px 0 #00ff00,
+            0 -3px #0000ff;
+        transform: translate(-51%, -50%) skew(2deg);
+        filter: brightness(2) saturate(2);
+    }
+    40% { 
+        text-shadow: 
+            2px 0 #ffff00,
+            -2px 0 #ff00ff,
+            0 2px #00ffff;
+        transform: translate(-50%, -51%) skew(-1deg);
+        filter: brightness(1.8) saturate(1.8);
+    }
+    60% { 
+        text-shadow: 
+            -2px 0 #00ffff,
+            2px 0 #ff00ff,
+            0 -2px #ffff00;
+        transform: translate(-49%, -50%) skew(1deg);
+        filter: brightness(1.6) saturate(1.6);
+    }
+    80% { 
+        text-shadow: 
+            4px 0 #ff0000,
+            -4px 0 #00ff00,
+            0 4px #0000ff;
+        transform: translate(-50%, -49%) skew(-2deg);
+        filter: brightness(2.2) saturate(2);
+    }
+    100% { 
+        text-shadow: 
+            3px 0 #ff00ff,
+            -3px 0 #00ffff,
+            0 3px #ffff00;
+        transform: translate(-50%, -50%) skew(0deg);
+        filter: brightness(1.5) saturate(1.5);
+    }
+}
+
+/* ===== AUDIO WAVEFORM EASTER EGG ===== */
+#waveform-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#waveform-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#waveform-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+#waveform-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 0.8em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    font-family: 'Analogue OS', sans-serif;
+    text-shadow: 0 0 10px rgba(0,255,204,0.8);
+}
+
+.easter-egg-trigger {
+    cursor: default;
+    transition: text-shadow 0.3s ease;
+}
+
+.easter-egg-trigger:hover {
+    text-shadow: 0 0 10px #00ffcc;
 }
 		</style>
 	</head>
@@ -261,6 +431,12 @@ body {
 
 		<!-- VHS Glitch Transition -->
 		<div id="page-transition">
+		</div>
+
+		<!-- Audio Waveform Easter Egg Overlay -->
+		<div id="waveform-overlay">
+		    <canvas id="waveform-canvas"></canvas>
+		    <div id="waveform-close">Press ESC or click anywhere to close</div>
 		</div>
 
 		<!-- Page Wrapper -->
@@ -302,7 +478,7 @@ body {
 
     <!-- Coming Soon Message -->
     <div class="coming-soon">
-        <p>New music coming soon.</p>
+        <p>New music coming soon<span class="easter-egg-trigger" id="easter-egg-trigger">.</span></p>
     </div>
 
 <!-- Email Signup -->
@@ -311,7 +487,7 @@ body {
     <p style="font-size: 0.9em; margin-bottom: 1.5em;">Get updates on new releases, shows, and exclusive content.</p>
     <form id="mailingListForm" action="https://formspree.io/f/mqeqpqdr" method="POST" style="display: flex; gap: 0.5em; flex-direction: column;">
         <input type="email" name="email" placeholder="Your email" required style="padding: 0.75em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 3px;">
-        <button type="submit" class="primary" id="subscribeBtn" style="width: 100%; font-family: 'Digital7', monospace !important;">
+        <button type="submit" class="primary" id="subscribeBtn" style="font-family: 'Digital7', monospace !important;">
             <span class="sub-text">Subscribe</span>
             <span class="sub-loading" style="display: none;">Subscribing...</span>
         </button>
@@ -408,6 +584,122 @@ document.getElementById('mailingListForm').addEventListener('submit', function(e
                 window.location.href = href;
             }, 350);
         });
+    });
+})();
+
+// ===== AUDIO WAVEFORM EASTER EGG =====
+(function() {
+    const overlay = document.getElementById('waveform-overlay');
+    const canvas = document.getElementById('waveform-canvas');
+    const trigger = document.getElementById('easter-egg-trigger');
+    
+    let animationId = null;
+    let isActive = false;
+    
+    const ctx = canvas.getContext('2d');
+    let time = 0;
+    let mouseX = 0;
+    let mouseY = 0;
+    let trails = [];
+    
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    
+    document.addEventListener('mousemove', (e) => {
+        if (isActive) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        }
+    });
+    
+    document.addEventListener('touchmove', (e) => {
+        if (isActive && e.touches.length > 0) {
+            mouseX = e.touches[0].clientX;
+            mouseY = e.touches[0].clientY;
+        }
+    });
+    
+    function drawWaveform() {
+        if (!isActive) return;
+        
+        const width = canvas.width;
+        const height = canvas.height;
+        const centerY = height / 2;
+        
+        // Fade effect
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.fillRect(0, 0, width, height);
+        
+        // Add trail point
+        if (mouseX > 0 || mouseY > 0) {
+            trails.push({ x: mouseX, y: mouseY, life: 100 });
+        }
+        
+        // Draw trails
+        trails = trails.filter(trail => trail.life > 0);
+        trails.forEach((trail, i) => {
+            const alpha = trail.life / 100;
+            const hue = (time * 2 + i * 10) % 360;
+            ctx.fillStyle = `hsla(${hue}, 85%, 70%, ${alpha * 0.5})`;
+            ctx.beginPath();
+            ctx.arc(trail.x, trail.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+            trail.life -= 2;
+        });
+        
+        // Draw reactive waveforms
+        const barCount = 80;
+        const barWidth = width / barCount;
+        
+        for (let i = 0; i < barCount; i++) {
+            const x = i * barWidth;
+            
+            // React to mouse position
+            const distanceFromMouse = Math.abs(mouseX - x);
+            const influence = Math.max(0, 1 - distanceFromMouse / (width * 0.3));
+            
+            // Base wave + mouse influence
+            const waveHeight = Math.sin(time * 0.05 + i * 0.2) * 50;
+            const mouseInfluence = influence * 100;
+            const totalHeight = Math.abs(waveHeight) + mouseInfluence;
+            
+            const hue = (time * 2 + i * 3) % 360;
+            
+            // Draw bars
+            ctx.fillStyle = `hsla(${hue}, 85%, 70%, 0.8)`;
+            ctx.fillRect(x, centerY - totalHeight / 2, barWidth - 2, totalHeight);
+            
+            // Glow effect
+            ctx.fillStyle = `hsla(${hue}, 85%, 70%, 0.3)`;
+            ctx.fillRect(x, centerY - totalHeight / 2 - 10, barWidth - 2, totalHeight + 20);
+        }
+        
+        time += 1;
+        animationId = requestAnimationFrame(drawWaveform);
+    }
+    
+    function activate() {
+        isActive = true;
+        time = 0;
+        trails = [];
+        overlay.classList.add('active');
+        drawWaveform();
+    }
+    
+    function deactivate() {
+        isActive = false;
+        overlay.classList.remove('active');
+        if (animationId) cancelAnimationFrame(animationId);
+    }
+    
+    trigger.addEventListener('click', activate);
+    overlay.addEventListener('click', deactivate);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isActive) deactivate();
     });
 })();
 </script>
