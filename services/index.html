@@ -1702,23 +1702,7 @@ document.addEventListener('keydown', (e) => {
         const pageHeight = document.documentElement.scrollHeight;
         const distanceFromBottom = pageHeight - scrollPosition;
         
-        // TEMPORARY DEBUG - Remove after testing
-        console.log('Scroll Debug:', {
-            scrollY: window.scrollY,
-            windowHeight: window.innerHeight,
-            pageHeight: pageHeight,
-            distanceFromBottom: distanceFromBottom
-        });
-        
-        // Show tracker when within 200px of bottom
-        if (distanceFromBottom < 50) {
-            tracker.classList.add('visible');
-        } else {
-            tracker.classList.remove('visible');
-        }
-        
-        ticking = false;
-    }
+
     
     function requestTick() {
         if (!ticking) {
