@@ -1,24 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-
-<!--
-   ████████╗██╗  ██╗███████╗     ██████╗ ██╗     ██╗   ██╗███████╗
-   ╚══██╔══╝██║  ██║██╔════╝    ██╔════╝ ██║     ██║   ██║██╔════╝
-      ██║   ███████║█████╗      ██║  ███╗██║     ██║   ██║█████╗  
-      ██║   ██╔══██║██╔══╝      ██║   ██║██║     ██║   ██║██╔══╝  
-      ██║   ██║  ██║███████╗    ╚██████╔╝███████╗╚██████╔╝███████╗
-      ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝
-   
-   You found the hidden layer.
-   The glue is everywhere.
-   Keep searching.
-   
-   - Jack @ Glue Matrix
--->
-<!-- The bedroom is the new studio. -->
-
 	<head>
-		<meta name="theme-color" content="#000000">
 		<title>GLUE MATRIX - Services</title>
         <link rel="icon" type="image/png" href="/favicon.png">
         <meta name="description" content="Professional audio services: mixing, recording, music production, composition, and podcast editing. Elevate your sound with Glue Matrix.">
@@ -30,82 +12,6 @@
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
 
-/* ===== CRT GRAIN TEXTURE ===== */
-body::after {
-    content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    pointer-events: none;
-    z-index: 9995;
-    opacity: 0.025;
-    background-image: 
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(255, 255, 255, 0.05) 2px,
-            rgba(255, 255, 255, 0.05) 4px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(255, 255, 255, 0.03) 2px,
-            rgba(255, 255, 255, 0.03) 4px
-        );
-    animation: grainMove 8s steps(10) infinite;
-}
-
-/* ===== SCROLL-BASED BOTTOM FADE - DISABLED =====
-   Removed because it was causing a permanent dark bar on mobile
-body::before {
-    content: '';
-    position: fixed;
-    bottom: 60px;
-    left: 0;
-    right: 0;
-    height: 150px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0.9) 100%);
-    pointer-events: none;
-    z-index: 9994;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-body.scrolled::before {
-    opacity: 1;
-}
-*/
-
-@keyframes grainMove {
-    0% { transform: translate(0, 0); }
-    10% { transform: translate(-5%, -5%); }
-    20% { transform: translate(-10%, 5%); }
-    30% { transform: translate(5%, -10%); }
-    40% { transform: translate(-5%, 15%); }
-    50% { transform: translate(-15%, 5%); }
-    60% { transform: translate(10%, -15%); }
-    70% { transform: translate(-10%, 10%); }
-    80% { transform: translate(15%, -5%); }
-    90% { transform: translate(-5%, -10%); }
-    100% { transform: translate(0, 0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    body::after {
-        animation: none;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    body::after {
-        opacity: 0.015;
-    }
-}
-
 
 html, body {
     height: 100%;
@@ -116,69 +22,24 @@ html, body {
 }
 
 
-/* ===== AWAKENING HOVER SYSTEM - REFOCUS EFFECT ===== */
+/* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
 .button,
 input[type="submit"],
 input[type="button"],
-button,
-a,
-#menu ul li a,
-#header h1 a {
-    filter: blur(0px);
-    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+button {
+    transition: all 0.3s ease !important;
     transform: translateY(0) scale(1) !important;
 }
 
-/* Quick blur pulse on hover */
 .button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,
 button:hover {
-    animation: refocus 300ms ease-out forwards;
-    transform: scale(1.02) !important;
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6) !important;
-}
-
-/* Refocus animation: sharp → slight blur → sharper */
-@keyframes refocus {
-    0% {
-        filter: blur(0px);
-    }
-    30% {
-        filter: blur(0.5px);
-    }
-    100% {
-        filter: blur(0px) brightness(1.05);
-    }
-}
-
-.button.primary:hover {
-    box-shadow: 0 0 25px rgba(237, 73, 51, 0.6) !important;
-}
-
-a:hover {
-    animation: refocus 300ms ease-out forwards;
-    text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
-}
-
-#menu ul li a:hover {
-    animation: refocus 300ms ease-out forwards;
-    color: #00ffcc;
-    padding-left: 1.5em;
-    text-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
-}
-
-#header h1 a:hover {
-    animation: refocus 300ms ease-out forwards;
-    transform: scale(1.02);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 20px rgba(237, 73, 51, 0.6) !important;
 }
 
 /* GLUE MATRIX logo hover */
-#header {
-    background: #000 !important;
-}
-
 #header h1 a {
     transition: all 0.3s ease !important;
     display: inline-block;
@@ -189,30 +50,9 @@ a:hover {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
-#header h1 a:hover {
-    transform: scale(1.05);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-}
-
 /* Menu hover effects */
 #menu ul li a {
     transition: all 0.2s ease;
-}
-
-/* Menu Constellation Canvas */
-#menu-constellation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-#menu ul {
-    position: relative;
-    z-index: 1;
 }
 
 #menu ul li a:hover {
@@ -243,40 +83,8 @@ a:hover {
 			
 			/* Mobile: use scroll instead of fixed */
 			@media screen and (max-width: 980px) {
-			    html {
-			        background-color: #000;
-			        min-height: 100%;
-			        height: 100%;
-			    }
-			    
 			    body {
-			        background-color: #000;
 			        background-attachment: scroll;
-			        background-position: center top;
-			        background-size: cover;
-			        min-height: 100vh;
-			        min-height: -webkit-fill-available;
-			        padding-bottom: 0;
-			    }
-			    
-			    .page-content {
-			        min-height: 100vh;
-			        padding-bottom: calc(8em + env(safe-area-inset-bottom));
-			    }
-			    
-			    #footer {
-			        background: transparent !important;
-			        padding-bottom: calc(4em + env(safe-area-inset-bottom)) !important;
-			    }
-			}
-			
-			/* iOS Safari -webkit-fill-available support */
-			@supports (-webkit-touch-callout: none) {
-			    html {
-			        height: -webkit-fill-available;
-			    }
-			    body {
-			        min-height: -webkit-fill-available;
 			    }
 			}
 			
@@ -411,7 +219,7 @@ body {
 				height: 60px;
 			}
 			
-/* Before/After Interactive Crossfade */
+			/* Before/After Audio Player */
 			.audio-comparison {
 				background: rgba(0,0,0,0.7);
 				padding: 2.5em;
@@ -427,177 +235,39 @@ body {
 				font-size: 1.8em;
 			}
 			
-			.crossfade-player {
-				max-width: 800px;
-				margin: 0 auto;
+			.audio-players {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 2em;
+				margin-top: 2em;
 			}
 			
-			.visual-comparison {
-				position: relative;
-				width: 100%;
-				height: 200px;
-				background: rgba(0,0,0,0.5);
-				border-radius: 8px;
-				overflow: hidden;
-				margin-bottom: 2em;
+			.audio-player-box {
+				background: rgba(0,0,0,0.4);
+				padding: 1.5em;
+				border-radius: 5px;
+				text-align: center;
 			}
 			
-			.before-side,
-			.after-side {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				padding: 1em;
-			}
-			
-			.before-side {
-				background: rgba(100, 0, 0, 0.2);
-				filter: blur(1px) saturate(0.5);
-				clip-path: inset(0 50% 0 0);
-			}
-			
-			.after-side {
-				background: rgba(0, 100, 100, 0.2);
-				clip-path: inset(0 0 0 50%);
-			}
-			
-			.before-side h4 {
-				color: rgba(255, 100, 100, 0.8);
-				margin-bottom: 1em;
-				font-size: 0.9em;
-				text-transform: uppercase;
-				letter-spacing: 0.1em;
-			}
-			
-			.after-side h4 {
+			.audio-player-box h4 {
 				color: #00ffcc;
 				margin-bottom: 1em;
-				font-size: 0.9em;
-				text-transform: uppercase;
-				letter-spacing: 0.1em;
-			}
-			
-			.waveform-viz {
-				width: 100%;
-				height: 60px;
-			}
-			
-			.waveform-viz canvas {
-				width: 100%;
-				height: 100%;
-			}
-			
-			.slider-divider {
-				position: absolute;
-				top: 0;
-				left: 50%;
-				width: 4px;
-				height: 100%;
-				background: #00ffcc;
-				box-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
-				transform: translateX(-50%);
-				transition: left 0.1s ease-out;
-				pointer-events: none;
-			}
-			
-			.crossfade-controls {
-				display: flex;
-				flex-direction: column;
-				gap: 1em;
-				align-items: center;
-			}
-			
-			#play-pause-btn {
-				min-width: 120px;
-				font-family: 'Digital7', monospace;
 				font-size: 1.1em;
-				white-space: nowrap;
-				padding: 0.75em 1.5em;
-				display: flex;
-				align-items: center;
-				justify-content: center;
 			}
 			
-			#crossfade-slider {
+			.audio-player-box audio {
 				width: 100%;
-				height: 6px;
-				-webkit-appearance: none;
-				appearance: none;
-				background: linear-gradient(to right, rgba(255,100,100,0.3) 0%, rgba(0,255,204,0.3) 100%);
-				outline: none;
-				border-radius: 3px;
-				cursor: pointer;
+				margin-top: 0.5em;
 			}
 			
-			#crossfade-slider::-webkit-slider-thumb {
-				-webkit-appearance: none;
-				appearance: none;
-				width: 20px;
-				height: 20px;
-				border-radius: 50%;
-				background: #00ffcc;
-				cursor: pointer;
-				box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+			.audio-note {
+				text-align: center;
+				font-size: 0.9em;
+				color: rgba(255,255,255,0.6);
+				margin-top: 1.5em;
+				font-style: italic;
 			}
 			
-			#crossfade-slider::-moz-range-thumb {
-				width: 20px;
-				height: 20px;
-				border-radius: 50%;
-				background: #00ffcc;
-				cursor: pointer;
-				border: none;
-				box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
-			}
-			
-			.slider-labels {
-				display: flex;
-				justify-content: space-between;
-				width: 100%;
-				font-size: 0.85em;
-				opacity: 0.7;
-			}
-			
-			@media screen and (max-width: 768px) {
-				.visual-comparison {
-					height: 150px;
-				}
-				
-				.before-side h4,
-				.after-side h4 {
-					font-size: 0.75em;
-				}
-				
-				.waveform-viz {
-					height: 40px;
-				}
-				
-				/* Hide desktop player, show mobile player */
-				.desktop-only {
-					display: none !important;
-				}
-				
-				.mobile-only {
-					display: block !important;
-				}
-			}
-			
-			/* Hide mobile player on desktop */
-			.mobile-only {
-				display: none;
-			}
-			
-			.desktop-only {
-				display: block;
-			}
-
-
 			/* Alchemy Symbol Decorations */
 			.alchemy-symbol {
 				position: absolute;
@@ -690,7 +360,7 @@ body {
 				}
 			}
 
-/* ===== ENHANCED VHS GLITCH TRANSITION ===== */
+/* ===== VHS GLITCH TRANSITION ===== */
 #page-transition {
     position: fixed;
     top: 0;
@@ -702,71 +372,26 @@ body {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
-    overflow: hidden;
 }
 
 #page-transition.active {
     opacity: 1;
     visibility: visible;
-    animation: glitchTransition 0.6s ease-in-out;
+    animation: glitchTransition 0.5s ease-in-out;
 }
 
 @keyframes glitchTransition {
-    0% { 
-        opacity: 0;
-        filter: brightness(1);
-    }
-    5% { 
-        opacity: 1;
-        filter: brightness(1.5) saturate(1.5);
-    }
-    10% { 
-        opacity: 1;
-        background: #000;
-    }
-    15% {
-        clip-path: inset(20% 0 60% 0);
-        transform: translateX(-8px);
-        filter: hue-rotate(90deg) brightness(1.3);
-    }
-    20% {
-        clip-path: inset(50% 0 30% 0);
-        transform: translateX(8px);
-        filter: hue-rotate(180deg) brightness(1.5);
-        background: rgba(255, 0, 255, 0.1);
-    }
-    25% {
-        clip-path: inset(10% 0 70% 0);
-        transform: translateX(-5px);
-        filter: hue-rotate(270deg) brightness(1.2);
-        background: rgba(0, 255, 255, 0.1);
-    }
-    30% {
-        clip-path: inset(70% 0 10% 0);
-        transform: translateX(5px);
-        filter: hue-rotate(45deg) brightness(1.4);
-        background: rgba(255, 255, 0, 0.1);
-    }
-    35% {
-        clip-path: inset(40% 0 40% 0);
-        transform: translateX(0);
-        filter: brightness(2) saturate(2);
-    }
-    40% {
-        clip-path: inset(0);
-        opacity: 1;
-        filter: hue-rotate(0deg);
-    }
-    50% {
-        opacity: 1;
-        filter: brightness(1);
-    }
-    100% { 
-        opacity: 0;
-    }
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    20% { opacity: 1; clip-path: inset(20% 0 60% 0); transform: translateX(-5px); }
+    25% { clip-path: inset(50% 0 30% 0); transform: translateX(5px); }
+    30% { clip-path: inset(10% 0 70% 0); transform: translateX(-3px); }
+    35% { clip-path: inset(70% 0 10% 0); transform: translateX(3px); }
+    40% { clip-path: inset(40% 0 40% 0); transform: translateX(0); }
+    50% { clip-path: inset(0); opacity: 1; }
+    100% { opacity: 0; }
 }
 
-/* RGB Color Split Effect */
 #page-transition::before {
     content: '';
     position: absolute;
@@ -778,61 +403,11 @@ body {
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 255, 204, 0.05) 2px,
-        rgba(0, 255, 204, 0.05) 4px
+        rgba(0, 255, 204, 0.03) 2px,
+        rgba(0, 255, 204, 0.03) 4px
     );
-    animation: scanlines 0.1s linear infinite;
-    mix-blend-mode: screen;
 }
 
-/* Chromatic Aberration Layer - Red */
-#page-transition::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        rgba(255, 0, 0, 0.2) 0%,
-        transparent 20%,
-        transparent 80%,
-        rgba(0, 255, 255, 0.2) 100%
-    );
-    animation: rgbSplit 0.2s ease-in-out infinite;
-    mix-blend-mode: screen;
-}
-
-@keyframes scanlines {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(4px); }
-}
-
-@keyframes rgbSplit {
-    0% { 
-        transform: translateX(-3px);
-        opacity: 0.8;
-    }
-    25% { 
-        transform: translateX(3px);
-        opacity: 1;
-    }
-    50% { 
-        transform: translateX(-2px);
-        opacity: 0.8;
-    }
-    75% { 
-        transform: translateX(2px);
-        opacity: 1;
-    }
-    100% { 
-        transform: translateX(-3px);
-        opacity: 0.8;
-    }
-}
-
-/* VHS Static Noise */
 .glitch-text {
     position: absolute;
     top: 50%;
@@ -840,218 +415,25 @@ body {
     transform: translate(-50%, -50%);
     font-family: 'Digital7', monospace;
     font-size: 2em;
-    color: #fff;
+    color: #00ffcc;
     text-shadow: 
-        3px 0 #ff00ff,
-        -3px 0 #00ffff,
-        0 3px #ffff00,
-        0 -3px #ff0000;
-    animation: textGlitch 0.15s ease-in-out infinite;
-    filter: brightness(1.5);
+        2px 0 #ff0000,
+        -2px 0 #00ffff;
+    animation: textGlitch 0.3s ease-in-out infinite;
 }
 
 @keyframes textGlitch {
-    0% { 
-        text-shadow: 
-            3px 0 #ff00ff,
-            -3px 0 #00ffff,
-            0 3px #ffff00;
-        transform: translate(-50%, -50%) skew(0deg);
-        filter: brightness(1.5) saturate(1.5);
-    }
-    20% { 
-        text-shadow: 
-            -3px 0 #ff0000,
-            3px 0 #00ff00,
-            0 -3px #0000ff;
-        transform: translate(-51%, -50%) skew(2deg);
-        filter: brightness(2) saturate(2);
-    }
-    40% { 
-        text-shadow: 
-            2px 0 #ffff00,
-            -2px 0 #ff00ff,
-            0 2px #00ffff;
-        transform: translate(-50%, -51%) skew(-1deg);
-        filter: brightness(1.8) saturate(1.8);
-    }
-    60% { 
-        text-shadow: 
-            -2px 0 #00ffff,
-            2px 0 #ff00ff,
-            0 -2px #ffff00;
-        transform: translate(-49%, -50%) skew(1deg);
-        filter: brightness(1.6) saturate(1.6);
-    }
-    80% { 
-        text-shadow: 
-            4px 0 #ff0000,
-            -4px 0 #00ff00,
-            0 4px #0000ff;
-        transform: translate(-50%, -49%) skew(-2deg);
-        filter: brightness(2.2) saturate(2);
-    }
-    100% { 
-        text-shadow: 
-            3px 0 #ff00ff,
-            -3px 0 #00ffff,
-            0 3px #ffff00;
-        transform: translate(-50%, -50%) skew(0deg);
-        filter: brightness(1.5) saturate(1.5);
-    }
+    0%, 100% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(-50%, -50%); }
+    25% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; transform: translate(-51%, -50%); }
+    50% { text-shadow: 1px 0 #ff0000, -1px 0 #00ffff; transform: translate(-50%, -51%); }
+    75% { text-shadow: -1px 0 #ff0000, 1px 0 #00ffff; transform: translate(-49%, -50%); }
 }
-
-
-
-/* ===== SEED OF LIFE EASTER EGG ===== */
-#seed-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.3);
-}
-
-#seed-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-#seed-canvas {
-    width: 100%;
-    height: 100%;
-}
-
-#seed-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: #fff;
-    font-size: 0.8em;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    font-family: 'Analogue OS', sans-serif;
-    text-shadow: 0 0 10px rgba(0,255,204,0.8);
-}
-
-.easter-egg-trigger {
-    cursor: default;
-    transition: text-shadow 0.3s ease;
-}
-
-.easter-egg-trigger:hover {
-    text-shadow: 0 0 10px #00ffcc;
-}
-
-
-
-/* Easter Egg Tracker */
-#egg-tracker {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 9997;
-    display: flex;
-    gap: 8px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-#egg-tracker.visible {
-    opacity: 0.3;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-#egg-tracker.visible:hover {
-    opacity: 1;
-}
-
-.egg-circle {
-    width: 12px;
-    height: 12px;
-    border: 2px solid #00ffcc;
-    border-radius: 50%;
-    background: transparent;
-    transition: all 0.5s ease;
-}
-
-.egg-circle.found {
-    background: #00ffcc;
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
-    animation: eggPulse 2s infinite;
-}
-
-@keyframes eggPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.2); opacity: 0.8; }
-}
-
-/* God Mode Overlay */
-#god-mode-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 99999;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-
-#god-mode-overlay.active {
-    display: flex;
-    opacity: 1;
-}
-
-#god-mode-message {
-    font-family: 'Digital7', monospace;
-    font-size: 3em;
-    color: #00ffcc;
-    text-shadow: 0 0 30px rgba(0, 255, 204, 1);
-    animation: glitchText 0.3s infinite;
-}
-
 		</style>
 	</head>
-
-<!-- Easter Egg Tracker -->
-        <div id="egg-tracker">
-            <div class="egg-circle" data-egg="home"></div>
-            <div class="egg-circle" data-egg="services"></div>
-            <div class="egg-circle" data-egg="music"></div>
-            <div class="egg-circle" data-egg="about"></div>
-            <div class="egg-circle" data-egg="contact"></div>
-        </div>
-
-        <!-- God Mode Overlay -->
-        <div id="god-mode-overlay">
-            <div id="god-mode-message">YOU'VE DECIPHERED THE MATRIX</div>
-        </div>
-
 	<body>
 
 		<!-- VHS Glitch Transition -->
 		<div id="page-transition">
-		</div>
-
-		<!-- Seed of Life Easter Egg Overlay -->
-		<div id="seed-overlay">
-		    <canvas id="seed-canvas"></canvas>
-		    <div id="seed-close">Press ESC or click anywhere to close</div>
 		</div>
 
 		<!-- Alchemy Symbol Decorations -->
@@ -1082,8 +464,7 @@ body {
 						<li class="special">
 							<a href="#menu" class="menuToggle"><span>Menu</span></a>
 							<div id="menu">
-										<canvas id="menu-constellation"></canvas>
-										<ul>
+								<ul>
 									<li><a href="/">Home</a></li>
 									<li><a href="/services/">Services</a></li>
 									<li><a href="/music/">Music</a></li>
@@ -1132,7 +513,7 @@ body {
 							<h3>Production</h3>
 							<div class="price">Starting at $750</div>
 							<div class="price-detail">per song</div>
-							<p>Full production services from concept to completion. Audio consulting included. Specializing in psych pop, electronic, indie, rock, and atmospheric soundscapes with lush layering and creative sound design.</p>
+							<p>Full production services from concept to completion. Audio consulting included. Specializing in psych pop, electronic, indie, and atmospheric soundscapes with lush layering and creative sound design.</p>
 						</div>
 
 						<!-- Composition -->
@@ -1144,7 +525,7 @@ body {
 							<h3>Composition</h3>
 							<div class="price">$300/min</div>
 							<div class="price-detail">custom music</div>
-							<p>Original compositions tailored to your project. Film scores, game soundtracks, commercial music, or standalone pieces.</p>
+							<p>Original compositions tailored to your project. Film scores, game soundtracks, commercial music, or standalone pieces. Royalty-free licensing available.</p>
 						</div>
 
 						<!-- Podcast Editing -->
@@ -1179,67 +560,30 @@ body {
 					<!-- Custom Pricing Note -->
 					<div style="background: rgba(0,255,204,0.1); border: 1px solid rgba(0,255,204,0.3); border-radius: 8px; padding: 2em; margin: 3em auto; max-width: 700px; text-align: center;">
 					    <p style="font-size: 1.1em; line-height: 1.7; margin: 0;">
-					        <strong style="color: #00ffcc;"><span class="easter-egg-trigger" id="easter-egg-trigger">C</span>ustom Pricing Available</strong><br/>
+					        <strong style="color: #00ffcc;">Custom Pricing Available</strong><br/>
 					    </p>
 					</div>
 
-<!-- Before/After Interactive Crossfade -->
+					<!-- Before/After Audio Comparison -->
 					<div class="audio-comparison">
 						<h2>Hear the Difference</h2>
-						<p style="text-align: center; margin-bottom: 2em;">Compare the raw recording with the final mix.</p>
+						<p style="text-align: center; margin-bottom: 2em;">Experience the transformation from raw recording to polished mix.</p>
 						
-						<!-- DESKTOP: Fancy Crossfade Player -->
-						<div class="crossfade-player desktop-only">
-							<div class="visual-comparison">
-								<div class="before-side" id="before-visual">
-									<h4>Before (Raw)</h4>
-									<div class="waveform-viz">
-										<canvas id="before-canvas"></canvas>
-									</div>
-								</div>
-								<div class="after-side" id="after-visual">
-									<h4>After (Glue Matrix)</h4>
-									<div class="waveform-viz">
-										<canvas id="after-canvas"></canvas>
-									</div>
-								</div>
-								<div class="slider-divider" id="slider-divider"></div>
+						<div class="audio-players">
+							<div class="audio-player-box">
+								<h4>Before (Raw Mix)</h4>
+								<audio controls>
+									<source src="/assets/audio/before-mix.mp3" type="audio/mpeg">
+									Your browser does not support the audio element.
+								</audio>
 							</div>
 							
-							<div class="crossfade-controls">
-								<button id="play-pause-btn" class="button">▶ Play</button>
-								<input type="range" id="crossfade-slider" min="0" max="100" value="50" />
-								<div class="slider-labels">
-									<span>Raw</span>
-									<span>Mixed</span>
-								</div>
-							</div>
-							
-							<audio id="before-audio" loop>
-								<source src="/assets/audio/before-mix.mp3" type="audio/mpeg">
-							</audio>
-							<audio id="after-audio" loop>
-								<source src="/assets/audio/after-mix.mp3" type="audio/mpeg">
-							</audio>
-						</div>
-						
-						<!-- MOBILE: Simple Two-Button Player -->
-						<div class="simple-player mobile-only">
-							<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; max-width: 500px; margin: 0 auto;">
-								<div style="text-align: center;">
-									<h4 style="color: rgba(255, 100, 100, 0.8); margin-bottom: 1em; font-size: 0.9em;">BEFORE (Raw)</h4>
-									<button id="mobile-before-btn" class="button" style="width: 100%;">▶ Play</button>
-									<audio id="mobile-before-audio" loop>
-										<source src="/assets/audio/before-mix.mp3" type="audio/mpeg">
-									</audio>
-								</div>
-								<div style="text-align: center;">
-									<h4 style="color: #00ffcc; margin-bottom: 1em; font-size: 0.9em;">AFTER (Mixed)</h4>
-									<button id="mobile-after-btn" class="button" style="width: 100%;">▶ Play</button>
-									<audio id="mobile-after-audio" loop>
-										<source src="/assets/audio/after-mix.mp3" type="audio/mpeg">
-									</audio>
-								</div>
+							<div class="audio-player-box">
+								<h4>After (Professional Mix)</h4>
+								<audio controls>
+									<source src="/assets/audio/after-mix.mp3" type="audio/mpeg">
+									Your browser does not support the audio element.
+								</audio>
 							</div>
 						</div>
 					</div>
@@ -1254,7 +598,7 @@ body {
 						</div>
 
 						<div class="testimonial">
-							<p>"Working with Glue Matrix transformed my sound. The attention to detail and creative input elevated my tracks beyond what I imagined possible. Jack rocks!"</p>
+							<p>"Working with Glue Matrix transformed my sound. The attention to detail and creative input elevated my tracks beyond what I imagined possible."</p>
 							<div class="author">— Pseyeche</div>
 						</div>
 					</div>
@@ -1275,7 +619,7 @@ body {
 				<li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 				<li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 				<li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-				<li><a href="/cdn-cgi/l/email-protection#620803010922050e17070f0316100b1a4c010d0f" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				<li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 			</ul>
 			<ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
 				<li>&copy; GLUE MATRIX</li>
@@ -1284,14 +628,13 @@ body {
 		</footer>
 
 		<!-- Scripts -->
-		<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
 		<script src="/assets/js/jquery.scrollex.min.js"></script>
 		<script src="/assets/js/jquery.scrolly.min.js"></script>
 		<script src="/assets/js/browser.min.js"></script>
 		<script src="/assets/js/breakpoints.min.js"></script>
 		<script src="/assets/js/util.js"></script>
 		<script src="/assets/js/main.js"></script>
-		
 
 <script>
 // ===== VHS GLITCH PAGE TRANSITIONS =====
@@ -1315,623 +658,6 @@ body {
         });
     });
 })();
-
-// ===== BOTTOM GRADIENT FADE ON SCROLL =====
-(function() {
-    let scrollThreshold = 100; // Show fade after scrolling 100px
-    
-    function checkScroll() {
-        if (window.pageYOffset > scrollThreshold) {
-            document.body.classList.add('scrolled');
-        } else {
-            document.body.classList.remove('scrolled');
-        }
-    }
-    
-    window.addEventListener('scroll', checkScroll, { passive: true });
-    checkScroll(); // Check on load
-})();
-
-// ===== FORCE HEADER TO STAY VISIBLE ON MOBILE =====
-(function() {
-    const header = document.getElementById('header');
-    if (!header) return;
-    
-    // Force header to always be visible on mobile
-    if (window.innerWidth <= 980) {
-        const forceHeaderVisible = function() {
-            header.style.position = 'fixed';
-            header.style.top = '0';
-            header.style.transform = 'none';
-            header.classList.remove('alt');
-        };
-        
-        // Run continuously
-        setInterval(forceHeaderVisible, 100);
-        window.addEventListener('scroll', forceHeaderVisible, { passive: true });
-        forceHeaderVisible();
-    }
-})();
-
-// ===== MENU CONSTELLATION EFFECT =====
-(function() {
-    const menu = document.getElementById('menu');
-    const canvas = document.getElementById('menu-constellation');
-    
-    if (!canvas || !menu) return;
-    
-    const ctx = canvas.getContext('2d');
-    let nodes = [];
-    let animating = false;
-    
-    function resize() {
-        canvas.width = menu.offsetWidth;
-        canvas.height = menu.offsetHeight;
-    }
-    
-    function getMenuItemPositions() {
-        const items = menu.querySelectorAll('ul li');
-        const positions = [];
-        
-        items.forEach(item => {
-            const rect = item.getBoundingClientRect();
-            const menuRect = menu.getBoundingClientRect();
-            positions.push({
-                x: rect.left - menuRect.left + rect.width / 2,
-                y: rect.top - menuRect.top + rect.height / 2
-            });
-        });
-        
-        return positions;
-    }
-    
-    function drawConstellation(progress) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = 'rgba(0, 255, 204, 0.3)';
-        ctx.fillStyle = '#00ffcc';
-        ctx.lineWidth = 1.5;
-        
-        // Draw lines
-        for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-                const alpha = progress * 0.3;
-                ctx.strokeStyle = `rgba(0, 255, 204, ${alpha})`;
-                
-                ctx.beginPath();
-                ctx.moveTo(nodes[i].x, nodes[i].y);
-                
-                // Curved line
-                const midX = (nodes[i].x + nodes[j].x) / 2 + (Math.sin(progress * Math.PI) * 20);
-                const midY = (nodes[i].y + nodes[j].y) / 2;
-                ctx.quadraticCurveTo(midX, midY, nodes[j].x, nodes[j].y);
-                ctx.stroke();
-            }
-        }
-        
-        // Draw nodes
-        nodes.forEach((node, i) => {
-            const delay = i * 0.1;
-            const nodeProgress = Math.max(0, Math.min(1, (progress - delay) / 0.3));
-            const pulse = 1 + Math.sin(progress * Math.PI * 4 + i) * 0.2;
-            const radius = 4 * nodeProgress * pulse;
-            
-            ctx.globalAlpha = nodeProgress;
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Glow
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = '#00ffcc';
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0;
-            ctx.globalAlpha = 1;
-        });
-    }
-    
-    function animate() {
-        let startTime = Date.now();
-        animating = true;
-        
-        function frame() {
-            if (!menu.classList.contains('active')) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                animating = false;
-                return;
-            }
-            
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(1, elapsed / 1000);
-            
-            drawConstellation(progress);
-            
-            requestAnimationFrame(frame);
-        }
-        
-        frame();
-    }
-    
-    // Watch for menu open/close
-    const observer = new MutationObserver(() => {
-        if (menu.classList.contains('active')) {
-            resize();
-            nodes = getMenuItemPositions();
-            if (!animating) animate();
-        } else {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            animating = false;
-        }
-    });
-    
-    observer.observe(menu, { attributes: true, attributeFilter: ['class'] });
-})();
-
-// ===== SEED OF LIFE EASTER EGG =====
-(function() {
-    const overlay = document.getElementById('seed-overlay');
-    const canvas = document.getElementById('seed-canvas');
-    const trigger = document.getElementById('easter-egg-trigger');
-    
-    let animationId = null;
-    let isActive = false;
-    
-    const ctx = canvas.getContext('2d');
-    let time = 0;
-    
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    
-    function drawSeedOfLife(centerX, centerY, radius, hue, pulseScale) {
-        ctx.strokeStyle = `hsla(${hue}, 85%, 70%, 0.7)`;
-        ctx.lineWidth = 2;
-        
-        // Center circle
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius * pulseScale, 0, Math.PI * 2);
-        ctx.stroke();
-        
-        // 6 surrounding circles
-        const angles = [0, 60, 120, 180, 240, 300];
-        angles.forEach(angle => {
-            const rad = (angle * Math.PI) / 180;
-            const x = centerX + Math.cos(rad) * radius * pulseScale;
-            const y = centerY + Math.sin(rad) * radius * pulseScale;
-            
-            ctx.beginPath();
-            ctx.arc(x, y, radius * pulseScale, 0, Math.PI * 2);
-            ctx.stroke();
-        });
-    }
-    
-    function draw() {
-        if (!isActive) return;
-        
-        const width = canvas.width;
-        const height = canvas.height;
-        const centerX = width / 2;
-        const centerY = height / 2;
-        
-        // Clear with semi-transparent background
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, width, height);
-        
-        // Pulsing scale
-        const pulse = 0.9 + Math.sin(time * 0.05) * 0.1;
-        
-        // Color shift
-        const hue = (time * 2) % 360;
-        
-        // Draw multiple layers with different sizes
-        const baseRadius = Math.min(width, height) * 0.15;
-        
-        drawSeedOfLife(centerX, centerY, baseRadius, hue, pulse);
-        drawSeedOfLife(centerX, centerY, baseRadius * 1.5, (hue + 120) % 360, pulse * 0.95);
-        drawSeedOfLife(centerX, centerY, baseRadius * 2, (hue + 240) % 360, pulse * 0.9);
-        
-        time += 1;
-        animationId = requestAnimationFrame(draw);
-    }
-    
-    function activate() {
-        isActive = true;
-        time = 0;
-        overlay.classList.add('active');
-        draw();
-    }
-    
-    function deactivate() {
-        isActive = false;
-        overlay.classList.remove('active');
-        if (animationId) cancelAnimationFrame(animationId);
-    }
-    
-    trigger.addEventListener('click', activate);
-    overlay.addEventListener('click', deactivate);
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isActive) deactivate();
-    });
-})();
-
-// ===== MOBILE SIMPLE AUDIO PLAYER =====
-(function() {
-    const beforeBtn = document.getElementById('mobile-before-btn');
-    const afterBtn = document.getElementById('mobile-after-btn');
-    const beforeAudio = document.getElementById('mobile-before-audio');
-    const afterAudio = document.getElementById('mobile-after-audio');
-    
-    if (!beforeBtn || !afterBtn) return; // Not on mobile
-    
-    let beforePlaying = false;
-    let afterPlaying = false;
-    
-    // Before button
-    beforeBtn.addEventListener('click', function() {
-        if (beforePlaying) {
-            beforeAudio.pause();
-            beforeBtn.innerHTML = '&#9654; Play';
-            beforePlaying = false;
-        } else {
-            // Stop the other one
-            afterAudio.pause();
-            afterBtn.innerHTML = '&#9654; Play';
-            afterPlaying = false;
-            
-            // Play this one
-            beforeAudio.play().catch(e => alert('Play failed: ' + e.message));
-            beforeBtn.innerHTML = '&#9208; Pause';
-            beforePlaying = true;
-        }
-    });
-    
-    // After button
-    afterBtn.addEventListener('click', function() {
-        if (afterPlaying) {
-            afterAudio.pause();
-            afterBtn.innerHTML = '&#9654; Play';
-            afterPlaying = false;
-        } else {
-            // Stop the other one
-            beforeAudio.pause();
-            beforeBtn.innerHTML = '&#9654; Play';
-            beforePlaying = false;
-            
-            // Play this one
-            afterAudio.play().catch(e => alert('Play failed: ' + e.message));
-            afterBtn.innerHTML = '&#9208; Pause';
-            afterPlaying = true;
-        }
-    });
-})();
-
-// ===== DESKTOP CROSSFADE PLAYER =====
-(function() {
-    const beforeAudio = document.getElementById('before-audio');
-    const afterAudio = document.getElementById('after-audio');
-    const slider = document.getElementById('crossfade-slider');
-    const playBtn = document.getElementById('play-pause-btn');
-    const divider = document.getElementById('slider-divider');
-    const beforeVisual = document.getElementById('before-visual');
-    const afterVisual = document.getElementById('after-visual');
-    const beforeCanvas = document.getElementById('before-canvas');
-    const afterCanvas = document.getElementById('after-canvas');
-    
-    if (!beforeAudio || !afterAudio || !slider || !playBtn) return; // Desktop player not present
-    
-    let playing = false;
-    
-    // Setup canvases
-    const beforeCtx = beforeCanvas.getContext('2d');
-    const afterCtx = afterCanvas.getContext('2d');
-    beforeCanvas.width = beforeCanvas.offsetWidth;
-    beforeCanvas.height = beforeCanvas.offsetHeight;
-    afterCanvas.width = afterCanvas.offsetWidth;
-    afterCanvas.height = afterCanvas.offsetHeight;
-    
-    // Draw waveforms
-    function drawWaveform(ctx, color) {
-        const w = ctx.canvas.width;
-        const h = ctx.canvas.height;
-        const cy = h / 2;
-        ctx.clearRect(0, 0, w, h);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        for (let x = 0; x < w; x++) {
-            const y = cy + Math.sin((x / w) * Math.PI * 4 + Date.now() * 0.001) * (h * 0.3);
-            if (x === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-    }
-    
-    function animate() {
-        if (playing) {
-            drawWaveform(beforeCtx, 'rgba(255, 100, 100, 0.6)');
-            drawWaveform(afterCtx, 'rgba(0, 255, 204, 0.8)');
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
-    
-    // Set volumes
-    function setVolumes() {
-        const val = parseFloat(slider.value);
-        const beforeVol = (100 - val) / 100;
-        const afterVol = val / 100;
-        
-        beforeAudio.volume = beforeVol;
-        afterAudio.volume = afterVol;
-        
-        // Update visuals
-        divider.style.left = val + '%';
-        beforeVisual.style.clipPath = `inset(0 ${val}% 0 0)`;
-        afterVisual.style.clipPath = `inset(0 0 0 ${100 - val}%)`;
-        beforeVisual.style.filter = `blur(${afterVol * 2}px) saturate(${beforeVol})`;
-    }
-    
-    // Slider events
-    slider.addEventListener('input', setVolumes);
-    
-    // Play button
-    playBtn.addEventListener('click', function() {
-        if (playing) {
-            beforeAudio.pause();
-            afterAudio.pause();
-            playBtn.innerHTML = '&#9654; Play';
-            playing = false;
-        } else {
-            setVolumes();
-            beforeAudio.play();
-            afterAudio.play();
-            playBtn.innerHTML = '&#9208; Pause';
-            playing = true;
-        }
-    });
-    
-    // Keep in sync
-    beforeAudio.addEventListener('timeupdate', function() {
-        if (playing && Math.abs(beforeAudio.currentTime - afterAudio.currentTime) > 0.3) {
-            afterAudio.currentTime = beforeAudio.currentTime;
-        }
-    });
-    
-    // Init
-    setVolumes();
-})();
-
-// ===== EASTER EGG TRACKING SYSTEM =====
-(function() {
-    const eggs = {
-        home: false,
-        services: false,
-        music: false,
-        about: false,
-        contact: false
-    };
-    
-    // Load from localStorage
-    const saved = localStorage.getItem('glueMatrixEggs');
-    if (saved) {
-        const savedEggs = JSON.parse(saved);
-        Object.assign(eggs, savedEggs);
-    }
-    
-    // Update UI
-    function updateTracker() {
-        Object.keys(eggs).forEach(key => {
-            const circle = document.querySelector(`.egg-circle[data-egg="${key}"]`);
-            if (circle && eggs[key]) {
-                circle.classList.add('found');
-            }
-        });
-        
-        // Check if all found
-        if (Object.values(eggs).every(v => v === true)) {
-            setTimeout(triggerGodMode, 500);
-        }
-    }
-    
-    // Mark egg as found
-    window.markEggFound = function(eggName) {
-        if (!eggs[eggName]) {
-            eggs[eggName] = true;
-            localStorage.setItem('glueMatrixEggs', JSON.stringify(eggs));
-            updateTracker();
-        }
-    };
-    
-    // Auto-mark based on page
-    const pageName = window.location.pathname.includes('/services') ? 'services' :
-                     window.location.pathname.includes('/music') ? 'music' :
-                     window.location.pathname.includes('/about') ? 'about' :
-                     window.location.pathname.includes('/contact') ? 'contact' : 'home';
-    
-    // Listen for easter egg triggers on this page
-    const eggTrigger = document.getElementById('easter-egg-trigger');
-    if (eggTrigger) {
-        eggTrigger.addEventListener('click', function() {
-            markEggFound(pageName);
-        });
-    }
-    
-    // God Mode
-    function triggerGodMode() {
-        const overlay = document.getElementById('god-mode-overlay');
-        
-        // Check if already shown this session
-        if (sessionStorage.getItem('godModeShown')) return;
-        
-        overlay.classList.add('active');
-        sessionStorage.setItem('godModeShown', 'true');
-        
-        // Activate ALL effects
-        document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
-        document.body.style.animation = 'screenShake 0.5s infinite';
-        
-        setTimeout(() => {
-            overlay.classList.remove('active');
-            document.body.style.filter = '';
-            document.body.style.animation = '';
-        }, 5000);
-    }
-
-    // Add reset functionality (Shift + R)
-    document.addEventListener('keydown', (e) => {
-        if (e.shiftKey && e.key === 'R') {
-            if (confirm('Reset all easter eggs?')) {
-                localStorage.removeItem('glueMatrixEggs');
-                sessionStorage.removeItem('godModeShown');
-                location.reload();
-            }
-        }
-    });
-    
-    updateTracker();
-})();
-
-// ===== EASTER EGG TRACKER SCROLL VISIBILITY =====
-(function() {
-    const tracker = document.getElementById('egg-tracker');
-    if (!tracker) return;
-    
-    function checkScroll() {
-        // Get scroll position
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        
-        // Get document height - try multiple methods for mobile
-        const body = document.body;
-        const html = document.documentElement;
-        const docHeight = Math.max(
-            body.scrollHeight, body.offsetHeight,
-            html.clientHeight, html.scrollHeight, html.offsetHeight
-        );
-        
-        // Calculate scroll percentage
-        const scrollPercent = (scrollTop + windowHeight) / docHeight;
-        
-        // Show at 80% or more
-        if (scrollPercent >= 0.8) {
-            tracker.classList.add('visible');
-        } else {
-            tracker.classList.remove('visible');
-        }
-    }
-    
-    // Check frequently
-    let scrollTimer;
-    function handleScroll() {
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(checkScroll, 50);
-    }
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('touchmove', handleScroll, { passive: true });
-    window.addEventListener('touchend', checkScroll, { passive: true });
-    window.addEventListener('resize', checkScroll);
-    
-    // Check on load
-    setTimeout(checkScroll, 500);
-    checkScroll();
-})();
-
-
-// ===== KONAMI CODE EASTER EGG =====
-(function() {
-    const code = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-    let position = 0;
-    
-    document.addEventListener('keydown', (e) => {
-        const key = e.key.toLowerCase();
-        
-        if (key === code[position] || e.key === code[position]) {
-            position++;
-            
-            if (position === code.length) {
-                activateGodMode();
-                position = 0;
-            }
-        } else {
-            position = 0;
-        }
-    });
-    
-    function activateGodMode() {
-        const overlay = document.getElementById('god-mode-overlay');
-        if (!overlay) return;
-        
-        overlay.classList.add('active');
-        
-        // Activate all visual effects
-        document.body.style.filter = 'hue-rotate(360deg) saturate(2) brightness(1.2)';
-        document.body.style.animation = 'screenShake 0.5s infinite, rainbowShift 3s infinite';
-        
-        // Trigger all easter eggs if possible
-        const eggTriggers = document.querySelectorAll('.easter-egg-trigger');
-        eggTriggers.forEach(trigger => {
-            if (trigger.click) trigger.click();
-        });
-        
-        // Exit after 5 seconds or ESC
-        const exitGodMode = () => {
-            overlay.classList.remove('active');
-            document.body.style.filter = '';
-            document.body.style.animation = '';
-        };
-        
-        setTimeout(exitGodMode, 5000);
-        
-        document.addEventListener('keydown', function escHandler(e) {
-            if (e.key === 'Escape') {
-                exitGodMode();
-                document.removeEventListener('keydown', escHandler);
-            }
-        });
-        
-        overlay.addEventListener('click', exitGodMode, { once: true });
-    }
-})();
-
-// Add rainbow shift animation
-if (!document.getElementById('konami-style')) {
-    const style = document.createElement('style');
-    style.id = 'konami-style';
-    style.textContent = `
-    @keyframes rainbowShift {
-        0% { filter: hue-rotate(0deg) saturate(2); }
-        25% { filter: hue-rotate(90deg) saturate(2); }
-        50% { filter: hue-rotate(180deg) saturate(2); }
-        75% { filter: hue-rotate(270deg) saturate(2); }
-        100% { filter: hue-rotate(360deg) saturate(2); }
-    }
-    `;
-    document.head.appendChild(style);
-}
-
-// Screen shake animation
-const style = document.createElement('style');
-style.textContent = `
-@keyframes screenShake {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-2px, 2px); }
-    20% { transform: translate(2px, -2px); }
-    30% { transform: translate(-2px, -2px); }
-    40% { transform: translate(2px, 2px); }
-    50% { transform: translate(-2px, 2px); }
-    60% { transform: translate(2px, -2px); }
-    70% { transform: translate(-2px, -2px); }
-    80% { transform: translate(2px, 2px); }
-    90% { transform: translate(-2px, 2px); }
-}
-`;
-document.head.appendChild(style);
-
 </script>
 
 	</body>

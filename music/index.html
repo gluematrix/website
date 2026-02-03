@@ -1,25 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-
-<!--
-   ████████╗██╗  ██╗███████╗     ██████╗ ██╗     ██╗   ██╗███████╗
-   ╚══██╔══╝██║  ██║██╔════╝    ██╔════╝ ██║     ██║   ██║██╔════╝
-      ██║   ███████║█████╗      ██║  ███╗██║     ██║   ██║█████╗  
-      ██║   ██╔══██║██╔══╝      ██║   ██║██║     ██║   ██║██╔══╝  
-      ██║   ██║  ██║███████╗    ╚██████╔╝███████╗╚██████╔╝███████╗
-      ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝
-   
-   You found the hidden layer.
-   The glue is everywhere.
-   Keep searching.
-   
-   - Jack @ Glue Matrix
--->
-   <!-- If you're reading this, you're already listening. -->
-
-
 	<head>
-        <meta name="theme-color" content="#000000">
 		<title>GLUE MATRIX - Music</title>
         <link rel="icon" type="image/png" href="/favicon.png">
         <meta name="description" content="Listen to Glue Matrix on Spotify, Apple Music, Tidal, and SoundCloud. Original music exploring the forces that connect us all.">
@@ -31,82 +12,6 @@
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
 
-            #header {
-    background: #000 !important;
-}
-
-/* Extend header to top of screen on iOS */
-#header {
-    background: #000 !important;
-    padding-top: env(safe-area-inset-top) !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 10000 !important;
-}
-
-/* Add padding to page content so it doesn't hide under header */
-.page-content {
-    padding-top: calc(6em + env(safe-area-inset-top)) !important;
-}
-
-/* ===== CRT GRAIN TEXTURE ===== */
-body::after {
-    content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    pointer-events: none;
-    z-index: 9995;
-    opacity: 0.025;
-    background-image: 
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(255, 255, 255, 0.05) 2px,
-            rgba(255, 255, 255, 0.05) 4px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(255, 255, 255, 0.03) 2px,
-            rgba(255, 255, 255, 0.03) 4px
-        );
-    animation: grainMove 8s steps(10) infinite;
-}
-
-@keyframes grainMove {
-    0% { transform: translate(0, 0); }
-    10% { transform: translate(-5%, -5%); }
-    20% { transform: translate(-10%, 5%); }
-    30% { transform: translate(5%, -10%); }
-    40% { transform: translate(-5%, 15%); }
-    50% { transform: translate(-15%, 5%); }
-    60% { transform: translate(10%, -15%); }
-    70% { transform: translate(-10%, 10%); }
-    80% { transform: translate(15%, -5%); }
-    90% { transform: translate(-5%, -10%); }
-    100% { transform: translate(0, 0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    body::after {
-        animation: none;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    body::after {
-        opacity: 0.015; /* Even more subtle on mobile */
-    }
-}
-
-
 
 html, body {
     height: 100%;
@@ -117,86 +22,21 @@ html, body {
 }
 
 
-/* ===== AWAKENING HOVER SYSTEM - REFOCUS EFFECT ===== */
+/* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
 .button,
 input[type="submit"],
 input[type="button"],
-button,
-a,
-#menu ul li a,
-#header h1 a {
-    filter: blur(0px);
-    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+button {
+    transition: all 0.3s ease !important;
     transform: translateY(0) scale(1) !important;
 }
 
-/* Quick blur pulse on hover */
 .button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,
 button:hover {
-    animation: refocus 300ms ease-out forwards;
-    transform: scale(1.02) !important;
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6) !important;
-}
-
-/* Refocus animation: sharp → slight blur → sharper */
-@keyframes refocus {
-    0% {
-        filter: blur(0px);
-    }
-    30% {
-        filter: blur(0.5px);
-    }
-    100% {
-        filter: blur(0px) brightness(1.05);
-    }
-}
-
-/* Chromatic Aberration on Key Elements */
-.button,
-#header h1 a {
-    position: relative;
-}
-
-.button::before,
-#header h1 a::before {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: rgba(0, 255, 255, 0.2);
-    transform: translate(-0.5px, 0);
-    transition: all 250ms ease-out;
-    pointer-events: none;
-}
-
-.button:hover::before,
-#header h1 a:hover::before {
-    transform: translate(0, 0);
-    opacity: 0;
-}
-
-.button.primary:hover {
-    box-shadow: 0 0 25px rgba(237, 73, 51, 0.6) !important;
-}
-
-a:hover {
-    animation: refocus 300ms ease-out forwards;
-    text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
-}
-
-#menu ul li a:hover {
-    animation: refocus 300ms ease-out forwards;
-    color: #00ffcc;
-    padding-left: 1.5em;
-    text-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
-}
-
-#header h1 a:hover {
-    animation: refocus 300ms ease-out forwards;
-    transform: scale(1.02);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 20px rgba(237, 73, 51, 0.6) !important;
 }
 
 /* GLUE MATRIX logo hover */
@@ -214,23 +54,6 @@ a:hover {
 #menu ul li a {
     transition: all 0.2s ease;
 }
-
-/* Menu Constellation Canvas */
-#menu-constellation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-#menu ul {
-    position: relative;
-    z-index: 1;
-}
-
 
 #menu ul li a:hover {
     color: #00ffcc;
@@ -255,15 +78,25 @@ a:hover {
     font-family: 'Digital7', monospace !important;
 }
 
-/* Email input and Subscribe button - SAME SIZE */
-#mailingListForm input[type="email"],
-#mailingListForm button.primary {
+/* Email input - keep normal size */
+#mailingListForm input[type="email"] {
     padding: 0.875em 1em !important;
     font-size: 1em !important;
     height: auto !important;
     line-height: 1.5 !important;
     text-align: center !important;
-    width: 100% !important;
+}
+
+/* Subscribe button - smaller */
+#mailingListForm button.primary {
+    padding: 0 2em !important;
+    font-size: 0.8em !important;
+    font-weight: 600 !important;
+    height: 3.125em !important;
+    letter-spacing: 0.225em !important;
+    line-height: 3.125em !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
 }
 
 #subscribeBtn,
@@ -272,9 +105,21 @@ a:hover {
     font-family: 'Digital7', monospace !important;
 }
 
-/* Full page background with integrated dark overlay */
+/* Dark overlay for readability */
+#page-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+
+
 body {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/assets/css/images/musicphoto.jpg');
+    position: relative;
+}
+
+/* Full page background for music */
+body {
+    background-image: url('/assets/css/images/musicphoto.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -282,8 +127,6 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    width: 100%;
-    position: relative;
 }
 
 /* Mobile: use scroll instead of fixed */
@@ -296,14 +139,7 @@ body {
 #page-wrapper {
     position: relative;
     z-index: 1;
-    background: transparent !important;
 }
-
-			    #footer {
-			        background: transparent !important;
-			        padding-bottom: calc(4em + env(safe-area-inset-bottom)) !important;
-			    }
-			
 
 .page-content {
     display: flex;
@@ -351,7 +187,7 @@ body {
     font-style: italic;
 }
 
-/* ===== ENHANCED VHS GLITCH TRANSITION ===== */
+/* ===== VHS GLITCH TRANSITION ===== */
 #page-transition {
     position: fixed;
     top: 0;
@@ -363,71 +199,26 @@ body {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
-    overflow: hidden;
 }
 
 #page-transition.active {
     opacity: 1;
     visibility: visible;
-    animation: glitchTransition 0.6s ease-in-out;
+    animation: glitchTransition 0.5s ease-in-out;
 }
 
 @keyframes glitchTransition {
-    0% { 
-        opacity: 0;
-        filter: brightness(1);
-    }
-    5% { 
-        opacity: 1;
-        filter: brightness(1.5) saturate(1.5);
-    }
-    10% { 
-        opacity: 1;
-        background: #000;
-    }
-    15% {
-        clip-path: inset(20% 0 60% 0);
-        transform: translateX(-8px);
-        filter: hue-rotate(90deg) brightness(1.3);
-    }
-    20% {
-        clip-path: inset(50% 0 30% 0);
-        transform: translateX(8px);
-        filter: hue-rotate(180deg) brightness(1.5);
-        background: rgba(255, 0, 255, 0.1);
-    }
-    25% {
-        clip-path: inset(10% 0 70% 0);
-        transform: translateX(-5px);
-        filter: hue-rotate(270deg) brightness(1.2);
-        background: rgba(0, 255, 255, 0.1);
-    }
-    30% {
-        clip-path: inset(70% 0 10% 0);
-        transform: translateX(5px);
-        filter: hue-rotate(45deg) brightness(1.4);
-        background: rgba(255, 255, 0, 0.1);
-    }
-    35% {
-        clip-path: inset(40% 0 40% 0);
-        transform: translateX(0);
-        filter: brightness(2) saturate(2);
-    }
-    40% {
-        clip-path: inset(0);
-        opacity: 1;
-        filter: hue-rotate(0deg);
-    }
-    50% {
-        opacity: 1;
-        filter: brightness(1);
-    }
-    100% { 
-        opacity: 0;
-    }
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    20% { opacity: 1; clip-path: inset(20% 0 60% 0); transform: translateX(-5px); }
+    25% { clip-path: inset(50% 0 30% 0); transform: translateX(5px); }
+    30% { clip-path: inset(10% 0 70% 0); transform: translateX(-3px); }
+    35% { clip-path: inset(70% 0 10% 0); transform: translateX(3px); }
+    40% { clip-path: inset(40% 0 40% 0); transform: translateX(0); }
+    50% { clip-path: inset(0); opacity: 1; }
+    100% { opacity: 0; }
 }
 
-/* RGB Color Split Effect */
 #page-transition::before {
     content: '';
     position: absolute;
@@ -439,61 +230,11 @@ body {
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 255, 204, 0.05) 2px,
-        rgba(0, 255, 204, 0.05) 4px
+        rgba(0, 255, 204, 0.03) 2px,
+        rgba(0, 255, 204, 0.03) 4px
     );
-    animation: scanlines 0.1s linear infinite;
-    mix-blend-mode: screen;
 }
 
-/* Chromatic Aberration Layer - Red */
-#page-transition::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        rgba(255, 0, 0, 0.2) 0%,
-        transparent 20%,
-        transparent 80%,
-        rgba(0, 255, 255, 0.2) 100%
-    );
-    animation: rgbSplit 0.2s ease-in-out infinite;
-    mix-blend-mode: screen;
-}
-
-@keyframes scanlines {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(4px); }
-}
-
-@keyframes rgbSplit {
-    0% { 
-        transform: translateX(-3px);
-        opacity: 0.8;
-    }
-    25% { 
-        transform: translateX(3px);
-        opacity: 1;
-    }
-    50% { 
-        transform: translateX(-2px);
-        opacity: 0.8;
-    }
-    75% { 
-        transform: translateX(2px);
-        opacity: 1;
-    }
-    100% { 
-        transform: translateX(-3px);
-        opacity: 0.8;
-    }
-}
-
-/* VHS Static Noise */
 .glitch-text {
     position: absolute;
     top: 50%;
@@ -501,216 +242,25 @@ body {
     transform: translate(-50%, -50%);
     font-family: 'Digital7', monospace;
     font-size: 2em;
-    color: #fff;
+    color: #00ffcc;
     text-shadow: 
-        3px 0 #ff00ff,
-        -3px 0 #00ffff,
-        0 3px #ffff00,
-        0 -3px #ff0000;
-    animation: textGlitch 0.15s ease-in-out infinite;
-    filter: brightness(1.5);
+        2px 0 #ff0000,
+        -2px 0 #00ffff;
+    animation: textGlitch 0.3s ease-in-out infinite;
 }
 
 @keyframes textGlitch {
-    0% { 
-        text-shadow: 
-            3px 0 #ff00ff,
-            -3px 0 #00ffff,
-            0 3px #ffff00;
-        transform: translate(-50%, -50%) skew(0deg);
-        filter: brightness(1.5) saturate(1.5);
-    }
-    20% { 
-        text-shadow: 
-            -3px 0 #ff0000,
-            3px 0 #00ff00,
-            0 -3px #0000ff;
-        transform: translate(-51%, -50%) skew(2deg);
-        filter: brightness(2) saturate(2);
-    }
-    40% { 
-        text-shadow: 
-            2px 0 #ffff00,
-            -2px 0 #ff00ff,
-            0 2px #00ffff;
-        transform: translate(-50%, -51%) skew(-1deg);
-        filter: brightness(1.8) saturate(1.8);
-    }
-    60% { 
-        text-shadow: 
-            -2px 0 #00ffff,
-            2px 0 #ff00ff,
-            0 -2px #ffff00;
-        transform: translate(-49%, -50%) skew(1deg);
-        filter: brightness(1.6) saturate(1.6);
-    }
-    80% { 
-        text-shadow: 
-            4px 0 #ff0000,
-            -4px 0 #00ff00,
-            0 4px #0000ff;
-        transform: translate(-50%, -49%) skew(-2deg);
-        filter: brightness(2.2) saturate(2);
-    }
-    100% { 
-        text-shadow: 
-            3px 0 #ff00ff,
-            -3px 0 #00ffff,
-            0 3px #ffff00;
-        transform: translate(-50%, -50%) skew(0deg);
-        filter: brightness(1.5) saturate(1.5);
-    }
+    0%, 100% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(-50%, -50%); }
+    25% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; transform: translate(-51%, -50%); }
+    50% { text-shadow: 1px 0 #ff0000, -1px 0 #00ffff; transform: translate(-50%, -51%); }
+    75% { text-shadow: -1px 0 #ff0000, 1px 0 #00ffff; transform: translate(-49%, -50%); }
 }
-
-/* ===== AUDIO WAVEFORM EASTER EGG ===== */
-#waveform-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-#waveform-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-#waveform-canvas {
-    width: 100%;
-    height: 100%;
-}
-
-#waveform-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: #fff;
-    font-size: 0.8em;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    font-family: 'Analogue OS', sans-serif;
-    text-shadow: 0 0 10px rgba(0,255,204,0.8);
-}
-
-.easter-egg-trigger {
-    cursor: default;
-    transition: text-shadow 0.3s ease;
-}
-
-.easter-egg-trigger:hover {
-    text-shadow: 0 0 10px #00ffcc;
-}
-
-
-
-/* Easter Egg Tracker */
-#egg-tracker {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 9997;
-    display: flex;
-    gap: 8px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-#egg-tracker.visible {
-    opacity: 0.3;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-#egg-tracker.visible:hover {
-    opacity: 1;
-}
-
-.egg-circle {
-    width: 12px;
-    height: 12px;
-    border: 2px solid #00ffcc;
-    border-radius: 50%;
-    background: transparent;
-    transition: all 0.5s ease;
-}
-
-.egg-circle.found {
-    background: #00ffcc;
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
-    animation: eggPulse 2s infinite;
-}
-
-@keyframes eggPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.2); opacity: 0.8; }
-}
-
-/* God Mode Overlay */
-#god-mode-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 99999;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-
-#god-mode-overlay.active {
-    display: flex;
-    opacity: 1;
-}
-
-#god-mode-message {
-    font-family: 'Digital7', monospace;
-    font-size: 3em;
-    color: #00ffcc;
-    text-shadow: 0 0 30px rgba(0, 255, 204, 1);
-    animation: glitchText 0.3s infinite;
-}
-
 		</style>
 	</head>
-
-<!-- Easter Egg Tracker -->
-        <div id="egg-tracker">
-            <div class="egg-circle" data-egg="home"></div>
-            <div class="egg-circle" data-egg="services"></div>
-            <div class="egg-circle" data-egg="music"></div>
-            <div class="egg-circle" data-egg="about"></div>
-            <div class="egg-circle" data-egg="contact"></div>
-        </div>
-
-        <!-- God Mode Overlay -->
-        <div id="god-mode-overlay">
-            <div id="god-mode-message">YOU'VE DECIPHERED THE MATRIX</div>
-        </div>
-
 	<body>
 
 		<!-- VHS Glitch Transition -->
 		<div id="page-transition">
-		</div>
-
-		<!-- Audio Waveform Easter Egg Overlay -->
-		<div id="waveform-overlay">
-		    <canvas id="waveform-canvas"></canvas>
-		    <div id="waveform-close">Press ESC or click anywhere to close</div>
 		</div>
 
 		<!-- Page Wrapper -->
@@ -724,7 +274,6 @@ body {
 								<li class="special">
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
-										<canvas id="menu-constellation"></canvas>
 										<ul>
 											<li><a href="/">Home</a></li>
 											<li><a href="/services/">Services</a></li>
@@ -753,7 +302,7 @@ body {
 
     <!-- Coming Soon Message -->
     <div class="coming-soon">
-        <p>New music coming soon<span class="easter-egg-trigger" id="easter-egg-trigger">.</span></p>
+        <p>New music coming soon.</p>
     </div>
 
 <!-- Email Signup -->
@@ -762,7 +311,7 @@ body {
     <p style="font-size: 0.9em; margin-bottom: 1.5em;">Get updates on new releases, shows, and exclusive content.</p>
     <form id="mailingListForm" action="https://formspree.io/f/mqeqpqdr" method="POST" style="display: flex; gap: 0.5em; flex-direction: column;">
         <input type="email" name="email" placeholder="Your email" required style="padding: 0.75em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 3px;">
-        <button type="submit" class="primary" id="subscribeBtn" style="font-family: 'Digital7', monospace !important;">
+        <button type="submit" class="primary" id="subscribeBtn" style="width: 100%; font-family: 'Digital7', monospace !important;">
             <span class="sub-text">Subscribe</span>
             <span class="sub-loading" style="display: none;">Subscribing...</span>
         </button>
@@ -861,441 +410,6 @@ document.getElementById('mailingListForm').addEventListener('submit', function(e
         });
     });
 })();
-
-// ===== MENU CONSTELLATION EFFECT =====
-(function() {
-    const menu = document.getElementById('menu');
-    const canvas = document.getElementById('menu-constellation');
-    
-    if (!canvas || !menu) return;
-    
-    const ctx = canvas.getContext('2d');
-    let nodes = [];
-    let animating = false;
-    
-    function resize() {
-        canvas.width = menu.offsetWidth;
-        canvas.height = menu.offsetHeight;
-    }
-    
-    function getMenuItemPositions() {
-        const items = menu.querySelectorAll('ul li');
-        const positions = [];
-        
-        items.forEach(item => {
-            const rect = item.getBoundingClientRect();
-            const menuRect = menu.getBoundingClientRect();
-            positions.push({
-                x: rect.left - menuRect.left + rect.width / 2,
-                y: rect.top - menuRect.top + rect.height / 2
-            });
-        });
-        
-        return positions;
-    }
-    
-    function drawConstellation(progress) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = 'rgba(0, 255, 204, 0.3)';
-        ctx.fillStyle = '#00ffcc';
-        ctx.lineWidth = 1.5;
-        
-        // Draw lines
-        for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-                const alpha = progress * 0.3;
-                ctx.strokeStyle = `rgba(0, 255, 204, ${alpha})`;
-                
-                ctx.beginPath();
-                ctx.moveTo(nodes[i].x, nodes[i].y);
-                
-                // Curved line
-                const midX = (nodes[i].x + nodes[j].x) / 2 + (Math.sin(progress * Math.PI) * 20);
-                const midY = (nodes[i].y + nodes[j].y) / 2;
-                ctx.quadraticCurveTo(midX, midY, nodes[j].x, nodes[j].y);
-                ctx.stroke();
-            }
-        }
-        
-        // Draw nodes
-        nodes.forEach((node, i) => {
-            const delay = i * 0.1;
-            const nodeProgress = Math.max(0, Math.min(1, (progress - delay) / 0.3));
-            const pulse = 1 + Math.sin(progress * Math.PI * 4 + i) * 0.2;
-            const radius = 4 * nodeProgress * pulse;
-            
-            ctx.globalAlpha = nodeProgress;
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Glow
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = '#00ffcc';
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0;
-            ctx.globalAlpha = 1;
-        });
-    }
-    
-    function animate() {
-        let startTime = Date.now();
-        animating = true;
-        
-        function frame() {
-            if (!menu.classList.contains('active')) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                animating = false;
-                return;
-            }
-            
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(1, elapsed / 1000);
-            
-            drawConstellation(progress);
-            
-            requestAnimationFrame(frame);
-        }
-        
-        frame();
-    }
-    
-    // Watch for menu open/close
-    const observer = new MutationObserver(() => {
-        if (menu.classList.contains('active')) {
-            resize();
-            nodes = getMenuItemPositions();
-            if (!animating) animate();
-        } else {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            animating = false;
-        }
-    });
-    
-    observer.observe(menu, { attributes: true, attributeFilter: ['class'] });
-})();
-
-// ===== AUDIO WAVEFORM EASTER EGG =====
-(function() {
-    const overlay = document.getElementById('waveform-overlay');
-    const canvas = document.getElementById('waveform-canvas');
-    const trigger = document.getElementById('easter-egg-trigger');
-    
-    let animationId = null;
-    let isActive = false;
-    
-    const ctx = canvas.getContext('2d');
-    let time = 0;
-    let mouseX = 0;
-    let mouseY = 0;
-    let trails = [];
-    
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    
-    document.addEventListener('mousemove', (e) => {
-        if (isActive) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        }
-    });
-    
-    document.addEventListener('touchmove', (e) => {
-        if (isActive && e.touches.length > 0) {
-            mouseX = e.touches[0].clientX;
-            mouseY = e.touches[0].clientY;
-        }
-    });
-    
-    function drawWaveform() {
-        if (!isActive) return;
-        
-        const width = canvas.width;
-        const height = canvas.height;
-        const centerY = height / 2;
-        
-        // Fade effect
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-        ctx.fillRect(0, 0, width, height);
-        
-        // Add trail point
-        if (mouseX > 0 || mouseY > 0) {
-            trails.push({ x: mouseX, y: mouseY, life: 100 });
-        }
-        
-        // Draw trails
-        trails = trails.filter(trail => trail.life > 0);
-        trails.forEach((trail, i) => {
-            const alpha = trail.life / 100;
-            const hue = (time * 2 + i * 10) % 360;
-            ctx.fillStyle = `hsla(${hue}, 85%, 70%, ${alpha * 0.5})`;
-            ctx.beginPath();
-            ctx.arc(trail.x, trail.y, 5, 0, Math.PI * 2);
-            ctx.fill();
-            trail.life -= 2;
-        });
-        
-        // Draw reactive waveforms
-        const barCount = 80;
-        const barWidth = width / barCount;
-        
-        for (let i = 0; i < barCount; i++) {
-            const x = i * barWidth;
-            
-            // React to mouse position
-            const distanceFromMouse = Math.abs(mouseX - x);
-            const influence = Math.max(0, 1 - distanceFromMouse / (width * 0.3));
-            
-            // Base wave + mouse influence
-            const waveHeight = Math.sin(time * 0.05 + i * 0.2) * 50;
-            const mouseInfluence = influence * 100;
-            const totalHeight = Math.abs(waveHeight) + mouseInfluence;
-            
-            const hue = (time * 2 + i * 3) % 360;
-            
-            // Draw bars
-            ctx.fillStyle = `hsla(${hue}, 85%, 70%, 0.8)`;
-            ctx.fillRect(x, centerY - totalHeight / 2, barWidth - 2, totalHeight);
-            
-            // Glow effect
-            ctx.fillStyle = `hsla(${hue}, 85%, 70%, 0.3)`;
-            ctx.fillRect(x, centerY - totalHeight / 2 - 10, barWidth - 2, totalHeight + 20);
-        }
-        
-        time += 1;
-        animationId = requestAnimationFrame(drawWaveform);
-    }
-    
-    function activate() {
-        isActive = true;
-        time = 0;
-        trails = [];
-        overlay.classList.add('active');
-        drawWaveform();
-    }
-    
-    function deactivate() {
-        isActive = false;
-        overlay.classList.remove('active');
-        if (animationId) cancelAnimationFrame(animationId);
-    }
-    
-    trigger.addEventListener('click', activate);
-    overlay.addEventListener('click', deactivate);
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isActive) deactivate();
-    });
-})();
-
-// ===== EASTER EGG TRACKING SYSTEM =====
-(function() {
-    const eggs = {
-        home: false,
-        services: false,
-        music: false,
-        about: false,
-        contact: false
-    };
-    
-    // Load from localStorage
-    const saved = localStorage.getItem('glueMatrixEggs');
-    if (saved) {
-        const savedEggs = JSON.parse(saved);
-        Object.assign(eggs, savedEggs);
-    }
-    
-    // Update UI
-    function updateTracker() {
-        Object.keys(eggs).forEach(key => {
-            const circle = document.querySelector(`.egg-circle[data-egg="${key}"]`);
-            if (circle && eggs[key]) {
-                circle.classList.add('found');
-            }
-        });
-        
-        // Check if all found
-        if (Object.values(eggs).every(v => v === true)) {
-            setTimeout(triggerGodMode, 500);
-        }
-    }
-    
-    // Mark egg as found
-    window.markEggFound = function(eggName) {
-        if (!eggs[eggName]) {
-            eggs[eggName] = true;
-            localStorage.setItem('glueMatrixEggs', JSON.stringify(eggs));
-            updateTracker();
-        }
-    };
-    
-    // Auto-mark based on page
-    const pageName = window.location.pathname.includes('/services') ? 'services' :
-                     window.location.pathname.includes('/music') ? 'music' :
-                     window.location.pathname.includes('/about') ? 'about' :
-                     window.location.pathname.includes('/contact') ? 'contact' : 'home';
-    
-    // Listen for easter egg triggers on this page
-    const eggTrigger = document.getElementById('easter-egg-trigger');
-    if (eggTrigger) {
-        eggTrigger.addEventListener('click', function() {
-            markEggFound(pageName);
-        });
-    }
-    
-// God Mode
-function triggerGodMode() {
-    const overlay = document.getElementById('god-mode-overlay');
-    
-    // Check if already shown this session
-    if (sessionStorage.getItem('godModeShown')) return;
-    
-    overlay.classList.add('active');
-    sessionStorage.setItem('godModeShown', 'true');
-    
-    // Activate ALL effects
-    document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
-    document.body.style.animation = 'screenShake 0.5s infinite';
-    
-    setTimeout(() => {
-        overlay.classList.remove('active');
-        document.body.style.filter = '';
-        document.body.style.animation = '';
-    }, 5000);
-}
-
-// Add reset functionality (Shift + R)
-document.addEventListener('keydown', (e) => {
-    if (e.shiftKey && e.key === 'R') {
-        if (confirm('Reset all easter eggs?')) {
-            localStorage.removeItem('glueMatrixEggs');
-            sessionStorage.removeItem('godModeShown');
-            location.reload();
-        }
-    }
-});
-    updateTracker();
-})();
-
-// ===== EASTER EGG TRACKER SCROLL VISIBILITY =====
-(function() {
-    const tracker = document.getElementById('egg-tracker');
-    if (!tracker) return;
-    
-    function checkScroll() {
-        const scrollPosition = window.scrollY + window.innerHeight;
-        const pageHeight = document.documentElement.scrollHeight;
-        
-        // Show tracker when within 200px of bottom
-        if (pageHeight - scrollPosition < 200) {
-            tracker.classList.add('visible');
-        } else {
-            tracker.classList.remove('visible');
-        }
-    }
-    
-    // Check on scroll
-    window.addEventListener('scroll', checkScroll);
-    
-    // Check on page load
-    checkScroll();
-})();
-
-// ===== KONAMI CODE EASTER EGG =====
-(function() {
-    const code = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-    let position = 0;
-    
-    document.addEventListener('keydown', (e) => {
-        const key = e.key.toLowerCase();
-        
-        if (key === code[position] || e.key === code[position]) {
-            position++;
-            
-            if (position === code.length) {
-                activateGodMode();
-                position = 0;
-            }
-        } else {
-            position = 0;
-        }
-    });
-    
-    function activateGodMode() {
-        const overlay = document.getElementById('god-mode-overlay');
-        if (!overlay) return;
-        
-        overlay.classList.add('active');
-        
-        // Activate all visual effects
-        document.body.style.filter = 'hue-rotate(360deg) saturate(2) brightness(1.2)';
-        document.body.style.animation = 'screenShake 0.5s infinite, rainbowShift 3s infinite';
-        
-        // Trigger all easter eggs if possible
-        const eggTriggers = document.querySelectorAll('.easter-egg-trigger');
-        eggTriggers.forEach(trigger => {
-            if (trigger.click) trigger.click();
-        });
-        
-        // Exit after 5 seconds or ESC
-        const exitGodMode = () => {
-            overlay.classList.remove('active');
-            document.body.style.filter = '';
-            document.body.style.animation = '';
-        };
-        
-        setTimeout(exitGodMode, 5000);
-        
-        document.addEventListener('keydown', function escHandler(e) {
-            if (e.key === 'Escape') {
-                exitGodMode();
-                document.removeEventListener('keydown', escHandler);
-            }
-        });
-        
-        overlay.addEventListener('click', exitGodMode, { once: true });
-    }
-})();
-
-// Add rainbow shift animation
-if (!document.getElementById('konami-style')) {
-    const style = document.createElement('style');
-    style.id = 'konami-style';
-    style.textContent = `
-    @keyframes rainbowShift {
-        0% { filter: hue-rotate(0deg) saturate(2); }
-        25% { filter: hue-rotate(90deg) saturate(2); }
-        50% { filter: hue-rotate(180deg) saturate(2); }
-        75% { filter: hue-rotate(270deg) saturate(2); }
-        100% { filter: hue-rotate(360deg) saturate(2); }
-    }
-    `;
-    document.head.appendChild(style);
-}
-
-// Screen shake animation
-const style = document.createElement('style');
-style.textContent = `
-@keyframes screenShake {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-2px, 2px); }
-    20% { transform: translate(2px, -2px); }
-    30% { transform: translate(-2px, -2px); }
-    40% { transform: translate(2px, 2px); }
-    50% { transform: translate(-2px, 2px); }
-    60% { transform: translate(2px, -2px); }
-    70% { transform: translate(-2px, -2px); }
-    80% { transform: translate(2px, 2px); }
-    90% { transform: translate(-2px, 2px); }
-}
-`;
-document.head.appendChild(style);
-
 </script>
 
 	</body>

@@ -1,23 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-
-<!--
-   ████████╗██╗  ██╗███████╗     ██████╗ ██╗     ██╗   ██╗███████╗
-   ╚══██╔══╝██║  ██║██╔════╝    ██╔════╝ ██║     ██║   ██║██╔════╝
-      ██║   ███████║█████╗      ██║  ███╗██║     ██║   ██║█████╗  
-      ██║   ██╔══██║██╔══╝      ██║   ██║██║     ██║   ██║██╔══╝  
-      ██║   ██║  ██║███████╗    ╚██████╔╝███████╗╚██████╔╝███████╗
-      ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝
-   
-   You found the hidden layer.
-   The glue is everywhere.
-   Keep searching.
-   
-   - Jack @ Glue Matrix
--->
-<!-- Much love to all beings everywhere. -->
 	<head>
-		<meta name="theme-color" content="#000000">
 		<title>GLUE MATRIX - Home</title>
         <link rel="icon" type="image/png" href="favicon.png">
         <meta name="description" content="Glue Matrix - Professional music mixing, recording, and sound design focused on clarity, depth, and emotion. Elevate your sound to its highest potential.">
@@ -28,72 +11,6 @@
 		<link rel="stylesheet" href="assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 <style>
-html {
-    background-color: rgba(255, 255, 255, 0.01);
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
-}
-
-#header {
-    background-color: rgba(255, 255, 255, 0.01) !important;
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)) !important;
-}
-
-/* ===== CRT GRAIN TEXTURE ===== */
-body::after {
-    content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    pointer-events: none;
-    z-index: 9995;
-    opacity: 0.025;
-    background-image: 
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(255, 255, 255, 0.05) 2px,
-            rgba(255, 255, 255, 0.05) 4px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(255, 255, 255, 0.03) 2px,
-            rgba(255, 255, 255, 0.03) 4px
-        );
-    animation: grainMove 8s steps(10) infinite;
-}
-
-@keyframes grainMove {
-    0% { transform: translate(0, 0); }
-    10% { transform: translate(-5%, -5%); }
-    20% { transform: translate(-10%, 5%); }
-    30% { transform: translate(5%, -10%); }
-    40% { transform: translate(-5%, 15%); }
-    50% { transform: translate(-15%, 5%); }
-    60% { transform: translate(10%, -15%); }
-    70% { transform: translate(-10%, 10%); }
-    80% { transform: translate(15%, -5%); }
-    90% { transform: translate(-5%, -10%); }
-    100% { transform: translate(0, 0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    body::after {
-        animation: none;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    body::after {
-        opacity: 0.015; /* Even more subtle on mobile */
-    }
-}
-
-
 html, body {
     height: 100%;
 }
@@ -102,86 +19,25 @@ html, body {
     min-height: 100%;
 }
 
-/* ===== AWAKENING HOVER SYSTEM - REFOCUS EFFECT ===== */
+/* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
 .button,
 input[type="submit"],
 input[type="button"],
-button,
-a,
-#menu ul li a,
-#header h1 a {
-    filter: blur(0px);
-    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+button {
+    transition: all 0.3s ease !important;
     transform: translateY(0) scale(1) !important;
 }
 
-/* Quick blur pulse on hover */
 .button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,
 button:hover {
-    animation: refocus 300ms ease-out forwards;
-    transform: scale(1.02) !important;
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6) !important;
-}
-
-/* Refocus animation: sharp → slight blur → sharper */
-@keyframes refocus {
-    0% {
-        filter: blur(0px);
-    }
-    30% {
-        filter: blur(0.5px);
-    }
-    100% {
-        filter: blur(0px) brightness(1.05);
-    }
-}
-
-/* Chromatic Aberration on Key Elements */
-.button,
-#header h1 a {
-    position: relative;
-}
-
-.button::before,
-#header h1 a::before {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: rgba(0, 255, 255, 0.2);
-    transform: translate(-0.5px, 0);
-    transition: all 250ms ease-out;
-    pointer-events: none;
-}
-
-.button:hover::before,
-#header h1 a:hover::before {
-    transform: translate(0, 0);
-    opacity: 0;
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6) !important;
 }
 
 .button.primary:hover {
-    box-shadow: 0 0 25px rgba(237, 73, 51, 0.6) !important;
-}
-
-a:hover {
-    animation: refocus 300ms ease-out forwards;
-    text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
-}
-
-#menu ul li a:hover {
-    animation: refocus 300ms ease-out forwards;
-    color: #00ffcc;
-    padding-left: 1.5em;
-    text-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
-}
-
-#header h1 a:hover {
-    animation: refocus 300ms ease-out forwards;
-    transform: scale(1.02);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20px rgba(237, 73, 51, 0.6) !important;
 }
 
 /* GLUE MATRIX logo hover */
@@ -200,22 +56,6 @@ a:hover {
     transition: all 0.2s ease;
 }
 
-/* Menu Constellation Canvas */
-#menu-constellation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-#menu ul {
-    position: relative;
-    z-index: 1;
-}
-
 #menu ul li a:hover {
     color: #00ffcc;
     padding-left: 1.5em;
@@ -232,8 +72,11 @@ a:hover {
 
 /* Full page background with integrated dark overlay */
 body {
-    background-color: rgba(255, 255, 255, 0.01);
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/css/images/homephoto.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -241,78 +84,17 @@ body {
     position: relative;
 }
 
-/* Background image on page wrapper instead of body */
-#page-wrapper {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/css/images/homephoto.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-}
-
-/* ===== MOBILE FIXES - SOLID BLACK STATUS BAR & FOOTER ===== */
+/* Mobile: use scroll instead of fixed */
 @media screen and (max-width: 980px) {
-    html {
-        background-color: #000 !important;
-        min-height: 100%;
-        height: 100%;
-    }
-    
     body {
-        background-color: #000 !important;
-        background-image: none !important;
-        min-height: 100vh;
-        min-height: -webkit-fill-available;
-        padding-bottom: 0;
-        padding-top: 0;
-    }
-    
-    /* Header stays at top */
-    #header {
-        background: #000 !important;
-    }
-    
-    /* Page wrapper has the background image on mobile */
-    #page-wrapper {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/css/images/homephoto.jpg');
-        background-size: cover;
-        background-position: center top;
         background-attachment: scroll;
-        background-repeat: no-repeat;
-        padding-top: 0;
-    }
-    
-    .home-content {
-        min-height: 100vh;
-        padding-bottom: calc(8em + env(safe-area-inset-bottom));
-    }
-    
-    #footer {
-        background: transparent !important;
-        padding-bottom: calc(4em + env(safe-area-inset-bottom)) !important;
-    }
-}
-
-/* iOS Safari -webkit-fill-available support */
-@supports (-webkit-touch-callout: none) {
-    html {
-        height: -webkit-fill-available;
-    }
-    body {
-        min-height: -webkit-fill-available;
     }
 }
 
 #page-wrapper {
     position: relative;
     z-index: 1;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/css/images/homephoto.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
-    background-repeat: no-repeat;
-    min-height: 100vh;
+    background: transparent !important; 
 }
 
 .home-content {
@@ -424,7 +206,7 @@ body {
     }
 }
 
-/* ===== ENHANCED VHS GLITCH TRANSITION ===== */
+/* ===== VHS GLITCH TRANSITION ===== */
 #page-transition {
     position: fixed;
     top: 0;
@@ -436,92 +218,27 @@ body {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
-    overflow: hidden;
 }
 
 #page-transition.active {
     opacity: 1;
     visibility: visible;
-    animation: glitchTransition 0.6s ease-in-out;
+    animation: glitchTransition 0.5s ease-in-out;
 }
 
 @keyframes glitchTransition {
-    0% { 
-        opacity: 0;
-        filter: brightness(1);
-    }
-    5% { 
-        opacity: 1;
-        filter: brightness(1.5) saturate(1.5);
-    }
-    10% { 
-        opacity: 1;
-        background: #000;
-    }
-    15% {
-        clip-path: inset(20% 0 60% 0);
-        transform: translateX(-8px);
-        filter: hue-rotate(90deg) brightness(1.3);
-    }
-    20% {
-        clip-path: inset(50% 0 30% 0);
-        transform: translateX(8px);
-        filter: hue-rotate(180deg) brightness(1.5);
-        background: rgba(255, 0, 255, 0.1);
-    }
-    25% {
-        clip-path: inset(10% 0 70% 0);
-        transform: translateX(-5px);
-        filter: hue-rotate(270deg) brightness(1.2);
-        background: rgba(0, 255, 255, 0.1);
-    }
-    30% {
-        clip-path: inset(70% 0 10% 0);
-        transform: translateX(5px);
-        filter: hue-rotate(45deg) brightness(1.4);
-        background: rgba(255, 255, 0, 0.1);
-    }
-    35% {
-        clip-path: inset(40% 0 40% 0);
-        transform: translateX(0);
-        filter: brightness(2) saturate(2);
-    }
-    40% {
-        clip-path: inset(0);
-        opacity: 1;
-        filter: hue-rotate(0deg);
-    }
-    50% {
-        opacity: 1;
-        filter: brightness(1);
-    }
-    100% { 
-        opacity: 0;
-    }
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    20% { opacity: 1; clip-path: inset(20% 0 60% 0); transform: translateX(-5px); }
+    25% { clip-path: inset(50% 0 30% 0); transform: translateX(5px); }
+    30% { clip-path: inset(10% 0 70% 0); transform: translateX(-3px); }
+    35% { clip-path: inset(70% 0 10% 0); transform: translateX(3px); }
+    40% { clip-path: inset(40% 0 40% 0); transform: translateX(0); }
+    50% { clip-path: inset(0); opacity: 1; }
+    100% { opacity: 0; }
 }
 
-
-
-/* RGB Color Split Effect */
-#page-transition::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 255, 204, 0.05) 2px,
-        rgba(0, 255, 204, 0.05) 4px
-    );
-    animation: scanlines 0.1s linear infinite;
-    mix-blend-mode: screen;
-}
-
-/* Chromatic Aberration Layer - Red */
+#page-transition::before,
 #page-transition::after {
     content: '';
     position: absolute;
@@ -529,15 +246,27 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+#page-transition::before {
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 204, 0.03) 2px,
+        rgba(0, 255, 204, 0.03) 4px
+    );
+    animation: scanlines 0.1s linear infinite;
+}
+
+#page-transition::after {
     background: linear-gradient(
         90deg,
-        rgba(255, 0, 0, 0.2) 0%,
-        transparent 20%,
-        transparent 80%,
-        rgba(0, 255, 255, 0.2) 100%
+        transparent 0%,
+        rgba(0, 255, 204, 0.1) 50%,
+        transparent 100%
     );
-    animation: rgbSplit 0.2s ease-in-out infinite;
-    mix-blend-mode: screen;
+    animation: glitchBar 0.2s ease-in-out infinite;
 }
 
 @keyframes scanlines {
@@ -545,146 +274,10 @@ body {
     100% { transform: translateY(4px); }
 }
 
-@keyframes rgbSplit {
-    0% { 
-        transform: translateX(-3px);
-        opacity: 0.8;
-    }
-    25% { 
-        transform: translateX(3px);
-        opacity: 1;
-    }
-    50% { 
-        transform: translateX(-2px);
-        opacity: 0.8;
-    }
-    75% { 
-        transform: translateX(2px);
-        opacity: 1;
-    }
-    100% { 
-        transform: translateX(-3px);
-        opacity: 0.8;
-    }
+@keyframes glitchBar {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
 }
-
-/* VHS Static Noise */
-.glitch-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Digital7', monospace;
-    font-size: 2em;
-    color: #fff;
-    text-shadow: 
-        3px 0 #ff00ff,
-        -3px 0 #00ffff,
-        0 3px #ffff00,
-        0 -3px #ff0000;
-    animation: textGlitch 0.15s ease-in-out infinite;
-    filter: brightness(1.5);
-}
-
-@keyframes textGlitch {
-    0% { 
-        text-shadow: 
-            3px 0 #ff00ff,
-            -3px 0 #00ffff,
-            0 3px #ffff00;
-        transform: translate(-50%, -50%) skew(0deg);
-        filter: brightness(1.5) saturate(1.5);
-    }
-    20% { 
-        text-shadow: 
-            -3px 0 #ff0000,
-            3px 0 #00ff00,
-            0 -3px #0000ff;
-        transform: translate(-51%, -50%) skew(2deg);
-        filter: brightness(2) saturate(2);
-    }
-    40% { 
-        text-shadow: 
-            2px 0 #ffff00,
-            -2px 0 #ff00ff,
-            0 2px #00ffff;
-        transform: translate(-50%, -51%) skew(-1deg);
-        filter: brightness(1.8) saturate(1.8);
-    }
-    60% { 
-        text-shadow: 
-            -2px 0 #00ffff,
-            2px 0 #ff00ff,
-            0 -2px #ffff00;
-        transform: translate(-49%, -50%) skew(1deg);
-        filter: brightness(1.6) saturate(1.6);
-    }
-    80% { 
-        text-shadow: 
-            4px 0 #ff0000,
-            -4px 0 #00ff00,
-            0 4px #0000ff;
-        transform: translate(-50%, -49%) skew(-2deg);
-        filter: brightness(2.2) saturate(2);
-    }
-    100% { 
-        text-shadow: 
-            3px 0 #ff00ff,
-            -3px 0 #00ffff,
-            0 3px #ffff00;
-        transform: translate(-50%, -50%) skew(0deg);
-        filter: brightness(1.5) saturate(1.5);
-    }
-}
-
-
-
-
-
-
-
-/* ===== LIVE PSYCHEDELIC BACKGROUND ===== */
-#live-psychedelic-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0;
-    display: none; /* HIDDEN BY DEFAULT */
-    transition: opacity 0.5s ease;
-}
-
-#live-psychedelic-bg.unlocked {
-    display: block;
-    opacity: 0.12;
-}
-
-@media screen and (max-width: 768px) {
-    #live-psychedelic-bg.unlocked {
-        opacity: 0.08;
-    }
-}
-
-#live-psychedelic-canvas {
-    width: 100%;
-    height: 100%;
-}
-
-@media screen and (max-width: 768px) {
-    #live-psychedelic-bg {
-        opacity: 0.08;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    #live-psychedelic-bg {
-        display: none;
-    }
-}
-
 
 /* ===== EASTER EGG PSYCHEDELIC OVERLAY ===== */
 #psychedelic-overlay {
@@ -732,105 +325,9 @@ body {
 .easter-egg-trigger:hover {
     text-shadow: 0 0 10px #00ffcc;
 }
-
-
-
-/* Easter Egg Tracker */
-#egg-tracker {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 9997;
-    display: flex;
-    gap: 8px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-#egg-tracker.visible {
-    opacity: 0.3;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-#egg-tracker.visible:hover {
-    opacity: 1;
-}
-
-.egg-circle {
-    width: 12px;
-    height: 12px;
-    border: 2px solid #00ffcc;
-    border-radius: 50%;
-    background: transparent;
-    transition: all 0.5s ease;
-}
-
-.egg-circle.found {
-    background: #00ffcc;
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
-    animation: eggPulse 2s infinite;
-}
-
-@keyframes eggPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.2); opacity: 0.8; }
-}
-
-/* God Mode Overlay */
-#god-mode-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 99999;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-
-#god-mode-overlay.active {
-    display: flex;
-    opacity: 1;
-}
-
-#god-mode-message {
-    font-family: 'Digital7', monospace;
-    font-size: 3em;
-    color: #00ffcc;
-    text-shadow: 0 0 30px rgba(0, 255, 204, 1);
-    animation: glitchText 0.3s infinite;
-}
-
 </style>
 	</head>
-
-<!-- Easter Egg Tracker -->
-        <div id="egg-tracker">
-            <div class="egg-circle" data-egg="home"></div>
-            <div class="egg-circle" data-egg="services"></div>
-            <div class="egg-circle" data-egg="music"></div>
-            <div class="egg-circle" data-egg="about"></div>
-            <div class="egg-circle" data-egg="contact"></div>
-        </div>
-
-        <!-- God Mode Overlay -->
-        <div id="god-mode-overlay">
-            <div id="god-mode-message">YOU'VE DECIPHERED THE MATRIX</div>
-        </div>
-
 	<body>
-
-        <!-- Live Psychedelic Background -->
-        <div id="live-psychedelic-bg">
-            <canvas id="live-psychedelic-canvas"></canvas>
-        </div>
 
         <!-- Frequency Visualizer Background -->
         <div id="frequency-visualizer"></div>
@@ -855,7 +352,6 @@ body {
 								<li class="special">
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
-										<canvas id="menu-constellation"></canvas>
 										<ul>
 											<li><a href="/">Home</a></li>
 											<li><a href="/services/">Services</a></li>
@@ -873,6 +369,7 @@ body {
 					<div class="home-content">
 						<h1>GLUE MATRIX</h1>
                         
+                        <p>PARDON THE DUST - THIS WEBSITE IS STILL IN PROGRESS!</p>
                         <p>Hidden between layers is a force that connects us all.</p>
                         <p>Glue Matrix is a musical project that attempts to alchemize and decipher this force.</p>
                         <p>Much love to all beings everywhere<span class="easter-egg-trigger" id="easter-egg-trigger">.</span></p>
@@ -892,175 +389,13 @@ body {
         <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
         <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
         <li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-        <li><a href="/cdn-cgi/l/email-protection#4f252e2c240f28233a2a222e3b3d2637612c2022" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+        <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
     </ul>
     <ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
         <li>&copy; GLUE MATRIX</li>
     </ul>
     <p style="opacity: 0.01; font-size: 1px; position: absolute; left: -9999px;">Design: <a href="http://html5up.net">HTML5 UP</a></p>
 </footer>
-
-<!-- Ambient Audio Player -->
-		<div id="audio-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 9998; cursor: pointer; opacity: 0.6; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center;">
-			<svg width="40" height="40" viewBox="0 0 40 40" id="audio-icon">
-				<circle cx="20" cy="20" r="18" fill="none" stroke="#00ffcc" stroke-width="2"/>
-				<path id="speaker-icon" d="M14 16 L14 24 L18 24 L26 30 L26 10 Z" fill="#00ffcc"/>
-				<path id="sound-waves" d="M29 16 Q31 20 29 24 M32 13 Q35 20 32 27" stroke="#00ffcc" stroke-width="2" fill="none" opacity="0"/>
-			</svg>
-		</div>
-		<audio id="ambient-audio" loop>
-			<source src="assets/audio/ambient-drone.mp3" type="audio/mpeg">
-			<!-- You'll need to create this file - a 20-30 sec ambient loop -->
-		</audio>
-
-</audio>
-
-		<!-- Psychedelic Background Toggle (Hidden until unlocked) -->
-		<div id="psychedelic-toggle" style="position: fixed; bottom: 70px; right: 20px; z-index: 9998; cursor: pointer; opacity: 0; display: none; transition: opacity 0.3s;">
-			<svg width="40" height="40" viewBox="0 0 40 40">
-				<circle cx="20" cy="20" r="18" fill="none" stroke="#00ffcc" stroke-width="2"/>
-				<circle cx="20" cy="20" r="12" fill="none" stroke="#00ffcc" stroke-width="2"/>
-				<circle cx="20" cy="20" r="6" fill="none" stroke="#00ffcc" stroke-width="2" id="psychedelic-indicator"/>
-			</svg>
-		</div>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-
-
-
-
-		// Ambient Audio System
-		(function() {
-			const toggle = document.getElementById('audio-toggle');
-			const audio = document.getElementById('ambient-audio');
-			const soundWaves = document.getElementById('sound-waves');
-			
-			if (!toggle || !audio) return;
-			
-			let isPlaying = false;
-			
-			// Check localStorage
-			const savedState = localStorage.getItem('glueMatrixAudio');
-			if (savedState === 'playing') {
-				audio.play().catch(() => {
-					// Autoplay blocked, that's fine
-					localStorage.setItem('glueMatrixAudio', 'paused');
-				});
-				isPlaying = true;
-				soundWaves.setAttribute('opacity', '1');
-			}
-			
-			toggle.addEventListener('click', function() {
-				if (isPlaying) {
-					audio.pause();
-					soundWaves.setAttribute('opacity', '0');
-					localStorage.setItem('glueMatrixAudio', 'paused');
-					isPlaying = false;
-				} else {
-					audio.play().catch(err => {
-						console.log('Audio play failed:', err);
-					});
-					soundWaves.setAttribute('opacity', '1');
-					localStorage.setItem('glueMatrixAudio', 'playing');
-					isPlaying = true;
-				}
-			});
-			
-			// Sync visual state with actual playback
-			audio.addEventListener('play', () => {
-				isPlaying = true;
-				soundWaves.setAttribute('opacity', '1');
-			});
-			
-			audio.addEventListener('pause', () => {
-				isPlaying = false;
-				soundWaves.setAttribute('opacity', '0');
-			});
-			
-			toggle.addEventListener('mouseenter', function() {
-				this.style.opacity = '1';
-			});
-			
-			toggle.addEventListener('mouseleave', function() {
-				this.style.opacity = '0.6';
-			});
-			
-			// Breathing animation when playing
-			let breathTime = 0;
-			function breathe() {
-				if (isPlaying && !audio.paused) {
-					breathTime += 0.02;
-					const scale = 1 + Math.sin(breathTime) * 0.05;
-					toggle.style.transform = `scale(${scale})`;
-				} else {
-					toggle.style.transform = 'scale(1)';
-				}
-				requestAnimationFrame(breathe);
-			}
-			breathe();
-		})();
-		</script>
- <script>
-
-       // Psychedelic Background Toggle System
-		(function() {
-			const bg = document.getElementById('live-psychedelic-bg');
-			const toggle = document.getElementById('psychedelic-toggle');
-			const indicator = document.getElementById('psychedelic-indicator');
-			
-			if (!bg || !toggle) return;
-			
-			let isActive = false;
-			
-			function initPsychedelicToggle() {
-				const unlocked = localStorage.getItem('psychedelicUnlocked');
-				
-				if (unlocked === 'true') {
-					toggle.style.display = 'flex';
-					toggle.style.opacity = '0.6';
-					
-					// Check if it should be active
-					const savedState = localStorage.getItem('psychedelicActive');
-					if (savedState === 'true') {
-						bg.classList.add('unlocked');
-						isActive = true;
-						indicator.setAttribute('fill', '#00ffcc');
-					}
-				}
-			}
-			
-			toggle.addEventListener('click', function() {
-				isActive = !isActive;
-				
-				if (isActive) {
-					bg.classList.add('unlocked');
-					indicator.setAttribute('fill', '#00ffcc');
-					localStorage.setItem('psychedelicActive', 'true');
-				} else {
-					bg.classList.remove('unlocked');
-					indicator.setAttribute('fill', 'none');
-					localStorage.setItem('psychedelicActive', 'false');
-				}
-			});
-			
-			toggle.addEventListener('mouseenter', function() {
-				this.style.opacity = '1';
-			});
-			
-			toggle.addEventListener('mouseleave', function() {
-				this.style.opacity = '0.6';
-			});
-			
-			// Initialize on page load
-			initPsychedelicToggle();
-			
-			// Make function globally accessible
-			window.initPsychedelicToggle = initPsychedelicToggle;
-		})();
-
- </script>
- 
-		</script>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -1101,124 +436,6 @@ body {
     animateBars();
 })();
 
-// ===== LIVE PSYCHEDELIC BACKGROUND (MOUSE-REACTIVE) =====
-(function() {
-    const canvas = document.getElementById('live-psychedelic-canvas');
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    let time = 0;
-    let mouseX = 0.5;
-    let mouseY = 0.5;
-    let breathing = 0;
-    
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    
-    // Track mouse
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX / window.innerWidth;
-        mouseY = e.clientY / window.innerHeight;
-    });
-    
-// Ripple tracking
-    let ripples = [];
-    
-    function noise2D(x, y, t) {
-        let n = 0;
-        n += Math.sin(x * 0.02 + t * 0.5) * Math.cos(y * 0.02 + t * 0.3);
-        n += Math.sin(x * 0.04 - t * 0.4) * Math.cos(y * 0.03 + t * 0.2) * 0.5;
-        n += Math.sin(x * 0.01 + y * 0.01 + t * 0.6) * 0.7;
-        n += Math.cos(x * 0.03 + t * 0.2) * Math.sin(y * 0.04 - t * 0.5) * 0.4;
-        
-        // Mouse influence
-        const dx = x - mouseX * canvas.width;
-        const dy = y - mouseY * canvas.height;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const mouseInfluence = Math.max(0, 1 - dist / 200) * 0.3;
-        n += mouseInfluence;
-        
-        // Ripple influence
-        ripples.forEach(ripple => {
-            const rdx = x - ripple.x;
-            const rdy = y - ripple.y;
-            const rdist = Math.sqrt(rdx * rdx + rdy * rdy);
-            const rippleRadius = 150;
-            
-            if (rdist < rippleRadius) {
-                const rippleInfluence = (1 - rdist / rippleRadius) * ripple.strength * 0.4;
-                n += rippleInfluence;
-            }
-        });
-        
-        return n / 2.5;
-    }
-    
-    function hsvToRgb(h, s, v) {
-        let r, g, b;
-        const i = Math.floor(h * 6);
-        const f = h * 6 - i;
-        const p = v * (1 - s);
-        const q = v * (1 - f * s);
-        const tv = v * (1 - (1 - f) * s);
-        switch (i % 6) {
-            case 0: r = v; g = tv; b = p; break;
-            case 1: r = q; g = v; b = p; break;
-            case 2: r = p; g = v; b = tv; break;
-            case 3: r = p; g = q; b = v; break;
-            case 4: r = tv; g = p; b = v; break;
-            case 5: r = v; g = p; b = q; break;
-        }
-        return `rgb(${Math.round(r*255)},${Math.round(g*255)},${Math.round(b*255)})`;
-    }
-    
-    function draw() {
-        const width = canvas.width;
-        const height = canvas.height;
-        const centerX = width / 2;
-        const centerY = height / 2;
-        const step = 6;
-        
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, width, height);
-        
-        // Breathing effect
-        breathing += 0.02;
-        const breathScale = 1 + Math.sin(breathing) * 0.08;
-        
-        for (let y = 0; y < height; y += step) {
-            for (let x = 0; x < width; x += step) {
-                const mx = Math.abs(x - centerX);
-                const my = Math.abs(y - centerY);
-                
-                // Add slight jitter for organic feel
-                const jitterX = (Math.random() - 0.5) * 0.8;
-                const jitterY = (Math.random() - 0.5) * 0.8;
-                
-                const n = noise2D(mx + jitterX, my + jitterY, time);
-                const contour = (n + 1) * 12 * breathScale;
-                const frac = contour - Math.floor(contour);
-                
-                if (Math.abs(frac - 0.5) < 0.12) {
-                    const hue = ((n + 1) / 2 + time * 0.08) % 1;
-                    ctx.fillStyle = hsvToRgb(hue, 0.85, 0.95);
-                    ctx.fillRect(x, y, step, step);
-                }
-            }
-        }
-        
-        time += 0.015;
-        requestAnimationFrame(draw);
-    }
-    
-    draw();
-})();
-
-
 // ===== VHS GLITCH PAGE TRANSITIONS =====
 (function() {
     const transition = document.getElementById('page-transition');
@@ -1239,121 +456,6 @@ body {
             }, 350);
         });
     });
-})();
-
-// ===== MENU CONSTELLATION EFFECT =====
-(function() {
-    const menu = document.getElementById('menu');
-    const canvas = document.getElementById('menu-constellation');
-    
-    if (!canvas || !menu) return;
-    
-    const ctx = canvas.getContext('2d');
-    let nodes = [];
-    let animating = false;
-    
-    function resize() {
-        canvas.width = menu.offsetWidth;
-        canvas.height = menu.offsetHeight;
-    }
-    
-    function getMenuItemPositions() {
-        const items = menu.querySelectorAll('ul li');
-        const positions = [];
-        
-        items.forEach(item => {
-            const rect = item.getBoundingClientRect();
-            const menuRect = menu.getBoundingClientRect();
-            positions.push({
-                x: rect.left - menuRect.left + rect.width / 2,
-                y: rect.top - menuRect.top + rect.height / 2
-            });
-        });
-        
-        return positions;
-    }
-    
-    function drawConstellation(progress) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = 'rgba(0, 255, 204, 0.3)';
-        ctx.fillStyle = '#00ffcc';
-        ctx.lineWidth = 1.5;
-        
-        // Draw lines
-        for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-                const alpha = progress * 0.3;
-                ctx.strokeStyle = `rgba(0, 255, 204, ${alpha})`;
-                
-                ctx.beginPath();
-                ctx.moveTo(nodes[i].x, nodes[i].y);
-                
-                // Curved line
-                const midX = (nodes[i].x + nodes[j].x) / 2 + (Math.sin(progress * Math.PI) * 20);
-                const midY = (nodes[i].y + nodes[j].y) / 2;
-                ctx.quadraticCurveTo(midX, midY, nodes[j].x, nodes[j].y);
-                ctx.stroke();
-            }
-        }
-        
-        // Draw nodes
-        nodes.forEach((node, i) => {
-            const delay = i * 0.1;
-            const nodeProgress = Math.max(0, Math.min(1, (progress - delay) / 0.3));
-            const pulse = 1 + Math.sin(progress * Math.PI * 4 + i) * 0.2;
-            const radius = 4 * nodeProgress * pulse;
-            
-            ctx.globalAlpha = nodeProgress;
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Glow
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = '#00ffcc';
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0;
-            ctx.globalAlpha = 1;
-        });
-    }
-    
-    function animate() {
-        let startTime = Date.now();
-        animating = true;
-        
-        function frame() {
-            if (!menu.classList.contains('active')) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                animating = false;
-                return;
-            }
-            
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(1, elapsed / 1000);
-            
-            drawConstellation(progress);
-            
-            requestAnimationFrame(frame);
-        }
-        
-        frame();
-    }
-    
-    // Watch for menu open/close
-    const observer = new MutationObserver(() => {
-        if (menu.classList.contains('active')) {
-            resize();
-            nodes = getMenuItemPositions();
-            if (!animating) animate();
-        } else {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            animating = false;
-        }
-    });
-    
-    observer.observe(menu, { attributes: true, attributeFilter: ['class'] });
 })();
 
 // ===== PSYCHEDELIC CONTOUR EASTER EGG =====
@@ -1607,243 +709,6 @@ body {
         });
     }
 })();
-
-// ===== EASTER EGG TRACKING SYSTEM =====
-(function() {
-    const eggs = {
-        home: false,
-        services: false,
-        music: false,
-        about: false,
-        contact: false
-    };
-    
-    // Load from localStorage
-    const saved = localStorage.getItem('glueMatrixEggs');
-    if (saved) {
-        const savedEggs = JSON.parse(saved);
-        Object.assign(eggs, savedEggs);
-    }
-    
-    // Update UI
-    function updateTracker() {
-        Object.keys(eggs).forEach(key => {
-            const circle = document.querySelector(`.egg-circle[data-egg="${key}"]`);
-            if (circle && eggs[key]) {
-                circle.classList.add('found');
-            }
-        });
-        
-        // Check if all found
-        if (Object.values(eggs).every(v => v === true)) {
-            setTimeout(triggerGodMode, 500);
-        }
-    }
-    
-    // Mark egg as found
-    window.markEggFound = function(eggName) {
-        if (!eggs[eggName]) {
-            eggs[eggName] = true;
-            localStorage.setItem('glueMatrixEggs', JSON.stringify(eggs));
-            updateTracker();
-        }
-    };
-    
-    // Auto-mark based on page
-    const pageName = window.location.pathname.includes('/services') ? 'services' :
-                     window.location.pathname.includes('/music') ? 'music' :
-                     window.location.pathname.includes('/about') ? 'about' :
-                     window.location.pathname.includes('/contact') ? 'contact' : 'home';
-    
-    // Listen for easter egg triggers on this page
-    const eggTrigger = document.getElementById('easter-egg-trigger');
-    if (eggTrigger) {
-        eggTrigger.addEventListener('click', function() {
-            markEggFound(pageName);
-        });
-    }
-    
-// God Mode + Unlock Psychedelic Background
-function triggerGodMode() {
-    const overlay = document.getElementById('god-mode-overlay');
-    
-    // Check if already shown this session
-    if (sessionStorage.getItem('godModeShown')) return;
-    
-    overlay.classList.add('active');
-    sessionStorage.setItem('godModeShown', 'true');
-    
-    // Activate ALL effects
-    document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
-    document.body.style.animation = 'screenShake 0.5s infinite';
-    
-    // UNLOCK PSYCHEDELIC BACKGROUND PERMANENTLY
-    localStorage.setItem('psychedelicUnlocked', 'true');
-    
-    setTimeout(() => {
-        overlay.classList.remove('active');
-        document.body.style.filter = '';
-        document.body.style.animation = '';
-        
-        // Show unlock notification
-        alert('🌀 PSYCHEDELIC BACKGROUND UNLOCKED!\n\nYou can now toggle it on/off using the button in the bottom-right.');
-        
-        // Activate the toggle
-        initPsychedelicToggle();
-    }, 5000);
-}
-
-// Add reset functionality (Shift + R)
-document.addEventListener('keydown', (e) => {
-    if (e.shiftKey && e.key === 'R') {
-        if (confirm('Reset all easter eggs?')) {
-            localStorage.removeItem('glueMatrixEggs');
-            sessionStorage.removeItem('godModeShown');
-            location.reload();
-        }
-    }
-});
-    
-    updateTracker();
-})();
-
-// ===== EASTER EGG TRACKER SCROLL VISIBILITY - FIXED FOR MOBILE =====
-(function() {
-    const tracker = document.getElementById('egg-tracker');
-    if (!tracker) return;
-    
-    function checkScroll() {
-        // Get scroll position
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        
-        // Get document height - try multiple methods for mobile
-        const body = document.body;
-        const html = document.documentElement;
-        const docHeight = Math.max(
-            body.scrollHeight, body.offsetHeight,
-            html.clientHeight, html.scrollHeight, html.offsetHeight
-        );
-        
-        // Calculate scroll percentage
-        const scrollPercent = (scrollTop + windowHeight) / docHeight;
-        
-        // Show at 80% or more
-        if (scrollPercent >= 0.8) {
-            tracker.classList.add('visible');
-        } else {
-            tracker.classList.remove('visible');
-        }
-    }
-    
-    // Check frequently
-    let scrollTimer;
-    function handleScroll() {
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(checkScroll, 50);
-    }
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('touchmove', handleScroll, { passive: true });
-    window.addEventListener('touchend', checkScroll, { passive: true });
-    window.addEventListener('resize', checkScroll);
-    
-    // Check on load
-    setTimeout(checkScroll, 500);
-    checkScroll();
-})();
-
-// ===== KONAMI CODE EASTER EGG =====
-(function() {
-    const code = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-    let position = 0;
-    
-    document.addEventListener('keydown', (e) => {
-        const key = e.key.toLowerCase();
-        
-        if (key === code[position] || e.key === code[position]) {
-            position++;
-            
-            if (position === code.length) {
-                activateGodMode();
-                position = 0;
-            }
-        } else {
-            position = 0;
-        }
-    });
-    
-    function activateGodMode() {
-        const overlay = document.getElementById('god-mode-overlay');
-        if (!overlay) return;
-        
-        overlay.classList.add('active');
-        
-        // Activate all visual effects
-        document.body.style.filter = 'hue-rotate(360deg) saturate(2) brightness(1.2)';
-        document.body.style.animation = 'screenShake 0.5s infinite, rainbowShift 3s infinite';
-        
-        // Trigger all easter eggs if possible
-        const eggTriggers = document.querySelectorAll('.easter-egg-trigger');
-        eggTriggers.forEach(trigger => {
-            if (trigger.click) trigger.click();
-        });
-        
-        // Exit after 5 seconds or ESC
-        const exitGodMode = () => {
-            overlay.classList.remove('active');
-            document.body.style.filter = '';
-            document.body.style.animation = '';
-        };
-        
-        setTimeout(exitGodMode, 5000);
-        
-        document.addEventListener('keydown', function escHandler(e) {
-            if (e.key === 'Escape') {
-                exitGodMode();
-                document.removeEventListener('keydown', escHandler);
-            }
-        });
-        
-        overlay.addEventListener('click', exitGodMode, { once: true });
-    }
-})();
-
-// Add rainbow shift animation
-if (!document.getElementById('konami-style')) {
-    const style = document.createElement('style');
-    style.id = 'konami-style';
-    style.textContent = `
-    @keyframes rainbowShift {
-        0% { filter: hue-rotate(0deg) saturate(2); }
-        25% { filter: hue-rotate(90deg) saturate(2); }
-        50% { filter: hue-rotate(180deg) saturate(2); }
-        75% { filter: hue-rotate(270deg) saturate(2); }
-        100% { filter: hue-rotate(360deg) saturate(2); }
-    }
-    `;
-    document.head.appendChild(style);
-}
-
-
-// Screen shake animation
-const style = document.createElement('style');
-style.textContent = `
-@keyframes screenShake {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-2px, 2px); }
-    20% { transform: translate(2px, -2px); }
-    30% { transform: translate(-2px, -2px); }
-    40% { transform: translate(2px, 2px); }
-    50% { transform: translate(-2px, 2px); }
-    60% { transform: translate(2px, -2px); }
-    70% { transform: translate(-2px, -2px); }
-    80% { transform: translate(2px, 2px); }
-    90% { transform: translate(-2px, 2px); }
-}
-`;
-document.head.appendChild(style);
-
 </script>
 
 	</body>
