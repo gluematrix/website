@@ -80,7 +80,7 @@ body::after {
 
 @media screen and (max-width: 768px) {
     body::after {
-        opacity: 0.015; /* Even more subtle on mobile */
+        opacity: 0.015;
     }
 }
 
@@ -128,30 +128,6 @@ button:hover {
     100% {
         filter: blur(0px) brightness(1.05);
     }
-}
-
-/* Chromatic Aberration on Key Elements */
-.button,
-#header h1 a {
-    position: relative;
-}
-
-.button::before,
-#header h1 a::before {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: rgba(0, 255, 255, 0.2);
-    transform: translate(-0.5px, 0);
-    transition: all 250ms ease-out;
-    pointer-events: none;
-}
-
-.button:hover::before,
-#header h1 a:hover::before {
-    transform: translate(0, 0);
-    opacity: 0;
 }
 
 .button.primary:hover {
@@ -475,15 +451,15 @@ body {
 			}
 			
 			#play-pause-btn {
-    min-width: 120px;
-    font-family: 'Digital7', monospace;
-    font-size: 1.1em;
-    white-space: nowrap;
-    padding: 0.75em 1.5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+				min-width: 120px;
+				font-family: 'Digital7', monospace;
+				font-size: 1.1em;
+				white-space: nowrap;
+				padding: 0.75em 1.5em;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
 			
 			#crossfade-slider {
 				width: 100%;
@@ -1442,7 +1418,7 @@ body {
     });
 })();
 
-// ===== INTERACTIVE CROSSFADE PLAYER =====
+// ===== INTERACTIVE CROSSFADE PLAYER - FIXED FOR MOBILE =====
 (function() {
     const beforeAudio = document.getElementById('before-audio');
     const afterAudio = document.getElementById('after-audio');
@@ -1470,7 +1446,7 @@ body {
     const afterCtx = setupCanvas(afterCanvas);
     
     // Draw simple waveforms
-    function drawWaveform(ctx, color, blur = 0, saturation = 1) {
+    function drawWaveform(ctx, color) {
         const width = ctx.canvas.width;
         const height = ctx.canvas.height;
         const centerY = height / 2;
@@ -1478,7 +1454,6 @@ body {
         ctx.clearRect(0, 0, width, height);
         ctx.strokeStyle = color;
         ctx.lineWidth = 2;
-        ctx.filter = `blur(${blur}px) saturate(${saturation})`;
         
         ctx.beginPath();
         for (let x = 0; x < width; x++) {
@@ -1487,102 +1462,94 @@ body {
             else ctx.lineTo(x, y);
         }
         ctx.stroke();
-        ctx.filter = 'none';
     }
     
     // Animate waveforms
     function animate() {
         if (isPlaying) {
-            drawWaveform(beforeCtx, 'rgba(255, 100, 100, 0.6)', 1, 0.5);
-            drawWaveform(afterCtx, 'rgba(0, 255, 204, 0.8)', 0, 1);
+            drawWaveform(beforeCtx, 'rgba(255, 100, 100, 0.6)');
+            drawWaveform(afterCtx, 'rgba(0, 255, 204, 0.8)');
         }
         requestAnimationFrame(animate);
     }
     animate();
     
-    // Crossfade logic - FIXED FOR MOBILE
+    // Crossfade logic
     function updateCrossfade(value) {
-        const position = value / 100;
+        const position = parseFloat(value) / 100;
         
-        // CRITICAL: Set volumes directly
-        beforeAudio.volume = Math.max(0, Math.min(1, 1 - position));
-        afterAudio.volume = Math.max(0, Math.min(1, position));
+        // Set volumes with clamping
+        const beforeVol = Math.max(0, Math.min(1, 1 - position));
+        const afterVol = Math.max(0, Math.min(1, position));
         
-        // Update divider position
+        beforeAudio.volume = beforeVol;
+        afterAudio.volume = afterVol;
+        
+        // Update divider
         divider.style.left = `${value}%`;
         
-        // Update visual positioning
+        // Update visuals
         beforeVisual.style.clipPath = `inset(0 ${value}% 0 0)`;
         afterVisual.style.clipPath = `inset(0 0 0 ${100 - value}%)`;
         
-        // Update blur on before side
         const blurAmount = position * 2;
         beforeVisual.style.filter = `blur(${blurAmount}px) saturate(${1 - position * 0.5})`;
     }
     
-    // Event listeners for ALL devices
-    slider.addEventListener('input', (e) => {
-        updateCrossfade(e.target.value);
+    // ALL event listeners
+    slider.addEventListener('input', function() {
+        updateCrossfade(this.value);
     });
     
-    slider.addEventListener('change', (e) => {
-        updateCrossfade(e.target.value);
+    slider.addEventListener('change', function() {
+        updateCrossfade(this.value);
     });
     
-    // Mobile-specific events
-    let isTouching = false;
-    
-    slider.addEventListener('touchstart', () => {
-        isTouching = true;
-    });
-    
-    slider.addEventListener('touchmove', (e) => {
-        if (isTouching) {
-            updateCrossfade(slider.value);
-        }
-    });
-    
-    slider.addEventListener('touchend', () => {
-        isTouching = false;
-        updateCrossfade(slider.value);
+    slider.addEventListener('touchend', function() {
+        updateCrossfade(this.value);
     });
     
     // Play/Pause
-    playPauseBtn.addEventListener('click', () => {
+    playPauseBtn.addEventListener('click', function() {
         if (isPlaying) {
             beforeAudio.pause();
             afterAudio.pause();
-            playPauseBtn.innerHTML = '&#9654; Play';
+            playPauseBtn.textContent = '▶ Play';
             isPlaying = false;
         } else {
-            // Force sync before playing
-            const currentValue = slider.value;
-            updateCrossfade(currentValue);
+            // Set volumes BEFORE playing
+            updateCrossfade(slider.value);
             
-            beforeAudio.play().catch(err => console.log('Before audio error:', err));
-            afterAudio.play().catch(err => console.log('After audio error:', err));
-            playPauseBtn.innerHTML = '&#9208; Pause';
-            isPlaying = true;
+            // Play both
+            const playBefore = beforeAudio.play();
+            const playAfter = afterAudio.play();
+            
+            Promise.all([playBefore, playAfter]).then(() => {
+                playPauseBtn.textContent = '⏸ Pause';
+                isPlaying = true;
+            }).catch(err => {
+                console.error('Play failed:', err);
+            });
         }
     });
     
-    // Sync audio playback timing
-    beforeAudio.addEventListener('timeupdate', () => {
-        if (Math.abs(beforeAudio.currentTime - afterAudio.currentTime) > 0.1) {
+    // Keep in sync
+    beforeAudio.addEventListener('timeupdate', function() {
+        if (isPlaying && Math.abs(beforeAudio.currentTime - afterAudio.currentTime) > 0.3) {
             afterAudio.currentTime = beforeAudio.currentTime;
         }
     });
     
-    // Force volume sync while playing (mobile backup)
-    setInterval(() => {
-        if (isPlaying) {
-            const position = slider.value / 100;
+    // AGGRESSIVE mobile fix - force volumes every 100ms while playing
+    setInterval(function() {
+        if (isPlaying && !beforeAudio.paused && !afterAudio.paused) {
+            const position = parseFloat(slider.value) / 100;
             beforeAudio.volume = Math.max(0, Math.min(1, 1 - position));
             afterAudio.volume = Math.max(0, Math.min(1, position));
         }
-    }, 250);
+    }, 100);
     
-    // Initialize at 50/50
+    // Initialize
     updateCrossfade(50);
 })();
 
@@ -1641,37 +1608,37 @@ body {
         });
     }
     
-// God Mode
-function triggerGodMode() {
-    const overlay = document.getElementById('god-mode-overlay');
-    
-    // Check if already shown this session
-    if (sessionStorage.getItem('godModeShown')) return;
-    
-    overlay.classList.add('active');
-    sessionStorage.setItem('godModeShown', 'true');
-    
-    // Activate ALL effects
-    document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
-    document.body.style.animation = 'screenShake 0.5s infinite';
-    
-    setTimeout(() => {
-        overlay.classList.remove('active');
-        document.body.style.filter = '';
-        document.body.style.animation = '';
-    }, 5000);
-}
-
-// Add reset functionality (Shift + R)
-document.addEventListener('keydown', (e) => {
-    if (e.shiftKey && e.key === 'R') {
-        if (confirm('Reset all easter eggs?')) {
-            localStorage.removeItem('glueMatrixEggs');
-            sessionStorage.removeItem('godModeShown');
-            location.reload();
-        }
+    // God Mode
+    function triggerGodMode() {
+        const overlay = document.getElementById('god-mode-overlay');
+        
+        // Check if already shown this session
+        if (sessionStorage.getItem('godModeShown')) return;
+        
+        overlay.classList.add('active');
+        sessionStorage.setItem('godModeShown', 'true');
+        
+        // Activate ALL effects
+        document.body.style.filter = 'hue-rotate(360deg) saturate(2)';
+        document.body.style.animation = 'screenShake 0.5s infinite';
+        
+        setTimeout(() => {
+            overlay.classList.remove('active');
+            document.body.style.filter = '';
+            document.body.style.animation = '';
+        }, 5000);
     }
-});
+
+    // Add reset functionality (Shift + R)
+    document.addEventListener('keydown', (e) => {
+        if (e.shiftKey && e.key === 'R') {
+            if (confirm('Reset all easter eggs?')) {
+                localStorage.removeItem('glueMatrixEggs');
+                sessionStorage.removeItem('godModeShown');
+                location.reload();
+            }
+        }
+    });
     
     updateTracker();
 })();
@@ -1686,9 +1653,10 @@ document.addEventListener('keydown', (e) => {
     function checkScroll() {
         const scrollPosition = window.scrollY + window.innerHeight;
         const pageHeight = document.documentElement.scrollHeight;
+        const distanceFromBottom = pageHeight - scrollPosition;
         
         // Show tracker when within 200px of bottom
-        if (pageHeight - scrollPosition < 200) {
+        if (distanceFromBottom < 200) {
             tracker.classList.add('visible');
         } else {
             tracker.classList.remove('visible');
@@ -1696,13 +1664,6 @@ document.addEventListener('keydown', (e) => {
         
         ticking = false;
     }
-
-	function checkScroll() {
-        const scrollPosition = window.scrollY + window.innerHeight;
-        const pageHeight = document.documentElement.scrollHeight;
-        const distanceFromBottom = pageHeight - scrollPosition;
-        
-
     
     function requestTick() {
         if (!ticking) {
