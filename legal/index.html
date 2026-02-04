@@ -71,44 +71,6 @@ footer .copyright li:before {
 
 
 
-/* Remove any padding/margin that creates the gray bar */
-#page-wrapper {
-    position: relative;
-    z-index: 1;
-    background: transparent !important;
-    min-height: 100vh;
-    padding-bottom: 0;
-}
-
-.page-content {
-    padding-bottom: 2em; /* Keep some space for footer */
-}
-
-footer {
-    margin-bottom: 0 !important;
-    padding-bottom: calc(2em + env(safe-area-inset-bottom)) !important;
-}
-
-/* Footer styling */
-.copyright {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3em;
-}
-
-.copyright li:last-child {
-    font-size: 0.75em;
-}
-
-
-html, body {
-    height: 100%;
-}
-
-#page-wrapper {
-    min-height: 100%;
-}
 
 /* iOS Safari bottom bar fix */
 @supports (-webkit-touch-callout: none) {
