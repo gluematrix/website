@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>GLUE MATRIX - Privacy & Legal</title>
+        <link rel="icon" type="image/png" href="/favicon.png">
+        <meta name="description" content="Privacy policy, legal information, and terms for Glue Matrix">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/mobile.css" />
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+		<style>
+
+html, body {
+    height: 100%;
+}
+
+#page-wrapper {
+    min-height: 100%;
+}
+
+/* iOS Safari bottom bar fix */
+@supports (-webkit-touch-callout: none) {
+    .page-content {
+        padding-bottom: calc(4em + 100px) !important;
+    }
+}
+
+/* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
+.button,
+input[type="submit"],
+input[type="button"],
+button {
+    transition: all 0.3s ease !important;
+    transform: translateY(0) scale(1) !important;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+button:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 20px rgba(237, 73, 51, 0.6) !important;
+}
+
+/* GLUE MATRIX logo hover */
+#header h1 a {
+    transition: all 0.3s ease !important;
+    display: inline-block;
+}
+
+#header h1 a:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+/* Menu hover effects */
+#menu ul li a {
+    transition: all 0.2s ease;
+}
+
+#menu ul li a:hover {
+    color: #00ffcc;
+    padding-left: 1.5em;
+}
+
+.menuToggle {
+    transition: all 0.3s ease;
+}
+
+.menuToggle:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+body {
+    background-image: url('/assets/css/images/contactphoto.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+@media screen and (max-width: 980px) {
+    body {
+        background-attachment: scroll;
+    }
+}
+
+#page-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    text-align: center;
+    padding: 6em 2em 4em 2em;
+}
+
+.legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(0,0,0,0.7);
+    padding: 2.5em;
+    border-radius: 8px;
+    border: 1px solid rgba(0,255,204,0.3);
+}
+
+.page-content h1 {
+    font-size: clamp(2em, 6vw, 3em);
+    margin-bottom: 0.5em;
+    color: #00ffcc;
+}
+
+.legal-container h2 {
+    color: #00ffcc;
+    font-size: 1.5em;
+    margin: 2em 0 1em 0;
+    border-bottom: 1px solid rgba(0,255,204,0.3);
+    padding-bottom: 0.5em;
+}
+
+.legal-container h2:first-of-type {
+    margin-top: 0;
+}
+
+.legal-container p {
+    text-align: left;
+    line-height: 1.8;
+    margin-bottom: 1em;
+    font-size: 0.95em;
+}
+
+.legal-container ul {
+    text-align: left;
+    margin: 1em 0 1em 2em;
+    line-height: 1.8;
+}
+
+.legal-container ul li {
+    margin-bottom: 0.5em;
+}
+
+.legal-container a {
+    color: #00ffcc;
+    text-decoration: none;
+    border-bottom: 1px dotted #00ffcc;
+}
+
+.legal-container a:hover {
+    border-bottom: 1px solid #00ffcc;
+}
+
+.last-updated {
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9em;
+    margin-top: 2em;
+}
+
+@media screen and (max-width: 768px) {
+    .legal-container {
+        padding: 1.5em;
+    }
+}
+
+/* ===== VHS GLITCH TRANSITION ===== */
+#page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+#page-transition.active {
+    opacity: 1;
+    visibility: visible;
+    animation: glitchTransition 0.6s ease-in-out;
+}
+
+@keyframes glitchTransition {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+		</style>
+	</head>
+	<body>
+
+		<!-- VHS Glitch Transition -->
+		<div id="page-transition"></div>
+
+		<!-- Page Wrapper -->
+		<div id="page-wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<h1><a href="/">GLUE MATRIX</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="/">Home</a></li>
+									<li><a href="/services/">Services</a></li>
+									<li><a href="/music/">Music</a></li>
+									<li><a href="/about/">About</a></li>
+									<li><a href="/contact/">Contact</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Legal Content -->
+			<div class="page-content">
+				<h1>Privacy & Legal</h1>
+				
+				<div class="legal-container">
+					
+					<h2>Privacy Policy</h2>
+					<p>Glue Matrix ("we," "us," "our") respects your privacy. This policy explains how we collect, use, and protect your personal information.</p>
+					
+					<p><strong>Information We Collect:</strong></p>
+					<ul>
+						<li><strong>Contact Forms:</strong> When you contact us or subscribe to our mailing list, we collect your name and email address.</li>
+						<li><strong>Usage Data:</strong> We use browser localStorage to remember your audio player preferences. This data stays on your device and is not transmitted to us.</li>
+					</ul>
+					
+					<p><strong>How We Use Your Information:</strong></p>
+					<ul>
+						<li>To respond to your inquiries and provide requested services</li>
+						<li>To send updates about new releases and shows (if you subscribed to our mailing list)</li>
+						<li>To improve our website and services</li>
+					</ul>
+					
+					<p><strong>Third-Party Services:</strong></p>
+					<ul>
+						<li><strong>Formspree:</strong> We use Formspree to process contact form submissions. Your information is subject to their <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">privacy policy</a>.</li>
+						<li>We do not sell, trade, or share your personal information with third parties for marketing purposes.</li>
+					</ul>
+					
+					<p><strong>Your Rights:</strong></p>
+					<ul>
+						<li>You can request deletion of your information by emailing <a href="mailto:jack@gluematrix.com">jack@gluematrix.com</a></li>
+						<li>You can unsubscribe from our mailing list at any time</li>
+						<li>You can clear your browser's localStorage to remove any saved preferences</li>
+					</ul>
+					
+					<h2>Cookie Policy</h2>
+					<p>This website uses browser localStorage (not cookies) to save your audio player preferences. This data is stored locally on your device and is not transmitted to our servers. You can clear this data through your browser settings at any time.</p>
+					
+					<h2>Terms of Service</h2>
+					<p><strong>Service Agreement:</strong> By using Glue Matrix services, you agree to provide accurate information and communicate professionally. All audio work is subject to agreed-upon terms, pricing, and timelines discussed prior to project start.</p>
+					
+					<p><strong>Payment & Refunds:</strong> Payment terms are established per project. Refunds are considered on a case-by-case basis and are at the sole discretion of Glue Matrix.</p>
+					
+					<p><strong>Intellectual Property:</strong> You retain ownership of your original content. Glue Matrix retains the right to showcase work in portfolios unless otherwise agreed. All custom audio production and services are provided "as-is."</p>
+					
+					<p><strong>Limitation of Liability:</strong> Glue Matrix is not liable for any indirect, incidental, or consequential damages arising from the use of our services or website.</p>
+					
+					<h2>Website Credits</h2>
+					<p>This website design is based on the "Spectral" template by <a href="http://html5up.net" target="_blank" rel="noopener">HTML5 UP</a>, used under the <a href="https://html5up.net/license" target="_blank" rel="noopener">Creative Commons license</a>. Customization and content by Glue Matrix.</p>
+					
+					<h2>Contact</h2>
+					<p>For questions about this privacy policy or to exercise your rights, contact us at:</p>
+					<p><a href="mailto:jack@gluematrix.com">jack@gluematrix.com</a></p>
+					
+					<p class="last-updated">Last Updated: February 3, 2026</p>
+					
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 3em 0 2em 0;">
+			<ul class="icons">
+				<li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+				<li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+			</ul>
+			<ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+				<li>&copy; GLUE MATRIX</li>
+				<li><a href="/legal/">Privacy & Legal</a></li>
+			</ul>
+		</footer>
+
+		<!-- Scripts -->
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/jquery.scrolly.min.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+
+<script>
+// VHS GLITCH PAGE TRANSITIONS
+(function() {
+    const transition = document.getElementById('page-transition');
+    
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+                return;
+            }
+            
+            e.preventDefault();
+            transition.classList.add('active');
+            
+            setTimeout(() => {
+                window.location.href = href;
+            }, 350);
+        });
+    });
+})();
+</script>
+
+	</body>
+</html>
