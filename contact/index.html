@@ -13,7 +13,13 @@
 		<style>
 
 
+html, body {
+    height: 100%;
+}
 
+#page-wrapper {
+    min-height: 100%;
+}
 
 /* iOS Safari bottom bar fix */
 @supports (-webkit-touch-callout: none) {
@@ -529,7 +535,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     </ul>
 <ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
     <li>&copy; GLUE MATRIX</li>
-    <li style="font-size: 0.8em;"><a href="/legal/">Privacy & Legal</a></li>
+    <li><a href="/legal/">Privacy & Legal</a></li>
 </ul>
 </footer>
 
@@ -651,53 +657,6 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     });
 })();
 </script>
-
-<script>
-// Bottom gradient that appears when scrolling up on mobile
-(function() {
-    if (window.innerWidth > 768) return;
-    
-    const gradient = document.createElement('div');
-    gradient.id = 'scroll-gradient';
-    gradient.style.cssText = `
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 150px;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
-        pointer-events: none;
-        z-index: 998;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    `;
-    document.body.appendChild(gradient);
-    
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    
-    function updateGradient() {
-        const currentScrollY = window.scrollY;
-        
-        if (currentScrollY < lastScrollY && currentScrollY > 100) {
-            gradient.style.opacity = '1';
-        } else {
-            gradient.style.opacity = '0';
-        }
-        
-        lastScrollY = currentScrollY;
-        ticking = false;
-    }
-    
-    window.addEventListener('scroll', function() {
-        if (!ticking) {
-            window.requestAnimationFrame(updateGradient);
-            ticking = true;
-        }
-    });
-})();
-</script>
-
 
 	</body>
 </html>
