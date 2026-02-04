@@ -552,6 +552,84 @@ body {
 
 </audio>
 
+<script>
+
+
+
+
+		// Ambient Audio System
+		(function() {
+			const toggle = document.getElementById('audio-toggle');
+			const audio = document.getElementById('ambient-audio');
+			const soundWaves = document.getElementById('sound-waves');
+			
+			if (!toggle || !audio) return;
+			
+			let isPlaying = false;
+			
+			// Check localStorage
+			const savedState = localStorage.getItem('glueMatrixAudio');
+			if (savedState === 'playing') {
+				audio.play().catch(() => {
+					// Autoplay blocked, that's fine
+					localStorage.setItem('glueMatrixAudio', 'paused');
+				});
+				isPlaying = true;
+				soundWaves.setAttribute('opacity', '1');
+			}
+			
+			toggle.addEventListener('click', function() {
+				if (isPlaying) {
+					audio.pause();
+					soundWaves.setAttribute('opacity', '0');
+					localStorage.setItem('glueMatrixAudio', 'paused');
+					isPlaying = false;
+				} else {
+					audio.play().catch(err => {
+						console.log('Audio play failed:', err);
+					});
+					soundWaves.setAttribute('opacity', '1');
+					localStorage.setItem('glueMatrixAudio', 'playing');
+					isPlaying = true;
+				}
+			});
+			
+			// Sync visual state with actual playback
+			audio.addEventListener('play', () => {
+				isPlaying = true;
+				soundWaves.setAttribute('opacity', '1');
+			});
+			
+			audio.addEventListener('pause', () => {
+				isPlaying = false;
+				soundWaves.setAttribute('opacity', '0');
+			});
+			
+			toggle.addEventListener('mouseenter', function() {
+				this.style.opacity = '1';
+			});
+			
+			toggle.addEventListener('mouseleave', function() {
+				this.style.opacity = '0.6';
+			});
+			
+			// Breathing animation when playing
+			let breathTime = 0;
+			function breathe() {
+				if (isPlaying && !audio.paused) {
+					breathTime += 0.02;
+					const scale = 1 + Math.sin(breathTime) * 0.05;
+					toggle.style.transform = `scale(${scale})`;
+				} else {
+					toggle.style.transform = 'scale(1)';
+				}
+				requestAnimationFrame(breathe);
+			}
+			breathe();
+		})();
+		</script>
+
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
