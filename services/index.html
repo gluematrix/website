@@ -39,23 +39,24 @@ body::after {
 }
 
 /* ===== SCROLL-BASED BOTTOM FADE ===== */
-body::before {
-    content: '';
-    position: fixed;
-    bottom: 0;
-    bottom: env(safe-area-inset-bottom, 0);  /* Add this line for iOS */
-    left: 0;
-    right: 0;
-    height: 150px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0.9) 100%);
-    pointer-events: none;
-    z-index: 9994;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+@media screen and (max-width: 980px) {
+    body::before {
+        content: '';
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 200px;
+        background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0.9) 100%);
+        pointer-events: none;
+        z-index: 9994;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
 
-body.scrolled::before {
-    opacity: 1;
+    body.scrolled::before {
+        opacity: 1;
+    }
 }
 
 /* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
