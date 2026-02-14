@@ -18,68 +18,8 @@ html, body {
 
 #page-wrapper {
     min-height: 100%;
-}
-
-/* ===== DARK OVERLAY FOR TEXT READABILITY ===== */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Make sure overlay extends on mobile */
-@media screen and (max-width: 980px) {
-    body::after {
-        bottom: 0;
-        bottom: calc(0px - env(safe-area-inset-bottom, 0px));
-        min-height: 100vh;
-        min-height: -webkit-fill-available;
-    }
-}
-
-#page-wrapper {
     position: relative;
     z-index: 1;
-}
-
-@media screen and (max-width: 980px) {
-    html {
-        background-color: #000;
-        background-image: url('/assets/css/images/servicesphoto.jpg');
-        background-size: cover;
-        background-position: center top;
-        background-attachment: scroll;
-        background-repeat: no-repeat;
-        min-height: 100%;
-        height: 100%;
-    }
-    
-    body {
-        background-color: transparent;  /* Changed from #000 */
-        background-image: url('/assets/css/images/servicesphoto.jpg');
-        background-attachment: scroll;
-        background-position: center top;
-        background-size: cover;
-        min-height: 100vh;
-        min-height: -webkit-fill-available;
-        padding-bottom: 0;
-    }
-    
-    .page-content {
-        min-height: 100vh;
-        padding-bottom: calc(8em + env(safe-area-inset-bottom));
-    }
-    
-    #footer {
-        background: transparent !important;
-        padding-bottom: calc(4em + env(safe-area-inset-bottom)) !important;
-    }
 }
 
 /* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
@@ -129,9 +69,11 @@ button:hover {
     transform: scale(1.1);
 }
 
-/* Full page background */
+/* Full page background with overlay */
 body {
-    background-image: url('/assets/css/images/servicesphoto.jpg');
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url('/assets/css/images/servicesphoto.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -143,16 +85,26 @@ body {
     position: relative;
 }
 
-/* Mobile: use scroll instead of fixed */
+/* Mobile: use scroll instead of fixed AND put overlay on both html and body */
 @media screen and (max-width: 980px) {
     html {
         background-color: #000;
+        background-image: 
+            linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+            url('/assets/css/images/servicesphoto.jpg');
+        background-size: cover;
+        background-position: center top;
+        background-attachment: scroll;
+        background-repeat: no-repeat;
         min-height: 100%;
         height: 100%;
     }
     
     body {
-        background-color: #000;
+        background-color: transparent;
+        background-image: 
+            linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+            url('/assets/css/images/servicesphoto.jpg');
         background-attachment: scroll;
         background-position: center top;
         background-size: cover;
@@ -180,21 +132,6 @@ body {
     body {
         min-height: -webkit-fill-available;
     }
-}
-
-/* Dark overlay */
-#page-wrapper {
-    position: relative;
-    z-index: 1;
-}
-
-body {
-    position: relative;
-}
-
-#page-wrapper {
-    position: relative;
-    z-index: 1;
 }
 
 .page-content {
@@ -1079,7 +1016,6 @@ body {
         }
     });
 })();
-
 
 </script>
 
