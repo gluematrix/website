@@ -12,45 +12,13 @@
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
 
-/* Mobile: use scroll instead of fixed */
-@media screen and (max-width: 980px) {
-    html {
-        background-color: #000;
-        min-height: 100%;
-        height: 100%;
-    }
-    
-    body {
-        background-color: #000;
-        background-attachment: scroll;
-        background-position: center top;
-        background-size: cover;
-        min-height: 100vh;
-        min-height: -webkit-fill-available;
-        padding-bottom: 0;
-    }
-    
-    .page-content {
-        min-height: 100vh;
-        padding-bottom: calc(8em + env(safe-area-inset-bottom));
-    }
-    
-    #footer {
-        background: transparent !important;
-        padding-bottom: calc(4em + env(safe-area-inset-bottom)) !important;
-    }
+html, body {
+    height: 100%;
 }
 
-/* iOS Safari -webkit-fill-available support */
-@supports (-webkit-touch-callout: none) {
-    html {
-        height: -webkit-fill-available;
-    }
-    body {
-        min-height: -webkit-fill-available;
-    }
+#page-wrapper {
+    min-height: 100%;
 }
-
 
 /* ===== SCROLL-BASED BOTTOM FADE ===== */
 body::before {
@@ -69,23 +37,6 @@ body::before {
 
 body.scrolled::before {
     opacity: 1;
-}
-
-
-
-html, body {
-    height: 100%;
-}
-
-#page-wrapper {
-    min-height: 100%;
-}
-
-/* iOS Safari bottom bar fix */
-@supports (-webkit-touch-callout: none) {
-    .page-content {
-        padding-bottom: calc(4em + 100px) !important;
-    }
 }
 
 /* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
@@ -135,298 +86,329 @@ button:hover {
     transform: scale(1.1);
 }
 
-			/* Full page background */
-			body {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/assets/css/images/servicesphoto.jpg');
-				background-size: cover;
-				background-position: center;
-				background-attachment: fixed;
-				background-repeat: no-repeat;
-				margin: 0;
-				padding: 0;
-				min-height: 100vh;
-				overflow-x: hidden;
-				position: relative;
-			}
-			
-			/* Mobile: use scroll instead of fixed */
-			@media screen and (max-width: 980px) {
-			    body {
-			        background-attachment: scroll;
-			    }
-			}
-			
-			/* Dark overlay */
+/* Full page background */
+body {
+    background-image: url('/assets/css/images/servicesphoto.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Mobile: use scroll instead of fixed */
+@media screen and (max-width: 980px) {
+    html {
+        background-color: #000;
+        min-height: 100%;
+        height: 100%;
+    }
+    
+    body {
+        background-color: #000;
+        background-attachment: scroll;
+        background-position: center top;
+        background-size: cover;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+        padding-bottom: 0;
+    }
+    
+    .page-content {
+        min-height: 100vh;
+        padding-bottom: calc(8em + env(safe-area-inset-bottom));
+    }
+    
+    #footer {
+        background: transparent !important;
+        padding-bottom: calc(4em + env(safe-area-inset-bottom)) !important;
+    }
+}
+
+/* iOS Safari -webkit-fill-available support */
+@supports (-webkit-touch-callout: none) {
+    html {
+        height: -webkit-fill-available;
+    }
+    body {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Dark overlay */
 #page-wrapper {
     position: relative;
     z-index: 1;
 }
 
-
 body {
     position: relative;
 }
-			
-			#page-wrapper {
-				position: relative;
-				z-index: 1;
-			}
-			
-			.page-content {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				min-height: calc(100vh - 100px);
-				padding: 6em 2em 4em 2em;
-			}
-			
-			.services-container {
-				max-width: 1200px;
-				width: 100%;
-				margin: 0 auto;
-			}
-			
-			.page-content h1 {
-				font-size: clamp(2em, 6vw, 3em);
-				margin-bottom: 0.5em;
-				text-align: center;
-			}
-			
-			.services-container > p {
-				font-size: clamp(0.9em, 2.5vw, 1.2em);
-				max-width: 700px;
-				line-height: 1.8;
-				margin: 0 auto 3em auto;
-				text-align: center;
-			}
-			
-			/* Services Grid - 3 columns on desktop, bottom 2 centered */
-			.services-grid {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 2em;
-				margin: 3em 0;
-			}
-			
-			/* Center the last 2 cards (Podcast & Consulting) on desktop */
-			.service-card:nth-child(4) {
-				grid-column: 1 / 2;
-			}
-			
-			.service-card:nth-child(5) {
-				grid-column: 2 / 3;
-			}
-			
-			/* Push them to center by starting at column 2 */
-			@media screen and (min-width: 769px) {
-				.services-grid {
-					grid-template-columns: repeat(6, 1fr);
-				}
-				
-				.service-card:nth-child(1),
-				.service-card:nth-child(2),
-				.service-card:nth-child(3) {
-					grid-column: span 2;
-				}
-				
-				.service-card:nth-child(4) {
-					grid-column: 2 / 4;
-				}
-				
-				.service-card:nth-child(5) {
-					grid-column: 4 / 6;
-				}
-			}
-			
-			.service-card {
-				background: rgba(0,0,0,0.6);
-				padding: 2em;
-				border-radius: 8px;
-				border: 1px solid rgba(0,255,204,0.3);
-				position: relative;
-				transition: all 0.3s ease;
-			}
-			
-			.service-card:hover {
-				border-color: rgba(0,255,204,0.6);
-				box-shadow: 0 10px 30px rgba(0,255,204,0.2);
-			}
-			
-			.service-card h3 {
-				color: #00ffcc;
-				font-size: 1.3em;
-				margin-bottom: 0.5em;
-			}
-			
-			.service-card .price {
-				font-size: 1.5em;
-				color: #fff;
-				margin: 0.5em 0;
-				font-weight: bold;
-			}
-			
-			.service-card .price-detail {
-				font-size: 0.85em;
-				color: rgba(255,255,255,0.7);
-				margin-bottom: 1em;
-			}
-			
-			.service-card p {
-				font-size: 0.95em;
-				line-height: 1.6;
-				color: rgba(255,255,255,0.9);
-			}
-			
-			/* Waveform decorations */
-			.waveform {
-				position: absolute;
-				top: 10px;
-				right: 10px;
-				opacity: 0.15;
-				width: 60px;
-				height: 60px;
-			}
-			
-			/* Before/After Audio Player */
-			.audio-comparison {
-				background: rgba(0,0,0,0.7);
-				padding: 2.5em;
-				border-radius: 8px;
-				margin: 4em 0;
-				border: 1px solid rgba(0,255,204,0.3);
-			}
-			
-			.audio-comparison h2 {
-				color: #00ffcc;
-				text-align: center;
-				margin-bottom: 1.5em;
-				font-size: 1.8em;
-			}
-			
-			.audio-players {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 2em;
-				margin-top: 2em;
-			}
-			
-			.audio-player-box {
-				background: rgba(0,0,0,0.4);
-				padding: 1.5em;
-				border-radius: 5px;
-				text-align: center;
-			}
-			
-			.audio-player-box h4 {
-				color: #00ffcc;
-				margin-bottom: 1em;
-				font-size: 1.1em;
-			}
-			
-			.audio-player-box audio {
-				width: 100%;
-				margin-top: 0.5em;
-			}
-			
-			.audio-note {
-				text-align: center;
-				font-size: 0.9em;
-				color: rgba(255,255,255,0.6);
-				margin-top: 1.5em;
-				font-style: italic;
-			}
-			
-			/* Alchemy Symbol Decorations */
-			.alchemy-symbol {
-				position: absolute;
-				opacity: 0.08;
-				pointer-events: none;
-			}
-			
-			.symbol-top-right {
-				top: 120px;
-				right: 50px;
-				width: 100px;
-				height: 100px;
-			}
-			
-			.symbol-bottom {
-				bottom: 100px;
-				left: 50%;
-				transform: translateX(-50%);
-				width: 120px;
-				height: 120px;
-			}
-			
-			/* Testimonials */
-			.testimonials {
-				margin: 4em 0;
-			}
-			
-			.testimonials h2 {
-				color: #00ffcc;
-				text-align: center;
-				margin-bottom: 2em;
-				font-size: 1.8em;
-			}
-			
-			.testimonial {
-				background: rgba(0,0,0,0.6);
-				padding: 2em;
-				border-radius: 8px;
-				border-left: 4px solid #00ffcc;
-				margin-bottom: 1.5em;
-			}
-			
-			.testimonial p {
-				font-size: 1.05em;
-				line-height: 1.7;
-				margin-bottom: 1em;
-				font-style: italic;
-			}
-			
-			.testimonial .author {
-				color: #00ffcc;
-				font-size: 0.95em;
-				text-align: right;
-			}
-			
-			@media screen and (max-width: 1024px) {
-				.services-grid {
-					grid-template-columns: repeat(2, 1fr);
-				}
-				
-				.service-card:nth-child(1),
-				.service-card:nth-child(2),
-				.service-card:nth-child(3),
-				.service-card:nth-child(4),
-				.service-card:nth-child(5) {
-					grid-column: auto;
-				}
-			}
-			
-			@media screen and (max-width: 768px) {
-				.services-grid {
-					grid-template-columns: 1fr !important;
-				}
-				
-				.service-card,
-				.service-card:nth-child(1),
-				.service-card:nth-child(2),
-				.service-card:nth-child(3),
-				.service-card:nth-child(4),
-				.service-card:nth-child(5) {
-					grid-column: auto !important;
-				}
-				
-				.audio-players {
-					grid-template-columns: 1fr;
-				}
-				
-				.alchemy-symbol {
-					display: none;
-				}
-			}
+
+#page-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    padding: 6em 2em 4em 2em;
+}
+
+.services-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.page-content h1 {
+    font-size: clamp(2em, 6vw, 3em);
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+.services-container > p {
+    font-size: clamp(0.9em, 2.5vw, 1.2em);
+    max-width: 700px;
+    line-height: 1.8;
+    margin: 0 auto 3em auto;
+    text-align: center;
+}
+
+/* Services Grid - 3 columns on desktop, bottom 2 centered */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2em;
+    margin: 3em 0;
+}
+
+/* Center the last 2 cards (Podcast & Consulting) on desktop */
+.service-card:nth-child(4) {
+    grid-column: 1 / 2;
+}
+
+.service-card:nth-child(5) {
+    grid-column: 2 / 3;
+}
+
+/* Push them to center by starting at column 2 */
+@media screen and (min-width: 769px) {
+    .services-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .service-card:nth-child(1),
+    .service-card:nth-child(2),
+    .service-card:nth-child(3) {
+        grid-column: span 2;
+    }
+    
+    .service-card:nth-child(4) {
+        grid-column: 2 / 4;
+    }
+    
+    .service-card:nth-child(5) {
+        grid-column: 4 / 6;
+    }
+}
+
+.service-card {
+    background: rgba(0,0,0,0.6);
+    padding: 2em;
+    border-radius: 8px;
+    border: 1px solid rgba(0,255,204,0.3);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    border-color: rgba(0,255,204,0.6);
+    box-shadow: 0 10px 30px rgba(0,255,204,0.2);
+}
+
+.service-card h3 {
+    color: #00ffcc;
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+}
+
+.service-card .price {
+    font-size: 1.5em;
+    color: #fff;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
+.service-card .price-detail {
+    font-size: 0.85em;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 1em;
+}
+
+.service-card p {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+}
+
+/* Waveform decorations */
+.waveform {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0.15;
+    width: 60px;
+    height: 60px;
+}
+
+/* Before/After Audio Player */
+.audio-comparison {
+    background: rgba(0,0,0,0.7);
+    padding: 2.5em;
+    border-radius: 8px;
+    margin: 4em 0;
+    border: 1px solid rgba(0,255,204,0.3);
+}
+
+.audio-comparison h2 {
+    color: #00ffcc;
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-size: 1.8em;
+}
+
+.audio-players {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    margin-top: 2em;
+}
+
+.audio-player-box {
+    background: rgba(0,0,0,0.4);
+    padding: 1.5em;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.audio-player-box h4 {
+    color: #00ffcc;
+    margin-bottom: 1em;
+    font-size: 1.1em;
+}
+
+.audio-player-box audio {
+    width: 100%;
+    margin-top: 0.5em;
+}
+
+.audio-note {
+    text-align: center;
+    font-size: 0.9em;
+    color: rgba(255,255,255,0.6);
+    margin-top: 1.5em;
+    font-style: italic;
+}
+
+/* Alchemy Symbol Decorations */
+.alchemy-symbol {
+    position: absolute;
+    opacity: 0.08;
+    pointer-events: none;
+}
+
+.symbol-top-right {
+    top: 120px;
+    right: 50px;
+    width: 100px;
+    height: 100px;
+}
+
+.symbol-bottom {
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+}
+
+/* Testimonials */
+.testimonials {
+    margin: 4em 0;
+}
+
+.testimonials h2 {
+    color: #00ffcc;
+    text-align: center;
+    margin-bottom: 2em;
+    font-size: 1.8em;
+}
+
+.testimonial {
+    background: rgba(0,0,0,0.6);
+    padding: 2em;
+    border-radius: 8px;
+    border-left: 4px solid #00ffcc;
+    margin-bottom: 1.5em;
+}
+
+.testimonial p {
+    font-size: 1.05em;
+    line-height: 1.7;
+    margin-bottom: 1em;
+    font-style: italic;
+}
+
+.testimonial .author {
+    color: #00ffcc;
+    font-size: 0.95em;
+    text-align: right;
+}
+
+@media screen and (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .service-card:nth-child(1),
+    .service-card:nth-child(2),
+    .service-card:nth-child(3),
+    .service-card:nth-child(4),
+    .service-card:nth-child(5) {
+        grid-column: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .service-card,
+    .service-card:nth-child(1),
+    .service-card:nth-child(2),
+    .service-card:nth-child(3),
+    .service-card:nth-child(4),
+    .service-card:nth-child(5) {
+        grid-column: auto !important;
+    }
+    
+    .audio-players {
+        grid-template-columns: 1fr;
+    }
+    
+    .alchemy-symbol {
+        display: none;
+    }
+}
 
 /* ===== ENHANCED VHS GLITCH TRANSITION ===== */
 #page-transition {
@@ -1016,6 +998,7 @@ body {
         if (e.key === 'Escape' && isActive) deactivate();
     });
 })();
+
 // ===== BROWSER BACK BUTTON FIX =====
 (function() {
     // Force page reload when using back/forward buttons
@@ -1044,9 +1027,6 @@ body {
         }
     });
     
-
-
-	
     // Clean up transitions when page is about to be cached
     window.addEventListener('pagehide', function() {
         const transition = document.getElementById('page-transition');
@@ -1072,7 +1052,6 @@ body {
     window.addEventListener('scroll', checkScroll, { passive: true });
     checkScroll(); // Check on load
 })();
-
 
 </script>
 
