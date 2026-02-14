@@ -984,6 +984,23 @@ body {
         }
     });
     
+// ===== BOTTOM GRADIENT FADE ON SCROLL =====
+(function() {
+    let scrollThreshold = 100; // Show fade after scrolling 100px
+    
+    function checkScroll() {
+        if (window.pageYOffset > scrollThreshold) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+    }
+    
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll(); // Check on load
+})();
+
+
     // Clean up transitions when page is about to be cached
     window.addEventListener('pagehide', function() {
         const transition = document.getElementById('page-transition');
