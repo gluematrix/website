@@ -20,11 +20,29 @@ html, body {
     min-height: 100%;
 }
 
+/* ===== DARK OVERLAY FOR TEXT READABILITY ===== */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    pointer-events: none;
+    z-index: 0;
+}
+
+#page-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
 /* ===== SCROLL-BASED BOTTOM FADE ===== */
 body::before {
     content: '';
     position: fixed;
-    bottom: 60px;
+    bottom: 0;  /* ← CHANGED TO 0 */
     left: 0;
     right: 0;
     height: 150px;
