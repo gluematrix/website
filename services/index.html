@@ -42,7 +42,8 @@ body::after {
 body::before {
     content: '';
     position: fixed;
-    bottom: 0;  /* ← CHANGED TO 0 */
+    bottom: 0;
+    bottom: env(safe-area-inset-bottom, 0);  /* Add this line for iOS */
     left: 0;
     right: 0;
     height: 150px;
