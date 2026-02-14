@@ -12,6 +12,66 @@
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
 
+/* Mobile: use scroll instead of fixed */
+@media screen and (max-width: 980px) {
+    html {
+        background-color: #000;
+        min-height: 100%;
+        height: 100%;
+    }
+    
+    body {
+        background-color: #000;
+        background-attachment: scroll;
+        background-position: center top;
+        background-size: cover;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+        padding-bottom: 0;
+    }
+    
+    .page-content {
+        min-height: 100vh;
+        padding-bottom: calc(8em + env(safe-area-inset-bottom));
+    }
+    
+    #footer {
+        background: transparent !important;
+        padding-bottom: calc(4em + env(safe-area-inset-bottom)) !important;
+    }
+}
+
+/* iOS Safari -webkit-fill-available support */
+@supports (-webkit-touch-callout: none) {
+    html {
+        height: -webkit-fill-available;
+    }
+    body {
+        min-height: -webkit-fill-available;
+    }
+}
+
+
+/* ===== SCROLL-BASED BOTTOM FADE ===== */
+body::before {
+    content: '';
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0.9) 100%);
+    pointer-events: none;
+    z-index: 9994;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+body.scrolled::before {
+    opacity: 1;
+}
+
+
 
 html, body {
     height: 100%;
@@ -984,6 +1044,19 @@ body {
         }
     });
     
+
+
+	
+    // Clean up transitions when page is about to be cached
+    window.addEventListener('pagehide', function() {
+        const transition = document.getElementById('page-transition');
+        if (transition) {
+            transition.classList.remove('active');
+            transition.style.opacity = '0';
+        }
+    });
+})();
+
 // ===== BOTTOM GRADIENT FADE ON SCROLL =====
 (function() {
     let scrollThreshold = 100; // Show fade after scrolling 100px
@@ -1001,15 +1074,6 @@ body {
 })();
 
 
-    // Clean up transitions when page is about to be cached
-    window.addEventListener('pagehide', function() {
-        const transition = document.getElementById('page-transition');
-        if (transition) {
-            transition.classList.remove('active');
-            transition.style.opacity = '0';
-        }
-    });
-})();
 </script>
 
 	</body>
