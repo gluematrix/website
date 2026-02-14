@@ -33,6 +33,16 @@ body::after {
     z-index: 0;
 }
 
+/* Make sure overlay extends on mobile */
+@media screen and (max-width: 980px) {
+    body::after {
+        bottom: 0;
+        bottom: calc(0px - env(safe-area-inset-bottom, 0px));
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+}
+
 #page-wrapper {
     position: relative;
     z-index: 1;
