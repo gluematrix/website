@@ -13,18 +13,33 @@
 		<style>
 
 .stream-logo-link {
-    color: rgba(255, 255, 255, 0.75);
-    transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .stream-logo-link:hover {
-    color: #ed4933;
     transform: scale(1.15);
-    filter: drop-shadow(0 0 10px rgba(237, 73, 51, 0.5));
 }
+
+.stream-logo-link[aria-label="Listen on Spotify"] { color: #1DB954; }
+.stream-logo-link[aria-label="Listen on Spotify"]:hover { filter: drop-shadow(0 0 10px rgba(29, 185, 84, 0.7)); }
+
+.stream-logo-link[aria-label="Listen on Apple Music"] { color: #FC3C44; }
+.stream-logo-link[aria-label="Listen on Apple Music"]:hover { filter: drop-shadow(0 0 10px rgba(252, 60, 68, 0.7)); }
+
+.stream-logo-link[aria-label="Listen on Tidal"] { color: rgba(255, 255, 255, 0.85); }
+.stream-logo-link[aria-label="Listen on Tidal"]:hover { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); }
+
+.stream-logo-link[aria-label="Listen on SoundCloud"] { color: #FF5500; }
+.stream-logo-link[aria-label="Listen on SoundCloud"]:hover { filter: drop-shadow(0 0 10px rgba(255, 85, 0, 0.7)); }
+
+.stream-logo-link[aria-label="Listen on YouTube Music"] { color: #FF0000; }
+.stream-logo-link[aria-label="Listen on YouTube Music"]:hover { filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.7)); }
+
+.stream-logo-link[aria-label="Listen on Bandcamp"] { color: #1DA0C3; }
+.stream-logo-link[aria-label="Listen on Bandcamp"]:hover { filter: drop-shadow(0 0 10px rgba(29, 160, 195, 0.7)); }
 
 
 html, body {
