@@ -581,7 +581,7 @@ document.getElementById('mailingListForm').addEventListener('submit', function(e
         }
     }).then(response => {
         if (response.ok) {
-            subStatus.textContent = 'You\'re subscribed! Check your email.';
+            subStatus.textContent = 'You\'re subscribed! We will be in touch...';
             subStatus.style.color = '#00ff88';
             subStatus.style.display = 'block';
             form.reset();
