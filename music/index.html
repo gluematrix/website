@@ -12,6 +12,20 @@
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 		<style>
 
+.stream-logo-link {
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stream-logo-link:hover {
+    color: #ed4933;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 10px rgba(237, 73, 51, 0.5));
+}
+
 
 html, body {
     height: 100%;
@@ -526,13 +540,52 @@ body {
 <div class="page-content">
     <h1>Music</h1>
 <p>Listen to Glue Matrix<span class="easter-egg-trigger" id="easter-egg-trigger" style="display: inline-block; margin-left: 2px; animation: blink 1.2s step-end infinite;">▌</span></p>    
-    <!-- Streaming Links -->
-    <div class="music-links">
-        <a href="https://open.spotify.com/artist/51pjgf2UfI5WiQ52KWlJjE" class="button" target="_blank" rel="noopener">Spotify</a>
-        <a href="https://music.apple.com/us/artist/glue-matrix/1807712310" class="button" target="_blank" rel="noopener">Apple Music</a>
-        <a href="https://tidal.com/artist/56568122/u" class="button" target="_blank" rel="noopener">Tidal</a>
-        <a href="https://soundcloud.com/gluematrix" class="button" target="_blank" rel="noopener">SoundCloud</a>
-    </div>
+  <!-- Streaming Links -->
+<div class="music-links" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 2em; margin: 2em 0; max-width: 500px;">
+
+    <!-- Spotify -->
+    <a href="https://open.spotify.com/artist/51pjgf2UfI5WiQ52KWlJjE" target="_blank" rel="noopener" class="stream-logo-link" aria-label="Listen on Spotify">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 168" width="48" height="48">
+            <path fill="currentColor" d="M84 0C37.7 0 0 37.7 0 84s37.7 84 84 84 84-37.7 84-84S130.3 0 84 0zm38.6 121.2c-1.5 2.4-4.7 3.2-7.1 1.7-19.4-11.9-43.9-14.6-72.7-8-2.8.6-5.5-1.1-6.1-3.9-.6-2.8 1.1-5.5 3.9-6.1 31.5-7.2 58.5-4.1 80.3 9.2 2.5 1.5 3.2 4.7 1.7 7.1zm10.3-22.9c-1.9 3-5.9 4-8.9 2.1-22.2-13.7-56.1-17.6-82.3-9.6-3.4 1-7-.9-8-4.3-1-3.4.9-7 4.3-8 30-9.1 67.3-4.7 92.8 11 3 1.9 3.9 5.9 2.1 8.8zm.9-23.8c-26.6-15.8-70.5-17.3-95.9-9.6-4.1 1.2-8.4-1.1-9.6-5.2-1.2-4.1 1.1-8.4 5.2-9.6 29.2-8.9 77.6-7.1 108.2 11.1 3.7 2.2 4.9 7 2.7 10.7-2.2 3.7-7 4.9-10.6 2.6z"/>
+        </svg>
+    </a>
+
+    <!-- Apple Music -->
+    <a href="https://music.apple.com/us/artist/glue-matrix/1807712310" target="_blank" rel="noopener" class="stream-logo-link" aria-label="Listen on Apple Music">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="48" height="48">
+            <path fill="currentColor" d="M39.293 0H10.707C4.792 0 0 4.792 0 10.707v28.586C0 45.208 4.792 50 10.707 50h28.586C45.208 50 50 45.208 50 39.293V10.707C50 4.792 45.208 0 39.293 0zm-4.73 35.196c-.566.98-1.617 1.547-2.683 1.547-.523 0-1.051-.133-1.535-.414l-3.52-2.033v.012c-.512-.295-.863-.734-1.062-1.225-.203-.498-.246-1.062-.109-1.611l1.504-6.146-7.602-4.39c-1.041-.601-1.397-1.934-.797-2.976.601-1.041 1.934-1.397 2.976-.797l9.086 5.246c.641.37 1.074.994 1.188 1.713.039.246.039.496-.003.742l-1.543 6.309 2.809 1.621c1.041.601 1.397 1.934.797 2.976l-.506-.574zm1.265-17.61L22.05 9.492c-1.041-.601-2.375-.244-2.976.797-.601 1.041-.244 2.375.797 2.976l13.779 7.953v-3.632z"/>
+        </svg>
+    </a>
+
+    <!-- Tidal -->
+    <a href="https://tidal.com/artist/56568122/u" target="_blank" rel="noopener" class="stream-logo-link" aria-label="Listen on Tidal">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
+            <path fill="currentColor" d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996l4.004 4.004 4.004-4.004 4.004 4.004 4.004-4.004zM8.008 12l-4.004 4.004L0 12.004 0 12l4.004-4.004zM12.012 16.004l4.004-4.004 4.004 4.004-4.004 4.004zM15.992 7.996l4.004-4.004L24 7.996l-4.004 4.004z"/>
+        </svg>
+    </a>
+
+    <!-- SoundCloud -->
+    <a href="https://soundcloud.com/gluematrix" target="_blank" rel="noopener" class="stream-logo-link" aria-label="Listen on SoundCloud">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
+            <path fill="currentColor" d="M1.175 12.225c-.017 0-.034.002-.051.004-.046.005-.09.021-.125.051-.061.05-.093.12-.093.195v5.523c0 .162.13.294.294.294h.025c.162 0 .293-.132.293-.294v-5.523c0-.162-.13-.294-.293-.294h-.05zm1.705-.44c-.026 0-.051.002-.075.007-.058.01-.11.038-.148.081-.059.065-.088.152-.088.241v6.201c0 .162.13.294.293.294h.025c.162 0 .293-.132.293-.294v-6.201c0-.162-.13-.294-.293-.294h-.007zm1.705.268c-.003 0-.007 0-.01.001-.06.005-.115.033-.154.079-.059.07-.085.163-.085.253v5.888c0 .162.13.294.293.294h.025c.162 0 .293-.132.293-.294v-5.888c0-.162-.13-.294-.293-.294h-.069zm1.706-.694c-.065 0-.124.026-.168.068-.062.059-.093.141-.093.225v6.943c0 .162.13.294.293.294h.025c.162 0 .293-.132.293-.294v-6.943c0-.162-.13-.294-.293-.294h-.057zm1.706.327c-.1 0-.185.046-.241.116-.069.089-.093.207-.079.324v6.468c0 .162.13.294.293.294h.025c.162 0 .293-.132.293-.294v-6.468c-.017-.155-.141-.277-.291-.44zm1.706-1.41c-.12 0-.222.072-.268.174-.062.137-.058.3.012.431v8.238c0 .162.13.294.293.294h.025c.162 0 .293-.132.293-.294v-8.238c.07-.131.074-.294.012-.431-.046-.102-.148-.174-.267-.174h-.1zm1.705 1.058c-.021 0-.041.003-.06.008-.075.022-.137.075-.171.146-.049.099-.053.214-.012.315v7.448c0 .162.13.294.293.294h.025c.162 0 .293-.132.293-.294v-7.448c.041-.101.037-.216-.012-.315-.034-.071-.096-.124-.171-.146-.02-.005-.04-.008-.06-.008h-.125zm1.706-.326c-.065 0-.124.026-.168.068-.062.059-.093.141-.093.225v7.775c0 .162.13.294.293.294h.025c.162 0 .293-.132.293-.294v-7.775c0-.162-.13-.294-.293-.294h-.057zm3.85-4.506c-1.424 0-2.749.482-3.805 1.284-.065-2.906-2.46-5.24-5.416-5.24-2.994 0-5.42 2.382-5.42 5.32 0 .062.004.124.006.186-.388-.095-.79-.147-1.205-.147C1.708 6.165 0 7.874 0 9.994s1.708 3.829 3.828 3.829h14.254C20.292 13.823 22 12.114 22 9.994c0-2.116-1.704-3.829-3.818-3.829-.003 0-.006.001-.009.001z"/>
+        </svg>
+    </a>
+
+    <!-- YouTube Music -->
+    <a href="https://music.youtube.com/channel/UCveT96fvXQmSnJ7pa71IEuQ?si=aTiZ6jismZTsKHfi" target="_blank" rel="noopener" class="stream-logo-link" aria-label="Listen on YouTube Music">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
+            <path fill="currentColor" d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-11.616a4.516 4.516 0 1 0 0 9.032 4.516 4.516 0 0 0 0-9.032zm0 7.212a2.696 2.696 0 1 1 0-5.392 2.696 2.696 0 0 1 0 5.392zm0-3.888a1.192 1.192 0 1 0 0 2.384 1.192 1.192 0 0 0 0-2.384zM9.864 8.4L16.8 12l-6.936 3.6V8.4z"/>
+        </svg>
+    </a>
+
+    <!-- Bandcamp -->
+    <a href="https://gluematrix.bandcamp.com" target="_blank" rel="noopener" class="stream-logo-link" aria-label="Listen on Bandcamp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
+            <path fill="currentColor" d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/>
+        </svg>
+    </a>
+
+</div>
 
 <!-- BaNdCAMPPPP Embed Player -->
 <div style="width: 100%; max-width: 660px; margin: 1.5em auto;">
