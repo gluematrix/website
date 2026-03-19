@@ -11,12 +11,20 @@
 		<link rel="stylesheet" href="assets/css/mobile.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 <style>
+
 html, body {
     height: 100%;
+    overflow: hidden;
 }
 
 #page-wrapper {
-    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    background: transparent !important;
 }
 
 /* ===== CONSISTENT BUTTON HOVER - ZOOM EFFECT ===== */
@@ -91,23 +99,17 @@ body {
     }
 }
 
-#page-wrapper {
-    position: relative;
-    z-index: 1;
-    background: transparent !important; 
-}
-
 .home-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     text-align: center;
-    padding: 5em 2em 2em 2em;
+    padding: 2em 2em 0 2em;
     position: relative;
     z-index: 2;
-    box-sizing: border-box;
+    min-height: 0;
 }
 
 .home-content h1 {
@@ -130,7 +132,7 @@ body {
 }
 
 .home-content p:last-of-type {
-    margin-bottom: 1em;
+    margin-bottom: 0;
 }
 
 .home-content .button {
@@ -148,6 +150,15 @@ body {
     margin: 0 auto;
 }
 
+/* Footer pinned to bottom inside wrapper */
+#footer {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    background: transparent !important;
+    padding: 1em 0 1.5em 0;
+}
+
 /* On mobile: stack all 4 buttons vertically and center them */
 @media screen and (max-width: 768px) {
     .button-container {
@@ -161,6 +172,17 @@ body {
         max-width: 250px;
         margin: 0;
     }
+
+    html, body {
+        overflow: hidden;
+        height: 100%;
+        height: -webkit-fill-available;
+    }
+
+    #page-wrapper {
+        height: 100vh;
+        height: -webkit-fill-available;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -168,6 +190,16 @@ body {
         font-size: 0.8em;
         width: 75%;
         max-width: 220px;
+    }
+}
+
+/* iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    html, body {
+        height: -webkit-fill-available;
+    }
+    #page-wrapper {
+        height: -webkit-fill-available;
     }
 }
 
@@ -296,8 +328,6 @@ body {
     mix-blend-mode: screen;
 }
 
-
-
 /* Chromatic Aberration Layer - Red */
 #page-transition::after {
     content: '';
@@ -323,26 +353,11 @@ body {
 }
 
 @keyframes rgbSplit {
-    0% { 
-        transform: translateX(-3px);
-        opacity: 0.8;
-    }
-    25% { 
-        transform: translateX(3px);
-        opacity: 1;
-    }
-    50% { 
-        transform: translateX(-2px);
-        opacity: 0.8;
-    }
-    75% { 
-        transform: translateX(2px);
-        opacity: 1;
-    }
-    100% { 
-        transform: translateX(-3px);
-        opacity: 0.8;
-    }
+    0% { transform: translateX(-3px); opacity: 0.8; }
+    25% { transform: translateX(3px); opacity: 1; }
+    50% { transform: translateX(-2px); opacity: 0.8; }
+    75% { transform: translateX(2px); opacity: 1; }
+    100% { transform: translateX(-3px); opacity: 0.8; }
 }
 
 /* VHS Static Noise */
@@ -365,50 +380,32 @@ body {
 
 @keyframes textGlitch {
     0% { 
-        text-shadow: 
-            3px 0 #ff00ff,
-            -3px 0 #00ffff,
-            0 3px #ffff00;
+        text-shadow: 3px 0 #ff00ff, -3px 0 #00ffff, 0 3px #ffff00;
         transform: translate(-50%, -50%) skew(0deg);
         filter: brightness(1.5) saturate(1.5);
     }
     20% { 
-        text-shadow: 
-            -3px 0 #ff0000,
-            3px 0 #00ff00,
-            0 -3px #0000ff;
+        text-shadow: -3px 0 #ff0000, 3px 0 #00ff00, 0 -3px #0000ff;
         transform: translate(-51%, -50%) skew(2deg);
         filter: brightness(2) saturate(2);
     }
     40% { 
-        text-shadow: 
-            2px 0 #ffff00,
-            -2px 0 #ff00ff,
-            0 2px #00ffff;
+        text-shadow: 2px 0 #ffff00, -2px 0 #ff00ff, 0 2px #00ffff;
         transform: translate(-50%, -51%) skew(-1deg);
         filter: brightness(1.8) saturate(1.8);
     }
     60% { 
-        text-shadow: 
-            -2px 0 #00ffff,
-            2px 0 #ff00ff,
-            0 -2px #ffff00;
+        text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff, 0 -2px #ffff00;
         transform: translate(-49%, -50%) skew(1deg);
         filter: brightness(1.6) saturate(1.6);
     }
     80% { 
-        text-shadow: 
-            4px 0 #ff0000,
-            -4px 0 #00ff00,
-            0 4px #0000ff;
+        text-shadow: 4px 0 #ff0000, -4px 0 #00ff00, 0 4px #0000ff;
         transform: translate(-50%, -49%) skew(-2deg);
         filter: brightness(2.2) saturate(2);
     }
     100% { 
-        text-shadow: 
-            3px 0 #ff00ff,
-            -3px 0 #00ffff,
-            0 3px #ffff00;
+        text-shadow: 3px 0 #ff00ff, -3px 0 #00ffff, 0 3px #ffff00;
         transform: translate(-50%, -50%) skew(0deg);
         filter: brightness(1.5) saturate(1.5);
     }
@@ -451,7 +448,6 @@ body {
     text-shadow: 0 0 10px rgba(0,255,204,0.8);
 }
 
-/* Easter egg trigger - the period after "Much love" */
 .easter-egg-trigger {
     cursor: default;
     transition: text-shadow 0.3s ease;
@@ -477,56 +473,54 @@ body {
         </div>
 
 		<!-- Page Wrapper -->
-			<div id="page-wrapper" style="display: flex; flex-direction: column; height: 100vh; overflow: hidden;">
+		<div id="page-wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<h1><a href="/">GLUE MATRIX</a></h1>
-						<nav id="nav">
-							<ul>
-								<li class="special">
-									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-									<div id="menu">
-										<ul>
-											<li><a href="/">Home</a></li>
-										    <li><a href="/music/">Music</a></li>
-                                            <li><a href="/services/">Services</a></li>
-											<li><a href="/about/">About</a></li>
-											<li><a href="/contact/">Contact</a></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</nav>
-					</header>
+			<!-- Header -->
+			<header id="header">
+				<h1><a href="/">GLUE MATRIX</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="/">Home</a></li>
+									<li><a href="/music/">Music</a></li>
+									<li><a href="/services/">Services</a></li>
+									<li><a href="/about/">About</a></li>
+									<li><a href="/contact/">Contact</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
 
-				<!-- Home Content -->
-					<div class="home-content">
-						<h1>GLUE MATRIX</h1>
-                        
-                        <p>Glue Matrix is a musical project that attempts to alchemize and decipher</p>
-                        <p>the force that connects everything & everyone together.</p>
-                        <p>Much love<span class="easter-egg-trigger" id="easter-egg-trigger">.</span></p>
-				
-					</div>
+			<!-- Home Content -->
+			<div class="home-content">
+				<h1>GLUE MATRIX</h1>
+				<p>Glue Matrix is a musical project that attempts to alchemize and decipher</p>
+				<p>the force that connects everything & everyone together.</p>
+				<p>Much love<span class="easter-egg-trigger" id="easter-egg-trigger">.</span></p>
+			</div>
 
-			</div>       
+			<!-- Footer INSIDE page-wrapper so it stays in viewport -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				</ul>
+				<ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+					<li>&copy; GLUE MATRIX</li>
+					<li><a href="/legal/">Privacy & Legal</a></li>
+				</ul>
+			</footer>
 
-<!-- Footer -->
-<footer id="footer" style="position: relative; z-index: 1; background: transparent; padding: 1em 0 1em 0;">
-        <ul class="icons">
-        <li><a href="https://www.instagram.com/gluematrix/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-        <li><a href="https://www.facebook.com/profile.php?id=61575180267468" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-        <li><a href="https://x.com/gluematrixmusic" target="_blank" rel="noopener" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-        <li><a href="mailto:jack@gluematrix.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-    </ul>
-<ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
-    <li>&copy; GLUE MATRIX</li>
-    <li><a href="/legal/">Privacy & Legal</a></li>
-</ul>
-</footer>
+		</div>
 
-<!-- Ambient Audio Player -->
+		<!-- Ambient Audio Player -->
 		<div id="audio-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 9998; cursor: pointer; opacity: 0.6; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center;">
 			<svg width="40" height="40" viewBox="0 0 40 40" id="audio-icon">
 				<circle cx="20" cy="20" r="18" fill="none" stroke="#00ffcc" stroke-width="2"/>
@@ -536,15 +530,9 @@ body {
 		</div>
 		<audio id="ambient-audio" loop>
 			<source src="assets/audio/ambient-drone.mp3" type="audio/mpeg">
-			<!-- You'll need to create this file - a 20-30 sec ambient loop -->
 		</audio>
 
-
-<script>
-
-
-
-
+		<script>
 		// Ambient Audio System
 		(function() {
 			const toggle = document.getElementById('audio-toggle');
@@ -555,11 +543,9 @@ body {
 			
 			let isPlaying = false;
 			
-			// Check localStorage
 			const savedState = localStorage.getItem('glueMatrixAudio');
 			if (savedState === 'playing') {
 				audio.play().catch(() => {
-					// Autoplay blocked, that's fine
 					localStorage.setItem('glueMatrixAudio', 'paused');
 				});
 				isPlaying = true;
@@ -573,35 +559,18 @@ body {
 					localStorage.setItem('glueMatrixAudio', 'paused');
 					isPlaying = false;
 				} else {
-					audio.play().catch(err => {
-						console.log('Audio play failed:', err);
-					});
+					audio.play().catch(err => console.log('Audio play failed:', err));
 					soundWaves.setAttribute('opacity', '1');
 					localStorage.setItem('glueMatrixAudio', 'playing');
 					isPlaying = true;
 				}
 			});
 			
-			// Sync visual state with actual playback
-			audio.addEventListener('play', () => {
-				isPlaying = true;
-				soundWaves.setAttribute('opacity', '1');
-			});
+			audio.addEventListener('play', () => { isPlaying = true; soundWaves.setAttribute('opacity', '1'); });
+			audio.addEventListener('pause', () => { isPlaying = false; soundWaves.setAttribute('opacity', '0'); });
+			toggle.addEventListener('mouseenter', function() { this.style.opacity = '1'; });
+			toggle.addEventListener('mouseleave', function() { this.style.opacity = '0.6'; });
 			
-			audio.addEventListener('pause', () => {
-				isPlaying = false;
-				soundWaves.setAttribute('opacity', '0');
-			});
-			
-			toggle.addEventListener('mouseenter', function() {
-				this.style.opacity = '1';
-			});
-			
-			toggle.addEventListener('mouseleave', function() {
-				this.style.opacity = '0.6';
-			});
-			
-			// Breathing animation when playing
 			let breathTime = 0;
 			function breathe() {
 				if (isPlaying && !audio.paused) {
@@ -617,357 +586,238 @@ body {
 		})();
 		</script>
 
-
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
 
-<script>
-// ===== FREQUENCY VISUALIZER - VERY SUBTLE =====
-(function() {
-    const visualizer = document.getElementById('frequency-visualizer');
-    const barCount = Math.floor(window.innerWidth / 6);
-    const bars = [];
-    
-    for (let i = 0; i < barCount; i++) {
-        const bar = document.createElement('div');
-        bar.className = 'freq-bar';
-        bar.style.height = '5px';
-        visualizer.appendChild(bar);
-        bars.push(bar);
-    }
-    
-    function animateBars() {
-        const time = Date.now() * 0.0005;
-        
-        bars.forEach((bar, index) => {
-            const wave = Math.sin(time + index * 0.05) * 0.5 + 0.5;
-            const height = 5 + (wave * 40);
-            bar.style.height = `${height}px`;
-        });
-        
-        requestAnimationFrame(animateBars);
-    }
-    
-    animateBars();
-})();
+		<script>
+		// ===== FREQUENCY VISUALIZER =====
+		(function() {
+			const visualizer = document.getElementById('frequency-visualizer');
+			const barCount = Math.floor(window.innerWidth / 6);
+			const bars = [];
+			
+			for (let i = 0; i < barCount; i++) {
+				const bar = document.createElement('div');
+				bar.className = 'freq-bar';
+				bar.style.height = '5px';
+				visualizer.appendChild(bar);
+				bars.push(bar);
+			}
+			
+			function animateBars() {
+				const time = Date.now() * 0.0005;
+				bars.forEach((bar, index) => {
+					const wave = Math.sin(time + index * 0.05) * 0.5 + 0.5;
+					bar.style.height = `${5 + (wave * 40)}px`;
+				});
+				requestAnimationFrame(animateBars);
+			}
+			animateBars();
+		})();
 
-// ===== VHS GLITCH PAGE TRANSITIONS =====
-(function() {
-    const transition = document.getElementById('page-transition');
-    
-    document.querySelectorAll('a.nav-link, #menu a, a.button').forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
-                return;
-            }
-            
-            e.preventDefault();
-            transition.classList.add('active');
-            
-            setTimeout(() => {
-                window.location.href = href;
-            }, 350);
-        });
-    });
-})();
+		// ===== VHS GLITCH PAGE TRANSITIONS =====
+		(function() {
+			const transition = document.getElementById('page-transition');
+			document.querySelectorAll('a.nav-link, #menu a, a.button').forEach(link => {
+				link.addEventListener('click', function(e) {
+					const href = this.getAttribute('href');
+					if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) return;
+					e.preventDefault();
+					transition.classList.add('active');
+					setTimeout(() => { window.location.href = href; }, 350);
+				});
+			});
+		})();
 
-// ===== PSYCHEDELIC CONTOUR EASTER EGG =====
-(function() {
-    const overlay = document.getElementById('psychedelic-overlay');
-    const canvas = document.getElementById('psychedelic-canvas');
-    const trigger = document.getElementById('easter-egg-trigger');
-    
-    let animationId = null;
-    let isActive = false;
-    let startTime = 0;
-    
-    // Try WebGL first
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    
-    if (!gl) {
-        // Fallback to 2D canvas
-        init2DFallback();
-        return;
-    }
-    
-    // Vertex shader
-    const vertexShaderSource = `
-        attribute vec2 a_position;
-        void main() {
-            gl_Position = vec4(a_position, 0.0, 1.0);
-        }
-    `;
-    
-    // Fragment shader - creates the psychedelic contour effect
-    const fragmentShaderSource = `
-        precision highp float;
-        uniform vec2 u_resolution;
-        uniform float u_time;
-        
-        float noise(vec2 p, float t) {
-            float n = 0.0;
-            n += sin(p.x * 0.02 + t * 0.5) * cos(p.y * 0.02 + t * 0.3);
-            n += sin(p.x * 0.04 - t * 0.4) * cos(p.y * 0.03 + t * 0.2) * 0.5;
-            n += sin(p.x * 0.01 + p.y * 0.01 + t * 0.6) * 0.7;
-            n += cos(p.x * 0.03 + t * 0.2) * sin(p.y * 0.04 - t * 0.5) * 0.4;
-            n += sin((p.x + p.y) * 0.015 + t * 0.25) * 0.6;
-            n += cos(p.x * 0.025 - p.y * 0.02 + t * 0.35) * 0.35;
-            return n / 2.8;
-        }
-        
-        vec3 hsv2rgb(vec3 c) {
-            vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
-            vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
-            return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
-        }
-        
-        void main() {
-            vec2 uv = gl_FragCoord.xy;
-            vec2 center = u_resolution * 0.5;
-            vec2 mirrorUV = abs(uv - center);
-            
-            float n = noise(mirrorUV, u_time);
-            
-            float lineDensity = 15.0;
-            float contour = (n + 1.0) * lineDensity;
-            float frac = fract(contour);
-            
-            float lineThickness = 0.12;
-            float line = 1.0 - smoothstep(0.0, lineThickness, abs(frac - 0.5));
-            
-            float hue = fract((n + 1.0) * 0.5 + u_time * 0.08);
-            vec3 color = hsv2rgb(vec3(hue, 0.85, 0.95));
-            
-            float brightness = mix(0.05, 1.0, line);
-            color *= brightness;
-            
-            gl_FragColor = vec4(color, 1.0);
-        }
-    `;
-    
-    function compileShader(source, type) {
-        const shader = gl.createShader(type);
-        gl.shaderSource(shader, source);
-        gl.compileShader(shader);
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            console.error('Shader error:', gl.getShaderInfoLog(shader));
-            return null;
-        }
-        return shader;
-    }
-    
-    const vertexShader = compileShader(vertexShaderSource, gl.VERTEX_SHADER);
-    const fragmentShader = compileShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
-    
-    if (!vertexShader || !fragmentShader) {
-        init2DFallback();
-        return;
-    }
-    
-    const program = gl.createProgram();
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
-    
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        console.error('Program error:', gl.getProgramInfoLog(program));
-        init2DFallback();
-        return;
-    }
-    
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-        -1, -1, 1, -1, -1, 1,
-        -1, 1, 1, -1, 1, 1
-    ]), gl.STATIC_DRAW);
-    
-    const positionLocation = gl.getAttribLocation(program, 'a_position');
-    const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
-    const timeLocation = gl.getUniformLocation(program, 'u_time');
-    
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        gl.viewport(0, 0, canvas.width, canvas.height);
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    
-    function render() {
-        if (!isActive) return;
-        
-        const currentTime = (Date.now() - startTime) / 1000;
-        
-        gl.useProgram(program);
-        gl.enableVertexAttribArray(positionLocation);
-        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-        gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-        gl.uniform1f(timeLocation, currentTime);
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
-        
-        animationId = requestAnimationFrame(render);
-    }
-    
-    function activate() {
-        isActive = true;
-        startTime = Date.now();
-        overlay.classList.add('active');
-        render();
-    }
-    
-    function deactivate() {
-        isActive = false;
-        overlay.classList.remove('active');
-        if (animationId) cancelAnimationFrame(animationId);
-    }
-    
-    trigger.addEventListener('click', activate);
-    overlay.addEventListener('click', deactivate);
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isActive) deactivate();
-    });
-    
-    // 2D Canvas fallback
-    function init2DFallback() {
-        const ctx = canvas.getContext('2d');
-        let time = 0;
-        
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-        
-        function noise2D(x, y, t) {
-            let n = 0;
-            n += Math.sin(x * 0.02 + t * 0.5) * Math.cos(y * 0.02 + t * 0.3);
-            n += Math.sin(x * 0.04 - t * 0.4) * Math.cos(y * 0.03 + t * 0.2) * 0.5;
-            n += Math.sin(x * 0.01 + y * 0.01 + t * 0.6) * 0.7;
-            n += Math.cos(x * 0.03 + t * 0.2) * Math.sin(y * 0.04 - t * 0.5) * 0.4;
-            return n / 2.5;
-        }
-        
-        function hsvToRgb(h, s, v) {
-            let r, g, b;
-            const i = Math.floor(h * 6);
-            const f = h * 6 - i;
-            const p = v * (1 - s);
-            const q = v * (1 - f * s);
-            const tv = v * (1 - (1 - f) * s);
-            switch (i % 6) {
-                case 0: r = v; g = tv; b = p; break;
-                case 1: r = q; g = v; b = p; break;
-                case 2: r = p; g = v; b = tv; break;
-                case 3: r = p; g = q; b = v; break;
-                case 4: r = tv; g = p; b = v; break;
-                case 5: r = v; g = p; b = q; break;
-            }
-            return `rgb(${Math.round(r*255)},${Math.round(g*255)},${Math.round(b*255)})`;
-        }
-        
-        function draw() {
-            if (!isActive) return;
-            
-            const width = canvas.width;
-            const height = canvas.height;
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const step = 4;
-            
-            ctx.fillStyle = '#000';
-            ctx.fillRect(0, 0, width, height);
-            
-            for (let y = 0; y < height; y += step) {
-                for (let x = 0; x < width; x += step) {
-                    const mx = Math.abs(x - centerX);
-                    const my = Math.abs(y - centerY);
-                    const n = noise2D(mx, my, time);
-                    const contour = (n + 1) * 12;
-                    const frac = contour - Math.floor(contour);
-                    
-                    if (Math.abs(frac - 0.5) < 0.15) {
-                        const hue = ((n + 1) / 2 + time * 0.08) % 1;
-                        ctx.fillStyle = hsvToRgb(hue, 0.85, 0.95);
-                        ctx.fillRect(x, y, step, step);
-                    }
-                }
-            }
-            
-            time += 0.03;
-            animationId = requestAnimationFrame(draw);
-        }
-        
-        trigger.addEventListener('click', () => {
-            isActive = true;
-            time = 0;
-            overlay.classList.add('active');
-            draw();
-        });
-        
-        overlay.addEventListener('click', () => {
-            isActive = false;
-            overlay.classList.remove('active');
-            if (animationId) cancelAnimationFrame(animationId);
-        });
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isActive) {
-                isActive = false;
-                overlay.classList.remove('active');
-                if (animationId) cancelAnimationFrame(animationId);
-            }
-        });
-    }
-})();
-// ===== BROWSER BACK BUTTON FIX =====
-(function() {
-    // Force page reload when using back/forward buttons
-    window.addEventListener('pageshow', function(event) {
-        if (event.persisted) {
-            // Page was loaded from bfcache (back/forward cache)
-            // Reset all animations and transitions
-            const transition = document.getElementById('page-transition');
-            if (transition) {
-                transition.classList.remove('active');
-                transition.style.display = 'none';
-                setTimeout(() => {
-                    transition.style.display = '';
-                }, 100);
-            }
-            
-            // Reset any stuck filters or transforms on body
-            document.body.style.filter = '';
-            document.body.style.transform = '';
-            
-            // If the glitch is really bad, force a full reload
-            if (document.body.style.filter !== '' || 
-                document.querySelector('#page-transition.active')) {
-                window.location.reload();
-            }
-        }
-    });
-    
-    // Clean up transitions when page is about to be cached
-    window.addEventListener('pagehide', function() {
-        const transition = document.getElementById('page-transition');
-        if (transition) {
-            transition.classList.remove('active');
-            transition.style.opacity = '0';
-        }
-    });
-})();
-</script>
+		// ===== PSYCHEDELIC CONTOUR EASTER EGG =====
+		(function() {
+			const overlay = document.getElementById('psychedelic-overlay');
+			const canvas = document.getElementById('psychedelic-canvas');
+			const trigger = document.getElementById('easter-egg-trigger');
+			
+			let animationId = null;
+			let isActive = false;
+			let startTime = 0;
+			
+			const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+			
+			if (!gl) { init2DFallback(); return; }
+			
+			const vertexShaderSource = `
+				attribute vec2 a_position;
+				void main() { gl_Position = vec4(a_position, 0.0, 1.0); }
+			`;
+			
+			const fragmentShaderSource = `
+				precision highp float;
+				uniform vec2 u_resolution;
+				uniform float u_time;
+				
+				float noise(vec2 p, float t) {
+					float n = 0.0;
+					n += sin(p.x * 0.02 + t * 0.5) * cos(p.y * 0.02 + t * 0.3);
+					n += sin(p.x * 0.04 - t * 0.4) * cos(p.y * 0.03 + t * 0.2) * 0.5;
+					n += sin(p.x * 0.01 + p.y * 0.01 + t * 0.6) * 0.7;
+					n += cos(p.x * 0.03 + t * 0.2) * sin(p.y * 0.04 - t * 0.5) * 0.4;
+					n += sin((p.x + p.y) * 0.015 + t * 0.25) * 0.6;
+					n += cos(p.x * 0.025 - p.y * 0.02 + t * 0.35) * 0.35;
+					return n / 2.8;
+				}
+				
+				vec3 hsv2rgb(vec3 c) {
+					vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
+					vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+					return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+				}
+				
+				void main() {
+					vec2 uv = gl_FragCoord.xy;
+					vec2 center = u_resolution * 0.5;
+					vec2 mirrorUV = abs(uv - center);
+					float n = noise(mirrorUV, u_time);
+					float lineDensity = 15.0;
+					float contour = (n + 1.0) * lineDensity;
+					float frac = fract(contour);
+					float lineThickness = 0.12;
+					float line = 1.0 - smoothstep(0.0, lineThickness, abs(frac - 0.5));
+					float hue = fract((n + 1.0) * 0.5 + u_time * 0.08);
+					vec3 color = hsv2rgb(vec3(hue, 0.85, 0.95));
+					float brightness = mix(0.05, 1.0, line);
+					color *= brightness;
+					gl_FragColor = vec4(color, 1.0);
+				}
+			`;
+			
+			function compileShader(source, type) {
+				const shader = gl.createShader(type);
+				gl.shaderSource(shader, source);
+				gl.compileShader(shader);
+				if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) { console.error('Shader error:', gl.getShaderInfoLog(shader)); return null; }
+				return shader;
+			}
+			
+			const vertexShader = compileShader(vertexShaderSource, gl.VERTEX_SHADER);
+			const fragmentShader = compileShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
+			if (!vertexShader || !fragmentShader) { init2DFallback(); return; }
+			
+			const program = gl.createProgram();
+			gl.attachShader(program, vertexShader);
+			gl.attachShader(program, fragmentShader);
+			gl.linkProgram(program);
+			if (!gl.getProgramParameter(program, gl.LINK_STATUS)) { init2DFallback(); return; }
+			
+			const positionBuffer = gl.createBuffer();
+			gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
+			
+			const positionLocation = gl.getAttribLocation(program, 'a_position');
+			const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
+			const timeLocation = gl.getUniformLocation(program, 'u_time');
+			
+			function resizeCanvas() {
+				canvas.width = window.innerWidth;
+				canvas.height = window.innerHeight;
+				gl.viewport(0, 0, canvas.width, canvas.height);
+			}
+			resizeCanvas();
+			window.addEventListener('resize', resizeCanvas);
+			
+			function render() {
+				if (!isActive) return;
+				const currentTime = (Date.now() - startTime) / 1000;
+				gl.useProgram(program);
+				gl.enableVertexAttribArray(positionLocation);
+				gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+				gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+				gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+				gl.uniform1f(timeLocation, currentTime);
+				gl.drawArrays(gl.TRIANGLES, 0, 6);
+				animationId = requestAnimationFrame(render);
+			}
+			
+			function activate() { isActive = true; startTime = Date.now(); overlay.classList.add('active'); render(); }
+			function deactivate() { isActive = false; overlay.classList.remove('active'); if (animationId) cancelAnimationFrame(animationId); }
+			
+			trigger.addEventListener('click', activate);
+			overlay.addEventListener('click', deactivate);
+			document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isActive) deactivate(); });
+			
+			function init2DFallback() {
+				const ctx = canvas.getContext('2d');
+				let time = 0;
+				function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+				resize();
+				window.addEventListener('resize', resize);
+				function noise2D(x, y, t) {
+					let n = 0;
+					n += Math.sin(x * 0.02 + t * 0.5) * Math.cos(y * 0.02 + t * 0.3);
+					n += Math.sin(x * 0.04 - t * 0.4) * Math.cos(y * 0.03 + t * 0.2) * 0.5;
+					n += Math.sin(x * 0.01 + y * 0.01 + t * 0.6) * 0.7;
+					n += Math.cos(x * 0.03 + t * 0.2) * Math.sin(y * 0.04 - t * 0.5) * 0.4;
+					return n / 2.5;
+				}
+				function hsvToRgb(h, s, v) {
+					let r, g, b;
+					const i = Math.floor(h * 6), f = h * 6 - i, p = v*(1-s), q = v*(1-f*s), tv = v*(1-(1-f)*s);
+					switch (i % 6) {
+						case 0: r=v;g=tv;b=p;break; case 1: r=q;g=v;b=p;break; case 2: r=p;g=v;b=tv;break;
+						case 3: r=p;g=q;b=v;break; case 4: r=tv;g=p;b=v;break; case 5: r=v;g=p;b=q;break;
+					}
+					return `rgb(${Math.round(r*255)},${Math.round(g*255)},${Math.round(b*255)})`;
+				}
+				function draw() {
+					if (!isActive) return;
+					const w = canvas.width, h = canvas.height, cx = w/2, cy = h/2, step = 4;
+					ctx.fillStyle = '#000';
+					ctx.fillRect(0, 0, w, h);
+					for (let y = 0; y < h; y += step) {
+						for (let x = 0; x < w; x += step) {
+							const n = noise2D(Math.abs(x-cx), Math.abs(y-cy), time);
+							const frac = ((n+1)*12) - Math.floor((n+1)*12);
+							if (Math.abs(frac - 0.5) < 0.15) {
+								ctx.fillStyle = hsvToRgb(((n+1)/2 + time*0.08) % 1, 0.85, 0.95);
+								ctx.fillRect(x, y, step, step);
+							}
+						}
+					}
+					time += 0.03;
+					animationId = requestAnimationFrame(draw);
+				}
+				trigger.addEventListener('click', () => { isActive = true; time = 0; overlay.classList.add('active'); draw(); });
+				overlay.addEventListener('click', () => { isActive = false; overlay.classList.remove('active'); if (animationId) cancelAnimationFrame(animationId); });
+				document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isActive) { isActive = false; overlay.classList.remove('active'); if (animationId) cancelAnimationFrame(animationId); } });
+			}
+		})();
+
+		// ===== BROWSER BACK BUTTON FIX =====
+		(function() {
+			window.addEventListener('pageshow', function(event) {
+				if (event.persisted) {
+					const transition = document.getElementById('page-transition');
+					if (transition) {
+						transition.classList.remove('active');
+						transition.style.display = 'none';
+						setTimeout(() => { transition.style.display = ''; }, 100);
+					}
+					document.body.style.filter = '';
+					document.body.style.transform = '';
+					if (document.body.style.filter !== '' || document.querySelector('#page-transition.active')) {
+						window.location.reload();
+					}
+				}
+			});
+			window.addEventListener('pagehide', function() {
+				const transition = document.getElementById('page-transition');
+				if (transition) { transition.classList.remove('active'); transition.style.opacity = '0'; }
+			});
+		})();
+		</script>
 
 	</body>
 </html>
