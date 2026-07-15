@@ -202,29 +202,31 @@ body {
 				margin-bottom: 0;
 			}
 
-            .bio-accordion {
-    max-width: 700px;
-    width: 100%;
-    margin: 0 auto 2em auto;
+.bio-accordion {
+    max-width: 700px !important;
+    width: 100% !important;
+    margin: 0 auto 2em auto !important;
     text-align: left;
 }
 
-.bio-toggle {
-    width: 100%;
+.bio-accordion button.bio-toggle {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 0 0 0.75em 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
     background: rgba(0,0,0,0.5);
     border: 1px solid rgba(255,255,255,0.2);
     border-radius: 5px;
     color: #00ffcc;
-    padding: 1em 1.5em;
+    padding: 1em 1.5em !important;
     font-size: 1em;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     cursor: pointer;
     text-align: left;
-    margin-bottom: 0.75em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .bio-toggle::after {
