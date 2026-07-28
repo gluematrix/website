@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Glue Matrix | Music, Recording, Mixing & Music Production — Broomfield, CO</title>
+		<title>Glue Matrix | Music, Recording, Mixing &amp; Music Production — Broomfield, CO</title>
         <link rel="icon" type="image/png" href="favicon.png">
         <meta name="description" content="Glue Matrix is a professional audio engineering studio in Broomfield, CO. Music, recording, mixing, music production, and podcast editing by audio engineer Jack Barry.">
         <meta name="keywords" content="music mixing, sound design, audio engineering, music production, recording studio, Glue Matrix">
@@ -13,15 +13,18 @@
 <style>
 
 html, body {
-    height: 100%;
-    overflow: hidden;
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #page-wrapper {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
     position: relative;
     z-index: 1;
     background: transparent !important;
@@ -106,7 +109,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 2em 2em 0 2em;
+    padding: 4em 2em 2em 2em;
     position: relative;
     z-index: 2;
     min-height: 0;
@@ -150,6 +153,106 @@ body {
     margin: 0 auto;
 }
 
+/* ===== HOME PROFILE PHOTO ===== */
+.home-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin: 0 auto 1.5em auto;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.home-photo:hover {
+    box-shadow: 0 0 40px rgba(0,255,204,0.5);
+    transform: scale(1.05);
+}
+
+.home-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== BIO ACCORDION ===== */
+.bio-accordion {
+    max-width: 700px !important;
+    width: 100% !important;
+    margin: 1.5em auto 0 auto !important;
+    text-align: left;
+}
+
+.bio-accordion button.bio-toggle {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 0 0 0.75em 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 5px;
+    color: #00ffcc;
+    padding: 1em 1.5em !important;
+    font-size: 1em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: left;
+}
+
+.bio-toggle::after {
+    content: '+';
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.bio-toggle.open::after {
+    content: '−';
+}
+
+/* Full-width bars shouldn't zoom on hover - glow instead */
+.bio-toggle:hover {
+    transform: scale(1) !important;
+    box-shadow: 0 0 20px rgba(0,255,204,0.3) !important;
+}
+
+.bio-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.bio-text {
+    font-size: clamp(0.95em, 2.2vw, 1.1em);
+    line-height: 1.8;
+    text-align: left;
+    background: rgba(0,0,0,0.3);
+    padding: 2em;
+    border-radius: 5px;
+    margin-bottom: 1.5em;
+}
+
+/* Undo the homepage nowrap/ellipsis rule inside bio panels */
+.home-content .bio-text p {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    max-width: none;
+    font-size: inherit;
+    line-height: 1.8;
+    margin-bottom: 1.5em;
+}
+
+.home-content .bio-text p:last-child {
+    margin-bottom: 0;
+}
+
 /* Footer pinned to bottom inside wrapper */
 #footer {
     flex-shrink: 0;
@@ -174,14 +277,29 @@ body {
     }
 
     html, body {
-        overflow: hidden;
-        height: 100%;
-        height: -webkit-fill-available;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100%;
     }
 
     #page-wrapper {
-        height: 100vh;
-        height: -webkit-fill-available;
+        height: auto;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+
+    .home-photo {
+        width: 140px;
+        height: 140px;
+    }
+
+    .bio-text {
+        padding: 1.5em;
+    }
+
+    .home-content {
+        padding: 3em 1.5em 2em 1.5em;
     }
 }
 
@@ -196,10 +314,10 @@ body {
 /* iOS Safari */
 @supports (-webkit-touch-callout: none) {
     html, body {
-        height: -webkit-fill-available;
+        min-height: -webkit-fill-available;
     }
     #page-wrapper {
-        height: -webkit-fill-available;
+        min-height: -webkit-fill-available;
     }
 }
 
@@ -498,17 +616,36 @@ body {
 
 <!-- Home Content -->
 <div class="home-content">
+
+    <!-- Profile Photo -->
+    <div class="home-photo">
+        <img src="assets/css/images/profile.jpg" alt="Jack Barry — Glue Matrix" />
+    </div>
+
     <h1>GLUE MATRIX</h1>
     <p>Glue Matrix is an all-encompassing musical project by Jack<span class="easter-egg-trigger" id="easter-egg-trigger">.</span></p>
-    
-    <!-- Presave Block -->
-    <div style="margin-top: 1.2em; display: flex; flex-direction: column; align-items: center; gap: 0.4em;">
-        <p style="font-size: 0.75em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; margin: 0; white-space: nowrap;">
-            
-        </p>
-     <a href="/about/" class="button primary" style="white-space: nowrap; font-size: clamp(0.6em, 3.5vw, 1em); width: auto; max-width: 90vw; background-color: rgba(70, 130, 200, 0.55); border-color: rgba(70, 130, 200, 0.8);">
-    About
-</a>
+
+    <!-- Bio Accordion -->
+    <div class="bio-accordion">
+
+        <button class="bio-toggle" data-panel="engineer-panel">The Engineer</button>
+        <div class="bio-panel" id="engineer-panel">
+            <div class="bio-text">
+                <p>My goal is to help you create something that feels honest, impactful, and truly yours. Whether you’re tracking a full album, refining a production, or stepping into the studio for the first time, I’ll bring the same level of technical precision and investment to every session.</p>
+                <p>As a songwriter, producer, and artist, I understand what it’s like to be on both sides of the glass, and the vulnerability that comes with recording and the creative process. For the past decade, I’ve worked with artists and bands across a variety of genres, with a specialty in rock, indie, pop, electronic, R&amp;B, jazz, and psychedelic music. I’m a huge nerd when it comes to gear, microphones, and sound design, and I can utilize my formal training and experience to help your project shine. I currently work out of <a href="https://www.doghousemusic.com/recording?pgid=mjwe0and-620f7723-dc87-438d-a679-4cb07a082560" target="_blank" rel="noopener noreferrer">Dog House Music Studios</a>, as well as my home studio, and do freelance live audio as well. Let's make some magic!</p>
+            </div>
+        </div>
+
+        <button class="bio-toggle" data-panel="artist-panel">The Artist</button>
+        <div class="bio-panel" id="artist-panel">
+            <div class="bio-text">
+                <p>Glue Matrix is the all encompassing musical project of Florida born, Colorado based multi-instrumentalist, Jack Barry. Simultaneously an artist, record label, and full-service recording studio, offering mixing, recording, production, and live sound services.</p>
+                <p>Born in a beach town and drawn west by the mountains, Jack created Glue Matrix as a vehicle to explore the invisible forces that bind people, things, and experiences together. The name says it all: an alchemical matrix, connective tissue for sound.</p>
+                <p>Musically, Glue Matrix defies easy categorization and refuses to sit in one genre; drawing from experimental psych-pop, indie rock, electronic, and deep house, with an approach shaped by artists like Tame Impala, The Weeknd, Disclosure, King Gizzard and the Lizard Wizard, Shpongle, Fcukers, and Pink Floyd. Lush synthesizers, blown-out drums, layered FX, and stacked vocal arrangements define the sonic palette.</p>
+                <p>All written, recorded, mixed, and produced by Jack. Mush love!</p>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -522,7 +659,7 @@ body {
 				</ul>
 				<ul class="copyright" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
 					<li>&copy; GLUE MATRIX</li>
-					<li><a href="/legal/">Privacy & Legal</a></li>
+					<li><a href="/legal/">Privacy &amp; Legal</a></li>
 				</ul>
 			</footer>
 
@@ -627,6 +764,29 @@ body {
 				requestAnimationFrame(animateBars);
 			}
 			animateBars();
+		})();
+
+		// ===== BIO ACCORDION =====
+		(function() {
+			document.querySelectorAll('.bio-toggle').forEach(btn => {
+				btn.addEventListener('click', function() {
+					const panel = document.getElementById(this.dataset.panel);
+					const isOpen = this.classList.contains('open');
+
+					// Close all panels first
+					document.querySelectorAll('.bio-toggle').forEach(b => b.classList.remove('open'));
+					document.querySelectorAll('.bio-panel').forEach(p => p.style.maxHeight = null);
+
+					// Open the clicked one (unless it was already open)
+					if (!isOpen) {
+						this.classList.add('open');
+						panel.style.maxHeight = panel.scrollHeight + 'px';
+						setTimeout(() => {
+							panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+						}, 300);
+					}
+				});
+			});
 		})();
 
 		// ===== VHS GLITCH PAGE TRANSITIONS =====
