@@ -587,19 +587,7 @@ body {
 </div>
 
 
-<!-- Email Signup -->
-<div style="margin: 3em 0; width: 100%; max-width: 500px; padding: 2em; background: rgba(0,0,0,0.5); border-radius: 5px;">
-    <h3 style="margin-bottom: 1em;">Join the Mailing List</h3>
-    <p style="font-size: 0.9em; margin-bottom: 1.5em;">Get updates on new releases, shows, and exclusive content.</p>
-    <form id="mailingListForm" action="https://formspree.io/f/mqeqpqdr" method="POST" style="display: flex; gap: 0.5em; flex-direction: column;">
-        <input type="email" name="email" placeholder="Your email" required style="padding: 0.75em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 3px;">
-        <button type="submit" class="primary" id="subscribeBtn" style="font-family: 'Digital7', monospace !important;">
-            <span class="sub-text">Subscribe</span>
-            <span class="sub-loading" style="display: none;">Subscribing...</span>
-        </button>
-        <p id="subStatus" style="margin-top: 0.5em; display: none; font-size: 0.9em;"></p>
-    </form>
-</div>
+
 
 <script>
 document.getElementById('mailingListForm').addEventListener('submit', function(e) {
