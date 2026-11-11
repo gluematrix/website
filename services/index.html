@@ -320,6 +320,61 @@ body {
     height: 120px;
 }
 
+/* Client Work */
+.client-work {
+    background: rgba(0,0,0,0.7);
+    padding: 2.5em;
+    border-radius: 8px;
+    margin: 4em 0;
+    border: 1px solid rgba(0,255,204,0.3);
+}
+
+.client-work h2 {
+    color: #00ffcc;
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-size: 1.8em;
+}
+
+.client-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+}
+
+.client-card {
+    background: rgba(0,0,0,0.4);
+    padding: 1.5em;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.client-card h4 {
+    color: #00ffcc;
+    margin: 1em 0 0.3em 0;
+    font-size: 1.1em;
+}
+
+.client-card p {
+    font-size: 0.9em;
+    color: rgba(255,255,255,0.7);
+    margin: 0;
+}
+
+.client-card iframe {
+    width: 100%;
+    border: 0;
+    border-radius: 8px;
+}
+
+.video-wrap {
+    aspect-ratio: 16 / 9;
+}
+
+.video-wrap iframe {
+    height: 100%;
+}
+
 /* Testimonials */
 .testimonials {
     margin: 4em 0;
@@ -382,6 +437,10 @@ body {
     }
     
     .audio-players {
+        grid-template-columns: 1fr;
+    }
+
+        .client-grid {
         grid-template-columns: 1fr;
     }
     
@@ -809,10 +868,49 @@ body {
 						</div>
 					</div>
 
+
+<!-- Client Work -->
+<div class="client-work">
+    <h2>Client Work</h2>
+    <div class="client-grid">
+
+        <div class="client-card">
+            <iframe src="https://open.spotify.com/embed/track/0fLLS0yqxcmcX3DghtBWm0?utm_source=generator&si=9c444242a546469e" height="152" loading="lazy" allow="encrypted-media"></iframe>
+            <h4>Krash and the Bandahoots</h4>
+            <p>Recorded, mixed, co-produced</p>
+        </div>
+
+        <div class="client-card">
+            <iframe src="https://open.spotify.com/embed/track/3Bzhz9mLydt5hTbvK864qp?utm_source=generator&si=de7bcb174fa64045" height="152" loading="lazy" allow="encrypted-media"></iframe>
+            <h4>Krash and the Bandahoots</h4>
+            <p>Recorded, mixed, co-produced</p>
+        </div>
+
+        <div class="client-card">
+            <div class="video-wrap">
+                <iframe src="https://www.youtube.com/embed/76s17_9wW9Q?si=g1006NyVVOOku0D-" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <h4>ROUNDTREE</h4>
+            <p>Live set recorded and mixed</p>
+        </div>
+
+        <div class="client-card">
+            <div class="video-wrap">
+                <iframe src="https://www.youtube.com/embed/vQ6_SeLvHI0?si=qmUitzDCJQiPu2Mk" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <h4>Buck The Band</h4>
+            <p>Live set recorded and mixed</p>
+        </div>
+
+    </div>
+</div>
+
 					<!-- Testimonials -->
 					<div class="testimonials">
 						<h2>What Artists Say</h2>
 						
+
+                        
                         		<div class="testimonial">
 							<p>"This mix is pretty awesome, I never thought my music would ever sound like this. I'm kinda shook in a good way. You have a really powerful alignment with your craft. We are blessed to have crossed paths with you!"</p>
 							<div class="author">— Krash and the Bandahoots</div>
