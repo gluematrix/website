@@ -846,6 +846,63 @@ body {
 					    </p>
 					</div>
 
+
+
+
+<!-- Client Work -->
+<div class="client-work">
+    <h2>Client Work</h2>
+    <div class="client-grid">
+
+       <div class="client-card">
+    <img class="cover" src="/assets/css/images/krashep.jpg" alt="Krash and the Bandahoots - Cosmic Horror" loading="lazy">
+    <div class="cw-player">
+        <button class="cw-play" aria-label="Play"></button>
+        <div class="cw-track">
+            <div class="cw-bar"><div class="cw-fill"></div></div>
+            <div class="cw-time">0:00</div>
+        </div>
+        <audio preload="metadata" src="/assets/audio/cosmic.mp3"></audio>
+    </div>
+    <h4>Artist Name</h4>
+    <p>Recorded, mixed, co-produced</p>
+    <p><a href="SPOTIFY_TRACK_LINK" target="_blank" rel="noopener">Full release on Streaming Services</a></p>
+</div>
+
+<div class="client-card">
+    <img class="cover" src="/assets/css/images/krashep.jpg" alt="Krash and the Bandahoots - Phoenix" loading="lazy">
+    <div class="cw-player">
+        <button class="cw-play" aria-label="Play"></button>
+        <div class="cw-track">
+            <div class="cw-bar"><div class="cw-fill"></div></div>
+            <div class="cw-time">0:00</div>
+        </div>
+        <audio preload="metadata" src="/assets/audio/phoenix.mp3"></audio>
+    </div>
+    <h4>Artist Name</h4>
+    <p>Recorded, mixed, co-produced</p>
+    <p><a href="SPOTIFY_TRACK_LINK" target="_blank" rel="noopener">Full release on Streaming Services</a></p>
+</div>
+
+        <div class="client-card">
+            <div class="video-wrap">
+                <iframe src="https://www.youtube.com/embed/76s17_9wW9Q?si=g1006NyVVOOku0D-" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <h4>ROUNDTREE</h4>
+            <p>Live set recorded and mixed</p>
+        </div>
+
+        <div class="client-card">
+            <div class="video-wrap">
+                <iframe src="https://www.youtube.com/embed/vQ6_SeLvHI0?si=qmUitzDCJQiPu2Mk" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <h4>Buck The Band</h4>
+            <p>Live set recorded and mixed</p>
+        </div>
+
+    </div>
+</div>
+
 					<!-- Before/After Audio Comparison -->
 					<div class="audio-comparison">
 						<h2>Before / After</h2>						
@@ -867,43 +924,6 @@ body {
 							</div>
 						</div>
 					</div>
-
-
-<!-- Client Work -->
-<div class="client-work">
-    <h2>Client Work</h2>
-    <div class="client-grid">
-
-        <div class="client-card">
-            <iframe src="https://open.spotify.com/embed/track/0fLLS0yqxcmcX3DghtBWm0?utm_source=generator&si=9c444242a546469e" height="152" loading="lazy" allow="encrypted-media"></iframe>
-            <h4>Krash and the Bandahoots</h4>
-            <p>Recorded, mixed, co-produced</p>
-        </div>
-
-        <div class="client-card">
-            <iframe src="https://open.spotify.com/embed/track/3Bzhz9mLydt5hTbvK864qp?utm_source=generator&si=de7bcb174fa64045" height="152" loading="lazy" allow="encrypted-media"></iframe>
-            <h4>Krash and the Bandahoots</h4>
-            <p>Recorded, mixed, co-produced</p>
-        </div>
-
-        <div class="client-card">
-            <div class="video-wrap">
-                <iframe src="https://www.youtube.com/embed/76s17_9wW9Q?si=g1006NyVVOOku0D-" loading="lazy" allowfullscreen></iframe>
-            </div>
-            <h4>ROUNDTREE</h4>
-            <p>Live set recorded and mixed</p>
-        </div>
-
-        <div class="client-card">
-            <div class="video-wrap">
-                <iframe src="https://www.youtube.com/embed/vQ6_SeLvHI0?si=qmUitzDCJQiPu2Mk" loading="lazy" allowfullscreen></iframe>
-            </div>
-            <h4>Buck The Band</h4>
-            <p>Live set recorded and mixed</p>
-        </div>
-
-    </div>
-</div>
 
 					<!-- Testimonials -->
 					<div class="testimonials">
@@ -1114,6 +1134,47 @@ body {
     });
 })();
 
+
+
+</script>
+
+<script>
+(function() {
+    let current = null;
+    function fmt(s) {
+        if (!isFinite(s)) return '0:00';
+        return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+    }
+    document.querySelectorAll('.cw-player').forEach(function(p) {
+        const audio = p.querySelector('audio');
+        const btn = p.querySelector('.cw-play');
+        const bar = p.querySelector('.cw-bar');
+        const fill = p.querySelector('.cw-fill');
+        const time = p.querySelector('.cw-time');
+
+        btn.addEventListener('click', function() {
+            if (audio.paused) {
+                if (current && current !== audio) current.pause();
+                audio.play();
+                current = audio;
+            } else {
+                audio.pause();
+            }
+        });
+        audio.addEventListener('play', function() { p.classList.add('playing'); });
+        audio.addEventListener('pause', function() { p.classList.remove('playing'); });
+        audio.addEventListener('ended', function() { p.classList.remove('playing'); fill.style.width = '0%'; });
+        audio.addEventListener('loadedmetadata', function() { time.textContent = '0:00 / ' + fmt(audio.duration); });
+        audio.addEventListener('timeupdate', function() {
+            fill.style.width = (audio.currentTime / audio.duration * 100 || 0) + '%';
+            time.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+        });
+        bar.addEventListener('click', function(e) {
+            const r = bar.getBoundingClientRect();
+            audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
+        });
+    });
+})();
 </script>
 
 	</body>
